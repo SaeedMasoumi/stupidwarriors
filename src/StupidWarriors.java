@@ -1,6 +1,6 @@
 
 import mahyarise.TAgraphics.GraphicsInterface;
-
+import graphics.RenderMenu;
 /*
  * Copyright (C) 2014 Saeed Masoumi.
  *
@@ -38,7 +38,9 @@ public class StupidWarriors {
         graphic.setJudge(judge);
         graphic.start();}
     public static void main(String[] args) {
-        JugeEngine();
+        //JugeEngine();
+        RenderMenu startUp = new RenderMenu();
+        startUp.RenderStartUpMenu();
         System.out.println("hi");
     }
 }
