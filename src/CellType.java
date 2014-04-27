@@ -1,0 +1,4 @@
+//TODO Need Some Refactors
+public enum CellType {
+	CELL_TYPE_HQ, CELL_TYPE_MILITARY_BASE, CELL_TYPE_LANE, CELL_TYPE_UNUSED;
+}
