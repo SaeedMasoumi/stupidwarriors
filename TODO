@@ -1,3 +1,17 @@
 // ye class bashe bara inke taraf esme teamesh chie TeamID ro moshakhas kone ?! 
 // mokhtasate shro base haro dashte bashim bara por kardane Tank cells
 //IDEA: har object ke sakhte shod ye hash map dashte bashim ke data hasho berizim tosh o bara keshidan to graphic khob bashe
+//Important: ye class handler bezarim aval mapo inaro set kone 
+//importan: delay nabayad protected bashe behtare to har frame bazi az meghdaresh kam she o harvagh reload sefr shod attack kone
+// timer ezafe kardan chetor bashe va inke masalan tank n ta darim va chand saniye baad gharare n+1 ee beshe to mapi chizi add beshe dashte bashim
+sample:
+class SayHello extends TimerTask {
+    public void run() {
+       System.out.println("Hello World!"); 
+    }
+ }
+
+ // And From your main() method or any other method
+ Timer timer = new Timer();
+ timer.schedule(new SayHello(), 0, 5000);
+///
