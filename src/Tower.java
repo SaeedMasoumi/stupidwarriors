@@ -1,4 +1,4 @@
 
-public class Tower extends Building {
+public class Tower extends Unit {
 	
 }
