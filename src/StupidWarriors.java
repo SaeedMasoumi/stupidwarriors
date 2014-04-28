@@ -33,18 +33,18 @@ public class StupidWarriors {
         int[][] a = new int [200][200];
         for(int i=0;i<200;i++)
             for(int j = 0 ;j<200;j++)
-                a[i][j] = 13;
+                a[i][j] = 10;
         judge.loadMap(a);
         GraphicsInterface graphic;
         graphic = new GraphicsInterface();
         graphic.setJudge(judge);
         graphic.start();}
     public static void main(String[] args) {
-        JugeEngine();
+        //JugeEngine();
         RenderMenu startUp = new RenderMenu();
         //startUp.RenderStartUpMenu();
         ImageDisplayTest a = new ImageDisplayTest();
-        //a.startAks();
+       // a.startAks();
         Xylophone b = new Xylophone();
         b.start();
         System.out.println("hi");
