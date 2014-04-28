@@ -1,8 +1,10 @@
 
+import graphics.ImageDisplayTest;
 import mahyarise.TAgraphics.GraphicsInterface;
 import graphics.RenderMenu;
+import graphics.Xylophone;
 /*
- * Copyright (C) 2014 Saeed Masoumi.
+ * Copyright (C) 2014 Saeed Masoumi & Saeed Rajabzade.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -38,9 +40,13 @@ public class StupidWarriors {
         graphic.setJudge(judge);
         graphic.start();}
     public static void main(String[] args) {
-        //JugeEngine();
+        JugeEngine();
         RenderMenu startUp = new RenderMenu();
-        startUp.RenderStartUpMenu();
+        //startUp.RenderStartUpMenu();
+        ImageDisplayTest a = new ImageDisplayTest();
+        //a.startAks();
+        Xylophone b = new Xylophone();
+        b.start();
         System.out.println("hi");
     }
 }

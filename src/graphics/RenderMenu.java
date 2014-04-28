@@ -17,15 +17,22 @@
  * MA 02110-1301  USA
  */
 
+
 package graphics;
+import java.awt.Insets;
 import java.awt.Label;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 /**
  * Render the start Up menus And other things
@@ -35,15 +42,25 @@ public class RenderMenu extends Application{
 
     @Override
     public void start(Stage primaryStage) {
-        Group root = new Group();
-        Scene scene = new Scene(root,1024,600,Color.AZURE);
+        GridPane root = new GridPane();
+        root.setAlignment(Pos.CENTER);
+        root.setHgap(10);
+        root.setVgap(10);
+        root.setPadding(new javafx.geometry.Insets(25,25,25,25));
+        Text scenetitle = new Text("Welcome");
+        scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+        root.add(scenetitle, 0, 0, 2, 1);
+        Scene scene = new Scene(root,1024,600);
         //add icon to Menu
         Image image = new Image(getClass().getResourceAsStream("icon.png"));
         primaryStage.getIcons().add(image);
         //set title
         primaryStage.setTitle("Stupid Warriors v1.0");
         primaryStage.setScene(scene);
+        
+        //root.getChildren().removeAll();
         primaryStage.show();
+       
    }
     /**
      * implement launch method start() 
