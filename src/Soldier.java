@@ -29,8 +29,8 @@ public class Soldier extends Attacker {
     //TODO need some arguments
     public Soldier() {
         health = 400;
-        power = 20;
-        delayTime = 200;
+        attackPower = 20;
+        realoadTime = 200;
         range = 4;
         cost = 10;
         

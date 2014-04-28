@@ -30,7 +30,7 @@ import static org.junit.Assert.*;
  * @author Bl
  */
 public class JudgeTest {
-    private Judge judgeTest = new Judge();
+    private Judge judgeTest ;
     public JudgeTest() {
     judgeTest.setMapSize(200, 200);
         int[][] a = new int [200][200];
@@ -46,7 +46,6 @@ public class JudgeTest {
     }
     @BeforeClass
     public static void setUpClass() {
-    
     }
     
     @AfterClass

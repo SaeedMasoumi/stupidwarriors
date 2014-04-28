@@ -19,16 +19,23 @@
 
 /**
  *
- * @author saeed
+ * @author Saeed Masoumi
  */
 public class Tank extends Attacker {
     
-    // TODO add variables
+    // TODO add variables , add Started Cell
+    /**
+     * Tank Constructor 
+     */
     public Tank() {
+        //fill map info of this object
+        IS_ALIVE = true;
+        //fill object properties
         health = 1000;
-        power = 100;
-        delayTime = 500;
+        attackPower = 100;
+        realoadTime = 500;
         range = 6;
         cost = 40;
+        //cell , teamid 
     }
 }
