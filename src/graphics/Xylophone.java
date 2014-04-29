@@ -31,7 +31,12 @@
 
 package graphics;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
 import javafx.scene.DepthTest;
@@ -39,6 +44,7 @@ import javafx.scene.Group;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -56,39 +62,65 @@ import javafx.scene.transform.Scale;
 import javafx.scene.transform.Shear;
 import javafx.scene.transform.Translate;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Xylophone extends Application {
-
-
-  
-
-
+    final double sceneWidth =1024;
+    final double sceneHeight =700;
+    final double stageExtraWidht = 16 ;        
+    final double stageExtraHeight = 154 ;
+        
     public  void start() {
         launch();
     }
 
     @Override
     public void start(Stage stage)  {
+        //create StackPane
         StackPane stackpane = new StackPane();
-        Circle c = new Circle(250, Color.VIOLET);
-        c.setTranslateX(-100);
-        Rectangle rec = new Rectangle(500, 70, Color.GREEN);
-        Rectangle rec2 = new Rectangle(200,450, Color.RED);
-            rec2.setFill(new LinearGradient(0,0,0,1, true, CycleMethod.NO_CYCLE,
-        new Stop[]{
-        new Stop(0,Color.web("#4977A3")),
-        new Stop(0.5, Color.web("#B0C6DA")),
-        new Stop(1,Color.web("#9CB6CF")),}));
-    rec2.setStroke(Color.web("#D0E6FA"));
-    rec2.setArcHeight(3.5);
-    rec2.setArcWidth(3.5);
-        stackpane.getChildren().add(c);
-        stackpane.getChildren().add(rec);
-        stackpane.getChildren().add(rec2);
-        Scene scene =new Scene(stackpane,1024,600);
+        //add Images
+        Image backGround = new Image(getClass().getResourceAsStream("img/bg.jpg"));
+        Image icon = new Image(getClass().getResourceAsStream("icon.png"));
+        Image stiOP = new Image(getClass().getResourceAsStream("img/stiOP.png"));
+        Image stiFX = new Image(getClass().getResourceAsStream("img/stiFX.jpg"));
+        ImageView bgStable = new ImageView(backGround);
+        ImageView introChanger = new ImageView();
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(introChanger.imageProperty(), stiOP)),
+                new KeyFrame(Duration.seconds(2), new KeyValue(introChanger.imageProperty(), stiFX)),
+                new KeyFrame(Duration.seconds(4), new KeyValue(introChanger.imageProperty(), stiOP)),
+                new KeyFrame(Duration.seconds(6), new KeyValue(introChanger.imageProperty(), stiFX)),
+                new KeyFrame(Duration.seconds(8), new KeyValue(introChanger.imageProperty(),null) ));
+        
+        timeline.play();
+        //set BgBackground size
+        bgStable.setFitWidth(sceneWidth);
+        bgStable.setFitHeight(sceneHeight);
+        introChanger.setTranslateY(300);
+        introChanger.setFitWidth(100);
+        introChanger.setFitHeight(100);
+        //add them to stackpane
+        stackpane.getChildren().add(bgStable);
+        stackpane.getChildren().add(introChanger);
+        //create scene and add title and icon
+        Scene scene =new Scene(stackpane,sceneWidth,sceneHeight);
         stage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));
         stage.setTitle("Stupid Warriors V1.0");
-        stage.setScene(scene); 
+        //create a listener for handling when the size of stage changed
+       stage.widthProperty().addListener(new ChangeListener() { 
+            @Override
+            public void changed(ObservableValue ov, Object t, Object t1) {              
+               bgStable.setFitWidth(stage.getWidth());
+            }
+        });
+        stage.heightProperty().addListener(new ChangeListener() { 
+            @Override
+            public void changed(ObservableValue ov, Object t, Object t1) {              
+                bgStable.setFitHeight(stage.getHeight());
+            }
+        });
+
+        stage.setScene(scene);                             
         stage.show();
     }
 }

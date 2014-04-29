@@ -1,8 +1,9 @@
 
 import graphics.ImageDisplayTest;
-import mahyarise.TAgraphics.GraphicsInterface;
 import graphics.RenderMenu;
+import graphics.TimerTest;
 import graphics.Xylophone;
+import mahyarise.TAgraphics.GraphicsInterface;
 /*
  * Copyright (C) 2014 Saeed Masoumi & Saeed Rajabzade.
  *
@@ -42,11 +43,13 @@ public class StupidWarriors {
     public static void main(String[] args) {
         //JugeEngine();
         RenderMenu startUp = new RenderMenu();
-        //startUp.RenderStartUpMenu();
+        startUp.RenderStartUpMenu();
         ImageDisplayTest a = new ImageDisplayTest();
        // a.startAks();
         Xylophone b = new Xylophone();
-        b.start();
+        //b.start();
+        TimerTest c = new TimerTest();
+        //c.start();
         System.out.println("hi");
     }
 }

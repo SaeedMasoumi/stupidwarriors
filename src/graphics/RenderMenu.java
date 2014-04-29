@@ -21,7 +21,12 @@
 package graphics;
 import java.awt.Insets;
 import java.awt.Label;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -34,32 +39,22 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 /**
  * Render the start Up menus And other things
  * @author Saeed Masoumi
  */
 public class RenderMenu extends Application{
-
-    @Override
-    public void start(Stage primaryStage) {
-        GridPane root = new GridPane();
-        root.setAlignment(Pos.CENTER);
-        root.setHgap(10);
-        root.setVgap(10);
-        root.setPadding(new javafx.geometry.Insets(25,25,25,25));
-        Text scenetitle = new Text("Welcome");
-        scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-        root.add(scenetitle, 0, 0, 2, 1);
-        Scene scene = new Scene(root,1024,600);
-        //add icon to Menu
-        Image image = new Image(getClass().getResourceAsStream("icon.png"));
-        primaryStage.getIcons().add(image);
-        //set title
-        primaryStage.setTitle("Stupid Warriors v1.0");
-        primaryStage.setScene(scene);
+    private Stage stage ;
+    final double sceneWidth =1024;
+    final double sceneHeight =700;
+    final double stageExtraWidht = 16 ;        
+    final double stageExtraHeight = 154 ;
         
-        //root.getChildren().removeAll();
-        primaryStage.show();
+    @Override
+    public void start(Stage Stage) {
+        stage = Stage;
+        showStartUp();
        
    }
     /**
@@ -67,6 +62,58 @@ public class RenderMenu extends Application{
      * */
     public void RenderStartUpMenu(){
         launch();
+    }
+
+    private void showStartUp() {
+ //create StackPane
+        StackPane stackpane = new StackPane();
+        //add Text
+        Text loading= new Text("LOADING..........");
+        //add Images
+        Image backGround = new Image(getClass().getResourceAsStream("img/bg.jpg"));
+        Image icon = new Image(getClass().getResourceAsStream("icon.png"));
+        Image stiOP = new Image(getClass().getResourceAsStream("img/stiOP.png"));
+        Image stiFX = new Image(getClass().getResourceAsStream("img/stiFX.jpg"));
+        ImageView bgStable = new ImageView(backGround);
+        ImageView introChanger = new ImageView();
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(introChanger.imageProperty(), stiOP)),
+                new KeyFrame(Duration.seconds(2), new KeyValue(introChanger.imageProperty(), stiFX)),
+                new KeyFrame(Duration.seconds(4), new KeyValue(introChanger.imageProperty(), stiOP)),
+                new KeyFrame(Duration.seconds(6), new KeyValue(introChanger.imageProperty(), stiFX)),
+                new KeyFrame(Duration.seconds(8), new KeyValue(introChanger.imageProperty(),null) ));
+        
+        timeline.play();
+        //set BgBackground size
+        bgStable.setFitWidth(sceneWidth);
+        bgStable.setFitHeight(sceneHeight);
+        introChanger.setTranslateY(300);
+        introChanger.setFitWidth(100);
+        introChanger.setFitHeight(100);
+        //add them to stackpane
+        stackpane.getChildren().add(bgStable);
+        stackpane.getChildren().add(introChanger);
+        stackpane.getChildren().add(loading);
+        //create scene and add title and icon
+        Scene scene =new Scene(stackpane,sceneWidth,sceneHeight);
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));
+        stage.setTitle("Stupid Warriors V1.0");
+        //create a listener for handling when the size of stage changed
+       stage.widthProperty().addListener(new ChangeListener() { 
+            @Override
+            public void changed(ObservableValue ov, Object t, Object t1) {              
+               bgStable.setFitWidth(stage.getWidth());
+            }
+        });
+        stage.heightProperty().addListener(new ChangeListener() { 
+            @Override
+            public void changed(ObservableValue ov, Object t, Object t1) {              
+                bgStable.setFitHeight(stage.getHeight());
+            }
+        });
+
+        stage.setScene(scene);                             
+        stage.show();
     }
     
 }
