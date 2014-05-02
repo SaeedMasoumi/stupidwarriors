@@ -39,7 +39,6 @@ public class mainMenuScene extends mainScene{
 
         
     stage.setScene(new Scene(loader));
-        stage.show();//show stage
     }
 //    public void renderMainMenuScene(Stage stage){
 //     BorderPane bp = new BorderPane();

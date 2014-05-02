@@ -1,4 +1,4 @@
 
-abstract public class Building extends GameObject{
+public class Building extends GameObject{
 	int size;
 }

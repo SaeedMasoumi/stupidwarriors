@@ -1,5 +1,5 @@
 
-import engine.scene.RenderGame;
+//import engine.scene.RenderGame;
 import engine.scene.mainScene;
 import engine.scene.startUpScene;
 import mahyarise.TAgraphics.GraphicsInterface;
@@ -27,18 +27,17 @@ import mahyarise.TAgraphics.GraphicsInterface;
  * @author Saeed Masoumi
  */
 public class StupidWarriors {
-    public static void JugeEngine(){
+    public static void JudgeEngine(){
+        final int mapSize = 20; // be jaye inke ye adad ro 10 ja taghir bedim, hamin ye moteghayer ro taghir midim
         Judge judge = new Judge();
-        judge.setMapSize(200, 200);
-        int[][] a = new int [200][200];
-        for(int i=0;i<200;i++)
-            for(int j = 0 ;j<200;j++)
-                a[i][j] = 10;
-        judge.loadMap(a);
-        GraphicsInterface graphic;
-        graphic = new GraphicsInterface();
+        judge.setMapSize(mapSize, mapSize);
+        int[][] cellsType = new int [mapSize][mapSize];
+        
+        
+        GraphicsInterface graphic = new GraphicsInterface();
         graphic.setJudge(judge);
-        graphic.start();}
+        graphic.start();
+    }
     public static void main(String[] args) {
        // JugeEngine();
 //        startUpScene startUp = new startUpScene();
@@ -51,8 +50,11 @@ public class StupidWarriors {
         //b.start();
 //        TimerTest c = new TimerTest();
        // c.main();
-        mainScene scene = new mainScene();
-        scene.startUp();
+        
+//        mainScene scene = new mainScene();
+//        scene.startUp();
+        
+        JudgeEngine();
     }
 }
 
