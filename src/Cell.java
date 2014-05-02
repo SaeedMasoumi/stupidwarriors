@@ -16,4 +16,10 @@ public class Cell {
 	public int getType() {
 		return type;
 	}
+        public int getX(){
+        return this.col;
+        }
+        public int getY(){
+        return this.row;
+        }
 }

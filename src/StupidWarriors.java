@@ -1,8 +1,7 @@
 
-import graphics.ImageDisplayTest;
-import graphics.RenderMenu;
-import graphics.TimerTest;
-import graphics.Xylophone;
+import engine.scene.RenderGame;
+import engine.scene.mainScene;
+import engine.scene.startUpScene;
 import mahyarise.TAgraphics.GraphicsInterface;
 /*
  * Copyright (C) 2014 Saeed Masoumi & Saeed Rajabzade.
@@ -41,15 +40,20 @@ public class StupidWarriors {
         graphic.setJudge(judge);
         graphic.start();}
     public static void main(String[] args) {
-        //JugeEngine();
-        RenderMenu startUp = new RenderMenu();
-        startUp.RenderStartUpMenu();
-        ImageDisplayTest a = new ImageDisplayTest();
+       // JugeEngine();
+//        startUpScene startUp = new startUpScene();
+//       startUp.RenderStartUpMenu();
+//       // renderScene a = new renderScene();
+       // a.start();
+//ImageDisplayTest a = new ImageDisplayTest();
        // a.startAks();
-        Xylophone b = new Xylophone();
+        //Xylophone b = new Xylophone();
         //b.start();
-        TimerTest c = new TimerTest();
-        //c.start();
-        System.out.println("hi");
+//        TimerTest c = new TimerTest();
+       // c.main();
+        mainScene scene = new mainScene();
+        scene.startUp();
     }
 }
+
+  

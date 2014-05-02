@@ -30,6 +30,7 @@ public class Attacker extends Unit {
     //Attacker Properties
     protected double attackPower;
     protected double realoadTime;
+    protected double finalRealoadTime;
     protected double range;
     protected double cost;
     protected double speed; //TODO double nabayad bashe protected ham nabashe think about this ?!
