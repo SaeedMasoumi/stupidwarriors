@@ -9,4 +9,7 @@ public class GameObject {
         public GameObjectID getID() {
             return id;
         }
+        public void setHealth(double damage){
+         this.health+=damage;
+        }
 }

@@ -25,6 +25,9 @@
         <Insets />
       </StackPane.margin>
     </ImageView>
+    <Rectangle arcHeight="29.0" arcWidth="32.0" fill="BLACK" height="600.0" opacity="0.7" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1000.0" />
+    <Text fill="#ffcccc" strokeType="OUTSIDE" strokeWidth="0.0" text="saeed" />
+    <Label fx:id="label" text="saeed" textFill="WHITE" StackPane.alignment="TOP_CENTER" />
   </children>
   <stylesheets>
     <URL value="@../../../resources/css/bg.css" />

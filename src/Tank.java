@@ -22,14 +22,20 @@
  * @author Saeed Masoumi
  */
 public class Tank extends Attacker {
-    
+    private GameObject myEnemy;
     // TODO add variables , add Started Cell
     /**
      * Tank Constructor 
+     * should give a started row and col because we need these parameters
+     * @param StartedCol
+     * @param StartedRow
      */
-    public Tank() {
+    public Tank(Cell StartedCol,Cell StartedRow) {
         //fill map info of this object
         IS_ALIVE = true;
+        isAttacking = false;
+        this.startedCol = StartedCol;
+        this.startedRow = StartedRow;
         //fill object properties
         health = 1000;
         attackPower = 100;
@@ -37,13 +43,17 @@ public class Tank extends Attacker {
         finalRealoadTime = 500;
         range = 6;
         cost = 40;
-        //TODO fill cell , teamid , (nearest enemy cell)
+        this.col = StartedCol;
+        this.row = StartedRow;
+        this.myEnemy = null; // maybe removed shayad bug bede null bodanesh
+        //TODO  teamid , (nearest enemy cell)
     }
     /**
      * if this object been attacked his health should reduce
      * or if this object use powerUp his health should increase
      * @param damage  
      */
+    @Override
     public void setHealth(double damage){
         this.health += damage; //remeber this +
     }
@@ -74,10 +84,8 @@ public class Tank extends Attacker {
     public void findPath(){   
     
     } 
-    public void canAttack(){
+    public void findEnemy(){
         //first Priority is Tower so find it
-        boolean temp=false;
-        if(!temp){
             for(int i = this.col.getX()-(int)this.range;i<this.col.getX()+(int)this.range;i++){
                 for(int j=this.row.getY()-(int)this.range;j<this.col.getY()+(int)this.range;j++){
             //if exist some one in cell[i][j]=>isTower& !=myTeamID & reloadtime==finalrealoadTime
@@ -89,7 +97,7 @@ public class Tank extends Attacker {
             //وایمیسه یه اسپید بزاریم اگه اسپیسد  صفر بود موو نکنه
             }
             }
-        }
+       
         //second priority
     }
 }

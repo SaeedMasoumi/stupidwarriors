@@ -17,6 +17,7 @@
 
 package engine.scene.controller;
 
+import java.awt.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
@@ -32,10 +33,11 @@ import javafx.stage.Stage;
  *
  * @author Saeed Masoumi
  */
-public class gameSelectController implements Initializable{
+public class gameSelectController implements Initializable {
     private Stage stage;
     @FXML ImageView background;
     @FXML StackPane stackPane;
+    
     public gameSelectController(Stage stage) {
     this.stage=stage;
     }
@@ -60,7 +62,6 @@ public class gameSelectController implements Initializable{
        /****************************************
         * 
         ***************************************/
-       
        
        
     }
