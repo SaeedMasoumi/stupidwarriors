@@ -14,65 +14,44 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-
 package engine.scene;
-import java.awt.Insets;
-import java.awt.Label;
-import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.animation.Animation;
-import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
+import javafx.animation.PathTransition;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
-import javafx.animation.TimelineBuilder;
-import javafx.application.Application;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.Event;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
+import javafx.scene.shape.Path;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 /**
  * Render the start Up menus 
  * @author Saeed Masoumi
  */
 public class startUpScene extends mainScene{
-    /**
-     * Store Passing Time
-     */
-    private static int seconds = 0;
+
     private ImageView slideShow = new ImageView();
     private StackPane loader ;
+    
      /**
-     * first render startup about 6 seconds then call Menu Scene
+     * Render startup Scene about 7 seconds then call mainMenuScene
      * @param stage  stage in mainScene
      * @throws IOException 
      */
     public void renderStartUpScene(Stage stage) throws IOException{
-        
-         loader = FXMLLoader.load(getClass().getResource("layout/mainScene.fxml"));
+ 
+         loader = FXMLLoader.load(getClass().getResource("layout/startUp.fxml"));
          //show GPL ,JavaFx ,Opensource 
          Timeline slideShowTimer = new Timeline(
                 new KeyFrame(Duration.seconds(1), new KeyValue(slideShow.imageProperty(), new Image(JavaFx))),
@@ -81,41 +60,56 @@ public class startUpScene extends mainScene{
                 new KeyFrame(Duration.seconds(7), new KeyValue(slideShow.imageProperty(),null) ));
                 slideShowTimer.play();
         slideShow.setTranslateX(-200);
-        slideShow.setTranslateY(300);        
+        slideShow.setTranslateY(300);       
+       
         //add slideshow to loader
         loader.getChildren().add(slideShow);
         
         //add loader to stage        
         stage.setScene(new Scene(loader));
         stage.show();//show stage
-        
-        //timer for calculate when should we exit from startUp
-        final Timeline timeline = new Timeline(new KeyFrame(Duration.ZERO, new EventHandler() {
-        @Override public void handle(Event event) {
-           
-           refreshScene();     
-           if(seconds>=7){
-               mainMenuScene mainmenu = new mainMenuScene();
-               try {
-                   mainmenu.renderMainMenuScene(stage);
-               } catch (IOException ex) {
-                   Logger.getLogger(startUpScene.class.getName()).log(Level.SEVERE, null, ex);
-               }
-           }
-        }
-         }),  
-        new KeyFrame(Duration.seconds(1.0)));
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();//start timer
+       
+        //create a 7 seconds delay and after that start Main Menu Scene  
+         PauseTransition delay = new PauseTransition(Duration.seconds(6));
+         delay.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                // pass stage to mainMenuScene 
+                 mainMenuScene mainmenu = new mainMenuScene();
+                try {
+                    Stage st = new Stage();
+                    mainmenu.start(st);
+                } catch (Exception ex) {
+                    Logger.getLogger(startUpScene.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                 stage.hide();
+
+            }
+        });
+        delay.play();
     }
-        
-     private void refreshScene() {
-               
-               
-         seconds++;
-     }
 
 }
     
 
 //TODO add handler for background image for resizing when user resize the stage
+//@Removed code
+//        final Timeline timeline = new Timeline(new KeyFrame(Duration.ZERO, new EventHandler() {
+//        @Override 
+//        public void handle(Event event) {
+//           refreshScene();     
+//           if(seconds==7){
+//                
+//               mainMenuScene mainmenu = new mainMenuScene();
+//               try {
+//                   mainmenu.renderMainMenuScene(stage);
+//               } catch (IOException ex) {
+//                   Logger.getLogger(startUpScene.class.getName()).log(Level.SEVERE, null, ex);
+//               }
+//           }
+//        }
+//         }),  
+//        new KeyFrame(Duration.seconds(1.0)));
+//        timeline.setCycleCount(7);
+//       
+//        timeline.play();//start timer
