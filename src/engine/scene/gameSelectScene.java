@@ -39,7 +39,11 @@ public class gameSelectScene {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layout/gameSelect.fxml"));
         fxmlLoader.setController(new gameSelectController(stage));//set Controller for our fxml file
         loader = fxmlLoader.load();
+<<<<<<< HEAD
         stage.getScene().setRoot(loader) ;
+=======
+        stage.setScene(new Scene(loader));
+>>>>>>> 38ccf59cee97c90f7ab73205e1ab2236a1c6cdb6
         stage.setFullScreen(true);
 
     }
