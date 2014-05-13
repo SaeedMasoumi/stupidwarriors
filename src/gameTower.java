@@ -20,5 +20,17 @@
  * @author Saeed Masoumi
  */
 public class gameTower extends Tower {
+    public gameTower(Cell col,Cell row){
+        this.row = row;
+        this.col = col;
+        this.attackPowerSoldier = 50;
+        this.attackPowerTank = 400 ;
+        this.realoadTime = 2000;
+        this.finalRealoadTime = 2000;
+        this.health = 5000;
+        this.powerReflection =  0 ;
+        this.cost = 300 ;
+        this.range = 7;
     
+    }
 }

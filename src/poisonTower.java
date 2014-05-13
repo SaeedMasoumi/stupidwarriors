@@ -20,5 +20,17 @@
  * @author Saeed Masoumi
  */
 public class poisonTower extends Tower{
+    public poisonTower(Cell col , Cell row){
+        this.row = row;
+        this.col = col;
+        this.attackPowerSoldier = 50;
+        this.attackPowerTank = 100 ;
+        this.realoadTime = 350;
+        this.finalRealoadTime = 350;
+        this.health = 2000;
+        this.powerReflection =  70 ;
+        this.cost = 600 ;
+        this.range = 7;
     
+    }
 }

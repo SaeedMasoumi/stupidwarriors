@@ -20,5 +20,17 @@
  * @author Saeed Masoumi
  */
 public class electricityTower extends Tower{
-    
+    public electricityTower(Cell col,Cell row){
+        this.row = row;
+        this.col = col;
+        this.attackPowerSoldier = 50;
+        this.attackPowerTank = 200 ;
+        this.realoadTime = 200;
+        this.finalRealoadTime = 200;
+        this.health = 2000;
+        this.powerReflection =  10 ;
+        this.cost = 600 ;
+        this.range = 7;
+            
+            }
 }
