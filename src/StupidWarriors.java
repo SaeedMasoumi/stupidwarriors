@@ -1,7 +1,8 @@
 
-import engine.scene.RenderGame;
 import engine.scene.mainScene;
 import engine.scene.startUpScene;
+import java.util.Timer;
+import java.util.TimerTask;
 import mahyarise.TAgraphics.GraphicsInterface;
 /*
  * Copyright (C) 2014 Saeed Masoumi & Saeed Rajabzade.
@@ -35,14 +36,16 @@ public class StupidWarriors {
             for(int j = 0 ;j<200;j++)
                 a[i][j] = 10;
         judge.loadMap(a);
-        GraphicsInterface graphic;
+        GraphicsInterface graphic;  
         graphic = new GraphicsInterface();
         graphic.setJudge(judge);
-        graphic.start();}
+        graphic.start();
+ 
+    }
     public static void main(String[] args) {
-       // JugeEngine();
+  //      JugeEngine();
 //        startUpScene startUp = new startUpScene();
-//       startUp.RenderStartUpMenu();
+//      startUp.RenderStartUpMenu();
 //       // renderScene a = new renderScene();
        // a.start();
 //ImageDisplayTest a = new ImageDisplayTest();
@@ -52,7 +55,11 @@ public class StupidWarriors {
 //        TimerTest c = new TimerTest();
        // c.main();
         mainScene scene = new mainScene();
-        scene.startUp();
+        scene.start();
+        int [][]a = new int [2][3];
+        System.out.println(a.length);
+                //output FPS
+  
     }
 }
 

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane fx:id="stackPane" prefHeight="700.0" prefWidth="1024.0" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <ImageView fx:id="background" blendMode="SRC_OVER" disable="false" fitHeight="701.7022094726562" fitWidth="1235.874704009025" focusTraversable="false" pickOnBounds="true" preserveRatio="false" style="" visible="true">
+      <effect>
+        <ColorAdjust brightness="-0.04580152671755722" contrast="0.06106870229007644" hue="-0.12213740458015265" />
+      </effect>
+      <image>
+        <Image url="@../../../resources/img/selectGame.jpg" />
+      </image>
+      <StackPane.margin>
+        <Insets />
+      </StackPane.margin>
+    </ImageView>
+  </children>
+  <stylesheets>
+    <URL value="@../../../resources/css/bg.css" />
+  </stylesheets>
+</StackPane>

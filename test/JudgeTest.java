@@ -17,7 +17,6 @@
  * MA 02110-1301  USA
  */
 
-import engine.scene.RenderGame;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

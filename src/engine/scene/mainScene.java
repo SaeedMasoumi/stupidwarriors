@@ -19,7 +19,13 @@ package engine.scene;
 import java.awt.Insets;
 import java.awt.Label;
 import java.io.File;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Timer;
+import java.util.TimerTask;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -32,10 +38,12 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -44,6 +52,9 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+//sound
+ 
+ 
 /**
  * Main scene of the game
  * first start this then switch between fxml files and other things
@@ -56,18 +67,27 @@ public class mainScene extends Application{
     protected final static String icon = "file:src/resources/img/startup/icon.png" ;
     protected final static String GPLv3 = "file:src/resources/img/startup/gpl.png" ;
     protected final static String OpenSource= "file:src/resources/img/startup/opensource.png" ;
-    protected final static String JavaFx= "file:src/resources/img/startup/javaFX.png" ;
-    
+    protected final static String JavaFx= "file:src/resources/img/startup/javaFX.png" ; 
+    protected final static String Background= "file:src/resources/img/st.jpg" ; 
+    protected final static String sw= "file:src/resources/img/iconMenu.jpg" ; 
     @Override
     public void start(Stage primaryStage) throws IOException{
         this.stage = primaryStage;
         stage.setTitle("Stupid Warriors V1.0");
         stage.getIcons().add(new Image(icon));
-        startUpScene gameGUI = new startUpScene();
-        gameGUI.renderStartUpScene(stage);
-        
+       modernStartUp startup = new modernStartUp();
+       startup.start(stage);
+//      startUpScene a = new startUpScene();
+//      a.renderStartUpScene(stage);
+//              new Timer().schedule(new TimerTask() {
+
+//            @Override
+//            public void run() {
+//                System.out.println("FPS " + com.sun.javafx.perf.PerformanceTracker.getSceneTracker(stage.getScene()).getInstantFPS());
+//            }
+//        }, 0, 1000);
     }
-    public void startUp(){
+    public void start(){
     launch();
     }
     
