@@ -93,4 +93,10 @@ public class Tower extends Unit {
     public void autoRepair() {
         
     }
+	protected double powerReflection;
+        protected double attackPowerTank;
+        protected double attackPowerSoldier;
+        protected Cell col;
+        protected Cell row;
+        
 }

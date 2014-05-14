@@ -25,11 +25,18 @@ public class Attacker extends Unit {
     //Variables for Map information
     protected Cell row;
     protected Cell col;
+    protected Cell startedCol;
+    protected Cell startedRow;
     protected int TEAM_ID; // TODO For SMasoumi: TEAM_ID chie va be che dardi mikhore ?
-    protected boolean IS_ALIVE;    
+    protected boolean IS_ALIVE;   
+    protected boolean isAttacking;
+
     //Attacker Properties
     protected double attackPower;
+<<<<<<< HEAD
     protected double finalRealoadTime;
+=======
+>>>>>>> FETCH_HEAD
     protected double speed; //TODO double nabayad bashe protected ham nabashe think about this ?!
     // TODO For SMasoumi: etefaghan bayad double bashe chon mogheye powerup ye kasr behesh ezafe mishe na ye adade sahih
     // protected bayad bashe ke Unit o Tower behesh dastresi dashte bashan, baadan ke package ro dorost konim protected maani dar mishe ;)

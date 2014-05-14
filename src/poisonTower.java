@@ -15,20 +15,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package engine.scene;
-
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
-
 /**
- *
- * @author Bl
+ * this tower is for First Team
+ * @author Saeed Masoumi
  */
-public class menuController implements Initializable{
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-    }
+public class poisonTower extends Tower{
+    public poisonTower(Cell col , Cell row){
+        this.row = row;
+        this.col = col;
+        this.attackPowerSoldier = 50;
+        this.attackPowerTank = 100 ;
+        this.realoadTime = 350;
+        this.finalRealoadTime = 350;
+        this.health = 2000;
+        this.powerReflection =  70 ;
+        this.cost = 600 ;
+        this.range = 7;
     
+    }
 }

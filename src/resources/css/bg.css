@@ -1,0 +1,4 @@
+.loader{
+-fx-background-image: url("../img/bg.png");
+    -fx-background-repeat: stretch;
+}

@@ -17,39 +17,49 @@
 
 package engine.scene;
 
-import java.io.IOException;
+import engine.audio.Sound;
+import engine.scene.controller.menuController;
+import static engine.scene.mainScene.icon;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
- *
+ * Menu Builder Class 
+ * Create main Menu of the game 
  * @author Saeed Masoumi
  */
-public class mainMenuScene extends mainScene{
-    //TODO not complete
-     private StackPane loader ;
-    public void renderMainMenuScene(Stage stage) throws IOException{
-         loader = FXMLLoader.load(getClass().getResource("layout/menuScene.fxml"));
-
+public class mainMenuScene {
+    private StackPane loader ;
+    /**
+     * start main Menu Stage with given Stage
+     * @param stage Main Stage of the Game 
+     * @throws Exception maybe stage is null
+     */
+    public void start(Stage stage) throws Exception {
+        //change stage because in moderStage it has different stageStyle 
+        //and it's not full screen
         
-    stage.setScene(new Scene(loader));
+        stage = new Stage(StageStyle.DECORATED);
+        stage.setFullScreen(true);
+        stage.setFullScreenExitHint("");
+        stage.setTitle("Stupid Warriors V1.0");
+        stage.getIcons().add(new Image(icon));
+        
+        //Create stage with fxml file
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layout/mainMenu.fxml"));
+        fxmlLoader.setController(new menuController(stage));//set Controller for our fxml file
+        loader = fxmlLoader.load();  
+        Sound.bgMusic.setVolume(0.5);//set volum of background music
+        Sound.bgMusic.play();        //play background music
+        
+        //stage is complete now we should create a scene with loader and add it to stage and show it
+        stage.setScene(new Scene(loader));
+        stage.show();
     }
-//    public void renderMainMenuScene(Stage stage){
-//     BorderPane bp = new BorderPane();
-//        Scene scene = new Scene(bp,1024,600,Color.AZURE);
-//        ToolBar toolbar = new ToolBar();
-//        bp.setTop(toolbar);
-//
-//        Image image = new Image(icon);
-//        
-//        stage.getIcons().add(image);
-//        //set title
-//        stage.setScene(scene);
-//        stage.show();}
+ 
 }

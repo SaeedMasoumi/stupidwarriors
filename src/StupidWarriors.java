@@ -1,7 +1,8 @@
 
-//import engine.scene.RenderGame;
 import engine.scene.mainScene;
 import engine.scene.startUpScene;
+import java.util.Timer;
+import java.util.TimerTask;
 import mahyarise.TAgraphics.GraphicsInterface;
 /*
  * Copyright (C) 2014 Saeed Masoumi & Saeed Rajabzade.
@@ -27,21 +28,24 @@ import mahyarise.TAgraphics.GraphicsInterface;
  * @author Saeed Masoumi
  */
 public class StupidWarriors {
-    public static void JudgeEngine(){
-        final int mapSize = 20; // be jaye inke ye adad ro 10 ja taghir bedim, hamin ye moteghayer ro taghir midim
+    public static void JugeEngine(){
         Judge judge = new Judge();
-        judge.setMapSize(mapSize, mapSize);
-        int[][] cellsType = new int [mapSize][mapSize];
-        
-        
-        GraphicsInterface graphic = new GraphicsInterface();
+        judge.setMapSize(200, 200);
+        int[][] a = new int [200][200];
+        for(int i=0;i<200;i++)
+            for(int j = 0 ;j<200;j++)
+                a[i][j] = 10;
+        judge.loadMap(a);
+        GraphicsInterface graphic;  
+        graphic = new GraphicsInterface();
         graphic.setJudge(judge);
         graphic.start();
+ 
     }
     public static void main(String[] args) {
-       // JugeEngine();
+  //      JugeEngine();
 //        startUpScene startUp = new startUpScene();
-//       startUp.RenderStartUpMenu();
+//      startUp.RenderStartUpMenu();
 //       // renderScene a = new renderScene();
        // a.start();
 //ImageDisplayTest a = new ImageDisplayTest();
@@ -50,11 +54,12 @@ public class StupidWarriors {
         //b.start();
 //        TimerTest c = new TimerTest();
        // c.main();
-        
-//        mainScene scene = new mainScene();
-//        scene.startUp();
-        
-        JudgeEngine();
+        mainScene scene = new mainScene();
+        scene.start();
+        int [][]a = new int [2][3];
+        System.out.println(a.length);
+                //output FPS
+  
     }
 }
 

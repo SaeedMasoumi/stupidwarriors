@@ -9,11 +9,15 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane opacity="1.0" prefHeight="700.0" prefWidth="1024.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="engine.scene.renderController">
+<StackPane fx:id="stackPane" opacity="1.0" prefHeight="700.0" prefWidth="1024.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="engine.scene.controller.renderController">
   <children>
     <ImageView fitHeight="701.7022094726562" fitWidth="1235.874704009025" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
       <effect>
-        <Glow level="0.949685534591195" />
+        <SepiaTone level="0.3144654088050315">
+          <input>
+            <Glow level="0.949685534591195" />
+          </input>
+        </SepiaTone>
       </effect>
       <image>
         <Image url="@../../../resources/img/bg.jpg" />

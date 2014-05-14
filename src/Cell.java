@@ -5,14 +5,14 @@ public class Cell {
 	private final int type;
 	private int col, row;
         private GameObject objectInCell; // objecti ke tooye cell hast
-	
+
 	public Cell(int type, int col, int row) {
 //		this.type = type;
 		this.type = type;
 		this.col = col;
 		this.row = row;
 	}
-	
+
 	public int getType() {
 		return type;
 	}

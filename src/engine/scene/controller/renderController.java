@@ -17,7 +17,7 @@
  * MA 02110-1301  USA
  */
 
-package engine.scene;
+package engine.scene.controller;
 
 /**
  *
@@ -38,21 +38,27 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
  
-public class renderController extends StackPane implements Initializable{
+public class renderController implements Initializable{
 
     @FXML
-    private Label label;
+    private StackPane stackPane;
     
     public static Stage stage;
-    @Override
+   @Override
     public void initialize(URL location, ResourceBundle resources) {
-//With JavaFX2
+    
+  
+   
+        //System.out.println("sss");
+        //With JavaFX2
             
 //       stage.widthProperty().addListener(new ChangeListener() { 
 //            @Override
