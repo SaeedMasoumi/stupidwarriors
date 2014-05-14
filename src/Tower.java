@@ -10,7 +10,10 @@ public class Tower extends Unit {
     private int rangeUpgradeCounter = 0;
     
     // Constructor of Tower
-    public Tower (String type) {
+    public Tower (int col, int row, String type) {
+        this.col = col;
+        this.row = row;
+        
         this.type = type;
         range = 7;
 
