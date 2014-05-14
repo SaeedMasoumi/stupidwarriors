@@ -29,10 +29,7 @@ public class Attacker extends Unit {
     protected boolean IS_ALIVE;    
     //Attacker Properties
     protected double attackPower;
-    protected double realoadTime;
     protected double finalRealoadTime;
-    protected double range;
-    protected double cost;
     protected double speed; //TODO double nabayad bashe protected ham nabashe think about this ?!
     // TODO For SMasoumi: etefaghan bayad double bashe chon mogheye powerup ye kasr behesh ezafe mishe na ye adade sahih
     // protected bayad bashe ke Unit o Tower behesh dastresi dashte bashan, baadan ke package ro dorost konim protected maani dar mishe ;)

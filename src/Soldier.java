@@ -30,7 +30,7 @@ public class Soldier extends Attacker {
     public Soldier() {
         health = 400;
         attackPower = 20;
-        realoadTime = 200;
+        reloadTime = 200;
         range = 4;
         cost = 10;
         

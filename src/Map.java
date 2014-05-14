@@ -46,4 +46,16 @@ public class Map {
 	public int getCellsType(int col, int row) {
 		return cells[row][col].getType();
 	}
+        
+        public void specifyWays() {
+            
+        }
+        
+
+        class Node {
+            char data;
+            public Node(char c) {
+                this.data = c;
+            }
+        }
 }
