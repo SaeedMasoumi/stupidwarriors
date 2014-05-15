@@ -28,7 +28,7 @@ public class Attacker extends Unit {
     protected Cell startedCol;
     protected Cell startedRow;
     protected int TEAM_ID; // TODO For SMasoumi: TEAM_ID chie va be che dardi mikhore ?
-    protected boolean IS_ALIVE;   
+    protected boolean isAlive;   
     protected boolean isAttacking;
 
     //Attacker Properties

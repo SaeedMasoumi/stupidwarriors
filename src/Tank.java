@@ -32,14 +32,14 @@ public class Tank extends Attacker {
      */
     public Tank(Cell StartedCol,Cell StartedRow) {
         //fill map info of this object
-        IS_ALIVE = true;
+        isAlive = true;
         isAttacking = false;
         this.startedCol = StartedCol;
         this.startedRow = StartedRow;
         //fill object properties
         health = 1000;
         attackPower = 100;
-        realoadTime = 500; //realod time is in millisecond
+        reloadTime = 500; //realod time is in millisecond
         finalRealoadTime = 500;
         range = 6;
         cost = 40;

@@ -1,4 +1,4 @@
 
 public class Building extends GameObject{
-	int size;
+        protected boolean isDestroyed;
 }
