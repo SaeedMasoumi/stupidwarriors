@@ -23,7 +23,7 @@
  */
 public class Attacker extends Unit {
     //Variables for Map information
-    protected Cell startingCell;
+
     protected Cell currentCell;
     protected Cell nextCell;
 

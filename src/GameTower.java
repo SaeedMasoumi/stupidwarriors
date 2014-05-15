@@ -16,21 +16,20 @@
  */
 
 /**
- * this tower is for First Team
- * @author Saeed Masoumi
+ *
+ * @author Saeed
  */
-public class blackTower extends Tower{
-    public blackTower(Cell col,Cell row){
-        this.row = row;
-        this.col = col;
-        this.attackPowerSoldier = 40;
-        this.attackPowerTank = 200 ;
-        this.realoadTime = 800;
-        this.finalRealoadTime = 800;
-        this.health = 4000;
-        this.powerReflection =  30 ;
-        this.cost = 500 ;
-        this.range = 7;
-   
+public class GameTower extends Tower {
+
+    public GameTower(Cell cell, Team team) {
+        super(cell, team);
+        
+        pwrAgainstTanks = 50;
+        pwrAgainstSoldiers = 400;
+        reloadTime = 2000;
+        health = 5000;
+        cost = 300;
+        price = cost * 0.8;
     }
+    
 }

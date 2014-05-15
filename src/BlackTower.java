@@ -16,21 +16,20 @@
  */
 
 /**
- * this tower is for Second Team
- * @author Saeed Masoumi
+ *
+ * @author Saeed
  */
-public class electricityTower extends Tower{
-    public electricityTower(Cell col,Cell row){
-        this.row = row;
-        this.col = col;
-        this.attackPowerSoldier = 50;
-        this.attackPowerTank = 200 ;
-        this.realoadTime = 200;
-        this.finalRealoadTime = 200;
-        this.health = 2000;
-        this.powerReflection =  10 ;
-        this.cost = 600 ;
-        this.range = 7;
-            
-            }
+public class BlackTower extends Tower {
+    
+    public BlackTower (Cell cell, Team team) {
+        super(cell, team);
+        
+        pwrAgainstTanks = 200;
+        pwrAgainstSoldiers = 40;
+        reloadTime = 800;
+        health = 4000;
+        reflectionOfDamage = 30;
+        cost = 500;
+        price = cost * 0.8; // arzeshe tower
+    }
 }

@@ -56,5 +56,8 @@ public class Team {
         }, delayRate, delayRate);
     }
     
+    public void withdrawMoney(int money) {
+        this.money -= money;
+    }
     
 }

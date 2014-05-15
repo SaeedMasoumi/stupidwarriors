@@ -28,7 +28,10 @@ public class Soldier extends Attacker {
 
     
     //TODO need some arguments
-    public Soldier() {
+    
+    
+    
+    public Soldier(Cell starting) {
         health = 400;
         attackPower = 20;
         reloadTime = 200;

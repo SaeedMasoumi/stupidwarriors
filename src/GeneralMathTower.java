@@ -16,21 +16,21 @@
  */
 
 /**
- * this tower is for First Team
- * @author Saeed Masoumi
+ *
+ * @author Saeed
  */
-public class poisonTower extends Tower{
-    public poisonTower(Cell col , Cell row){
-        this.row = row;
-        this.col = col;
-        this.attackPowerSoldier = 50;
-        this.attackPowerTank = 100 ;
-        this.realoadTime = 350;
-        this.finalRealoadTime = 350;
-        this.health = 2000;
-        this.powerReflection =  70 ;
-        this.cost = 600 ;
-        this.range = 7;
-    
+public class GeneralMathTower extends Tower {
+
+    public GeneralMathTower(Cell cell, Team team) {
+        super(cell, team);
+        
+        pwrAgainstTanks = 20;
+        pwrAgainstSoldiers = 100;
+        reloadTime = 500;
+        health = 5000;
+        reflectionOfDamage = 0;
+        cost = 300;
+        price = cost * 0.8;
     }
+    
 }

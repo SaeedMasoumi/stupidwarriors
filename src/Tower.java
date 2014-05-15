@@ -1,75 +1,24 @@
 
 public class Tower extends Unit {
-    private String type;
-    private double pwrAgainstTanks;
-    private double pwrAgainstSoldiers;
-    private double reflectionOfDamage;
+    protected String type;
+    protected double pwrAgainstTanks;
+    protected double pwrAgainstSoldiers;
+    protected double reflectionOfDamage;
     
-    private double accuracyOfHit; // For phase 2
+    protected double accuracyOfHit; // For phase 2
     
-    private int rangeUpgradeCounter = 0;
+    protected int rangeUpgradeCounter = 0;
     
     // Constructor of Tower
-    public Tower (int col, int row, String type) {
-        this.col = col;
-        this.row = row;
-        
-        this.type = type;
-        range = 7;
-
-        switch(type) {
-            case "GameTower":
-                pwrAgainstTanks = 50;
-                pwrAgainstSoldiers = 400;
-                reloadTime = 2000;
-                health = 5000;
-                reflectionOfDamage = 0;
-                cost = 300;
-                
-            case "BlackTower":
-                pwrAgainstTanks = 200;
-                pwrAgainstSoldiers = 40;
-                reloadTime = 800;
-                health = 4000;
-                reflectionOfDamage = 30;
-                cost = 500;
-                
-            case "TankTower":
-                pwrAgainstTanks = 100;
-                pwrAgainstSoldiers = 20;
-                reloadTime = 500;
-                health = 4000;
-                reflectionOfDamage = 40;
-                cost = 500;
-                
-            case "GeneralMathTower":
-                pwrAgainstTanks = 20;
-                pwrAgainstSoldiers = 100;
-                reloadTime = 500;
-                health = 5000;
-                reflectionOfDamage = 0;
-                cost = 300;
-                
-            case "ElectricityTower":
-                pwrAgainstTanks = 200;
-                pwrAgainstSoldiers = 50;
-                reloadTime = 200;
-                health = 2000;
-                reflectionOfDamage = 10;
-                cost = 600;
-                
-            case "PoisonTower":
-                pwrAgainstSoldiers = 100;
-                pwrAgainstTanks = 50;
-                reloadTime = 350;
-                health = 2000;
-                reflectionOfDamage = 70;
-                cost = 600;
-        }
-        
+    public Tower (Cell cell, Team team) {
+        type = "Tower";
+        this.startingCell = cell;
+        this.team = team; // meghdare Team hichvaght null nemishe .. ba inke team haye tower ha malume vali khube ke baz in moteghayer ro dashte bashe baraye ayande
+        // shayad baadan khodemun khastim ye tower ezafe konim ke tooye har 2 team moshtarak bashe
     }
     
     public void reloadTimeUpgrade() {
+        
         cost += cost * 0.1;
         reloadTime -= reloadTime * 0.05;
     }

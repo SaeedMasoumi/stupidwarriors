@@ -16,21 +16,21 @@
  */
 
 /**
- * this tower is for Second Team
- * @author Saeed Masoumi
+ *
+ * @author Saeed
  */
-public class tankTower extends Tower{
-    public tankTower(Cell col ,Cell row){
-        this.row = row;
-        this.col = col;
-        this.attackPowerSoldier = 20;
-        this.attackPowerTank = 100 ;
-        this.realoadTime = 500;
-        this.finalRealoadTime = 500;
-        this.health = 4000;
-        this.powerReflection =  40 ;
-        this.cost = 500 ;
-        this.range = 7;
-    
+public class ElectricityTower extends Tower{
+
+    public ElectricityTower(Cell cell, Team team) {
+        super(cell, team);
+        
+        pwrAgainstTanks = 200;
+        pwrAgainstSoldiers = 50;
+        reloadTime = 200;
+        health = 2000;
+        reflectionOfDamage = 10;
+        cost = 600;
+        price = cost * 0.8;
     }
+    
 }

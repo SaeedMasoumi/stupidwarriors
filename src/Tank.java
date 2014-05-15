@@ -32,13 +32,16 @@ public class Tank extends Attacker {
      */
     
     // TODO : ino avaz kardam .. cell khodesh row, col dare .. chera 2 ta cell tarif karde budi ?
-    public Tank(Cell startingCell) {
+    public Tank(Cell startingCell, Team team) {
         
         //fill map info of this object
         isAlive = true;
         isAttacking = false;
         
         this.startingCell = startingCell;
+        
+        this.team = team;
+        
         //fill object properties
         health = 1000;
         attackPower = 100;
