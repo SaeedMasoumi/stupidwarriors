@@ -26,6 +26,7 @@ public class Soldier extends Attacker {
     private static int powerProgressCounter = 0;
     private static int healthProgressCounter = 0;
 
+    
     //TODO need some arguments
     public Soldier() {
         health = 400;
@@ -34,9 +35,9 @@ public class Soldier extends Attacker {
         range = 4;
         cost = 10;
     }
-        public static void powerProgress() {
+    public static void powerProgress() {
             
-        }
+    }
 }
 
 

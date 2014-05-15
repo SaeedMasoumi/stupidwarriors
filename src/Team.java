@@ -26,7 +26,7 @@ import java.util.TimerTask;
 public class Team {
     // properties
     private int money;
-    private int teamID;
+    private int id;
     
     Timer timer = new Timer();
     
@@ -36,10 +36,13 @@ public class Team {
     
     //Constructor
     public Team(int id) {
-        this.teamID = id;
+        this.id = id;
         money = 5000;
     }
     
+    public int getID() {
+        return id;
+    }
     
     // generate money
     public void generateMoney() {

@@ -1,3 +1,6 @@
+
+import java.util.ArrayList;
+
 /*
  * Copyright (C) 2014 Saeed Masoumi & Saeed Rajabzade.
  *
@@ -22,20 +25,20 @@
  * @author Saeed Masoumi
  */
 public class Tank extends Attacker {
-    private GameObject myEnemy;
-    // TODO add variables , add Started Cell
     /**
      * Tank Constructor 
      * should give a started row and col because we need these parameters
-     * @param StartedCol
-     * @param StartedRow
+     * @param startingPoint
      */
-    public Tank(Cell StartedCol,Cell StartedRow) {
+    
+    // TODO : ino avaz kardam .. cell khodesh row, col dare .. chera 2 ta cell tarif karde budi ?
+    public Tank(Cell startingCell) {
+        
         //fill map info of this object
         isAlive = true;
         isAttacking = false;
-        this.startedCol = StartedCol;
-        this.startedRow = StartedRow;
+        
+        this.startingCell = startingCell;
         //fill object properties
         health = 1000;
         attackPower = 100;
@@ -43,9 +46,7 @@ public class Tank extends Attacker {
         finalRealoadTime = 500;
         range = 6;
         cost = 40;
-        this.col = StartedCol;
-        this.row = StartedRow;
-        this.myEnemy = null; // maybe removed shayad bug bede null bodanesh
+        this.currentCell = startingCell;
         //TODO  teamid , (nearest enemy cell)
     }
     /**
@@ -55,29 +56,25 @@ public class Tank extends Attacker {
      */
     @Override
     public void setHealth(double damage){
-        this.health += damage; //remeber this +
+        this.health -= damage; //intori lazem nist + yademun bemune .. damage ro mosbat midim hamishe
     }
     /**
      * 
-     * @return the X position of object in map 
+     * @return the current cell
      */
-    public Cell getPositionX(){
-        return this.col ;
+    public Cell getCurrentCell() {
+        return currentCell;
     }
-    /**
-     * 
-     * @return the Y position of object in map 
-     */
-    public Cell getPositionY(){
-        return this.row;
-    }
+    
+    
     /**
      * 
      * @return object Team ID ( 1 = ) (2 = )
      */
-    public int getTeamID(){
-        return this.TEAM_ID ;
+    public Team getTeam(){
+        return this.team ;
     }
+    
     /**
      * 
      */
@@ -86,8 +83,7 @@ public class Tank extends Attacker {
     } 
     public void findEnemy(){
         //first Priority is Tower so find it
-            for(int i = this.col.getX()-(int)this.range;i<this.col.getX()+(int)this.range;i++){
-                for(int j=this.row.getY()-(int)this.range;j<this.col.getY()+(int)this.range;j++){
+            
             //if exist some one in cell[i][j]=>isTower& !=myTeamID & reloadtime==finalrealoadTime
             //temp = true
             //nearest Object = type of that object 
@@ -96,8 +92,6 @@ public class Tank extends Attacker {
             // و در حال شلیک نبود یعنی ریلود پر شده بود 
             //وایمیسه یه اسپید بزاریم اگه اسپیسد  صفر بود موو نکنه
             }
-            }
        
         //second priority
-    }
 }

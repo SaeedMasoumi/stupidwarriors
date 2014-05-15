@@ -21,8 +21,8 @@
  */
 public class MilitaryBase extends Building {
     
-    private static final int size1 = 5;
-    private static final int size2 = 3;
+    private static final int SIZE1 = 5;
+    private static final int SIZE2 = 3;
     
     public MilitaryBase() {
         health = 10000;
