@@ -23,14 +23,14 @@
  */
 public class Attacker extends Unit {
     //Variables for Map information
+    protected int TEAM_ID; // TODO For SMasoumi: TEAM_ID chie va be che dardi mikhore ?
 
-    protected Cell currentCell;
-    protected Cell nextCell;
 
     protected boolean isAttacking;
 
     //Attacker Properties
     protected double attackPower;
+
     protected double finalRealoadTime; // TODO: in alan chie 
     protected double speed; //TODO double nabayad bashe protected ham nabashe think about this ?!
     // TODO For SMasoumi: etefaghan bayad double bashe chon mogheye powerup ye kasr behesh ezafe mishe na ye adade sahih

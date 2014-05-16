@@ -2,17 +2,57 @@ import mahyarise.common.GameObjectID;
 
 
 public class GameObject {
-	protected double health;
+	protected   double health;
 	GameObjectID id; // each GameObject has it's own id
-        // in method lazeme pas GameObject dige abstract nist
-        
         protected Team team;
+        protected Cell currentCell;
+        protected Cell nextCell;
+        protected double price; // arzeshe har unit arzesh be base ha ham taalogh migire pas nabayad to unit bashe
+        protected int xSize;//FOR PHASE 1 andaze toole objecta
+        protected int ySize; // andaze arze objecta
+        // in method lazeme pas GameObject dige abstract nist
         
         public GameObjectID getID() {
             return id;
         }
         
         public void setHealth(double damage){
-         this.health -= damage;
+         this.health += damage; //shayad bekhaim jonro ziad konim 
         }
+        
+        public boolean isUnit(){
+            return  this.getClass().toString().matches(".*\\bTank.*\\b")     ||
+                    this.getClass().toString().matches(".*\\bAttacker.*\\b") ||
+                    this.getClass().toString().matches(".*\\bSoldier.*\\b")  ||
+                    this.getClass().toString().matches(".*\\bTower.*\\b");
+        
+        }
+        public boolean isAttacker(){
+            return  this.getClass().toString().matches(".*\\bTank.*\\b")     ||
+                    this.getClass().toString().matches(".*\\bAttacker.*\\b") ||
+                    this.getClass().toString().matches(".*\\bSoldier.*\\b");      
+        }
+        public boolean isTank(){
+            return this.getClass().toString().matches(".*\\bTank.*\\b");
+        }
+        public boolean isSoldier(){
+            return this.getClass().toString().matches(".*\\bSoldier.*\\b");        
+        }
+        public boolean isTower(){
+            return this.getClass().toString().matches(".*\\bTower.*\\b");        
+
+        }
+        public boolean isBuilding(){
+            return this.getClass().toString().matches(".*\\bBuilding.*\\b") ||
+                   this.getClass().toString().matches(".*\\bmilitaryBase.*\\b")||
+                    this.getClass().toString().matches(".*\\bheadQuarterBase.*\\b");        
+
+        }
+        //TODO: for rajab teamName ro doros kon
+    public int getTeamName() {
+
+    return 1;
+    
+    }
+        
 }

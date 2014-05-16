@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /*
  * Copyright (C) 2014 Saeed Masoumi & Saeed Rajabzade.
@@ -25,33 +26,30 @@ import java.util.ArrayList;
  * @author Saeed Masoumi
  */
 public class Tank extends Attacker {
+   private GameObject myEnemy;
+
     /**
      * Tank Constructor 
      * should give a started row and col because we need these parameters
-     * @param startingPoint
+     * @param Started
      */
-    
-    // TODO : ino avaz kardam .. cell khodesh row, col dare .. chera 2 ta cell tarif karde budi ?
-    public Tank(Cell startingCell, Team team) {
-        
+    public Tank(Cell Started) {
         //fill map info of this object
-        isAlive = true;
-        isAttacking = false;
-        
-        this.startingCell = startingCell;
-        
-        this.team = team;
-        
+        this.isAlive = true;
+        this.isAttacking = false;
+        this.startingCell = Started;
+        this.currentCell = Started;
         //fill object properties
-        health = 1000;
-        attackPower = 100;
-        reloadTime = 500; //realod time is in millisecond
-        finalRealoadTime = 500;
-        range = 6;
-        cost = 40;
-        this.currentCell = startingCell;
-        //TODO  teamid , (nearest enemy cell)
+        this.health = 1000;
+        this.attackPower = 100;
+        this.reloadTime = 500; //realod time is in millisecond
+        this.finalReloadTime = 500;
+        this.range = 6;
+        this.cost = 40;
+        this.myEnemy = null; // maybe removed shayad bug bede null bodanesh
+     
     }
+  
     /**
      * if this object been attacked his health should reduce
      * or if this object use powerUp his health should increase
@@ -59,7 +57,21 @@ public class Tank extends Attacker {
      */
     @Override
     public void setHealth(double damage){
-        this.health -= damage; //intori lazem nist + yademun bemune .. damage ro mosbat midim hamishe
+        this.health += damage; //remeber this +
+    }
+    /**
+     * return X position of our object
+     * @return the X position of object in map 
+     */
+    public int getPositionX(){
+        return this.currentCell.getX() ;
+    }
+    /**
+     * return Y position of our object
+     * @return the Y position of object in map 
+     */
+    public int getPositionY(){
+        return this.currentCell.getY();
     }
     /**
      * 
@@ -71,7 +83,7 @@ public class Tank extends Attacker {
     
     
     /**
-     * 
+     *  return Team-id name of our object
      * @return object Team ID ( 1 = ) (2 = )
      */
     public Team getTeam(){
@@ -82,8 +94,116 @@ public class Tank extends Attacker {
      * 
      */
     public void findPath(){   
-    
+        
     } 
+    /**
+     * Find Nearest Enemy from his range
+     * note that isAttacking should be false to call this method
+     * and (int) range maybe in future -> bug
+     */
+    public void findNearestEnemy(){
+         ArrayList<GameObject> enemy = getNearestEnemies(map);//map baziro yetori bayad begirim
+         if(enemy.isEmpty()){
+          this.myEnemy = null;
+             return ;
+         }
+         GameObject TargetEnemy =null;
+         boolean find = false;
+         //first Priority is Tower so find it
+         for (GameObject enemy1 : enemy) {
+            if (enemy1.isTower() && this.getDistance(enemy1)<=this.range) {
+                if (!find) {
+                    //yani avalin kasi hast ke peida shode
+                    if (enemy1.getTeamName() != this.getTeamName()) {
+                        TargetEnemy = enemy1;
+                        find = true;
+                    }
+                }
+                else {
+                if( this.getDistance(TargetEnemy)>this.getDistance(enemy1) && enemy1.getTeamName() != this.getTeamName() )
+                    TargetEnemy = enemy1;
+                
+                }
+            }
+        }
+        //we can't find any Tower so we find an attacker
+         if(!find){
+          for (GameObject enemy1 : enemy) {
+            if (enemy1.isAttacker()&& this.getDistance(enemy1)<=this.range) {
+                if (!find) {
+                    //yani avalin kasi hast ke peida shode
+                    if (enemy1.getTeamName() != this.getTeamName()) {
+                        TargetEnemy = enemy1;
+                        find = true;
+                    }
+                }
+                else {
+                if( this.getDistance(TargetEnemy)>this.getDistance(enemy1) && enemy1.getTeamName() != this.getTeamName() )
+                    TargetEnemy = enemy1;
+                
+                }
+            }
+        }
+        //can't find anyOne so find a valuable object
+        if(!find){
+         double value = 0;
+         for (GameObject enemy1 : enemy) {
+            if (enemy1.isTower() && this.getDistance(enemy1)<=this.range) {
+                if (!find) {
+                    //yani avalin kasi hast ke peida shode
+                    if (enemy1.getTeamName() != this.getTeamName()) {
+                        TargetEnemy = enemy1;
+                        value = TargetEnemy.price;
+                        find = true;
+                    }
+                }
+                else {
+                if( this.getDistance(TargetEnemy)>this.getDistance(enemy1) && enemy1.getTeamName() != this.getTeamName() &&value<enemy1.price)
+                    TargetEnemy = enemy1;
+                
+                }
+            }
+        }
+        
+        
+        }
+         
+         
+         }
+        
+    }
+              
+                    
+
+    /**
+     * find nearest enemy object
+     * @param map
+     * @return Arrays of GameObjects
+     */
+    //TODO getTeamName kamel nist 
+     public ArrayList<GameObject> getNearestEnemies(Map map){
+       ArrayList<GameObject> enemy = new ArrayList();
+        for(int i = this.currentCell.getX()-(int)this.range ; i<=this.currentCell.getX()+(int)this.range; i++){
+        for(int j=this.currentCell.getY()-(int)this.range ; j<=this.currentCell.getY()+(int)this.range; j++){
+            if( ( map.getCell(i, j).getObjectInCell().isUnit() || map.getCell(i, j).getObjectInCell().isBuilding() ) 
+                    && map.getCell(i, j).getObjectInCell().getTeamName() !=this.getTeamName())  
+               enemy.add(map.getCell(i, j).getObjectInCell());
+        }
+    }   
+    return enemy;
+    }
+    
+    //TODO move kardane tank age to map hast ke hich vagarna ezafe konam
+    public void setEnemy(GameObject t ){
+    this.myEnemy = t;
+    }
+        public GameObject getEnemy( ){
+    return this.myEnemy;
+    }
+    private double getDistance(GameObject target){
+     return Math.sqrt(Math.pow(this.currentCell.getX() - target.currentCell.getX(),
+             this.currentCell.getY() - target.currentCell.getY() ));
+    }
     public void findEnemy(){
         //first Priority is Tower so find it
             
@@ -98,3 +218,7 @@ public class Tank extends Attacker {
        
         //second priority
 }
+
+//TODO 
+//agar enemy nadasht isAttacking false she
+
