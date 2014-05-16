@@ -3,14 +3,19 @@ import mahyarise.common.GameObjectID;
 
 public class GameObject {
 	protected   double health;
-	GameObjectID id; // each GameObject has it's own id
+	protected GameObjectID id; // each GameObject has it's own id
         protected Team team;
         protected Cell currentCell;
         protected Cell nextCell;
+        
         protected double price; // arzeshe har unit arzesh be base ha ham taalogh migire pas nabayad to unit bashe
         protected int xSize;//FOR PHASE 1 andaze toole objecta
         protected int ySize; // andaze arze objecta
-        // in method lazeme pas GameObject dige abstract nist
+        
+        public GameObject(GameObjectID id, Team team) {
+            this.id = id;
+            this.team = team;
+        }
         
         public GameObjectID getID() {
             return id;
@@ -45,14 +50,16 @@ public class GameObject {
         public boolean isBuilding(){
             return this.getClass().toString().matches(".*\\bBuilding.*\\b") ||
                    this.getClass().toString().matches(".*\\bmilitaryBase.*\\b")||
-                    this.getClass().toString().matches(".*\\bheadQuarterBase.*\\b");        
+                   this.getClass().toString().matches(".*\\bheadQuarterBase.*\\b");        
 
         }
         //TODO: for rajab teamName ro doros kon
-    public int getTeamName() {
-
-    return 1;
+    public int getTeamID() {
+        return this.team.getID();
+    }
     
+    public int getTeamGroupID() {
+        return this.team.getGroupID();
     }
         
 }

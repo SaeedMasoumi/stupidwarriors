@@ -1,3 +1,6 @@
+
+import mahyarise.common.GameObjectID;
+
 /*
  * Copyright (C) 2014 saeed.
  *
@@ -31,7 +34,8 @@ public class Soldier extends Attacker {
     
     
     
-    public Soldier(Cell starting) {
+    public Soldier(Cell starting, GameObjectID id, Team team) {
+        super(id, team);
         health = 400;
         attackPower = 20;
         reloadTime = 200;

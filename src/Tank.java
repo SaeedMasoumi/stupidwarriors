@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import static jdk.nashorn.internal.objects.NativeArray.map;
+import mahyarise.common.GameObjectID;
 
 /*
  * Copyright (C) 2014 Saeed Masoumi & Saeed Rajabzade.
@@ -33,7 +34,9 @@ public class Tank extends Attacker {
      * should give a started row and col because we need these parameters
      * @param Started
      */
-    public Tank(Cell Started) {
+    public Tank(Cell Started,GameObjectID id, Team team) {
+        super(id, team);
+        
         //fill map info of this object
         this.isAlive = true;
         this.isAttacking = false;
@@ -57,7 +60,7 @@ public class Tank extends Attacker {
      */
     @Override
     public void setHealth(double damage){
-        this.health += damage; //remeber this +
+        this.health += damage; // + + +
     }
     /**
      * return X position of our object
@@ -183,19 +186,19 @@ public class Tank extends Attacker {
     //TODO getTeamName kamel nist 
      public ArrayList<GameObject> getNearestEnemies(Map map){
        ArrayList<GameObject> enemy = new ArrayList();
-        for(int i = this.currentCell.getX()-(int)this.range ; i<=this.currentCell.getX()+(int)this.range; i++){
-        for(int j=this.currentCell.getY()-(int)this.range ; j<=this.currentCell.getY()+(int)this.range; j++){
-            if( ( map.getCell(i, j).getObjectInCell().isUnit() || map.getCell(i, j).getObjectInCell().isBuilding() ) 
-                    && map.getCell(i, j).getObjectInCell().getTeamName() !=this.getTeamName())  
-               enemy.add(map.getCell(i, j).getObjectInCell());
-        }
-    }   
-    return enemy;
+        for(int i = this.currentCell.getX() - this.range ; i<=this.currentCell.getX() + this.range; i++){
+        for(int j=this.currentCell.getY() - this.range ; j<=this.currentCell.getY() + this.range; j++){
+            if( ( map.getCell(i, j).getObject().isUnit() || map.getCell(i, j).getObject().isBuilding() )  // mage GameObject e dige'ei be gheyr az in 2 ta darim ??
+                    && map.getCell(i, j).getObject().getTeamID() !=this.getTeamID())  
+               enemy.add(map.getCell(i, j).getObject());
+            }
+        }   
+        return enemy;
     }
     
     //TODO move kardane tank age to map hast ke hich vagarna ezafe konam
     public void setEnemy(GameObject t ){
-    this.myEnemy = t;
+        this.myEnemy = t;
     }
         public GameObject getEnemy( ){
     return this.myEnemy;

@@ -27,6 +27,7 @@ public class Team {
     // properties
     private int money;
     private int id;
+    private int groupID; // baraye shabake .. age 2 ta team motahed budam groupID shun yeki mishe ...
     
     Timer timer = new Timer();
     
@@ -34,14 +35,20 @@ public class Team {
     private int plusMoney = 10;
     private int delayRate = 1000;
     
+    
     //Constructor
-    public Team(int id) {
+    public Team(int id, int groupID) {
         this.id = id;
+        this.groupID = groupID;
         money = 5000;
     }
     
     public int getID() {
         return id;
+    }
+    
+    public int getGroupID() {
+        return groupID;
     }
     
     // generate money

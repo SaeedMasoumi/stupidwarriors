@@ -1,3 +1,6 @@
+
+import mahyarise.common.GameObjectID;
+
 /*
  * Copyright (C) 2014 Saeed Masoumi & Saeed Rajabzade.
  *
@@ -35,5 +38,9 @@ public class Attacker extends Unit {
     protected double speed; //TODO double nabayad bashe protected ham nabashe think about this ?!
     // TODO For SMasoumi: etefaghan bayad double bashe chon mogheye powerup ye kasr behesh ezafe mishe na ye adade sahih
     // protected bayad bashe ke Unit o Tower behesh dastresi dashte bashan, baadan ke package ro dorost konim protected maani dar mishe ;)
+
+    public Attacker(GameObjectID id, Team team) {
+        super(id, team);
+    }
     
 }

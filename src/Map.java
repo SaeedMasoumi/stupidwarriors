@@ -1,6 +1,10 @@
+/* in class ro static kardam chon tooye bazi faghat ye naghshe darim ke hamun aval tarif mishe ...
+*/
+
+// Need refactor
 public class Map {
-	private Cell[][] cells;
-	private int columnsLength, rowsLength;
+	private static Cell[][] cells;
+	private static int columnsLength, rowsLength;
 	
 	public Map() {
 		
@@ -19,7 +23,7 @@ public class Map {
                 this.columnsLength = col;
                 this.rowsLength = row;
 	}
-	public Cell getCell(int col, int row) {
+	public static Cell getCell(int col, int row) {
 		return cells[row][col];
 	}
 	
@@ -31,11 +35,11 @@ public class Map {
 		this.rowsLength = rowsLength;
 	}
 
-	public int getRowLength() {
+	public static int getRowLength() {
 		return cells.length;
 	}
 	
-	public int getColLength() {
+	public static int getColLength() {
 		return cells[0].length;
 	}
 	
@@ -43,19 +47,12 @@ public class Map {
 		cells[row][col] = new Cell(type, col, row);
 	}
 	
-	public int getCellsType(int col, int row) {
+	public static int getCellsType(int col, int row) {
 		return cells[row][col].getType();
 	}
         
         public void specifyWays() {
             
         }
-        
 
-        class Node {
-            char data;
-            public Node(char c) {
-                this.data = c;
-            }
-        }
 }

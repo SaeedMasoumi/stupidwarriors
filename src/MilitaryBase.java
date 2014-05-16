@@ -1,3 +1,6 @@
+
+import mahyarise.common.GameObjectID;
+
 /*
  * Copyright (C) 2014 Saeed Masoumi & Saeed Rajabzade
  *
@@ -24,7 +27,8 @@ public class MilitaryBase extends Building {
     private static final int SIZE1 = 5;
     private static final int SIZE2 = 3;
     
-    public MilitaryBase() {
+    public MilitaryBase(GameObjectID id, Team team) {
+        super(id, team);
         health = 10000;
         isDestroyed = false;
     }

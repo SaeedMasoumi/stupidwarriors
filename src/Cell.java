@@ -4,7 +4,7 @@ public class Cell {
 //	private CellType type;
 	private final int type;
 	private int col, row;
-        private GameObject objectInCell; // objecti ke tooye cell hast
+        private GameObject object = null; // objecti ke tooye cell hast
 
 	public Cell(int type, int col, int row) {
 //		this.type = type;
@@ -17,17 +17,17 @@ public class Cell {
 		return type;
 	}
         public int getX(){
-        return this.col;
+            return this.col;
         }
         public int getY(){
-        return this.row;
+            return this.row;
         }
         
-        public void setObjectInCell (GameObject obj) {
-            this.objectInCell = obj;
+        public void setObject (GameObject obj) {
+            this.object = obj;
         }
         
-        public GameObject getObjectInCell () {
-            return objectInCell;
+        public GameObject getObject () {
+            return object;
         }
 }

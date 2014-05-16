@@ -1,3 +1,6 @@
+
+import mahyarise.common.GameObjectID;
+
 /*
  * Copyright (C) 2014 Saeed Masoumi & Saeed Rajabzade
  *
@@ -21,8 +24,8 @@
  */
 public class BlackTower extends Tower {
     
-    public BlackTower (Cell cell, Team team) {
-        super(cell, team);
+    public BlackTower (Cell cell, GameObjectID id, Team team) {
+        super(cell, id, team);
         
         pwrAgainstTanks = 200;
         pwrAgainstSoldiers = 40;

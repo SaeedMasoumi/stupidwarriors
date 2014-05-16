@@ -1,6 +1,8 @@
 
+import mahyarise.common.GameObjectID;
+
+
 public class Tower extends Unit {
-    protected String type;
     protected double pwrAgainstTanks;
     protected double pwrAgainstSoldiers;
     protected double reflectionOfDamage;
@@ -10,11 +12,9 @@ public class Tower extends Unit {
     protected int rangeUpgradeCounter = 0;
     
     // Constructor of Tower
-    public Tower (Cell cell, Team team) {
-        type = "Tower";
+    public Tower (Cell cell, GameObjectID id, Team team) {
+        super(id, team);
         this.startingCell = cell;
-        this.team = team; // meghdare Team hichvaght null nemishe .. ba inke team haye tower ha malume vali khube ke baz in moteghayer ro dashte bashe baraye ayande
-        // shayad baadan khodemun khastim ye tower ezafe konim ke tooye har 2 team moshtarak bashe
     }
     
     public void reloadTimeUpgrade() {

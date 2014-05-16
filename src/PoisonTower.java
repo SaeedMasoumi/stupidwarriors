@@ -1,3 +1,6 @@
+
+import mahyarise.common.GameObjectID;
+
 /*
  * Copyright (C) 2014 Saeed Masoumi & Saeed Rajabzade
  *
@@ -21,8 +24,8 @@
  */
 public class PoisonTower extends Tower {
 
-    public PoisonTower(Cell cell, Team team) {
-        super(cell, team);
+    public PoisonTower(Cell cell, GameObjectID id, Team team) {
+        super(cell, id, team);
         
         pwrAgainstSoldiers = 100;
         pwrAgainstTanks = 50;

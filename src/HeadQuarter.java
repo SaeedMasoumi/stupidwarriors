@@ -1,3 +1,6 @@
+
+import mahyarise.common.GameObjectID;
+
 /*
  * Copyright (C) 2014 Saeed Masoumi & Saeed Rajabzade
  *
@@ -25,7 +28,8 @@ public class HeadQuarter extends Building {
     private static final int SIZE2 = 5;
     
     
-    public HeadQuarter() {
+    public HeadQuarter(GameObjectID id, Team team) {
+        super(id, team);
         health = 10000;
         isDestroyed = false;
     }

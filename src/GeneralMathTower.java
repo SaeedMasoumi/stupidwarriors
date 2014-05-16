@@ -1,3 +1,6 @@
+
+import mahyarise.common.GameObjectID;
+
 /*
  * Copyright (C) 2014 Saeed Masoumi & Saeed Rajabzade
  *
@@ -21,8 +24,8 @@
  */
 public class GeneralMathTower extends Tower {
 
-    public GeneralMathTower(Cell cell, Team team) {
-        super(cell, team);
+    public GeneralMathTower(Cell cell, GameObjectID id, Team team) {
+        super(cell, id, team);
         
         pwrAgainstTanks = 20;
         pwrAgainstSoldiers = 100;

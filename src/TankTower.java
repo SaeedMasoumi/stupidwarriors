@@ -1,3 +1,6 @@
+
+import mahyarise.common.GameObjectID;
+
 /*
  * Copyright (C) 2014 Saeed Masoumi & Saeed Rajabzade
  *
@@ -21,8 +24,8 @@
  */
 public class TankTower extends Tower {
 
-    public TankTower(Cell cell, Team team) {
-        super(cell, team);
+    public TankTower(Cell cell, GameObjectID id, Team team) {
+        super(cell, id, team);
         
         pwrAgainstTanks = 100;
         pwrAgainstSoldiers = 20;

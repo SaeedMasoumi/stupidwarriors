@@ -62,22 +62,22 @@ public class StupidWarriors {
     }
     public static void test(){
     
-     Cell one = new Cell(1, 1, 2);
-        Cell two = new Cell(2, 2, 2);
-        Cell twop = new Cell(3, 3, 2);
-        Cell []a={one,two};
-                Tank t2 = new Tank(one);
-        System.out.println(t2.isUnit());
-        two.setObjectInCell(t2);
-        Tank t = new Tank(two);
-     //   t.getNearestEnemy(a);
-        Tank t3 = new Tank(two);
-        t.setEnemy(t2);
-        t.getEnemy().setHealth(10);
-        System.out.println(t.health);
-        System.out.println(t2.health);
-        System.out.println(t3.health);
-        System.out.println(t.getEnemy().health);
+//     Cell one = new Cell(1, 1, 2);
+//        Cell two = new Cell(2, 2, 2);
+//        Cell twop = new Cell(3, 3, 2);
+//        Cell []a={one,two};
+//                Tank t2 = new Tank(one);
+//        System.out.println(t2.isUnit());
+//        two.setObjectInCell(t2);
+//        Tank t = new Tank(two);
+//     //   t.getNearestEnemy(a);
+//        Tank t3 = new Tank(two);
+//        t.setEnemy(t2);
+//        t.getEnemy().setHealth(10);
+//        System.out.println(t.health);
+//        System.out.println(t2.health);
+//        System.out.println(t3.health);
+//        System.out.println(t.getEnemy().health);
     }
 }
 
