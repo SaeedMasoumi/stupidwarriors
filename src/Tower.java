@@ -8,13 +8,14 @@ public class Tower extends Unit {
     protected double reflectionOfDamage;
     
     protected double accuracyOfHit; // For phase 2
-    
+
     protected int rangeUpgradeCounter = 0;
     
     // Constructor of Tower
     public Tower (Cell cell, GameObjectID id, Team team) {
         super(id, team);
         this.startingCell = cell;
+
     }
     
     public void reloadTimeUpgrade() {
