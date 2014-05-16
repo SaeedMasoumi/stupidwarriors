@@ -42,5 +42,12 @@ public class Tower extends Unit {
     public void autoRepair() {
         
     }
+
+    
+    // TODO .. age tunesti ino kamel kon ...
+    @Override
+    public GameObject findTarget(GameObject[] enemies) {
+        return null;
+    }
         
 }
