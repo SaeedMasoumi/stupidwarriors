@@ -29,6 +29,14 @@ import mahyarise.common.GameObjectID;
 public class Tank extends Attacker {
    private GameObject myEnemy;
 
+    // Same for all objects -> must be static
+    private static double MAX_HEALTH = 1000;
+    private static double ATTACK_POWER = 100;
+    private static double RELOAD_TIME = 500;
+    private static double COST = 40;
+    private static double PRICE = COST * 0.8;
+    private static int RANGE = 6;
+
     /**
      * Tank Constructor 
      * should give a started row and col because we need these parameters
@@ -43,16 +51,17 @@ public class Tank extends Attacker {
         this.startingCell = Started;
         this.currentCell = Started;
         //fill object properties
-        this.health = 1000;
-        this.attackPower = 100;
-        this.reloadTime = 500; //realod time is in millisecond
-        this.finalReloadTime = 500;
-        this.range = 6;
-        this.cost = 40;
-        this.myEnemy = null; // maybe removed shayad bug bede null bodanesh
-     
+        this.health = MAX_HEALTH;
+        this.attackPower = ATTACK_POWER;
+        this.reloadTime = RELOAD_TIME; //realod time is in millisecond
+        this.range = RANGE;
+        this.cost = COST;
     }
-  
+
+    public static void setRELOAD_TIME(int reload_time) {
+        RELOAD_TIME = reload_time;
+    }
+
     /**
      * if this object been attacked his health should reduce
      * or if this object use powerUp his health should increase
@@ -99,45 +108,26 @@ public class Tank extends Attacker {
     public void findPath(){   
         
     } 
-    /**
-     * Find Nearest Enemy from his range
-     * note that isAttacking should be false to call this method
-     * and (int) range maybe in future -> bug
-     */
 
-              
-                    
-
-    /**
-     * find nearest enemy object
-     * @param map
-     * @return Arrays of GameObjects
-     */
-    //TODO getTeamName kamel nist 
-    
     //TODO move kardane tank age to map hast ke hich vagarna ezafe konam
     public void setEnemy(GameObject t ){
         this.myEnemy = t;
     }
-        public GameObject getEnemy( ){
-    return this.myEnemy;
+    public GameObject getEnemy( ){
+        return this.myEnemy;
     }
-        
-    public void findEnemy(){
-        //first Priority is Tower so find it
-            
-            //if exist some one in cell[i][j]=>isTower& !=myTeamID & reloadtime==finalrealoadTime
-            //temp = true
-            //nearest Object = type of that object 
-            //Object.sethealth(-powerAttack)
-                     //به همین ترتیب میایم سلول های بعدی رو وارسی میکنیم اگر برج بود با آی دی مخالف تیم ما
-            // و در حال شلیک نبود یعنی ریلود پر شده بود 
-            //وایمیسه یه اسپید بزاریم اگه اسپیسد  صفر بود موو نکنه
-            }
-       
-        //second priority
-}
 
-//TODO 
-//agar enemy nadasht isAttacking false she
+
+    ///////////////// Upgrades /////////////////
+
+    public static void pwrUpgrade() {
+        ATTACK_POWER += ATTACK_POWER * 0.1;
+        PRICE += COST * 0.05;
+    }
+
+    public static void healthUpgrade() {
+        MAX_HEALTH += 5;
+        PRICE += COST * 0.05;
+    }
+}
 

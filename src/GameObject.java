@@ -2,6 +2,7 @@ import mahyarise.common.GameObjectID;
 
 public class GameObject {
 	protected double health;
+    protected static double MAX_HELATH; // baraye upgrade ha lazeme
 	protected GameObjectID id; // each GameObject has it's own id
 	protected Team team;
 	protected Cell currentCell;

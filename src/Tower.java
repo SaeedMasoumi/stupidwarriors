@@ -15,17 +15,17 @@ public class Tower extends Unit {
     public Tower (Cell cell, GameObjectID id, Team team) {
         super(id, team);
         this.startingCell = cell;
-
     }
     
     public void reloadTimeUpgrade() {
-        
-        cost += cost * 0.1;
+        team.withdrawMoney(price * 0.1);
+        price += price * 0.1;
         reloadTime -= reloadTime * 0.05;
     }
     
     public void powerUpgrade() {
-        cost += cost * 0.15;
+        team.withdrawMoney(price * 0.15);
+        price += price * 0.15;
         pwrAgainstSoldiers += pwrAgainstSoldiers * 0.1;
         pwrAgainstTanks += pwrAgainstTanks * 0.1;
     }
@@ -33,9 +33,9 @@ public class Tower extends Unit {
     public void rangeUpgrade() {
         if(rangeUpgradeCounter >= 3)
             return;
-        
+        team.withdrawMoney(price * 0.2);
         rangeUpgradeCounter++;
-        cost += cost * 0.2;
+        price += price * 0.2;
         range++;
     }
     

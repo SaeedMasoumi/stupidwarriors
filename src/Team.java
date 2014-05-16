@@ -1,4 +1,8 @@
 
+import mahyarise.common.GameObjectID;
+
+import java.util.HashMap;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -24,16 +28,24 @@ import java.util.TimerTask;
  * @author Saeed
  */
 public class Team {
+
+    private static final int TEAM_CE = 0;
+    private static final int TEAM_MATH = 1;
+
+    private boolean healthBounseUpgradeUsed = false;
+
     // properties
-    private int money;
+    private double money;
     private int id;
     private int groupID; // baraye shabake .. age 2 ta team motahed budam groupID shun yeki mishe ...
-    
+
+    private HashMap<GameObjectID, GameObject> objects = new HashMap<GameObjectID, GameObject>(); // for holding units
+
     Timer timer = new Timer();
     
     // some variables for handling ... felan final shoon nakardam ta vaghty ke sakhtare code ghashang shekl begire
     private int plusMoney = 10;
-    private int delayRate = 1000;
+    private int delayTime = 1000;
     
     
     //Constructor
@@ -60,11 +72,131 @@ public class Team {
             public void run() {
                 money += plusMoney;
             }
-        }, delayRate, delayRate);
+        }, delayTime, delayTime);
     }
     
-    public void withdrawMoney(int money) {
+    public void withdrawMoney(double money) {
         this.money -= money;
     }
-    
+
+    public void addObject(GameObject obj) {
+        objects.put(obj.getID(), obj);
+    }
+
+    public void removeObject(GameObject obj) {
+        objects.remove(obj.getID());
+    }
+
+    /* upgrade ha ro bayad rooye Team seda bezanim chon rooye hameye attacker haye ye team tasir dare */
+    public void PwrUpgrade() {
+        Attacker.pwrUpgradeCounter++;
+        this.withdrawMoney(Attacker.pwrUpgradeCounter * 1000);
+        for (GameObject object: objects.values())
+        {
+            if (object.isAttacker()) {
+                Attacker attacker = (Attacker) object;
+                attacker.pwrUpgradeForObj();
+            }
+        }
+        Attacker.pwrUpgrade();
+    }
+
+    public void healthUpgrade() {
+        Attacker.healthUpgradeCounter++;
+        this.withdrawMoney(Attacker.healthUpgradeCounter * 500);
+        Attacker.healthUpgrade();
+    }
+
+    /******* CE UPGRADES *******/
+    public void healthBounceUpgrade() {
+        if (this.id != TEAM_CE)
+            return;
+
+        if (healthBounseUpgradeUsed)
+            return;
+
+        healthBounseUpgradeUsed = true;
+        this.withdrawMoney(5000);
+
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                for(GameObject object: objects.values())
+                {
+                    if (object.health < object.MAX_HELATH)
+                        object.health += object.health * 0.05;
+
+                    if (object.health > object.MAX_HELATH)
+                        object.health = object.MAX_HELATH;
+                }
+            }
+        }, delayTime, delayTime);
+
+        for(GameObject object: objects.values())
+        {
+            if (object.isUnit())
+            {
+                Unit unit = (Unit) object;
+                unit.price += unit.cost * 0.1; //TODO shayad lazem bashe vase baghieye niru haei ke az in be baad ham sakhte mishan in kar ro anjam bedi
+            }
+        }
+    }
+
+    //TODO che konam ?!
+    public void shieldUpgrade() {
+
+    }
+
+    // TODO ye bar be ezaye har team ? agar man ye bar dige in tabe ro seda bezanam reloadTime bayad chand beshe ?
+    public void speedUpgrade() {
+        if (this.id != TEAM_CE)
+            return;
+
+        this.withdrawMoney(4000);
+        for(GameObject object: objects.values())
+        {
+            if(object.isTank())
+            {
+                Tank tank = (Tank) object;
+                tank.reloadTime = 400;
+                Tank.setRELOAD_TIME(400);
+            }
+        }
+    }
+
+    /******* MATH UPGRADES *******/
+    public void moneyBounceUpgrade() {
+        if(this.id != TEAM_MATH)
+            return;
+
+        this.withdrawMoney(5000);
+
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                money += 50 + (int)(Math.random() * ((1000 - 50) + 1));
+            }
+        }, delayTime * 60, delayTime * 60);
+    }
+
+    //TODO che konam ??
+    public void enemyPriceUpgrade() {
+
+    }
+
+    public void reduceUnitsPrice() {
+        if (this.id != TEAM_MATH)
+            return;
+
+        this.withdrawMoney(4000);
+
+        for(GameObject object: objects.values())
+        {
+            if(object.isUnit())
+            {
+                Unit unit = (Unit) object;
+                unit.price -= unit.price * 0.1;
+            }
+        }
+    }
 }

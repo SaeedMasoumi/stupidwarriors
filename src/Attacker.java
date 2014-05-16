@@ -29,6 +29,10 @@ public class Attacker extends Unit {
     protected int TEAM_ID; 
     protected boolean isAttacking;
 
+    protected static int pwrUpgradeCounter = 0;
+    protected static int healthUpgradeCounter = 0;
+
+
     // Attacker Properties
     protected double attackPower;
 
@@ -99,5 +103,23 @@ public class Attacker extends Unit {
         
         return null; //TODO need refactors and test..
     }
+
+    ///////////////// Upgrades /////////////////
+
+    public static void pwrUpgrade() {
+        Soldier.pwrUpgrade();
+        Tank.pwrUpgrade();
+    }
+
+    public void pwrUpgradeForObj() {
+        attackPower += attackPower * 0.1;
+        price += cost * 0.05;
+    }
+
+    public static void healthUpgrade() {
+        Soldier.healthUpgrade();
+        Tank.healthUpgrade();
+    }
+
 
 }

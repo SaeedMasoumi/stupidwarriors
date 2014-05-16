@@ -1,6 +1,8 @@
 
 import mahyarise.common.GameObjectID;
 
+import java.util.HashMap;
+
 /*
  * Copyright (C) 2014 saeed.
  *
@@ -26,25 +28,44 @@ import mahyarise.common.GameObjectID;
  */
 public class Soldier extends Attacker {
     
-    private static int powerProgressCounter = 0;
-    private static int healthProgressCounter = 0;
 
-    
+    // Same for all objects -> must be static
+    private static double MAX_HEALTH = 400;
+    private static double ATTACK_POWER = 20;
+    private static double RELOAD_TIME = 200;
+    private static double COST = 10;
+    private static double PRICE = COST * 0.8;
+    private static int RANGE = 4;
+
+    // for holding specific data of objects we define a hashmap
+    private HashMap<String, Double> data = new HashMap<String, Double>(); //TODO baadan kamel beshe ...
+
     //TODO need some arguments
     
     
     
     public Soldier(Cell starting, GameObjectID id, Team team) {
         super(id, team);
-        health = 400;
-        attackPower = 20;
-        reloadTime = 200;
-        range = 4;
-        cost = 10;
+        this.health = MAX_HEALTH;
+        this.attackPower = ATTACK_POWER;
+        this.reloadTime = RELOAD_TIME;
+        this.range = RANGE;
+        this.cost = COST;
+        this.price = PRICE;
     }
-    public static void powerProgress() {
-            
+
+    ///////////////// Upgrades /////////////////
+
+    public static void pwrUpgrade() {
+        ATTACK_POWER += ATTACK_POWER * 0.1;
+        PRICE += COST * 0.05;
     }
+
+    public static void healthUpgrade() {
+        MAX_HEALTH += 5;
+        PRICE += COST * 0.05;
+    }
+
 }
 
 
