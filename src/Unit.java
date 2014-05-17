@@ -27,7 +27,7 @@ abstract public class Unit extends GameObject{
             for(int row = this.currentCell.getY() - this.range; row <= this.currentCell.getY() + this.range; row++)
                 for(int i = 0; i < Map.getCell(col, row).getObjects().length; i++)
                 {
-                    if (Map.getCell(col, row).getObjects()[i] != null && Map.getCell(col, row).getObjects()[i].getTeamGroupID() != this.getTeamGroupID())
+                    if (Map.getCell(col, row).getObjects()[i] != null && Map.getCell(col, row).getObjects()[i].getTeamID() != this.getTeamID())
                     {
                         enemies.add(Map.getCell(col, row).getObjects()[i]);
                     }

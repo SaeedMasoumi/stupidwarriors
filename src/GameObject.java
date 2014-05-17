@@ -75,8 +75,4 @@ public class GameObject {
 		return this.team.getID();
 	}
 
-	public int getTeamGroupID() {
-		return this.team.getGroupID();
-	}
-
 }
