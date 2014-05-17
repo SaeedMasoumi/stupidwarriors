@@ -74,5 +74,11 @@ public class GameObject {
 	public int getTeamID() {
 		return this.team.getID();
 	}
-
+        
+        public boolean isDie() {
+            if (health <= 0)
+                return true;
+            
+            else return false;
+        }
 }

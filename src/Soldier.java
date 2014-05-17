@@ -2,6 +2,7 @@
 import mahyarise.common.GameObjectID;
 
 import java.util.HashMap;
+import java.util.TimerTask;
 
 /*
  * Copyright (C) 2014 saeed.
@@ -65,7 +66,6 @@ public class Soldier extends Attacker {
         MAX_HEALTH += 5;
         PRICE += COST * 0.05;
     }
-
 }
 
 

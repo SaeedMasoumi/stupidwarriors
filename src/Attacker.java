@@ -1,3 +1,4 @@
+import java.util.TimerTask;
 import mahyarise.common.GameObjectID;
 
 /*
@@ -48,58 +49,83 @@ public class Attacker extends Unit {
     public Attacker(GameObjectID id, Team team) {
             super(id, team);
     }
+    
+    @Override
+    public void attack() {
+        Cell targetCell = this.findTargets(this.findEnemies());
+        team.timer.schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                for(GameObject object: targetCell.getObjects())
+                {
+                    object.setHealth(-attackPower);
+                }
+            }
+        }, (int)this.reloadTime, (int)this.reloadTime);
+    }
+
 
     @Override
-    public GameObject findTarget(GameObject[] enemies) {
-        if (enemies.length == 0) // yani asan kasi tooye bordesh nist
+    public Cell findTargets(Cell[] enemiesCell) {
+        if (enemiesCell.length == 0) // yani asan kasi tooye bordesh nist
             return null;
 
         else 
         {
             isAttacking = true; // hamle mikone ... bayad vayse ...
-            for (GameObject enemy : enemies) 
+            for (Cell cell : enemiesCell) 
             {
-                if (enemy.isTower() && Calc.distance(this, enemy) <= this.range)
-                    return enemy;
+                for (GameObject enemy: cell.getObjects())
+                {
+                    if (enemy.isTower() && Calc.distance(this, enemy) <= this.range)
+                        return cell;
+                }
             }
 
             // yani borji ro peyda nakardim pas donbale attacker migardim
-            GameObject target = null;
-            for (GameObject enemy : enemies) 
-            {
+            Cell targetCell = null;
+            for (Cell cell: enemiesCell) {
+                for (GameObject enemy : cell.getObjects()) 
+                {
 
-                double distance = Double.MAX_VALUE;
+                    double distance = Double.MAX_VALUE;
 
-                if (enemy.isAttacker() && enemy.getLaneNumber() == this.getLaneNumber() && Calc.distance(this, enemy) <= this.range)
-                    if (Calc.distance(this, enemy) < distance)
-                        target = enemy;
+                    if (enemy.isAttacker() && enemy.getLaneNumber() == this.getLaneNumber() && Calc.distance(this, enemy) <= this.range)
+                        if (Calc.distance(this, enemy) < distance)
+                            targetCell = cell;
+                }
             }
             
-            
-            if (target != null) 
-                return target;
-            
-            for (GameObject enemy: enemies)
+            if (targetCell != null) 
+                return targetCell;
+            // hala price
+            for (Cell cell: enemiesCell) {
+            for (GameObject enemy: cell.getObjects())
             {
                 double price = 0;
                 if (enemy.isAttacker() && enemy.price > price && Calc.distance(this, enemy) <= this.range)
-                    target = enemy;
+                    targetCell = cell;
             }
-            
-            if (target != null)
-                return target;
+            }
+            if (targetCell != null)
+                return targetCell;
             // ya niru haye doshman hamechizeshun yekie ya inke niruye doshman building e
-            for(GameObject enemy: enemies)
-            {
-                if (enemy.isAttacker() && Calc.distance(this, enemy) <= this.range)
-                    return enemy;
+            for(Cell cell: enemiesCell) {
+                for(GameObject enemy: cell.getObjects())
+                {
+                    if (enemy.isAttacker() && Calc.distance(this, enemy) <= this.range)
+                        return cell;
+                }
             }
-            
             // yani niruye doshman building e
-            for(GameObject enemy: enemies) //TODO need Refactors .. agar Military Base tooye masire doshman ha bashe nemitunan be HQ asib bezanan
-                if (enemy.isBuilding() && Calc.distance(this, enemy) <= this.range)
-                    return enemy;
+            for (Cell cell: enemiesCell) {
+                for(GameObject enemy: cell.getObjects()) //TODO need Refactors .. agar Military Base tooye masire doshman ha bashe nemitunan be HQ asib bezanan
+                    if (enemy.isBuilding() && Calc.distance(this, enemy) <= this.range)
+                        return cell;
+            }
         }
+            
         
         return null; //TODO need refactors and test..
     }

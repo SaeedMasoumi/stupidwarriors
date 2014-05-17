@@ -1,4 +1,5 @@
 
+import java.util.TimerTask;
 import mahyarise.common.GameObjectID;
 
 
@@ -44,10 +45,28 @@ public class Tower extends Unit {
         
     }
 
+    @Override
+    public void attack() {
+        Cell targetCell = this.findTargets(this.findEnemies());
+        team.timer.schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                for(GameObject object: targetCell.getObjects())
+                {
+                    if(object.isSoldier())
+                        object.setHealth(-pwrAgainstSoldiers);
+                    else if (object.isTank())
+                        object.setHealth(-pwrAgainstTanks);
+                }
+            }
+        }, (int)this.reloadTime, (int)this.reloadTime);
+    }
+
     
     // TODO .. age tunesti ino kamel kon ...
     @Override
-    public GameObject findTarget(GameObject[] enemies) {
+    public Cell findTargets(Cell[] enemiesCell) {
         return null;
     }
         

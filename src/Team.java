@@ -237,4 +237,12 @@ public class Team {
             }
         }
     }
+    
+    public void updateInfo() {
+        for(GameObject object: objects.values())
+        {
+            if (object.isDie())
+                this.removeObject(object);
+        }
+    }
 }

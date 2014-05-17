@@ -1,5 +1,7 @@
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 import mahyarise.common.GameObjectID;
 
 
@@ -21,21 +23,22 @@ abstract public class Unit extends GameObject{
         super(id, team);
     }
     
-    public GameObject[] findEnemies() {
-        ArrayList<GameObject> enemies = new ArrayList<GameObject>();
+    public Cell[] findEnemies() {
+        ArrayList<Cell> enemiesCell = new ArrayList<Cell>();
         for(int col = this.currentCell.getX() - this.range; col <= this.currentCell.getX() + this.range; col++)
             for(int row = this.currentCell.getY() - this.range; row <= this.currentCell.getY() + this.range; row++)
                 for(int i = 0; i < Map.getCell(col, row).getObjects().length; i++)
                 {
                     if (Map.getCell(col, row).getObjects()[i] != null && Map.getCell(col, row).getObjects()[i].getTeamID() != this.getTeamID())
                     {
-                        enemies.add(Map.getCell(col, row).getObjects()[i]);
+                        enemiesCell.add(Map.getCell(col, row));
                     }
                 }
         
-        return enemies.toArray(new GameObject[enemies.size()]);
+        return enemiesCell.toArray(new Cell[enemiesCell.size()]);
     }
 
-    abstract public GameObject findTarget(GameObject[] enemies); // peyda kardane target baraye har unit motefavete
-
+    abstract public Cell findTargets(Cell[] enemiesCell); // peyda kardane target baraye har unit motefavete
+    
+    abstract public void attack();
 }
