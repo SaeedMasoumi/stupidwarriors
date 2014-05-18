@@ -20,11 +20,46 @@
 /* in class ro static kardam chon tooye bazi faghat ye naghshe darim ke hamun aval tarif mishe ...
 */
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 // Need refactor
 public class Map {
-	private static Cell[][] cells;
-	private static int columnsLength, rowsLength;
-	
+
+    private static final int MB_LEFT_LANE_RIGHT_PATTERN[][] = {{11,11,11,12},
+            {11,11,11,12},
+            {11,11,11,12},
+            {11,11,11,12},
+            {11,11,11,12}};
+
+    private static final int MB_RIGHT_LANE_LEFT_PATTERN[][] = {{12,11,11,11},
+            {12,11,11,11},
+            {12,11,11,11},
+            {12,11,11,11},
+            {12,11,11,11}};
+
+    private static final int MB_UP_LANE_DOWN_PATTERN[][] = {{11,11,11,11,11},
+            {11,11,11,11,11},
+            {11,11,11,11,11},
+            {12,12,12,12,12}};
+
+    private static final int MB_DOWN_LANE_UP_PATTERN[][] = {{12,12,12,12,12},
+            {11,11,11,11,11},
+            {11,11,11,11,11},
+            {11,11,11,11,11}};
+
+
+    // num for patterns ...
+    private static final int NUM_MBL_LR = 101;
+    private static final int NUM_MBR_LL = 102;
+    private static final int NUM_MBU_LD = 103;
+    private static final int NUM_MBD_LU = 104;
+
+
+    private static Cell[][] cells;
+    private static int columnsLength, rowsLength;
+
+
 	public Map() {
 		
 	}
@@ -45,12 +80,12 @@ public class Map {
 
     public Map(int[][] types)
     {
-        columnsLength = types.length;
-        rowsLength = types[0].length;
+        columnsLength = types[0].length;
+        rowsLength = types.length;
 
         cells = new Cell[rowsLength][columnsLength];
-        for (int col = 0; col < columnsLength; col++)
-            for (int row = 0; row < rowsLength; row++)
+        for (int row = 0; row < rowsLength; row++)
+            for (int col = 0; col < columnsLength; col++)
             {
                 cells[row][col] = new Cell(types[row][col], col, row);
             }
@@ -84,41 +119,120 @@ public class Map {
 		return cells[row][col].getType();
 	}
 
-    public void markingCells() {
-        for (int col = 0; col < columnsLength; col++)
-            for(int row = 0; row < rowsLength; row ++)
+//    public void markingCells() {
+//        for (int col = 0; col < columnsLength; col++)
+//            for(int row = 0; row < rowsLength; row ++)
+//            {
+//                if (cells[row][col].isPath())
+//                {
+//                    for (int distance = 0; ; distance ++)
+//                    {
+//                        if (isOutOfPath(col + distance, row) || isOutOfPath(col - distance, row)
+//                                || isOutOfPath(col, row + distance) || isOutOfPath(col, row - distance)) {
+//                            cells[row][col].setLaneNum(distance);
+//                            break;
+//                        }
+//                    }
+//                }
+//            }
+//    }
+
+    public void pathFinding() {
+        for (int col = 0; col <= columnsLength - MB_RIGHT_LANE_LEFT_PATTERN[0].length; col++)
+            for (int row = 0; row <= rowsLength - MB_RIGHT_LANE_LEFT_PATTERN.length; row++)
             {
-                if (cells[row][col].isPath())
-                {
-                    for (int distance = 0; ; distance ++)
+                int[][] pattern = new int[MB_RIGHT_LANE_LEFT_PATTERN.length][MB_RIGHT_LANE_LEFT_PATTERN[0].length];
+                for (int i = row; i < row + MB_RIGHT_LANE_LEFT_PATTERN.length; i++)
+                    for (int j = col; j < col + MB_RIGHT_LANE_LEFT_PATTERN[0].length; j++)
                     {
-                        if (isOutOfPath(col + distance, row) || isOutOfPath(col - distance, row)
-                                || isOutOfPath(col, row + distance) || isOutOfPath(col, row - distance)) {
-                            cells[row][col].setLaneNum(distance);
-                            break;
-                        }
+                        pattern[i - row][j - col] = cells[i][j].getType();
                     }
-                }
+
+                if (Arrays.deepEquals(pattern, MB_RIGHT_LANE_LEFT_PATTERN))
+                    markingCells(NUM_MBR_LL, col, row);
+                else if (Arrays.deepEquals(pattern, MB_LEFT_LANE_RIGHT_PATTERN))
+                    markingCells(NUM_MBL_LR, col, row);
+            }
+
+        for (int col = 0; col <= columnsLength - MB_DOWN_LANE_UP_PATTERN[0].length; col++)
+            for (int row = 0; row <= rowsLength - MB_DOWN_LANE_UP_PATTERN.length; row++)
+            {
+                int [][] pattern = new int[MB_DOWN_LANE_UP_PATTERN.length][MB_DOWN_LANE_UP_PATTERN[0].length];
+                for (int i = row; i < row + MB_DOWN_LANE_UP_PATTERN.length; i++)
+                    for (int j = col; j < col + MB_DOWN_LANE_UP_PATTERN[0].length; j++)
+                    {
+                        pattern[i - row][j - col] = cells[i][j].getType();
+                    }
+
+                if (Arrays.deepEquals(pattern, MB_DOWN_LANE_UP_PATTERN))
+                    markingCells(NUM_MBD_LU, col, row);
+                else if (Arrays.deepEquals(pattern, MB_UP_LANE_DOWN_PATTERN))
+                    markingCells(NUM_MBU_LD, col, row);
             }
     }
 
+    public void markingCells(int patternNum, int col, int row) {
+        if (patternNum == NUM_MBD_LU)
+        {
+            if (cells[row][col].getLaneNum() != 0) //TODO must change ...
+            {
+                return;
+            }
+
+            markingCellsUpDown(col, row);
+
+            while (isOutOfPath(col, row) || isOutOfPath(col + MB_DOWN_LANE_UP_PATTERN[0].length, row))
+            {
+                markingCellsUpDown(col, row);
+                row--;
+            }
+        }
+    }
+
     public boolean isOutOfPath(int col, int row) {
-        if (col < 0 || col >= columnsLength || row < 0 || row >= rowsLength || cells[col][row].getType() == Cell.CELL_TYPE_UNUSED)
+        if (col < 0 || col >= columnsLength || row < 0 || row >= rowsLength || cells[row][col].getType() == Cell.CELL_TYPE_UNUSED)
             return true;
 
         return false;
     }
 
+    public void markingCellsUpDown(int col, int row) {
+        System.out.println("hehe");
+        int x = 0;
+        for (int i = col; i < MB_DOWN_LANE_UP_PATTERN[0].length + col; i++) {
+            cells[row][i].setLaneNum(x);
+            x++;
+        }
+    }
+
+    public void markingCellRightLeft(int col, int row) {
+        int x = 0;
+        for (int i = row; i > MB_RIGHT_LANE_LEFT_PATTERN.length - row; i--) // shayad bug bede
+        {
+            cells[i][col].setLaneNum(x);
+            x++;
+        }
+    }
 
     public void printMapLaneNumbers() {
-        for (int col = 0; col < columnsLength; col++)
+        for (int row = 0; row < rowsLength; row++)
         {
-            for (int row = 0; row < rowsLength; row++)
-                System.out.print(cells[row][col].getLaneNum() + " " +
-                        "");
+            for (int col = 0; col < columnsLength; col++)
+                System.out.print(cells[row][col].getLaneNum() + " ");
 
             System.out.println();
         }
+    }
+
+    public static void print2DArray(int[][] array) {
+        for (int row = 0; row < array.length; row++)
+        {
+            for (int col = 0; col < array[0].length; col++)
+                System.out.print(array[row][col] + " ");
+
+            System.out.println();
+        }
+
     }
 
 
