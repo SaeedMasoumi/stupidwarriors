@@ -39,9 +39,23 @@ public class Map {
          */
 	public Map(int col ,int row) {
 		cells = new Cell[col][row];
-                this.columnsLength = col;
-                this.rowsLength = row;
+        this.columnsLength = col;
+        this.rowsLength = row;
 	}
+
+    public Map(int[][] types)
+    {
+        columnsLength = types.length;
+        rowsLength = types[0].length;
+
+        cells = new Cell[rowsLength][columnsLength];
+        for (int col = 0; col < columnsLength; col++)
+            for (int row = 0; row < rowsLength; row++)
+            {
+                cells[row][col] = new Cell(types[row][col], col, row);
+            }
+    }
+
 	public static Cell getCell(int col, int row) {
 		return cells[row][col];
 	}
@@ -69,9 +83,43 @@ public class Map {
 	public static int getCellsType(int col, int row) {
 		return cells[row][col].getType();
 	}
-        
-        public void specifyWays() {
-            
+
+    public void markingCells() {
+        for (int col = 0; col < columnsLength; col++)
+            for(int row = 0; row < rowsLength; row ++)
+            {
+                if (cells[row][col].isPath())
+                {
+                    for (int distance = 0; ; distance ++)
+                    {
+                        if (isOutOfPath(col + distance, row) || isOutOfPath(col - distance, row)
+                                || isOutOfPath(col, row + distance) || isOutOfPath(col, row - distance)) {
+                            cells[row][col].setLaneNum(distance);
+                            break;
+                        }
+                    }
+                }
+            }
+    }
+
+    public boolean isOutOfPath(int col, int row) {
+        if (col < 0 || col >= columnsLength || row < 0 || row >= rowsLength || cells[col][row].getType() == Cell.CELL_TYPE_UNUSED)
+            return true;
+
+        return false;
+    }
+
+
+    public void printMapLaneNumbers() {
+        for (int col = 0; col < columnsLength; col++)
+        {
+            for (int row = 0; row < rowsLength; row++)
+                System.out.print(cells[row][col].getLaneNum() + " " +
+                        "");
+
+            System.out.println();
         }
+    }
+
 
 }

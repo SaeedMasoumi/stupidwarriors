@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<StackPane fx:id="stackID" maxHeight="-1.0" maxWidth="-1.0" prefHeight="600.0" prefWidth="1024.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="menuController">
+  <children>
+    <ImageView id="" disable="false" fitHeight="701.7022094726562" fitWidth="1235.874704009025" pickOnBounds="true" preserveRatio="true" smooth="true" style="">
+      <effect>
+        <DisplacementMap scaleX="10.0" scaleY="100.0">
+          <mapData>
+            <FloatMap />
+          </mapData>
+        </DisplacementMap>
+      </effect>
+      <image>
+        <Image url="@../img/bg.jpg" />
+      </image>
+    </ImageView>
+    <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="49.0" style="  -fx-background-color: &#10;        #707070,&#10;        linear-gradient(#fcfcfc, #f3f3f3),&#10;        linear-gradient(#f2f2f2 0%, #ebebeb 49%, #dddddd 50%, #cfcfcf 100%);&#10;    -fx-background-insets: 0,1,2;&#10;    -fx-background-radius: 3,2,1;&#10;    -fx-padding: 3 30 3 30;&#10;    -fx-text-fill: black;&#10;    -fx-font-size: 14px;" text="Button" />
+  </children>
+</StackPane>

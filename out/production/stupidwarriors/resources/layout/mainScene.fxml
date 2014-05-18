@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane opacity="1.0" prefHeight="700.0" prefWidth="1024.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="engine.scene.renderController">
+  <children>
+    <ImageView fitHeight="701.7022094726562" fitWidth="1235.874704009025" pickOnBounds="true" preserveRatio="true" visible="true" StackPane.alignment="CENTER">
+      <effect>
+        <Glow level="0.9371069182389937" />
+      </effect>
+      <image>
+        <Image url="@../../../resources/img/bg.jpg" />
+      </image>
+    </ImageView>
+    <Label alignment="BOTTOM_CENTER" opacity="1.0" style="" text="Copyright © 2014 SATRAP™ All Rights Reserved" textFill="WHITE" StackPane.alignment="BOTTOM_CENTER">
+      <effect>
+        <Glow level="0.9622641509433962" />
+      </effect>
+      <font>
+        <Font size="13.0" />
+      </font>
+    </Label>
+  </children>
+</StackPane>

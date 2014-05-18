@@ -47,7 +47,7 @@ public class Tower extends Unit {
 
     @Override
     public void attack() {
-        Cell targetCell = this.findTargets(this.findEnemies());
+        final Cell targetCell = this.findTargets(this.findEnemies());
         team.timer.schedule(new TimerTask() {
 
             @Override

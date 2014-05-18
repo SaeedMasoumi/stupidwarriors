@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<StackPane fx:id="stackPane" prefHeight="700.0" prefWidth="1024.0" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" >
+  <children>
+    <ImageView fx:id="background" blendMode="SRC_OVER" disable="false" fitHeight="701.7022094726562" fitWidth="1235.874704009025" focusTraversable="false" pickOnBounds="true" preserveRatio="false" style="" visible="true">
+      <image>
+        <Image url="@../../../resources/img/bg.png" />
+      </image>
+      <StackPane.margin>
+        <Insets />
+      </StackPane.margin>
+    </ImageView>
+    <Rectangle fx:id="recBox" arcHeight="45.0" arcWidth="56.0" fill="#ffb800" height="92.0" opacity="0.6" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="198.0" StackPane.alignment="BOTTOM_LEFT">
+      <StackPane.margin>
+        <Insets bottom="25.0" left="25.0" />
+      </StackPane.margin>
+    </Rectangle>
+    <Label fx:id="recText" text="Welcome Back My Lord" textFill="WHITE" StackPane.alignment="BOTTOM_LEFT">
+      <effect>
+        <Glow level="0.4509433962264151" />
+      </effect>
+      <font>
+        <Font size="16.0" />
+      </font>
+      <StackPane.margin>
+        <Insets bottom="60.0" left="40.0" right="40.0" />
+      </StackPane.margin>
+    </Label>
+    <Button id="btnOrange" fx:id="playButton" mnemonicParsing="false" prefHeight="104.0" prefWidth="318.9853515625" text="Play">
+      <stylesheets>
+        <URL value="@../../../resources/css/button.css" />
+      </stylesheets>
+      <StackPane.margin>
+        <Insets bottom="400.0" left="725.0" />
+      </StackPane.margin>
+    </Button>
+    <Button id="btnBlue" fx:id="multiplayerButton" mnemonicParsing="false" prefHeight="104.0" prefWidth="198.0" text="Multi Player">
+      <stylesheets>
+        <URL value="@../../../resources/css/button.css" />
+      </stylesheets>
+      <StackPane.margin>
+        <Insets bottom="160.0" left="840.0" />
+      </StackPane.margin>
+    </Button>
+    <Button id="btnYellow" fx:id="loadButton" mnemonicParsing="false" prefHeight="104.0" prefWidth="102.0" text="Load">
+      <stylesheets>
+        <URL value="@../../../resources/css/button.css" />
+      </stylesheets>
+      <StackPane.margin>
+        <Insets bottom="160.0" left="510.0" />
+      </StackPane.margin>
+    </Button>
+    <Button id="btnGreen" fx:id="aboutusButton" mnemonicParsing="false" prefHeight="105.0" prefWidth="153.0" text="About Us">
+      <stylesheets>
+        <URL value="@../../../resources/css/button.css" />
+      </stylesheets>
+      <StackPane.margin>
+        <Insets left="880.0" top="80.0" />
+      </StackPane.margin>
+    </Button>
+    <Button id="exit" fx:id="optionButton" mnemonicParsing="false" prefHeight="105.0" prefWidth="153.0" text="Option">
+      <stylesheets>
+        <URL value="@../../../resources/css/button.css" />
+      </stylesheets>
+      <StackPane.margin>
+        <Insets left="550.0" top="80.0" />
+      </StackPane.margin>
+    </Button>
+  </children>
+  <stylesheets>
+    <URL value="@../../../resources/css/bg.css" />
+  </stylesheets>
+</StackPane>

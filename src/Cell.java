@@ -20,19 +20,43 @@ import java.util.ArrayList;
  */
 
 public class Cell {
-	// TODO make it with enum :
+
+    public static final int CELL_TYPE_HQ = 10;
+    public static final int CELL_TYPE_MILITARY_BASE = 11;
+    public static final int CELL_TYPE_LANE = 12;
+    public static final int CELL_TYPE_UNUSED = 13;
+
+    // TODO make it with enum :
 	// private CellType type;
 	private final int type;
 	private int col, row;
+    private int laneNum = 0; // if it was a lane ...
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 
 	public Cell(int type, int col, int row) {
 		this.type = type;
 		this.col = col;
 		this.row = row;
+
+        if (type != CELL_TYPE_LANE)
+            laneNum = 9;
 	}
 
-	public int getType() {
+    public boolean isPath() {
+        if (laneNum != -1)
+            return true;
+        return  false;
+    }
+
+    public void setLaneNum(int laneNum) {
+        this.laneNum = laneNum;
+    }
+
+    public int getLaneNum() {
+        return laneNum;
+    }
+
+    public int getType() {
 		return type;
 	}
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane id="background" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <top>
+    <ToolBar minHeight="14.0" prefHeight="33.0" prefWidth="800.0">
+      <items>
+        <Region styleClass="spacer" />
+        <HBox styleClass="segmented-button-bar">
+          <Button styleClass="first" text="Tasks" />
+          <Button text="Administrator" />
+          <Button text="Search" />
+          <Button text="Line" />
+          <Button styleClass="last" text="Process" />
+        </HBox>
+      </items>
+    </ToolBar>
+  </top>
+</BorderPane>
