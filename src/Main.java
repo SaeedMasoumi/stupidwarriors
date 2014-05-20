@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import judge.JudgeAbstract;
 import mahyarise.common.GameObjectID;
 
@@ -7,6 +8,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 import mahyarise.TAgraphics.GraphicsInterface;
 import mahyarise.common.exceptions.MahyariseExceptionBase;
+=======
+import java.util.Arrays;
+>>>>>>> FETCH_HEAD
 =======
 import java.util.Arrays;
 >>>>>>> FETCH_HEAD
@@ -19,6 +23,7 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         int[][] types1 = {{13,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,11,11,11},
                 {13,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,11,11,11},
@@ -193,6 +198,8 @@ public class Main {
                 }
             });
 =======
+=======
+>>>>>>> FETCH_HEAD
         int[][] types = {{12,12,12,12,12,12,12,12,12,12},
                 {13,13,12,12,12,12,12,13,13,13},
                 {13,13,12,12,12,12,12,13,13,13},
@@ -213,6 +220,9 @@ public class Main {
 
 
         map.printMapLaneNumbers();
+<<<<<<< HEAD
+>>>>>>> FETCH_HEAD
+=======
 >>>>>>> FETCH_HEAD
     }
 }

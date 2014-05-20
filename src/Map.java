@@ -21,7 +21,11 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+import java.lang.reflect.Array;
+>>>>>>> FETCH_HEAD
 =======
 import java.lang.reflect.Array;
 >>>>>>> FETCH_HEAD
@@ -62,8 +66,14 @@ public class Map {
 
     private static Cell[][] cells;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	private static int columnsLength, rowsLength;
 	
+=======
+    private static int columnsLength, rowsLength;
+
+
+>>>>>>> FETCH_HEAD
 =======
     private static int columnsLength, rowsLength;
 
@@ -137,12 +147,15 @@ public class Map {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     public static int getLaneNum(int col, int row) {return cells[row][col].getLaneNum();}
 
     public void markingCells() {
         for (int col = 0; col < columnsLength; col++)
             for(int row = 0; row < rowsLength; row ++)
 =======
+=======
+>>>>>>> FETCH_HEAD
 //    public void markingCells() {
 //        for (int col = 0; col < columnsLength; col++)
 //            for(int row = 0; row < rowsLength; row ++)
@@ -164,6 +177,7 @@ public class Map {
     public void pathFinding() {
         for (int col = 0; col <= columnsLength - MB_RIGHT_LANE_LEFT_PATTERN[0].length; col++)
             for (int row = 0; row <= rowsLength - MB_RIGHT_LANE_LEFT_PATTERN.length; row++)
+<<<<<<< HEAD
             {
                 int[][] pattern = new int[MB_RIGHT_LANE_LEFT_PATTERN.length][MB_RIGHT_LANE_LEFT_PATTERN[0].length];
                 for (int i = row; i < row + MB_RIGHT_LANE_LEFT_PATTERN.length; i++)
@@ -265,6 +279,55 @@ public class Map {
 //                    DFS(col, row, cells[col][row].getLaneNum(), checkedList);
 //            }
 
+=======
+            {
+                int[][] pattern = new int[MB_RIGHT_LANE_LEFT_PATTERN.length][MB_RIGHT_LANE_LEFT_PATTERN[0].length];
+                for (int i = row; i < row + MB_RIGHT_LANE_LEFT_PATTERN.length; i++)
+                    for (int j = col; j < col + MB_RIGHT_LANE_LEFT_PATTERN[0].length; j++)
+                    {
+                        pattern[i - row][j - col] = cells[i][j].getType();
+                    }
+
+                if (Arrays.deepEquals(pattern, MB_RIGHT_LANE_LEFT_PATTERN))
+                    markingCells(NUM_MBR_LL, col, row);
+                else if (Arrays.deepEquals(pattern, MB_LEFT_LANE_RIGHT_PATTERN))
+                    markingCells(NUM_MBL_LR, col, row);
+            }
+
+        for (int col = 0; col <= columnsLength - MB_DOWN_LANE_UP_PATTERN[0].length; col++)
+            for (int row = 0; row <= rowsLength - MB_DOWN_LANE_UP_PATTERN.length; row++)
+            {
+                int [][] pattern = new int[MB_DOWN_LANE_UP_PATTERN.length][MB_DOWN_LANE_UP_PATTERN[0].length];
+                for (int i = row; i < row + MB_DOWN_LANE_UP_PATTERN.length; i++)
+                    for (int j = col; j < col + MB_DOWN_LANE_UP_PATTERN[0].length; j++)
+                    {
+                        pattern[i - row][j - col] = cells[i][j].getType();
+                    }
+
+                if (Arrays.deepEquals(pattern, MB_DOWN_LANE_UP_PATTERN))
+                    markingCells(NUM_MBD_LU, col, row);
+                else if (Arrays.deepEquals(pattern, MB_UP_LANE_DOWN_PATTERN))
+                    markingCells(NUM_MBU_LD, col, row);
+            }
+    }
+
+    public void markingCells(int patternNum, int col, int row) {
+        if (patternNum == NUM_MBD_LU)
+        {
+            if (cells[row][col].getLaneNum() != 0) //TODO must change ...
+            {
+                return;
+            }
+
+            markingCellsUpDown(col, row);
+
+            while (isOutOfPath(col, row) || isOutOfPath(col + MB_DOWN_LANE_UP_PATTERN[0].length, row))
+            {
+                markingCellsUpDown(col, row);
+                row--;
+            }
+        }
+>>>>>>> FETCH_HEAD
     }
 
     public void mark(int patternNum, int col, int row) {
@@ -327,6 +390,9 @@ public class Map {
 =======
     public boolean isOutOfPath(int col, int row) {
         if (col < 0 || col >= columnsLength || row < 0 || row >= rowsLength || cells[row][col].getType() == Cell.CELL_TYPE_UNUSED)
+<<<<<<< HEAD
+>>>>>>> FETCH_HEAD
+=======
 >>>>>>> FETCH_HEAD
             return true;
 
@@ -353,6 +419,7 @@ public class Map {
 
     public void printMapLaneNumbers() {
 <<<<<<< HEAD
+<<<<<<< HEAD
         for (int row = 0; row < rowsLength; row++) {
             for (int col = 0; col < columnsLength; col++) {
                 System.out.print(cells[row][col].getLaneNum() + " ");
@@ -362,9 +429,26 @@ public class Map {
         {
             for (int col = 0; col < columnsLength; col++)
                 System.out.print(cells[row][col].getLaneNum() + " ");
+=======
+        for (int row = 0; row < rowsLength; row++)
+        {
+            for (int col = 0; col < columnsLength; col++)
+                System.out.print(cells[row][col].getLaneNum() + " ");
 
             System.out.println();
         }
+    }
+
+    public static void print2DArray(int[][] array) {
+        for (int row = 0; row < array.length; row++)
+        {
+            for (int col = 0; col < array[0].length; col++)
+                System.out.print(array[row][col] + " ");
+>>>>>>> FETCH_HEAD
+
+            System.out.println();
+        }
+
     }
 
     public static void print2DArray(int[][] array) {
