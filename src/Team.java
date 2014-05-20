@@ -25,20 +25,19 @@ import java.util.TimerTask;
 
 /**
  * Class for Team
- * @author Saeed
+ * @author Saeed Rajabzadeh
  */
 public class Team {
 
-    private static final int TEAM_CE = 0;
-    private static final int TEAM_MATH = 1;
+    public static final int TEAM_CE = 0;
+    public static final int TEAM_MATH = 1;
 
     private boolean healthBounceUpgradeUsed;
     private boolean speedUpgradeUsed;
     
     // properties
-    private double money;
+    private int money;
     private int id;
-    private int groupID; // baraye shabake .. age 2 ta team motahed budam groupID shun yeki mishe ...
 
     private HashMap<GameObjectID, GameObject> objects = new HashMap<GameObjectID, GameObject>(); // for holding units
     private static ArrayList<GameObject> allObjects = new ArrayList<GameObject>();
@@ -51,7 +50,7 @@ public class Team {
     
     
     //Constructor
-    public Team(int id, int groupID) {
+    public Team(int id) {
         this.id = id;
         money = 5000;
         
@@ -62,7 +61,15 @@ public class Team {
     public int getID() {
         return id;
     }
-    
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
     // generate money
     public void generateMoney() {
         timer.schedule(new TimerTask() {
@@ -100,13 +107,13 @@ public class Team {
                 attacker.pwrUpgradeForObj();
             }
         }
-        Attacker.pwrUpgrade();
+        Attacker.pwrUpgrade(id);
     }
 
     public void healthUpgrade() {
         Attacker.healthUpgradeCounter++;
         this.withdrawMoney(Attacker.healthUpgradeCounter * 500);
-        Attacker.healthUpgrade();
+        Attacker.healthUpgrade(id);
     }
 
     /******* CE UPGRADES *******/
@@ -124,13 +131,24 @@ public class Team {
             @Override
             public void run() {
                 for(GameObject object: objects.values())
-                {
-                    if (object.health < object.MAX_HELATH)
-                        object.health += object.health * 0.05;
+                    if (object.isAttacker()) {
+                        Attacker attacker = (Attacker) object;
+                        if (attacker.getTeamID() == TEAM_CE) {
+                            if (attacker.health < Soldier.CE_MAX_HEALTH)
+                                attacker.health += attacker.health * 0.05;
 
-                    if (object.health > object.MAX_HELATH)
-                        object.health = object.MAX_HELATH;
-                }
+                            if (attacker.health > Soldier.CE_MAX_HEALTH)
+                                attacker.health = Soldier.CE_MAX_HEALTH;
+                        }
+
+                        else {
+                            if (attacker.health < Soldier.MATH_MAX_HEALTH)
+                                attacker.health += attacker.health * 0.05;
+
+                            if (attacker.health > Soldier.MATH_MAX_HEALTH)
+                                attacker.health = Soldier.MATH_MAX_HEALTH;
+                        }
+                    }
             }
         }, delayTime, delayTime);
 
@@ -186,9 +204,9 @@ public class Team {
             {
                 Tank tank = (Tank) object;
                 tank.reloadTime = 400;
-                Tank.setRELOAD_TIME(400);
             }
         }
+        Tank.setCE_RELOAD_TIME(400);
     }
 
     /******* MATH UPGRADES *******/
@@ -220,6 +238,8 @@ public class Team {
                 unit.price += unit.price * 0.1;
             }
         }
+
+        Soldier.CE_PRICE += Soldier.CE_PRICE * 0.1; //TODO shayad bug bede
     }
 
     public void reduceUnitsPriceUprade() { // or Downgrade :D
@@ -236,6 +256,8 @@ public class Team {
                 unit.price -= unit.price * 0.1;
             }
         }
+
+        Soldier.MATH_PRICE -= Soldier.MATH_PRICE * 0.1; //TODO shayad bug bede
     }
     
     public void updateInfo() {

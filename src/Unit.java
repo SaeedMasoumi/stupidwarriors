@@ -1,7 +1,6 @@
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
+
 import mahyarise.common.GameObjectID;
 
 
@@ -25,8 +24,8 @@ abstract public class Unit extends GameObject{
     
     public Cell[] findEnemies() {
         ArrayList<Cell> enemiesCell = new ArrayList<Cell>();
-        for(int col = this.currentCell.getX() - this.range; col <= this.currentCell.getX() + this.range; col++)
-            for(int row = this.currentCell.getY() - this.range; row <= this.currentCell.getY() + this.range; row++)
+        for(int col = this.currentCell.getCol() - this.range; col <= this.currentCell.getCol() + this.range; col++)
+            for(int row = this.currentCell.getRow() - this.range; row <= this.currentCell.getRow() + this.range; row++)
                 for(int i = 0; i < Map.getCell(col, row).getObjects().length; i++)
                 {
                     if (Map.getCell(col, row).getObjects()[i] != null && Map.getCell(col, row).getObjects()[i].getTeamID() != this.getTeamID())

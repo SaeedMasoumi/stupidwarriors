@@ -43,9 +43,7 @@ public class Cell {
 	}
 
     public boolean isPath() {
-        if (laneNum != -1)
-            return true;
-        return  false;
+        return type == CELL_TYPE_LANE;
     }
 
     public void setLaneNum(int laneNum) {
@@ -60,11 +58,11 @@ public class Cell {
 		return type;
 	}
 
-	public int getX() {
+	public int getCol() {
 		return this.col;
 	}
 
-	public int getY() {
+	public int getRow() {
 		return this.row;
 	}
 

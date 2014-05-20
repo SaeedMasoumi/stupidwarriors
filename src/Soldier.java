@@ -2,7 +2,6 @@
 import mahyarise.common.GameObjectID;
 
 import java.util.HashMap;
-import java.util.TimerTask;
 
 /*
  * Copyright (C) 2014 saeed.
@@ -25,18 +24,25 @@ import java.util.TimerTask;
 
 /**
  *
- * @author saeed
+ * @author Saeed & Saeed
  */
 public class Soldier extends Attacker {
     
 
     // Same for all objects -> must be static
-    private static double MAX_HEALTH = 400;
-    private static double ATTACK_POWER = 20;
-    private static double RELOAD_TIME = 200;
-    private static double COST = 10;
-    private static double PRICE = COST * 0.8;
-    private static int RANGE = 4;
+    public static double CE_MAX_HEALTH = 400;
+    public static double CE_ATTACK_POWER = 20;
+    private static double CE_RELOAD_TIME = 200;
+    private static double CE_COST = 10;
+    public static double CE_PRICE = CE_COST * 0.8;
+    private static int CE_RANGE = 4;
+
+    public static double MATH_MAX_HEALTH = 400;
+    public static double MATH_ATTACK_POWER = 20;
+    private static double MATH_RELOAD_TIME = 200;
+    private static double MATH_COST = 10;
+    public static double MATH_PRICE = MATH_COST * 0.8;
+    private static int MATH_RANGE = 4;
 
     // for holding specific data of objects we define a hashmap
     private HashMap<String, Double> data = new HashMap<String, Double>(); //TODO baadan kamel beshe ...
@@ -47,25 +53,51 @@ public class Soldier extends Attacker {
     
     public Soldier(Cell starting, GameObjectID id, Team team) {
         super(id, team);
-        this.health = MAX_HEALTH;
-        this.attackPower = ATTACK_POWER;
-        this.reloadTime = RELOAD_TIME;
-        this.range = RANGE;
-        this.cost = COST;
-        this.price = PRICE;
+        if (team.getID() == Team.TEAM_CE)
+        {
+            this.health = CE_MAX_HEALTH;
+            this.attackPower = CE_ATTACK_POWER;
+            this.reloadTime = CE_RELOAD_TIME;
+            this.range = CE_RANGE;
+            this.cost = CE_COST;
+            this.price = CE_PRICE;
+        }
+
+        else {
+            this.health = MATH_MAX_HEALTH;
+            this.attackPower = MATH_ATTACK_POWER;
+            this.reloadTime = MATH_RELOAD_TIME;
+            this.range = MATH_RANGE;
+            this.cost = MATH_COST;
+            this.price = MATH_PRICE;
+        }
     }
 
     ///////////////// Upgrades /////////////////
 
-    public static void pwrUpgrade() {
-        ATTACK_POWER += ATTACK_POWER * 0.1;
-        PRICE += COST * 0.05;
+    public static void pwrUpgrade(int teamID) {
+        if (teamID == Team.TEAM_CE) {
+            CE_ATTACK_POWER += CE_ATTACK_POWER * 0.1;
+            CE_PRICE += CE_COST * 0.05;
+        }
+        else {
+            MATH_ATTACK_POWER += MATH_ATTACK_POWER * 0.1;
+            MATH_PRICE += MATH_COST * 0.05;
+        }
+
     }
 
-    public static void healthUpgrade() {
-        MAX_HEALTH += 5;
-        PRICE += COST * 0.05;
+    public static void healthUpgrade(int teamID) {
+        if (teamID == Team.TEAM_CE) {
+            CE_MAX_HEALTH += 5;
+            CE_PRICE += CE_COST * 0.05;
+        }
+        else {
+            MATH_MAX_HEALTH += 5;
+            MATH_PRICE += MATH_COST * 0.05;
+        }
     }
+
 }
 
 

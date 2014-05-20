@@ -65,7 +65,6 @@ public class Attacker extends Unit {
         }, (int)this.reloadTime, (int)this.reloadTime);
     }
 
-
     @Override
     public Cell findTargets(Cell[] enemiesCell) {
         if (enemiesCell.length == 0) // yani asan kasi tooye bordesh nist
@@ -88,7 +87,6 @@ public class Attacker extends Unit {
             for (Cell cell: enemiesCell) {
                 for (GameObject enemy : cell.getObjects()) 
                 {
-
                     double distance = Double.MAX_VALUE;
 
                     if (enemy.isAttacker() && enemy.getLaneNumber() == this.getLaneNumber() && Calc.distance(this, enemy) <= this.range)
@@ -132,9 +130,9 @@ public class Attacker extends Unit {
 
     ///////////////// Upgrades /////////////////
 
-    public static void pwrUpgrade() {
-        Soldier.pwrUpgrade();
-        Tank.pwrUpgrade();
+    public static void pwrUpgrade(int teamID) {
+        Soldier.pwrUpgrade(teamID);
+        Tank.pwrUpgrade(teamID);
     }
 
     public void pwrUpgradeForObj() {
@@ -142,10 +140,22 @@ public class Attacker extends Unit {
         price += cost * 0.05;
     }
 
-    public static void healthUpgrade() {
-        Soldier.healthUpgrade();
-        Tank.healthUpgrade();
+    public static void healthUpgrade(int teamID) {
+        Soldier.healthUpgrade(teamID);
+        Tank.healthUpgrade(teamID);
     }
 
 
+    public void pathFinding() {
+        for (int i = -1; i <= 1; i += 2)
+        {
+            if (!Map.isOutOfPath(currentCell.getCol(), currentCell.getRow() + i)
+                    && Map.getLaneNum(currentCell.getCol(), currentCell.getRow() + i) == currentCell.getLaneNum())
+                nextCell = Map.getCell(currentCell.getCol(), currentCell.getRow() + i);
+
+            else if (!Map.isOutOfPath(currentCell.getCol() + i, currentCell.getRow())
+                    && Map.getLaneNum(currentCell.getCol() + i, currentCell.getRow()) == currentCell.getLaneNum())
+                nextCell = Map.getCell(currentCell.getCol() + i, currentCell.getRow());
+        }
+    }
 }

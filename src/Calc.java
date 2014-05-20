@@ -21,6 +21,6 @@
  */
 public class Calc {
     public static double distance(GameObject o1, GameObject o2) {
-        return Math.sqrt(Math.pow((o1.currentCell.getX() - o2.currentCell.getX()), 2) + Math.pow(o1.currentCell.getY() - o2.currentCell.getY(), 2));
+        return Math.sqrt(Math.pow((o1.currentCell.getCol() - o2.currentCell.getCol()), 2) + Math.pow(o1.currentCell.getRow() - o2.currentCell.getRow(), 2));
     }
 }
