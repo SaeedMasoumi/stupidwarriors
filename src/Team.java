@@ -42,7 +42,7 @@ public class Team {
     private HashMap<GameObjectID, GameObject> objects = new HashMap<GameObjectID, GameObject>(); // for holding units
     private static ArrayList<GameObject> allObjects = new ArrayList<GameObject>();
     
-    Timer timer = new Timer();
+    static Timer timer = new Timer();
     
     // some variables for handling ... felan final shoon nakardam ta vaghty ke sakhtare code ghashang shekl begire
     private int plusMoney = 10;

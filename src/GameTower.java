@@ -32,7 +32,7 @@ public class GameTower extends Tower {
         reloadTime = 2000;
         health = 5000;
         cost = 300;
-        price = cost * 0.8;
+        price = (int) (cost * 0.8);
     }
     
 }

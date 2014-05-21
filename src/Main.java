@@ -1,10 +1,4 @@
-import mahyarise.common.GameObjectID;
-
-import java.util.HashMap;
-import java.util.Timer;
-import java.util.TimerTask;
 import mahyarise.TAgraphics.GraphicsInterface;
-import mahyarise.common.exceptions.MahyariseExceptionBase;
 
 /**
  * Created by Saeed on 5/16/2014.
@@ -61,15 +55,14 @@ public class Main {
                 {13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13},
                 {13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13}};
 
-//        Map map = new Map(types2);
-//        Timer timer = new Timer();
-//
-//
-//        map.markingCells();
-//
-//        Team team = new Team(1);
-//        map.pathFinding();
+
+        Judge judge = new Judge();
+        GraphicsInterface graphicsInterface = new GraphicsInterface(judge);
 
 
+        judge.loadMap(types2);
+        graphicsInterface.start();
+
+        System.out.println("HERE :D");
     }
 }

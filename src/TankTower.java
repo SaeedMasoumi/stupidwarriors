@@ -33,7 +33,7 @@ public class TankTower extends Tower {
         health = 4000;
         reflectionOfDamage = 40;
         cost = 500;
-        price = cost * 0.8;
+        price = (int) (cost * 0.8);
     }
     
 }

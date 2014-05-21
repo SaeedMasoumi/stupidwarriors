@@ -33,6 +33,6 @@ public class BlackTower extends Tower {
         health = 4000;
         reflectionOfDamage = 30;
         cost = 500;
-        price = cost * 0.8; // arzeshe tower
+        price = (int) (cost * 0.8); // arzeshe tower
     }
 }

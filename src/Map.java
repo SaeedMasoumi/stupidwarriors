@@ -94,7 +94,7 @@ public class Map {
         for (int row = 0; row < rowsLength; row++)
             for (int col = 0; col < columnsLength; col++)
             {
-                setCellsType(types[row][col], col, row);
+                cells[row][col] = new Cell(types[row][col], col, row);
             }
     }
 
@@ -111,11 +111,11 @@ public class Map {
     }
 
     public static int getRowLength() {
-        return cells.length;
+        return rowsLength;
     }
 
     public static int getColLength() {
-        return cells[0].length;
+        return columnsLength;
     }
 
     public static void setCellsType(int type, int col, int row) {

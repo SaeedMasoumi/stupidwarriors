@@ -33,7 +33,7 @@ public class ElectricityTower extends Tower{
         health = 2000;
         reflectionOfDamage = 10;
         cost = 600;
-        price = cost * 0.8;
+        price = (int) (cost * 0.8);
     }
     
 }

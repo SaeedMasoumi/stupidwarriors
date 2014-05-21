@@ -33,7 +33,7 @@ public class GeneralMathTower extends Tower {
         health = 5000;
         reflectionOfDamage = 0;
         cost = 300;
-        price = cost * 0.8;
+        price = (int) (cost * 0.8);
     }
     
 }
