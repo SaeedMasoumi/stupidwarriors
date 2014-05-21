@@ -1,4 +1,3 @@
-import judge.JudgeAbstract;
 import mahyarise.common.GameObjectID;
 
 import java.util.HashMap;
@@ -14,6 +13,11 @@ import mahyarise.common.exceptions.MahyariseExceptionBase;
 // stupidwarriors ghati pati bud ino vase khodam dorost kardam ... pakesh nakon ;)
 public class Main {
     public static void main(String[] args) {
+
+
+        // TODO: range niru ha moraba'e na dayere ...
+
+
 
         int[][] types1 = {{13,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,11,11,11},
                 {13,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,11,11,11},
@@ -65,7 +69,7 @@ public class Main {
 //
 //        Team team = new Team(1);
 //        map.pathFinding();
-        JudgeAbstract judge = new Judge();
+
 
     }
 }

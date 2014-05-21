@@ -1,6 +1,6 @@
-import judge.JudgeAbstract;
 import mahyarise.common.GameObjectID;
 import mahyarise.common.exceptions.MahyariseExceptionBase;
+import mahyarise.judge.JudgeAbstract;
 
 import java.util.HashMap;
 
