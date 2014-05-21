@@ -46,16 +46,16 @@ public class Tank extends Attacker {
     /**
      * Tank Constructor 
      * should give a started row and col because we need these parameters
-     * @param Started
+     * @param startingCell
      */
-    public Tank(Cell Started,GameObjectID id, Team team) {
-        super(id, team);
+    public Tank(Cell startingCell,GameObjectID id, Team team) {
+        super(startingCell, id, team);
         
         //fill map info of this object
         this.isAlive = true;
         this.isAttacking = false;
-        this.startingCell = Started;
-        this.currentCell = Started;
+        this.startingCell = startingCell;
+        this.currentCell = startingCell;
         //fill object properties
 
 

@@ -1,13 +1,18 @@
 import mahyarise.TAgraphics.GraphicsInterface;
 
+import java.util.TimerTask;
+
 /**
  * Created by Saeed on 5/21/2014.
  */
 
 // just for test
 public class Test {
-    public static void main(String[] args) {
 
+    static Judge judge = new Judge();
+    static GraphicsInterface graphicsInterface = new GraphicsInterface(judge);
+
+    public static void main(String[] args) {
 
         // TODO: range niru ha moraba'e na dayere ...
 
@@ -96,12 +101,12 @@ public class Test {
                 {13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13},
                 {13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13}};
 
-        Judge judge = new Judge();
-        GraphicsInterface graphicsInterface = new GraphicsInterface(judge);
 
         Map map = new Map();
         judge.setMapSize(map1[0].length, map1.length);
         judge.loadMap(map1);
+        judge.setMoney(GameState.TEAM_MATH, 1000);
+
 
         graphicsInterface.start();
     }

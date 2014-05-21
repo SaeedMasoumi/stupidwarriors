@@ -1,5 +1,7 @@
 
-import java.util.ArrayList;
+import common.exceptions.NotEnoughMoneyException;
+import common.exceptions.PowerUpAlreadyUsedException;
+import common.exceptions.UnauthorizedAccessException;
 import mahyarise.common.GameObjectID;
 
 import java.util.HashMap;
@@ -34,30 +36,35 @@ public class Team {
 
     private boolean healthBounceUpgradeUsed;
     private boolean speedUpgradeUsed;
-    
+    private boolean shieldUpgradeUsed;
+
+    private boolean moneyBounceUpgradeUsed;
+    private boolean enemyPriceUpgradeUsed;
+    private boolean reduceUnitsPriceUpgradeUsed;
+
     // properties
     private int money;
     private int id;
 
     private HashMap<GameObjectID, GameObject> objects = new HashMap<GameObjectID, GameObject>(); // for holding units
-    private static ArrayList<GameObject> allObjects = new ArrayList<GameObject>();
-    
+
     static Timer timer = new Timer();
-    
+
     // some variables for handling ... felan final shoon nakardam ta vaghty ke sakhtare code ghashang shekl begire
-    private int plusMoney = 10;
-    private int delayTime = 1000;
-    
-    
+    private static final int plusMoney = 10;
+    private static final int oneSec = 1000;
+
+
     //Constructor
     public Team(int id) {
         this.id = id;
         money = 5000;
-        
+
         healthBounceUpgradeUsed = false;
         speedUpgradeUsed = false;
+        shieldUpgradeUsed = false;
     }
-    
+
     public int getID() {
         return id;
     }
@@ -73,27 +80,27 @@ public class Team {
     // generate money
     public void generateMoney() {
         timer.schedule(new TimerTask() {
-            
+
             // the method which must be repeatedly call 
             @Override
             public void run() {
                 money += plusMoney;
             }
-        }, delayTime, delayTime);
+        }, 0, oneSec);
     }
-    
+
     public void withdrawMoney(double money) {
         this.money -= money;
     }
 
     public void addObject(GameObject obj) {
         objects.put(obj.getID(), obj);
-        allObjects.add(obj);
+        Game.getObjects().put(obj.getID(), obj);
     }
 
     public void removeObject(GameObject obj) {
         objects.remove(obj.getID());
-        allObjects.remove(obj);
+        Game.getObjects().remove(obj.getID());
     }
 
     /* upgrade ha ro bayad rooye Team seda bezanim chon rooye hameye attacker haye ye team tasir dare */
@@ -117,12 +124,15 @@ public class Team {
     }
 
     /******* CE UPGRADES *******/
-    public void healthBounceUpgrade() {
+    public void healthBounceUpgrade() throws NotEnoughMoneyException, UnauthorizedAccessException, PowerUpAlreadyUsedException {
         if (this.id != TEAM_CE)
-            return;
+            throw new UnauthorizedAccessException("Math");
 
         if (healthBounceUpgradeUsed)
-            return;
+            throw new PowerUpAlreadyUsedException();
+
+        if (money < 5000)
+            throw new NotEnoughMoneyException(money);
 
         healthBounceUpgradeUsed = true;
         this.withdrawMoney(5000);
@@ -150,7 +160,7 @@ public class Team {
                         }
                     }
             }
-        }, delayTime, delayTime);
+        }, 0, oneSec);
 
         for(GameObject object: objects.values())
         {
@@ -162,12 +172,19 @@ public class Team {
         }
     }
 
-    public void shieldUpgrade() {
+    public void shieldUpgrade() throws NotEnoughMoneyException, UnauthorizedAccessException, PowerUpAlreadyUsedException{
         if(this.id != TEAM_CE)
-            return;
-        
+            throw new UnauthorizedAccessException("Math");
+
+        if (shieldUpgradeUsed)
+            throw new PowerUpAlreadyUsedException();
+
+        if (money < 4000)
+            throw new NotEnoughMoneyException(money);
+
+        shieldUpgradeUsed = true;
         this.withdrawMoney(4000);
-        for(GameObject object: allObjects) {
+        for(GameObject object: Game.getObjects().values()) {
             if (object.getTeamID() != this.id) // agar teameshun yeki nabashe pas doshman hastan
             {
                 if (object.isTower())
@@ -176,27 +193,31 @@ public class Team {
                     tower.pwrAgainstSoldiers -= tower.pwrAgainstSoldiers * 0.1;
                     tower.pwrAgainstTanks -= tower.pwrAgainstTanks * 0.1;
                 }
-                
+
                 if (object.isAttacker())
                 {
                     Attacker attacker = (Attacker) object;
                     attacker.attackPower -= attacker.attackPower * 0.1;
                 }
-                
+
             }
-            
+
             else object.price += object.price * 0.05; // arzeshe niru haye CE be andazeye 5% bayad ziad beshe ... in else baraye niru haye CE hast
         }
     }
 
     // TODO ye bar be ezaye har team ? agar man ye bar dige in tabe ro seda bezanam reloadTime bayad chand beshe ?
-    public void speedUpgrade() {
+    public void speedUpgrade() throws NotEnoughMoneyException, UnauthorizedAccessException, PowerUpAlreadyUsedException {
         if (this.id != TEAM_CE)
-            return;
-        
-        if (speedUpgradeUsed)
-            return;
+            throw new UnauthorizedAccessException("Math");
 
+        if (speedUpgradeUsed)
+            throw new PowerUpAlreadyUsedException();
+
+        if (money < 4000)
+            throw new NotEnoughMoneyException(money);
+
+        speedUpgradeUsed = true;
         this.withdrawMoney(4000);
         for(GameObject object: objects.values())
         {
@@ -210,10 +231,17 @@ public class Team {
     }
 
     /******* MATH UPGRADES *******/
-    public void moneyBounceUpgrade() {
+    public void moneyBounceUpgrade() throws NotEnoughMoneyException, UnauthorizedAccessException, PowerUpAlreadyUsedException  {
         if(this.id != TEAM_MATH)
-            return;
+            throw new UnauthorizedAccessException("CE");
 
+        if (moneyBounceUpgradeUsed)
+            throw new PowerUpAlreadyUsedException();
+
+        if (money < 5000)
+            throw new NotEnoughMoneyException(money);
+
+        moneyBounceUpgradeUsed = true;
         this.withdrawMoney(5000);
 
         timer.schedule(new TimerTask() {
@@ -221,16 +249,23 @@ public class Team {
             public void run() {
                 money += 50 + (int)(Math.random() * ((1000 - 50) + 1));
             }
-        }, delayTime * 60, delayTime * 60);
+        }, 0, oneSec * 60);
     }
 
-    public void enemyPriceUpgrade() {
+    public void enemyPriceUpgrade() throws NotEnoughMoneyException, UnauthorizedAccessException, PowerUpAlreadyUsedException  {
         if(this.id != TEAM_MATH)
-            return;
-        
+            throw new UnauthorizedAccessException("CE");
+
+        if (enemyPriceUpgradeUsed)
+            throw new PowerUpAlreadyUsedException();
+
+        if (money < 4000)
+            throw new NotEnoughMoneyException(money);
+
+        enemyPriceUpgradeUsed = true;
         this.withdrawMoney(4000);
-        
-        for(GameObject object: allObjects)
+
+        for(GameObject object: Game.getObjects().values())
         {
             if (object.getTeamID() != this.id)
             {
@@ -242,10 +277,17 @@ public class Team {
         Soldier.CE_PRICE += Soldier.CE_PRICE * 0.1; //TODO shayad bug bede
     }
 
-    public void reduceUnitsPriceUprade() { // or Downgrade :D
+    public void reduceUnitsPriceUpgrade() throws NotEnoughMoneyException, UnauthorizedAccessException, PowerUpAlreadyUsedException  { // or Downgrade :D
         if (this.id != TEAM_MATH)
-            return;
+            throw new UnauthorizedAccessException("CE");
 
+        if (reduceUnitsPriceUpgradeUsed)
+            throw new PowerUpAlreadyUsedException();
+
+        if (money < 4000)
+            throw new NotEnoughMoneyException(money);
+
+        reduceUnitsPriceUpgradeUsed = true;
         this.withdrawMoney(4000);
 
         for(GameObject object: objects.values())
@@ -259,7 +301,7 @@ public class Team {
 
         Soldier.MATH_PRICE -= Soldier.MATH_PRICE * 0.1; //TODO shayad bug bede
     }
-    
+
     public void updateInfo() {
         for(GameObject object: objects.values())
         {
