@@ -5,7 +5,7 @@ import mahyarise.TAgraphics.GraphicsInterface;
  */
 
 // stupidwarriors ghati pati bud ino vase khodam dorost kardam ... pakesh nakon ;)
-public class Main {
+public class Game {
     public static void main(String[] args) {
 
 
@@ -64,6 +64,8 @@ public class Main {
         judge.loadMap(types2);
         graphicsInterface.start();
 
+        System.out.println(judge.getMapWidth());
+        System.out.println(judge.getMapHeight());
         System.out.println("HERE :D");
     }
 }
