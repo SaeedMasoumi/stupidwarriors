@@ -4,9 +4,9 @@ import mahyarise.common.GameObjectID;
 
 
 public class Tower extends Unit {
-    protected double pwrAgainstTanks;
-    protected double pwrAgainstSoldiers;
-    protected double reflectionOfDamage;
+    protected int pwrAgainstTanks;
+    protected int pwrAgainstSoldiers;
+    protected int reflectionOfDamage;
     
     protected double accuracyOfHit; // For phase 2
 

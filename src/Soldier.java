@@ -30,18 +30,18 @@ public class Soldier extends Attacker {
     
 
     // Same for all objects -> must be static
-    public static double CE_MAX_HEALTH = 400;
-    public static double CE_ATTACK_POWER = 20;
-    private static double CE_RELOAD_TIME = 200;
-    private static double CE_COST = 10;
-    public static double CE_PRICE = CE_COST * 0.8;
+    public static int CE_MAX_HEALTH = 400;
+    public static int CE_ATTACK_POWER = 20;
+    private static int CE_RELOAD_TIME = 200;
+    private static int CE_COST = 10;
+    public static int CE_PRICE = (int) (CE_COST * 0.8);
     private static int CE_RANGE = 4;
 
-    public static double MATH_MAX_HEALTH = 400;
-    public static double MATH_ATTACK_POWER = 20;
-    private static double MATH_RELOAD_TIME = 200;
-    private static double MATH_COST = 10;
-    public static double MATH_PRICE = MATH_COST * 0.8;
+    public static int MATH_MAX_HEALTH = 400;
+    public static int MATH_ATTACK_POWER = 20;
+    private static int MATH_RELOAD_TIME = 200;
+    private static int MATH_COST = 10;
+    public static int MATH_PRICE = (int) (MATH_COST * 0.8);
     private static int MATH_RANGE = 4;
 
     // for holding specific data of objects we define a hashmap

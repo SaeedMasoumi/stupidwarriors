@@ -1,7 +1,7 @@
 import mahyarise.common.GameObjectID;
 
 public class GameObject {
-	protected double health;
+	protected int health;
     protected static double MAX_HEALTH; // baraye upgrade ha lazeme
 	protected GameObjectID id; // each GameObject has it's own id
 	protected Team team;
@@ -9,7 +9,7 @@ public class GameObject {
 	protected int laneNumber; // shomareye masiri ke toosh hast .. ghalat emlaei
 								// ham nadare :D
 
-	protected double price; // arzeshe har unit arzesh be base ha ham taalogh
+	protected int price; // arzeshe har unit arzesh be base ha ham taalogh
 							// migire pas nabayad to unit bashe
 	protected int xSize;// FOR PHASE 1 andaze toole objecta
 	protected int ySize; // andaze arze objecta

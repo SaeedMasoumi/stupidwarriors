@@ -1,5 +1,7 @@
-package judge;
+package mahyarise.judge;
+
 import java.util.HashMap;
+
 import mahyarise.common.GameObjectID;
 import mahyarise.common.exceptions.MahyariseExceptionBase;
 

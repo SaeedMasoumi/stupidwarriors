@@ -28,18 +28,18 @@ public class Tank extends Attacker {
    private GameObject myEnemy;
 
     // Same for all objects -> must be static
-    private static double CE_MAX_HEALTH = 1000;
-    private static double CE_ATTACK_POWER = 100;
-    private static double CE_RELOAD_TIME = 500;
-    private static double CE_COST = 40;
-    private static double CE_PRICE = CE_COST * 0.8;
+    private static int CE_MAX_HEALTH = 1000;
+    private static int CE_ATTACK_POWER = 100;
+    private static int CE_RELOAD_TIME = 500;
+    private static int CE_COST = 40;
+    private static int CE_PRICE = (int) (CE_COST * 0.8);
     private static int CE_RANGE = 6;
 
-    private static double MATH_MAX_HEALTH = 1000;
-    private static double MATH_ATTACK_POWER = 100;
-    private static double MATH_RELOAD_TIME = 500;
-    private static double MATH_COST = 40;
-    private static double MATH_PRICE = MATH_COST * 0.8;
+    private static int MATH_MAX_HEALTH = 1000;
+    private static int MATH_ATTACK_POWER = 100;
+    private static int MATH_RELOAD_TIME = 500;
+    private static int MATH_COST = 40;
+    private static int MATH_PRICE = (int) (MATH_COST * 0.8);
     private static int MATH_RANGE = 6;
 
 

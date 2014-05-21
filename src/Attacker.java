@@ -37,9 +37,7 @@ public class Attacker extends Unit {
     // Attacker Properties
     protected double attackPower;
 
-    protected double finalRealoadTime; // TODO: in alan chie
-    protected double speed; // TODO double nabayad bashe protected ham nabashe
-							// think about this ?!
+    protected double speed;
 
 	// TODO For SMasoumi: etefaghan bayad double bashe chon mogheye powerup ye
 	// kasr behesh ezafe mishe na ye adade sahih
