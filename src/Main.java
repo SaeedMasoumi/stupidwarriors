@@ -60,6 +60,7 @@ public class Main {
         GraphicsInterface graphicsInterface = new GraphicsInterface(judge);
 
 
+        judge.setMapSize(types2[0].length, types2.length);
         judge.loadMap(types2);
         graphicsInterface.start();
 

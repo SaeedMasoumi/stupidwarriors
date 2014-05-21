@@ -5,14 +5,13 @@ import mahyarise.judge.JudgeAbstract;
 import java.util.HashMap;
 
 public class Judge extends JudgeAbstract {
-    Map map = new Map();
     Team ce = new Team(TEAM_CE);
     Team math = new Team(TEAM_MATH);
 
     @Override
     public void setMapSize(int columns, int rows) {
-        map.setColumnsLength(columns);
-        map.setRowsLength(rows);
+        Map.setColumnsLength(columns);
+        Map.setRowsLength(rows);
     }
 
     @Override
@@ -27,7 +26,7 @@ public class Judge extends JudgeAbstract {
 
     @Override
     public void loadMap(int[][] types) {
-        map.loadMap(types);
+        Map.loadMap(types);
     }
 
     @Override

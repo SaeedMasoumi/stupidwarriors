@@ -56,8 +56,8 @@ public class Map {
     private static final int NUM_MBD_LU = 104;
 
 
-    private static Cell[][] cells;
     private static int columnsLength, rowsLength;
+    private static Cell[][] cells;
 
     public Map() {
 
@@ -90,9 +90,10 @@ public class Map {
             }
     }
 
-    public void loadMap(int[][] types) {
-        for (int row = 0; row < rowsLength; row++)
-            for (int col = 0; col < columnsLength; col++)
+    public static void loadMap(int[][] types) {
+        cells = new Cell[rowsLength][columnsLength];
+        for (int row = 0; row < types.length; row++)
+            for (int col = 0; col < types[0].length; col++)
             {
                 cells[row][col] = new Cell(types[row][col], col, row);
             }
@@ -102,12 +103,12 @@ public class Map {
         return cells[row][col];
     }
 
-    public void setColumnsLength(int columnsLength) {
-        this.columnsLength = columnsLength;
+    public static void setColumnsLength(int columnsLength) {
+        Map.columnsLength = columnsLength;
     }
 
-    public void setRowsLength(int rowsLength) {
-        this.rowsLength = rowsLength;
+    public static void setRowsLength(int rowsLength) {
+        Map.rowsLength = rowsLength;
     }
 
     public static int getRowLength() {
