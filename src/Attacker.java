@@ -22,12 +22,11 @@ import mahyarise.common.GameObjectID;
 
 /**
  * Our Attackers Units include Tank Class and Soldier Class
- * 
+ *
  * @author Saeed Saeed
  */
 public class Attacker extends Unit {
     // Variables for Map information
-    protected int TEAM_ID; 
     protected boolean isAttacking;
 
     protected static int pwrUpgradeCounter = 0;
@@ -35,19 +34,16 @@ public class Attacker extends Unit {
 
 
     // Attacker Properties
-    protected double attackPower;
+    protected int attackPower;
 
-    protected double speed;
+    protected int speed;
 
-	// TODO For SMasoumi: etefaghan bayad double bashe chon mogheye powerup ye
-	// kasr behesh ezafe mishe na ye adade sahih
-	// protected bayad bashe ke Unit o Tower behesh dastresi dashte bashan,
-	// baadan ke package ro dorost konim protected maani dar mishe ;)
-
-    public Attacker(GameObjectID id, Team team) {
-            super(id, team);
+    public Attacker(Cell cell, GameObjectID id, Team team) {
+        super(id, team);
+        this.startingCell = cell;
+        cell.addObject(this);
     }
-    
+
     @Override
     public void attack() {
         final Cell targetCell = this.findTargets(this.findEnemies());
@@ -68,62 +64,71 @@ public class Attacker extends Unit {
         if (enemiesCell.length == 0) // yani asan kasi tooye bordesh nist
             return null;
 
-        else 
+        else
         {
-            isAttacking = true; // hamle mikone ... bayad vayse ...
-            for (Cell cell : enemiesCell) 
+            isAttacking = true; // hamle mikone ... TODO bayad vayse ...
+            for (Cell cell : enemiesCell)
             {
                 for (GameObject enemy: cell.getObjects())
                 {
-                    if (enemy.isTower() && Calc.distance(this, enemy) <= this.range)
+                    if (enemy.isTower())
                         return cell;
                 }
             }
 
-            // yani borji ro peyda nakardim pas donbale attacker migardim
+            // yani borji ro peyda nakardim pas donbale nazdiktarin attacker migardim
             Cell targetCell = null;
+            double distance = Double.MAX_VALUE;
             for (Cell cell: enemiesCell) {
-                for (GameObject enemy : cell.getObjects()) 
+                for (GameObject enemy : cell.getObjects())
                 {
-                    double distance = Double.MAX_VALUE;
-
-                    if (enemy.isAttacker() && enemy.getLaneNumber() == this.getLaneNumber() && Calc.distance(this, enemy) <= this.range)
-                        if (Calc.distance(this, enemy) < distance)
+                    if (enemy.isAttacker() && enemy.getLaneNumber() == this.getLaneNumber()) // tooye yek masir
+                        if (Calc.distance(this, enemy) < distance) {
                             targetCell = cell;
+                            distance = Calc.distance(this, enemy);
+                        }
                 }
             }
-            
-            if (targetCell != null) 
+
+            if (targetCell != null)
                 return targetCell;
+
             // hala price
             for (Cell cell: enemiesCell) {
-            for (GameObject enemy: cell.getObjects())
-            {
-                double price = 0;
-                if (enemy.isAttacker() && enemy.price > price && Calc.distance(this, enemy) <= this.range)
-                    targetCell = cell;
-            }
+                for (GameObject enemy: cell.getObjects())
+                {
+                    double price = 0;
+                    if (enemy.isAttacker() && enemy.price > price) {
+                        targetCell = cell;
+                        price = enemy.price;
+                    }
+                }
             }
             if (targetCell != null)
                 return targetCell;
+
             // ya niru haye doshman hamechizeshun yekie ya inke niruye doshman building e
             for(Cell cell: enemiesCell) {
                 for(GameObject enemy: cell.getObjects())
                 {
-                    if (enemy.isAttacker() && Calc.distance(this, enemy) <= this.range)
+                    if (enemy.isAttacker())
                         return cell;
                 }
             }
             // yani niruye doshman building e
+            distance = Double.MAX_VALUE;
             for (Cell cell: enemiesCell) {
                 for(GameObject enemy: cell.getObjects()) //TODO need Refactors .. agar Military Base tooye masire doshman ha bashe nemitunan be HQ asib bezanan
-                    if (enemy.isBuilding() && Calc.distance(this, enemy) <= this.range)
-                        return cell;
+                    if (enemy.isBuilding() && Calc.distance(this, enemy) < distance) {
+                        targetCell = cell;
+                        distance = Calc.distance(this, enemy);
+                    }
             }
+
+            if (targetCell != null)
+                return targetCell;
         }
-            
-        
-        return null; //TODO need refactors and test..
+        return null;
     }
 
     ///////////////// Upgrades /////////////////

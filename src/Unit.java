@@ -13,7 +13,7 @@ abstract public class Unit extends GameObject{
     //and each duration(it's a timer in javafx maybe it's 10ms) it +=10ms;
 
     protected int range;
-    protected double cost;
+    protected int cost;
     protected boolean isAlive; 
 
     
@@ -25,7 +25,7 @@ abstract public class Unit extends GameObject{
         ArrayList<Cell> enemiesCell = new ArrayList<Cell>();
         for(int col = this.currentCell.getCol() - this.range; col <= this.currentCell.getCol() + this.range; col++)
             for(int row = this.currentCell.getRow() - this.range; row <= this.currentCell.getRow() + this.range; row++)
-                for(int i = 0; i < Game.getMap().getCell(col, row).getObjects().length; i++)
+                for(int i = 0; i < Game.getMap().getCell(col, row).getObjects().length; i++) //TODO forech :D
                 {
                     if (Game.getMap().getCell(col, row).getObjects()[i] != null && Game.getMap().getCell(col, row).getObjects()[i].getTeamID() != this.getTeamID())
                     {

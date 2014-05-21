@@ -17,6 +17,7 @@ public class GameObject {
 	public GameObject(GameObjectID id, Team team) {
 		this.id = id;
 		this.team = team;
+        team.addObject(this);
 	}
 
 	public GameObjectID getID() {

@@ -52,7 +52,7 @@ public class Soldier extends Attacker {
     
     
     public Soldier(Cell starting, GameObjectID id, Team team) {
-        super(id, team);
+        super(starting, id, team);
         if (team.getID() == Team.TEAM_CE)
         {
             this.health = CE_MAX_HEALTH;

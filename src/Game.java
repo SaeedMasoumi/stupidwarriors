@@ -25,4 +25,10 @@ public class Game {
         return math;
     }
 
+    public static Team getTeamByID (int id) {
+        if (id == GameState.TEAM_CE)
+            return ce;
+        else return math;
+    }
+
 }

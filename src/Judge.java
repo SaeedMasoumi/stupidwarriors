@@ -51,7 +51,13 @@ public class Judge extends JudgeAbstract {
 
     @Override
     public GameObjectID createTower(int teamID, int towerType, int col, int row) throws MahyariseExceptionBase {
-        return null;
+        //TODO need to check for path and lane and cell
+        switch (towerType) {
+            case GameState.TOWER_TYPE_BLACK:
+                GameObjectID id = GameObjectID.create(BlackTower.class);
+                BlackTower blackTower = new BlackTower(game.getMap().getCell(col, row), id, game.getTeamByID(teamID));
+                return id;
+        }
     }
 
     @Override
