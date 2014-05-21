@@ -147,13 +147,13 @@ public class Attacker extends Unit {
     public void pathFinding() {
         for (int i = -1; i <= 1; i += 2)
         {
-            if (!Map.isOutOfPath(currentCell.getCol(), currentCell.getRow() + i)
-                    && Map.getLaneNum(currentCell.getCol(), currentCell.getRow() + i) == currentCell.getLaneNum())
-                nextCell = Map.getCell(currentCell.getCol(), currentCell.getRow() + i);
+            if (!Game.getMap().isOutOfPath(currentCell.getCol(), currentCell.getRow() + i)
+                    && Game.getMap().getLaneNum(currentCell.getCol(), currentCell.getRow() + i) == currentCell.getLaneNum())
+                nextCell = Game.getMap().getCell(currentCell.getCol(), currentCell.getRow() + i);
 
-            else if (!Map.isOutOfPath(currentCell.getCol() + i, currentCell.getRow())
-                    && Map.getLaneNum(currentCell.getCol() + i, currentCell.getRow()) == currentCell.getLaneNum())
-                nextCell = Map.getCell(currentCell.getCol() + i, currentCell.getRow());
+            else if (!Game.getMap().isOutOfPath(currentCell.getCol() + i, currentCell.getRow())
+                    && Game.getMap().getLaneNum(currentCell.getCol() + i, currentCell.getRow()) == currentCell.getLaneNum())
+                nextCell = Game.getMap().getCell(currentCell.getCol() + i, currentCell.getRow());
         }
     }
 }

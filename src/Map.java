@@ -56,8 +56,8 @@ public class Map {
     private static final int NUM_MBD_LU = 104;
 
 
-    private static int columnsLength, rowsLength;
-    private static Cell[][] cells;
+    private int columnsLength, rowsLength;
+    private Cell[][] cells;
 
     public Map() {
 
@@ -90,44 +90,46 @@ public class Map {
             }
     }
 
-    public static void loadMap(int[][] types) {
+    public void loadMap(int[][] types) {
         cells = new Cell[rowsLength][columnsLength];
         for (int row = 0; row < types.length; row++)
             for (int col = 0; col < types[0].length; col++)
             {
                 cells[row][col] = new Cell(types[row][col], col, row);
             }
+        this.markingCells(); // mark cells -> 0, 1, 2, 3, 4
+        this.markingPath(); // mark paths -> 0, 1, 2
     }
 
-    public static Cell getCell(int col, int row) {
+    public Cell getCell(int col, int row) {
         return cells[row][col];
     }
 
-    public static void setColumnsLength(int columnsLength) {
-        Map.columnsLength = columnsLength;
+    public void setColumnsLength(int columnsLength) {
+        this.columnsLength = columnsLength;
     }
 
-    public static void setRowsLength(int rowsLength) {
-        Map.rowsLength = rowsLength;
+    public void setRowsLength(int rowsLength) {
+        this.rowsLength = rowsLength;
     }
 
-    public static int getRowLength() {
+    public int getRowLength() {
         return rowsLength;
     }
 
-    public static int getColLength() {
+    public int getColLength() {
         return columnsLength;
     }
 
-    public static void setCellsType(int type, int col, int row) {
+    public void setCellsType(int type, int col, int row) {
         cells[row][col] = new Cell(type, col, row);
     }
 
-    public static int getCellsType(int col, int row) {
+    public int getCellsType(int col, int row) {
         return cells[row][col].getType();
     }
 
-    public static int getLaneNum(int col, int row) {return cells[row][col].getLaneNum();}
+    public int getLaneNum(int col, int row) {return cells[row][col].getLaneNum();}
 
     public void markingCells() {
         for (int col = 0; col < columnsLength; col++)
@@ -147,6 +149,8 @@ public class Map {
                     }
                 }
             }
+
+        this.pathFinding();
     }
 
     public void pathFinding() {
@@ -182,13 +186,6 @@ public class Map {
                 else if (Arrays.deepEquals(pattern, MB_UP_LANE_DOWN_PATTERN))
                     mark(NUM_MBU_LD, col, row);
             }
-
-//        ArrayList<Cell> checkedList = new ArrayList<Cell>();
-//        for (int col = 0; col < columnsLength; col++)
-//            for (int row = 0; row < rowsLength; row++) {
-//                    DFS(col, row, cells[col][row].getLaneNum(), checkedList);
-//            }
-
     }
 
     public void mark(int patternNum, int col, int row) {
@@ -246,7 +243,7 @@ public class Map {
         }
     }
 
-    public static boolean isOutOfPath(int col, int row) {
+    public boolean isOutOfPath(int col, int row) {
         if (col < 0 || col >= columnsLength || row < 0 || row >= rowsLength || cells[row][col].getType() == Cell.CELL_TYPE_UNUSED || cells[row][col].getType() == Cell.CELL_TYPE_HQ)
             return true;
 
@@ -254,10 +251,44 @@ public class Map {
     }
 
 
+    public void markingPath() {
+        ArrayList<Cell> checkedList = new ArrayList<Cell>();
+        int x = 0;
+        for (int row = 0; row < rowsLength; row++)
+            for (int col = 0; col < columnsLength; col++)
+            {
+                if (!checkedList.contains(cells[row][col]) && cells[row][col].getType() == GameState.CELL_TYPE_LANE)
+                    DFS_ForPath(col, row, checkedList, x++);
+            }
+    }
+
+    public void DFS_ForPath(int col, int row, ArrayList<Cell> checkedList, int x) {
+        if (checkedList.contains(cells[row][col]))
+            return;
+        checkedList.add(cells[row][col]);
+        cells[row][col].setPathNum(x);
+        for (int i = -1; i <= 1; i += 2) {
+            if (!isOutOfPath(col, row + i) && cells[row + i][col].getType() == GameState.CELL_TYPE_LANE)
+                DFS_ForPath(col, row + i, checkedList, x);
+            if (!isOutOfPath(col + i, row) && cells[row][col + i].getType() == GameState.CELL_TYPE_LANE)
+                DFS_ForPath(col + i, row, checkedList, x);
+        }
+
+    }
+
     public void printMapLaneNumbers() {
         for (int row = 0; row < rowsLength; row++) {
             for (int col = 0; col < columnsLength; col++) {
                 System.out.print(cells[row][col].getLaneNum() + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public void printPathNumbers() {
+        for (int row = 0; row < rowsLength; row++) {
+            for (int col = 0; col < columnsLength; col++) {
+                System.out.print(cells[row][col].getPathNum() + " ");
             }
             System.out.println();
         }

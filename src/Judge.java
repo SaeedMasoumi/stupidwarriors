@@ -5,38 +5,37 @@ import mahyarise.judge.JudgeAbstract;
 import java.util.HashMap;
 
 public class Judge extends JudgeAbstract {
-    Team ce = new Team(TEAM_CE);
-    Team math = new Team(TEAM_MATH);
+    Game game = new Game();
 
     @Override
     public void setMapSize(int columns, int rows) {
-        Map.setColumnsLength(columns);
-        Map.setRowsLength(rows);
+        game.getMap().setColumnsLength(columns);
+        game.getMap().setRowsLength(rows);
     }
 
     @Override
     public int getMapWidth() {
-        return Map.getColLength();
+        return game.getMap().getColLength();
     }
 
     @Override
     public int getMapHeight() {
-        return Map.getRowLength();
+        return game.getMap().getRowLength();
     }
 
     @Override
     public void loadMap(int[][] types) {
-        Map.loadMap(types);
+        game.getMap().loadMap(types);
     }
 
     @Override
     public void setMapCellType(int col, int row, int type) {
-        Map.setCellsType(type, col, row);
+        game.getMap().setCellsType(type, col, row);
     }
 
     @Override
     public int getMapCellType(int col, int row) {
-        return Map.getCellsType(col, row);
+        return game.getMap().getCellsType(col, row);
     }
 
     // TODO:: any statement need run before game start ...
@@ -67,9 +66,10 @@ public class Judge extends JudgeAbstract {
 
     @Override
     public int getMoney(int teamID) {
-        if (teamID == TEAM_CE)
-            return ce.getMoney();
-        else return math.getMoney();
+        if (teamID == GameState.TEAM_CE)
+            return game.getTeamCE().getMoney();
+        else
+            return game.getTeamMath().getMoney();
     }
 
     @Override
@@ -119,10 +119,10 @@ public class Judge extends JudgeAbstract {
 
     @Override
     public void setMoney(int teamID, int amount) {
-        if (teamID == TEAM_CE)
-            ce.setMoney(amount);
-        else if (teamID == TEAM_MATH)
-            math.setMoney(amount);
+        if (teamID == GameState.TEAM_CE)
+            game.getTeamCE().setMoney(amount);
+        else
+            game.getTeamMath().setMoney(amount);
     }
 
     @Override

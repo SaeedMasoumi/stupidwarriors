@@ -31,6 +31,7 @@ public class Cell {
 	private final int type;
 	private int col, row;
     private int laneNum = 0; // if it was a lane ...
+    private int pathNum = 0; // if it was in a path ...
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 
 	public Cell(int type, int col, int row) {
@@ -40,6 +41,8 @@ public class Cell {
 
         if (type != CELL_TYPE_LANE)
             laneNum = 9;
+        if (type != CELL_TYPE_LANE)
+            pathNum = 4;
 	}
 
     public boolean isPath() {
@@ -52,6 +55,14 @@ public class Cell {
 
     public int getLaneNum() {
         return laneNum;
+    }
+
+    public void setPathNum(int pathNum) {
+        this.pathNum = pathNum;
+    }
+
+    public int getPathNum() {
+        return pathNum;
     }
 
     public int getType() {
