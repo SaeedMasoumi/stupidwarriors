@@ -26,11 +26,13 @@ public class HeadQuarter extends Building {
     
     private static final int SIZE1 = 5;
     private static final int SIZE2 = 5;
-    
-    
+
+
     public HeadQuarter(GameObjectID id, Team team) {
         super(id, team);
         health = 10000;
-        isDestroyed = false;
+        isAlive = 1;
     }
+
+
 }

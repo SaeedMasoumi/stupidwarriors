@@ -1,3 +1,4 @@
+import common.exceptions.GameObjectNotFoundException;
 import common.exceptions.NotEnoughMoneyException;
 import common.exceptions.PowerUpAlreadyUsedException;
 import common.exceptions.UnauthorizedAccessException;
@@ -22,7 +23,7 @@ public class Judge extends JudgeAbstract {
 
     @Override
     public int getMapHeight() {
-        return Game.getMap().getRowLength();
+        return Game.getMap().getRowsLength();
     }
 
     @Override
@@ -136,7 +137,27 @@ public class Judge extends JudgeAbstract {
 
     @Override
     public HashMap<String, Integer> getInfo(GameObjectID id) throws MahyariseExceptionBase {
-        return null;
+        try {
+            if (!Game.getObjects().containsKey(id))
+                throw new GameObjectNotFoundException(id);
+
+            GameObject object = Game.getObjects().get(id);
+
+            if (object instanceof Attacker)
+                return ((Attacker) object).getInfo();
+
+
+            else if (object instanceof Tower)
+                return ((Tower) object).getInfo();
+
+            else return ((Building) object).getInfo();
+
+
+        } catch (GameObjectNotFoundException e){
+            e.printStackTrace();
+            return null;
+        }
+
     }
 
     @Override

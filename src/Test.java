@@ -102,10 +102,16 @@ public class Test {
                 {13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13}};
 
 
-        Map map = new Map();
         judge.setMapSize(map1[0].length, map1.length);
         judge.loadMap(map1);
-        judge.setMoney(GameState.TEAM_MATH, 1000);
+
+//        for (int i = 0; i < Game.getTeamMath().getHeadQuarter().getCells().length; i++)
+//            for (int j = 0; j < Game.getTeamMath().getHeadQuarter().getCells()[0].length; j++) {
+//                graphicsInterface.addMarker(Game.getTeamMath().getHeadQuarter().getCells()[i][j].getRow(), Game.getTeamMath().getHeadQuarter().getCells()[i][j].getCol());
+//            }
+
+
+
 
 
         graphicsInterface.start();

@@ -52,7 +52,7 @@ public class Tank extends Attacker {
         super(startingCell, id, team);
         
         //fill map info of this object
-        this.isAlive = true;
+        this.isAlive = 1;
         this.isAttacking = false;
         this.startingCell = startingCell;
         this.currentCell = startingCell;
@@ -81,15 +81,7 @@ public class Tank extends Attacker {
         CE_RELOAD_TIME = reload_time;
     }
 
-    /**
-     * if this object been attacked his health should reduce
-     * or if this object use powerUp his health should increase
-     * @param damage  
-     */
-    @Override
-    public void setHealth(double damage){
-        this.health += damage; // + + +
-    }
+
     /**
      * return X position of our object
      * @return the X position of object in map 
@@ -120,13 +112,7 @@ public class Tank extends Attacker {
     public Team getTeam(){
         return this.team ;
     }
-    
-    /**
-     * 
-     */
-    public void findPath(){   
-        
-    } 
+
 
     //TODO move kardane tank age to map hast ke hich vagarna ezafe konam
     public void setEnemy(GameObject t ){
@@ -140,7 +126,7 @@ public class Tank extends Attacker {
     ///////////////// Upgrades /////////////////
 
     public static void pwrUpgrade(int teamID) {
-        if (teamID == Team.TEAM_CE) {
+        if (teamID == GameState.TEAM_CE) {
             CE_ATTACK_POWER += CE_ATTACK_POWER * 0.1;
             CE_PRICE += CE_COST * 0.05;
         }
@@ -152,7 +138,7 @@ public class Tank extends Attacker {
     }
 
     public static void healthUpgrade(int teamID) {
-        if (teamID == Team.TEAM_CE) {
+        if (teamID == GameState.TEAM_CE) {
             CE_MAX_HEALTH += 5;
             CE_PRICE += CE_COST * 0.05;
         }

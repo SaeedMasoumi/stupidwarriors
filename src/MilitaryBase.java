@@ -26,12 +26,21 @@ public class MilitaryBase extends Building {
     
     private static final int SIZE1 = 5;
     private static final int SIZE2 = 3;
-    
+
+    private Cell[] lane = new Cell[5];
+    private int pathNumber;
+
     public MilitaryBase(GameObjectID id, Team team) {
         super(id, team);
         health = 10000;
-        isDestroyed = false;
+        isAlive = 1; 
     }
-    
-    
+
+    public void setLane(Cell[] lane) {
+        this.lane = lane;
+    }
+
+    public Cell[] getLane() {
+        return lane;
+    }
 }

@@ -45,8 +45,10 @@ public class Team {
     // properties
     private int money;
     private int id;
-
     private HashMap<GameObjectID, GameObject> objects = new HashMap<GameObjectID, GameObject>(); // for holding units
+
+    private HeadQuarter headQuarter;
+    private MilitaryBase[] militaryBases = new MilitaryBase[3]; // each team has 3 military bases
 
     static Timer timer = new Timer();
 
@@ -63,6 +65,11 @@ public class Team {
         healthBounceUpgradeUsed = false;
         speedUpgradeUsed = false;
         shieldUpgradeUsed = false;
+
+        headQuarter = new HeadQuarter(GameObjectID.create(HeadQuarter.class), this);
+
+        for (int i = 0; i < militaryBases.length; i++)
+            militaryBases[i] = new MilitaryBase(GameObjectID.create(MilitaryBase.class), this);
     }
 
     public int getID() {
@@ -75,6 +82,14 @@ public class Team {
 
     public void setMoney(int money) {
         this.money = money;
+    }
+
+    public HeadQuarter getHeadQuarter() {
+        return headQuarter;
+    }
+
+    public MilitaryBase[] getMilitaryBases() {
+        return militaryBases;
     }
 
     // generate money
@@ -104,8 +119,14 @@ public class Team {
     }
 
     /* upgrade ha ro bayad rooye Team seda bezanim chon rooye hameye attacker haye ye team tasir dare */
-    public void PwrUpgrade() {
+    public void PwrUpgrade() throws NotEnoughMoneyException {
         Attacker.pwrUpgradeCounter++;
+
+        if (money < Attacker.pwrUpgradeCounter * 1000) {
+            Attacker.pwrUpgradeCounter--;
+            throw new NotEnoughMoneyException(money);
+        }
+
         this.withdrawMoney(Attacker.pwrUpgradeCounter * 1000);
         for (GameObject object: objects.values())
         {
@@ -117,8 +138,14 @@ public class Team {
         Attacker.pwrUpgrade(id);
     }
 
-    public void healthUpgrade() {
+    public void healthUpgrade() throws NotEnoughMoneyException{
         Attacker.healthUpgradeCounter++;
+
+        if (money < Attacker.healthUpgradeCounter * 1000) {
+            Attacker.healthUpgradeCounter--;
+            throw new NotEnoughMoneyException(money);
+        }
+
         this.withdrawMoney(Attacker.healthUpgradeCounter * 500);
         Attacker.healthUpgrade(id);
     }

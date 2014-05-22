@@ -10,12 +10,12 @@ import java.util.Timer;
 public class Game {
     private static Map map = new Map();
 
-    private static Team ce = new Team(GameState.TEAM_CE);
-    private static Team math = new Team(GameState.TEAM_MATH);
-
     private static Timer timer = new Timer();
 
     private static HashMap<GameObjectID, GameObject> objects = new HashMap<GameObjectID, GameObject>();
+
+    private static Team ce = new Team(GameState.TEAM_CE);
+    private static Team math = new Team(GameState.TEAM_MATH);
 
     public static Map getMap() {
         return map;

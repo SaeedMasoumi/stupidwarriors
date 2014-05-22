@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.TimerTask;
 import mahyarise.common.GameObjectID;
 
@@ -36,8 +37,6 @@ public class Attacker extends Unit {
     // Attacker Properties
     protected int attackPower;
 
-    protected int speed;
-
     public Attacker(Cell cell, GameObjectID id, Team team) {
         super(id, team);
         this.startingCell = cell;
@@ -53,7 +52,7 @@ public class Attacker extends Unit {
             public void run() {
                 for(GameObject object: targetCell.getObjects())
                 {
-                    object.setHealth(-attackPower);
+                    object.takeDamage(attackPower);
                 }
             }
         }, (int)this.reloadTime, (int)this.reloadTime);
@@ -160,5 +159,20 @@ public class Attacker extends Unit {
                     && Game.getMap().getLaneNum(currentCell.getCol() + i, currentCell.getRow()) == currentCell.getLaneNum())
                 nextCell = Game.getMap().getCell(currentCell.getCol() + i, currentCell.getRow());
         }
+    }
+
+    public HashMap<String, Integer> getInfo() {
+        HashMap<String, Integer> info = new HashMap<String, Integer>();
+        info.put(GameState.HEALTH, health);
+        info.put(GameState.ROW, currentCell.getRow());
+        info.put(GameState.COLOUMN, currentCell.getCol());
+        info.put(GameState.TEAM_ID, team.getID());
+        info.put(GameState.IS_ALIVE, isAlive);
+        info.put(GameState.ATTACK, attackPower);
+        info.put(GameState.RELOAD_TIME, reloadTime);
+        info.put(GameState.VALUE, price);
+        info.put(GameState.RANGE, range);
+
+        return info;
     }
 }

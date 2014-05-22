@@ -76,7 +76,7 @@ public class Soldier extends Attacker {
     ///////////////// Upgrades /////////////////
 
     public static void pwrUpgrade(int teamID) {
-        if (teamID == Team.TEAM_CE) {
+        if (teamID == GameState.TEAM_CE) {
             CE_ATTACK_POWER += CE_ATTACK_POWER * 0.1;
             CE_PRICE += CE_COST * 0.05;
         }
@@ -88,7 +88,7 @@ public class Soldier extends Attacker {
     }
 
     public static void healthUpgrade(int teamID) {
-        if (teamID == Team.TEAM_CE) {
+        if (teamID == GameState.TEAM_CE) {
             CE_MAX_HEALTH += 5;
             CE_PRICE += CE_COST * 0.05;
         }

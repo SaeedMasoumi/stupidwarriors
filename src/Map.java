@@ -20,6 +20,7 @@
 /* in class ro static kardam chon tooye bazi faghat ye naghshe darim ke hamun aval tarif mishe ...
 */
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -48,6 +49,11 @@ public class Map {
             {11,11,11,11,11},
             {11,11,11,11,11}};
 
+    private static final int HEAD_QUARTER_PATTERN[][] = {{10,10,10,10,10},
+            {10,10,10,10,10},
+            {10,10,10,10,10},
+            {10,10,10,10,10},
+            {10,10,10,10,10}};
 
     // num for patterns ...
     private static final int NUM_MBL_LR = 101;
@@ -97,8 +103,12 @@ public class Map {
             {
                 cells[row][col] = new Cell(types[row][col], col, row);
             }
-        this.markingCells(); // mark cells -> 0, 1, 2, 3, 4
+        this.pathFinding(); // mark cells -> 0, 1, 2, 3, 4
         this.markingPath(); // mark paths -> 0, 1, 2
+
+        ArrayList<Cell[][]> HQs = getHeadQuartersCells();
+        Game.getTeamCE().getHeadQuarter().setCells(HQs.get(GameState.TEAM_CE)); // -> 0
+        Game.getTeamMath().getHeadQuarter().setCells(HQs.get(GameState.TEAM_MATH)); // -> 1
     }
 
     public Cell getCell(int col, int row) {
@@ -113,7 +123,7 @@ public class Map {
         this.rowsLength = rowsLength;
     }
 
-    public int getRowLength() {
+    public int getRowsLength() {
         return rowsLength;
     }
 
@@ -131,7 +141,67 @@ public class Map {
 
     public int getLaneNum(int col, int row) {return cells[row][col].getLaneNum();}
 
-    public void markingCells() {
+    public Cell[][] getMilitaryBaseCells() {
+        return null;
+    }
+
+    // TODO convert ArrayList to 2D Array directly
+    public ArrayList<Cell[][]> getHeadQuartersCells() {
+        ArrayList<Cell[][]> HQs = new ArrayList<Cell[][]>();
+
+        ArrayList<Cell> ceHQ = new ArrayList<Cell>();
+        ArrayList<Cell> mathHQ = new ArrayList<Cell>();
+
+        Cell[][] ceHQCell = new Cell[5][5];
+        Cell[][] mathHQCell = new Cell[5][5];
+
+        for (int col = 0; col < columnsLength; col++)
+            for (int row = 0; row < rowsLength; row++)
+            {
+                if (cells[row][col].getType() == GameState.CELL_TYPE_HQ)
+                    DFS(col, row, GameState.CELL_TYPE_HQ, ceHQ, mathHQ);
+            }
+
+        for (int i = 0; i < 5; i++)
+            for (int j = 0; j < 5; j++)
+            {
+                ceHQCell[i][j] = ceHQ.get(0);
+                ceHQ.remove(0);
+            }
+
+        HQs.add(ceHQCell);
+        for (int i = 0; i < 5; i++)
+            for (int j = 0; j < 5; j++)
+            {
+                mathHQCell[i][j] = mathHQ.get(0);
+                mathHQ.remove(0);
+            }
+        HQs.add(mathHQCell);
+
+        return HQs;
+    }
+
+    // TODO convert ArrayList to 2D Array directly
+    public void DFS(int col, int row, int type, ArrayList<Cell> ceHQ, ArrayList<Cell> mathHQ) {
+        if (ceHQ.contains(cells[row][col]))
+            return;
+        else if (mathHQ.contains(cells[row][col]))
+            return;
+
+        if (ceHQ.size() >= 25)
+            mathHQ.add(cells[row][col]);
+
+        else ceHQ.add(cells[row][col]);
+        for (int i = -1; i <= 1; i += 2)
+        {
+            if (!isOutOfPath(col + i, row) && cells[row][col + i].getType() == type)
+                DFS(col + i, row, type, ceHQ, mathHQ);
+            if (!isOutOfPath(col, row + i) && cells[row + i][col].getType() == type)
+                DFS(col, row + i, type, ceHQ, mathHQ);
+        }
+    }
+
+    public void pathFinding() {
         for (int col = 0; col < columnsLength; col++)
             for(int row = 0; row < rowsLength; row ++)
             {
@@ -150,10 +220,11 @@ public class Map {
                 }
             }
 
-        this.pathFinding();
+        this.markingWays();
     }
 
-    public void pathFinding() {
+    public void markingWays() {
+        Cell[] lane = new Cell[5];
         for (int col = 0; col <= columnsLength - MB_RIGHT_LANE_LEFT_PATTERN[0].length; col++)
             for (int row = 0; row <= rowsLength - MB_RIGHT_LANE_LEFT_PATTERN.length; row++)
             {
@@ -164,8 +235,12 @@ public class Map {
                         pattern[i - row][j - col] = cells[i][j].getType();
                     }
 
-                if (Arrays.deepEquals(pattern, MB_RIGHT_LANE_LEFT_PATTERN))
+                if (Arrays.deepEquals(pattern, MB_RIGHT_LANE_LEFT_PATTERN)) {
                     mark(NUM_MBR_LL, col, row);
+                    for (int i = row; i < row + 5; i++)
+                        lane[i] = cells[i][col];
+//                    if ()
+                }
                 else if (Arrays.deepEquals(pattern, MB_LEFT_LANE_RIGHT_PATTERN))
                     mark(NUM_MBL_LR, col, row);
             }
@@ -195,7 +270,7 @@ public class Map {
         if (patternNum == NUM_MBD_LU)
         {
             for (int i = col; i < MB_DOWN_LANE_UP_PATTERN[0].length + col; i++) {
-                DFS(i, row, cells[row][i].getLaneNum(), x++, isChecked);
+                DFS_forWays(i, row, cells[row][i].getLaneNum(), x++, isChecked);
             }
         }
 
@@ -204,7 +279,7 @@ public class Map {
         {
             for (int i = col; i < MB_UP_LANE_DOWN_PATTERN[0].length + col; i++)
             {
-                DFS(i, row + MB_UP_LANE_DOWN_PATTERN.length, cells[row + MB_UP_LANE_DOWN_PATTERN.length][i].getLaneNum(), x++, isChecked);
+                DFS_forWays(i, row + MB_UP_LANE_DOWN_PATTERN.length, cells[row + MB_UP_LANE_DOWN_PATTERN.length][i].getLaneNum(), x++, isChecked);
             }
         }
 
@@ -212,19 +287,18 @@ public class Map {
         {
             for (int i = row; i < MB_RIGHT_LANE_LEFT_PATTERN.length + row; i++)
             {
-                DFS(col, row, cells[i][col].getLaneNum(), x++, isChecked);
+                DFS_forWays(col, row, cells[i][col].getLaneNum(), x++, isChecked);
             }
         }
 
         else {
             for (int i = row; i < MB_LEFT_LANE_RIGHT_PATTERN.length + row; i++) {
-                DFS(col + MB_LEFT_LANE_RIGHT_PATTERN[0].length, i, cells[i][col + MB_LEFT_LANE_RIGHT_PATTERN[0].length].getLaneNum(), x++, isChecked);
+                DFS_forWays(col + MB_LEFT_LANE_RIGHT_PATTERN[0].length, i, cells[i][col + MB_LEFT_LANE_RIGHT_PATTERN[0].length].getLaneNum(), x++, isChecked);
             }
         }
     }
 
-
-    public void DFS(int col, int row, int laneNumber, int mark, ArrayList<Cell> checkedList) {
+    public void DFS_forWays(int col, int row, int laneNumber, int mark, ArrayList<Cell> checkedList) {
         if (checkedList.contains(cells[row][col]) || cells[row][col].getLaneNum() != laneNumber)
             return;
 
@@ -232,10 +306,10 @@ public class Map {
         cells[row][col].setLaneNum(mark);
         for (int i = -1; i <= 1; i += 2) {
             if (!isOutOfPath(col, row + i) && cells[row + i][col].getLaneNum() == laneNumber)
-                DFS(col, row + i, laneNumber, mark, checkedList);
+                DFS_forWays(col, row + i, laneNumber, mark, checkedList);
 
             if (!isOutOfPath(col + i, row) && cells[row][col + i].getLaneNum() == laneNumber)
-                DFS(col + i, row, laneNumber, mark, checkedList);
+                DFS_forWays(col + i, row, laneNumber, mark, checkedList);
 //            if (DFS(col + i, row, laneNumber, checkedList) || DFS(col, row + i,laneNumber, checkedList))
 //            {
 //                break;
@@ -250,7 +324,6 @@ public class Map {
         return false;
     }
 
-
     public void markingPath() {
         ArrayList<Cell> checkedList = new ArrayList<Cell>();
         int x = 0;
@@ -258,20 +331,20 @@ public class Map {
             for (int col = 0; col < columnsLength; col++)
             {
                 if (!checkedList.contains(cells[row][col]) && cells[row][col].getType() == GameState.CELL_TYPE_LANE)
-                    DFS_ForPath(col, row, checkedList, x++);
+                    DFS_forPath(col, row, checkedList, x++);
             }
     }
 
-    public void DFS_ForPath(int col, int row, ArrayList<Cell> checkedList, int x) {
+    public void DFS_forPath(int col, int row, ArrayList<Cell> checkedList, int x) {
         if (checkedList.contains(cells[row][col]))
             return;
         checkedList.add(cells[row][col]);
         cells[row][col].setPathNum(x);
         for (int i = -1; i <= 1; i += 2) {
             if (!isOutOfPath(col, row + i) && cells[row + i][col].getType() == GameState.CELL_TYPE_LANE)
-                DFS_ForPath(col, row + i, checkedList, x);
+                DFS_forPath(col, row + i, checkedList, x);
             if (!isOutOfPath(col + i, row) && cells[row][col + i].getType() == GameState.CELL_TYPE_LANE)
-                DFS_ForPath(col + i, row, checkedList, x);
+                DFS_forPath(col + i, row, checkedList, x);
         }
 
     }
@@ -293,6 +366,4 @@ public class Map {
             System.out.println();
         }
     }
-
-
 }

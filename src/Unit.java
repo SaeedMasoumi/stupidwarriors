@@ -14,8 +14,6 @@ abstract public class Unit extends GameObject{
 
     protected int range;
     protected int cost;
-    protected boolean isAlive; 
-
     
     public Unit(GameObjectID id, Team team) {
         super(id, team);
