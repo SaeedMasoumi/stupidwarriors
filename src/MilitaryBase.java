@@ -30,10 +30,13 @@ public class MilitaryBase extends Building {
     private Cell[] lane = new Cell[5];
     private int pathNumber;
 
-    public MilitaryBase(GameObjectID id, Team team) {
+
+    public MilitaryBase(GameObjectID id, Team team, int orientation, Cell leftUpCornerCell) {
         super(id, team);
         health = 10000;
-        isAlive = 1; 
+        isAlive = 1;
+        this.orientation = orientation;
+        this.leftUpCornerCell = leftUpCornerCell;
     }
 
     public void setLane(Cell[] lane) {
@@ -42,5 +45,13 @@ public class MilitaryBase extends Building {
 
     public Cell[] getLane() {
         return lane;
+    }
+
+    public void setPathNumber(int pathNumber) {
+        this.pathNumber = pathNumber;
+    }
+
+    public int getPathNumber() {
+        return pathNumber;
     }
 }

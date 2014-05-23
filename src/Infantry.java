@@ -1,4 +1,5 @@
 
+import common.exceptions.NotEnoughMoneyException;
 import mahyarise.common.GameObjectID;
 
 import java.util.HashMap;
@@ -26,7 +27,7 @@ import java.util.HashMap;
  *
  * @author Saeed & Saeed
  */
-public class Soldier extends Attacker {
+public class Infantry extends Attacker {
     
 
     // Same for all objects -> must be static
@@ -51,7 +52,7 @@ public class Soldier extends Attacker {
     
     
     
-    public Soldier(Cell starting, GameObjectID id, Team team) {
+    public Infantry(Cell starting, GameObjectID id, Team team) throws NotEnoughMoneyException{
         super(starting, id, team);
         if (team.getID() == Team.TEAM_CE)
         {
@@ -71,6 +72,8 @@ public class Soldier extends Attacker {
             this.cost = MATH_COST;
             this.price = MATH_PRICE;
         }
+
+        team.withdrawMoney(cost);
     }
 
     ///////////////// Upgrades /////////////////

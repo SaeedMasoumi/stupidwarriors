@@ -17,17 +17,17 @@ public class Tower extends Unit {
     protected int rangeUpgradeCounter = 0;
     
     // Constructor of Tower
-    public Tower (Cell cell, GameObjectID id, Team team) {
+    public Tower (Cell cell, GameObjectID id, Team team) throws NotEnoughMoneyException{
         super(id, team);
         this.currentCell = cell;
         cell.addObject(this);
     }
-    
+
     public void reloadTimeUpgrade() throws NotEnoughMoneyException {
         if (Game.getTeamByID(team.getID()).getMoney() < price * 0.1)
             throw new NotEnoughMoneyException(Game.getTeamByID(team.getID()).getMoney());
 
-        team.withdrawMoney(price * 0.1);
+        team.withdrawMoney((int)(price * 0.1));
         price += price * 0.1;
         reloadTime -= reloadTime * 0.05;
     }
@@ -36,7 +36,7 @@ public class Tower extends Unit {
         if (Game.getTeamByID(team.getID()).getMoney() < price * 0.15)
             throw new NotEnoughMoneyException(Game.getTeamByID(team.getID()).getMoney());
 
-        team.withdrawMoney(price * 0.15);
+        team.withdrawMoney((int)( price * 0.15));
         price += price * 0.15;
         pwrAgainstSoldiers += pwrAgainstSoldiers * 0.1;
         pwrAgainstTanks += pwrAgainstTanks * 0.1;
@@ -49,7 +49,7 @@ public class Tower extends Unit {
         if (Game.getTeamByID(team.getID()).getMoney() < price * 0.15)
             throw new NotEnoughMoneyException(Game.getTeamByID(team.getID()).getMoney());
 
-        team.withdrawMoney(price * 0.2);
+        team.withdrawMoney((int)(price * 0.2));
         rangeUpgradeCounter++;
         price += price * 0.2;
         range++;
@@ -63,7 +63,7 @@ public class Tower extends Unit {
     @Override
     public void attack() {
         final Cell targetCell = this.findTargets(this.findEnemies());
-        team.timer.schedule(new TimerTask() {
+        Game.getTimer().schedule(new TimerTask() {
 
             @Override
             public void run() {

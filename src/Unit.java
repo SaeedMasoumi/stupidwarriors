@@ -1,13 +1,12 @@
 
 import java.util.ArrayList;
 
+import common.exceptions.NotEnoughMoneyException;
 import mahyarise.common.GameObjectID;
 
 
 abstract public class Unit extends GameObject{
 //    protected ArrayList<GameObject> targets = new ArrayList<GameObject>(); 
-    protected Cell startingCell;
-    protected Cell nextCell;
 
     public int reloadTime; //we have a reload time so first it's equal 0
     //and each duration(it's a timer in javafx maybe it's 10ms) it +=10ms;
@@ -15,8 +14,20 @@ abstract public class Unit extends GameObject{
     protected int range;
     protected int cost;
     
-    public Unit(GameObjectID id, Team team) {
-        super(id, team);
+    public Unit(GameObjectID id, Team team) throws NotEnoughMoneyException{
+        try {
+            if (team.getMoney() < cost)
+                throw new NotEnoughMoneyException(team.getMoney());
+
+            this.id = id;
+            this.team = team;
+            isAlive = 1;
+            team.addObject(this);
+            Game.getObjects().put(id, this);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     public Cell[] findEnemies() {

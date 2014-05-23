@@ -49,40 +49,71 @@ public class Judge extends JudgeAbstract {
 
     @Override
     public GameObjectID createAttacker(int teamID, int attackerType, int path, int lane) throws MahyariseExceptionBase {
-        return null;
-    }
-
-    @Override
-    public GameObjectID createTower(int teamID, int towerType, int col, int row) throws MahyariseExceptionBase {
-        //TODO need to check for path and lane and cell, each team has it's own tower
         GameObjectID id = null;
-        switch (towerType) {
-            case GameState.TOWER_TYPE_BLACK:
-                id = GameObjectID.create(BlackTower.class);
-                BlackTower blackTower = new BlackTower(Game.getMap().getCell(col, row), id, Game.getTeamByID(teamID));
+
+        switch (attackerType) {
+            case ATTACKER_INFANTRY:
+                id = GameObjectID.create(Infantry.class);
+                new Infantry(Game.getTeamByID(teamID).getMilitaryBases().get(path).getLane()[lane], id, Game.getTeamByID(teamID));
                 break;
-            case GameState.TOWER_TYPE_GAME:
-                id = GameObjectID.create(GameTower.class);
-                GameTower gameTower = new GameTower(Game.getMap().getCell(col, row), id, Game.getTeamByID(teamID));
-                break;
-            case GameState.TOWER_TYPE_TANK:
-                id = GameObjectID.create(TankTower.class);
-                TankTower tankTower = new TankTower(Game.getMap().getCell(col, row), id, Game.getTeamByID(teamID));
-                break;
-            case GameState.TOWER_TYPE_GENERAL_MATH:
-                id = GameObjectID.create(GeneralMathTower.class);
-                GeneralMathTower generalMathTower = new GeneralMathTower(Game.getMap().getCell(col, row), id, Game.getTeamByID(teamID));
-                break;
-            case GameState.TOWER_TYPE_ELECTRICITY:
-                id = GameObjectID.create(ElectricityTower.class);
-                ElectricityTower electricityTower = new ElectricityTower(Game.getMap().getCell(col, row), id, Game.getTeamByID(teamID));
-                break;
-            case GameState.TOWER_TYPE_POISON:
-                id = GameObjectID.create(PoisonTower.class);
-                PoisonTower poisonTower = new PoisonTower(Game.getMap().getCell(col, row), id, Game.getTeamByID(teamID));
+
+            case ATTACKER_TANK:
+                id = GameObjectID.create(Tank.class);
+                new Infantry(Game.getTeamByID(teamID).getMilitaryBases().get(path).getLane()[lane], id, Game.getTeamByID(teamID));
                 break;
         }
         return id;
+    }
+
+    // Complete
+    @Override
+    public GameObjectID createTower(int teamID, int towerType, int col, int row) throws MahyariseExceptionBase {
+        //TODO need to check for path and lane and cell, each team has it's own tower
+        try {
+            GameObjectID id = null;
+            switch (towerType) {
+                case GameState.TOWER_TYPE_BLACK:
+                    if (Game.getTeamByID(teamID).getMoney() < BlackTower.getCost())
+                        throw new NotEnoughMoneyException(Game.getTeamByID(teamID).getMoney());
+                    id = GameObjectID.create(BlackTower.class);
+                    new BlackTower(Game.getMap().getCell(col, row), id, Game.getTeamByID(teamID));
+                    break;
+                case GameState.TOWER_TYPE_GAME:
+                    if (Game.getTeamByID(teamID).getMoney() < GameTower.getCost())
+                        throw new NotEnoughMoneyException(Game.getTeamByID(teamID).getMoney());
+                    id = GameObjectID.create(GameTower.class);
+                    new GameTower(Game.getMap().getCell(col, row), id, Game.getTeamByID(teamID));
+                    break;
+                case GameState.TOWER_TYPE_TANK:
+                    if (Game.getTeamByID(teamID).getMoney() < TankTower.getCost())
+                        throw new NotEnoughMoneyException(Game.getTeamByID(teamID).getMoney());
+                    id = GameObjectID.create(TankTower.class);
+                    new TankTower(Game.getMap().getCell(col, row), id, Game.getTeamByID(teamID));
+                    break;
+                case GameState.TOWER_TYPE_GENERAL_MATH:
+                    if (Game.getTeamByID(teamID).getMoney() < GeneralMathTower.getCost())
+                        throw new NotEnoughMoneyException(Game.getTeamByID(teamID).getMoney());
+                    id = GameObjectID.create(GeneralMathTower.class);
+                    new GeneralMathTower(Game.getMap().getCell(col, row), id, Game.getTeamByID(teamID));
+                    break;
+                case GameState.TOWER_TYPE_ELECTRICITY:
+                    if (Game.getTeamByID(teamID).getMoney() < ElectricityTower.getCost())
+                        throw new NotEnoughMoneyException(Game.getTeamByID(teamID).getMoney());
+                    id = GameObjectID.create(ElectricityTower.class);
+                    new ElectricityTower(Game.getMap().getCell(col, row), id, Game.getTeamByID(teamID));
+                    break;
+                case GameState.TOWER_TYPE_POISON:
+                    if (Game.getTeamByID(teamID).getMoney() < PoisonTower.getCost())
+                        throw new NotEnoughMoneyException(Game.getTeamByID(teamID).getMoney());
+                    id = GameObjectID.create(PoisonTower.class);
+                    new PoisonTower(Game.getMap().getCell(col, row), id, Game.getTeamByID(teamID));
+                    break;
+            }
+            return id;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
@@ -90,36 +121,58 @@ public class Judge extends JudgeAbstract {
         //TODO each team has it's own powerup ...
         try {
             switch (powerupType) {
-                case PU_CE_HEALTH:
+                case GameState.PU_CE_HEALTH:
                     Game.getTeamByID(teamID).healthBounceUpgrade();
                     break;
-                case PU_CE_PACE:
+                case GameState.PU_CE_PACE:
                     Game.getTeamByID(teamID).speedUpgrade();
                     break;
-                case PU_CE_ARMOR:
+                case GameState.PU_CE_ARMOR:
                     Game.getTeamByID(teamID).shieldUpgrade();
                     break;
-                case PU_MATH_ECO:
+                case GameState.PU_MATH_ECO:
                     Game.getTeamByID(teamID).moneyBounceUpgrade();
                     break;
-                case PU_MATH_DEC_VAL:
+                case GameState.PU_MATH_DEC_VAL:
                     Game.getTeamByID(teamID).reduceUnitsPriceUpgrade();
                     break;
-                case PU_MATH_PROFIT:
+                case GameState.PU_MATH_PROFIT:
                     Game.getTeamByID(teamID).enemyPriceUpgrade();
             }
-        } catch (NotEnoughMoneyException e) {
-            e.printStackTrace();
-        } catch (PowerUpAlreadyUsedException e) {
-            e.printStackTrace();
-        } catch (UnauthorizedAccessException e) {
+        } catch (Exception e){
             e.printStackTrace();
         }
     }
 
+    // Complete
     @Override
     public void purchaseTowerPowerup(int teamID, GameObjectID id, int powerupType) throws MahyariseExceptionBase {
+        try {
+            if (!Game.getObjects().containsKey(id))
+                throw new GameObjectNotFoundException(id);
 
+            if (!(Game.getObjects().get(id) instanceof Tower))
+                throw new UnauthorizedAccessException("is not a tower");
+
+            Tower tower = (Tower) Game.getObjects().get(id);
+
+            switch (powerupType) {
+                case GameState.PU_TOWER_POWER:
+                    tower.powerUpgrade();
+                    break;
+                case GameState.PU_TOWER_PACE:
+                    tower.reloadTimeUpgrade();
+                    break;
+                case GameState.PU_TOWER_RANGE:
+                    tower.rangeUpgrade();
+                    break;
+                case GameState.PU_TOWER_AUTO_HEALING: // for phase2
+                    tower.autoRepair();
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -130,11 +183,13 @@ public class Judge extends JudgeAbstract {
             return Game.getTeamMath().getMoney();
     }
 
+    // Complete
     @Override
     public int[] getTeamPowerups(int teamID) {
-        return new int[0];
+        return Game.getTeamByID(teamID).getTeamUpgradePurchaseList();
     }
 
+    // Complete
     @Override
     public HashMap<String, Integer> getInfo(GameObjectID id) throws MahyariseExceptionBase {
         try {
@@ -187,7 +242,7 @@ public class Judge extends JudgeAbstract {
 
     @Override
     public void pauseTimer() {
-
+        Game.getTimer().cancel();
     }
 
     @Override

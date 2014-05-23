@@ -1,4 +1,5 @@
 
+import common.exceptions.NotEnoughMoneyException;
 import mahyarise.common.GameObjectID;
 
 /*
@@ -46,16 +47,15 @@ public class Tank extends Attacker {
     /**
      * Tank Constructor 
      * should give a started row and col because we need these parameters
-     * @param startingCell
+     * @param currentCell
      */
-    public Tank(Cell startingCell,GameObjectID id, Team team) {
-        super(startingCell, id, team);
+    public Tank(Cell currentCell,GameObjectID id, Team team) throws NotEnoughMoneyException{
+        super(currentCell, id, team);
         
         //fill map info of this object
         this.isAlive = 1;
         this.isAttacking = false;
-        this.startingCell = startingCell;
-        this.currentCell = startingCell;
+        this.currentCell = currentCell;
         //fill object properties
 
 
@@ -75,6 +75,7 @@ public class Tank extends Attacker {
             this.cost = MATH_COST;
         }
 
+        team.withdrawMoney(cost);
     }
 
     public static void setCE_RELOAD_TIME(int reload_time) {

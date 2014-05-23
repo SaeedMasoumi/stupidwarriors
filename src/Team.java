@@ -4,8 +4,8 @@ import common.exceptions.PowerUpAlreadyUsedException;
 import common.exceptions.UnauthorizedAccessException;
 import mahyarise.common.GameObjectID;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Timer;
 import java.util.TimerTask;
 
 /*
@@ -45,12 +45,12 @@ public class Team {
     // properties
     private int money;
     private int id;
+
     private HashMap<GameObjectID, GameObject> objects = new HashMap<GameObjectID, GameObject>(); // for holding units
+    private ArrayList<Integer> teamUpgradePurchaseList = new ArrayList<Integer>();
 
     private HeadQuarter headQuarter;
-    private MilitaryBase[] militaryBases = new MilitaryBase[3]; // each team has 3 military bases
-
-    static Timer timer = new Timer();
+    private HashMap<Integer, MilitaryBase> militaryBases = new HashMap<Integer, MilitaryBase>(); // each team has 3 military bases
 
     // some variables for handling ... felan final shoon nakardam ta vaghty ke sakhtare code ghashang shekl begire
     private static final int plusMoney = 10;
@@ -67,9 +67,6 @@ public class Team {
         shieldUpgradeUsed = false;
 
         headQuarter = new HeadQuarter(GameObjectID.create(HeadQuarter.class), this);
-
-        for (int i = 0; i < militaryBases.length; i++)
-            militaryBases[i] = new MilitaryBase(GameObjectID.create(MilitaryBase.class), this);
     }
 
     public int getID() {
@@ -88,13 +85,20 @@ public class Team {
         return headQuarter;
     }
 
-    public MilitaryBase[] getMilitaryBases() {
+    public HashMap<Integer, MilitaryBase> getMilitaryBases() {
         return militaryBases;
+    }
+
+    public int[] getTeamUpgradePurchaseList() {
+        int[] list = new int[teamUpgradePurchaseList.size()];
+        for (int i = 0; i < list.length; i++)
+            list[i] = teamUpgradePurchaseList.get(i).intValue();
+        return list;
     }
 
     // generate money
     public void generateMoney() {
-        timer.schedule(new TimerTask() {
+        Game.getTimer().schedule(new TimerTask() {
 
             // the method which must be repeatedly call 
             @Override
@@ -104,8 +108,8 @@ public class Team {
         }, 0, oneSec);
     }
 
-    public void withdrawMoney(double money) {
-        this.money -= money;
+    public void withdrawMoney(int amount) {
+        this.money -= amount;
     }
 
     public void addObject(GameObject obj) {
@@ -162,28 +166,27 @@ public class Team {
             throw new NotEnoughMoneyException(money);
 
         healthBounceUpgradeUsed = true;
+        teamUpgradePurchaseList.add(GameState.PU_CE_HEALTH);
         this.withdrawMoney(5000);
 
-        timer.schedule(new TimerTask() {
+        Game.getTimer().schedule(new TimerTask() {
             @Override
             public void run() {
-                for(GameObject object: objects.values())
+                for (GameObject object : objects.values())
                     if (object.isAttacker()) {
                         Attacker attacker = (Attacker) object;
                         if (attacker.getTeamID() == TEAM_CE) {
-                            if (attacker.health < Soldier.CE_MAX_HEALTH)
+                            if (attacker.health < Infantry.CE_MAX_HEALTH)
                                 attacker.health += attacker.health * 0.05;
 
-                            if (attacker.health > Soldier.CE_MAX_HEALTH)
-                                attacker.health = Soldier.CE_MAX_HEALTH;
-                        }
-
-                        else {
-                            if (attacker.health < Soldier.MATH_MAX_HEALTH)
+                            if (attacker.health > Infantry.CE_MAX_HEALTH)
+                                attacker.health = Infantry.CE_MAX_HEALTH;
+                        } else {
+                            if (attacker.health < Infantry.MATH_MAX_HEALTH)
                                 attacker.health += attacker.health * 0.05;
 
-                            if (attacker.health > Soldier.MATH_MAX_HEALTH)
-                                attacker.health = Soldier.MATH_MAX_HEALTH;
+                            if (attacker.health > Infantry.MATH_MAX_HEALTH)
+                                attacker.health = Infantry.MATH_MAX_HEALTH;
                         }
                     }
             }
@@ -210,6 +213,7 @@ public class Team {
             throw new NotEnoughMoneyException(money);
 
         shieldUpgradeUsed = true;
+        teamUpgradePurchaseList.add(GameState.PU_CE_ARMOR);
         this.withdrawMoney(4000);
         for(GameObject object: Game.getObjects().values()) {
             if (object.getTeamID() != this.id) // agar teameshun yeki nabashe pas doshman hastan
@@ -245,6 +249,7 @@ public class Team {
             throw new NotEnoughMoneyException(money);
 
         speedUpgradeUsed = true;
+        teamUpgradePurchaseList.add(GameState.PU_CE_PACE);
         this.withdrawMoney(4000);
         for(GameObject object: objects.values())
         {
@@ -269,12 +274,13 @@ public class Team {
             throw new NotEnoughMoneyException(money);
 
         moneyBounceUpgradeUsed = true;
+        teamUpgradePurchaseList.add(GameState.PU_MATH_ECO);
         this.withdrawMoney(5000);
 
-        timer.schedule(new TimerTask() {
+        Game.getTimer().schedule(new TimerTask() {
             @Override
             public void run() {
-                money += 50 + (int)(Math.random() * ((1000 - 50) + 1));
+                money += 50 + (int) (Math.random() * ((1000 - 50) + 1));
             }
         }, 0, oneSec * 60);
     }
@@ -290,6 +296,7 @@ public class Team {
             throw new NotEnoughMoneyException(money);
 
         enemyPriceUpgradeUsed = true;
+        teamUpgradePurchaseList.add(GameState.PU_MATH_PROFIT);
         this.withdrawMoney(4000);
 
         for(GameObject object: Game.getObjects().values())
@@ -301,7 +308,7 @@ public class Team {
             }
         }
 
-        Soldier.CE_PRICE += Soldier.CE_PRICE * 0.1; //TODO shayad bug bede
+        Infantry.CE_PRICE += Infantry.CE_PRICE * 0.1; //TODO shayad bug bede
     }
 
     public void reduceUnitsPriceUpgrade() throws NotEnoughMoneyException, UnauthorizedAccessException, PowerUpAlreadyUsedException  { // or Downgrade :D
@@ -315,6 +322,7 @@ public class Team {
             throw new NotEnoughMoneyException(money);
 
         reduceUnitsPriceUpgradeUsed = true;
+        teamUpgradePurchaseList.add(GameState.PU_MATH_DEC_VAL);
         this.withdrawMoney(4000);
 
         for(GameObject object: objects.values())
@@ -326,7 +334,7 @@ public class Team {
             }
         }
 
-        Soldier.MATH_PRICE -= Soldier.MATH_PRICE * 0.1; //TODO shayad bug bede
+        Infantry.MATH_PRICE -= Infantry.MATH_PRICE * 0.1; //TODO shayad bug bede
     }
 
     public void updateInfo() {

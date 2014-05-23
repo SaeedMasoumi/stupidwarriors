@@ -1,5 +1,7 @@
 import java.util.HashMap;
 import java.util.TimerTask;
+
+import common.exceptions.NotEnoughMoneyException;
 import mahyarise.common.GameObjectID;
 
 /*
@@ -29,6 +31,7 @@ import mahyarise.common.GameObjectID;
 public class Attacker extends Unit {
     // Variables for Map information
     protected boolean isAttacking;
+    protected Cell nextCell;
 
     protected static int pwrUpgradeCounter = 0;
     protected static int healthUpgradeCounter = 0;
@@ -37,16 +40,16 @@ public class Attacker extends Unit {
     // Attacker Properties
     protected int attackPower;
 
-    public Attacker(Cell cell, GameObjectID id, Team team) {
+    public Attacker(Cell cell, GameObjectID id, Team team) throws NotEnoughMoneyException{
         super(id, team);
-        this.startingCell = cell;
+        this.currentCell = cell;
         cell.addObject(this);
     }
 
     @Override
     public void attack() {
         final Cell targetCell = this.findTargets(this.findEnemies());
-        team.timer.schedule(new TimerTask() {
+        Game.getTimer().schedule(new TimerTask() {
 
             @Override
             public void run() {
@@ -133,7 +136,7 @@ public class Attacker extends Unit {
     ///////////////// Upgrades /////////////////
 
     public static void pwrUpgrade(int teamID) {
-        Soldier.pwrUpgrade(teamID);
+        Infantry.pwrUpgrade(teamID);
         Tank.pwrUpgrade(teamID);
     }
 
@@ -143,7 +146,7 @@ public class Attacker extends Unit {
     }
 
     public static void healthUpgrade(int teamID) {
-        Soldier.healthUpgrade(teamID);
+        Infantry.healthUpgrade(teamID);
         Tank.healthUpgrade(teamID);
     }
 

@@ -20,6 +20,8 @@
 /* in class ro static kardam chon tooye bazi faghat ye naghshe darim ke hamun aval tarif mishe ...
 */
 
+import mahyarise.common.GameObjectID;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,12 +50,6 @@ public class Map {
             {11,11,11,11,11},
             {11,11,11,11,11},
             {11,11,11,11,11}};
-
-    private static final int HEAD_QUARTER_PATTERN[][] = {{10,10,10,10,10},
-            {10,10,10,10,10},
-            {10,10,10,10,10},
-            {10,10,10,10,10},
-            {10,10,10,10,10}};
 
     // num for patterns ...
     private static final int NUM_MBL_LR = 101;
@@ -103,12 +99,13 @@ public class Map {
             {
                 cells[row][col] = new Cell(types[row][col], col, row);
             }
-        this.pathFinding(); // mark cells -> 0, 1, 2, 3, 4
+
         this.markingPath(); // mark paths -> 0, 1, 2
+        this.pathFinding(); // mark cells -> 0, 1, 2, 3, 4
 
         ArrayList<Cell[][]> HQs = getHeadQuartersCells();
-        Game.getTeamCE().getHeadQuarter().setCells(HQs.get(GameState.TEAM_CE)); // -> 0
-        Game.getTeamMath().getHeadQuarter().setCells(HQs.get(GameState.TEAM_MATH)); // -> 1
+        Game.getTeamCE().getHeadQuarter().setLocation(HQs.get(GameState.TEAM_CE)); // -> 0
+        Game.getTeamMath().getHeadQuarter().setLocation(HQs.get(GameState.TEAM_MATH)); // -> 1
     }
 
     public Cell getCell(int col, int row) {
@@ -141,10 +138,6 @@ public class Map {
 
     public int getLaneNum(int col, int row) {return cells[row][col].getLaneNum();}
 
-    public Cell[][] getMilitaryBaseCells() {
-        return null;
-    }
-
     // TODO convert ArrayList to 2D Array directly
     public ArrayList<Cell[][]> getHeadQuartersCells() {
         ArrayList<Cell[][]> HQs = new ArrayList<Cell[][]>();
@@ -156,7 +149,7 @@ public class Map {
         Cell[][] mathHQCell = new Cell[5][5];
 
         for (int col = 0; col < columnsLength; col++)
-            for (int row = 0; row < rowsLength; row++)
+            for (int row = rowsLength - 1; row >= 0; row--)
             {
                 if (cells[row][col].getType() == GameState.CELL_TYPE_HQ)
                     DFS(col, row, GameState.CELL_TYPE_HQ, ceHQ, mathHQ);
@@ -224,7 +217,6 @@ public class Map {
     }
 
     public void markingWays() {
-        Cell[] lane = new Cell[5];
         for (int col = 0; col <= columnsLength - MB_RIGHT_LANE_LEFT_PATTERN[0].length; col++)
             for (int row = 0; row <= rowsLength - MB_RIGHT_LANE_LEFT_PATTERN.length; row++)
             {
@@ -237,12 +229,12 @@ public class Map {
 
                 if (Arrays.deepEquals(pattern, MB_RIGHT_LANE_LEFT_PATTERN)) {
                     mark(NUM_MBR_LL, col, row);
-                    for (int i = row; i < row + 5; i++)
-                        lane[i] = cells[i][col];
-//                    if ()
+                    findMilitaryBases(NUM_MBR_LL, col, row);
                 }
-                else if (Arrays.deepEquals(pattern, MB_LEFT_LANE_RIGHT_PATTERN))
+                else if (Arrays.deepEquals(pattern, MB_LEFT_LANE_RIGHT_PATTERN)) {
                     mark(NUM_MBL_LR, col, row);
+                    findMilitaryBases(NUM_MBL_LR, col, row);
+                }
             }
 
         for (int col = 0; col <= columnsLength - MB_DOWN_LANE_UP_PATTERN[0].length; col++)
@@ -257,10 +249,83 @@ public class Map {
 
                 if (Arrays.deepEquals(pattern, MB_DOWN_LANE_UP_PATTERN)) {
                     mark(NUM_MBD_LU, col, row);
+                    findMilitaryBases(NUM_MBD_LU, col, row);
                 }
-                else if (Arrays.deepEquals(pattern, MB_UP_LANE_DOWN_PATTERN))
+                else if (Arrays.deepEquals(pattern, MB_UP_LANE_DOWN_PATTERN)) {
                     mark(NUM_MBU_LD, col, row);
+                    findMilitaryBases(NUM_MBU_LD, col, row);
+                }
             }
+    }
+
+    public void findMilitaryBases(int patternType, int col, int row) {
+        int index = 0;
+        Cell[] lane = new Cell[5];
+        int teamID = 1;
+        if (patternType == NUM_MBR_LL) {
+            System.out.println("MBR_LL   run");
+            for (int i = row; i < row + 5; i++) {
+                lane[index++] = cells[i][col];
+//                if (cells[i][col + 4].getObjectsList().contains(Game.getTeamCE().getHeadQuarter()))
+//                    teamID = GameState.TEAM_CE;
+//                if (cells[i][col + 4].getObjectsList().contains(Game.getTeamMath().getHeadQuarter()))
+//                    teamID = GameState.TEAM_MATH;
+            }
+            if ((col > columnsLength/2) || (col == columnsLength/2 && row < rowsLength/2))
+                teamID = GameState.TEAM_MATH;
+            else teamID = GameState.TEAM_CE;
+
+            MilitaryBase mb = new MilitaryBase(GameObjectID.create(MilitaryBase.class), Game.getTeamByID(teamID),
+                    GameState.ORIENTATION_VERTICAL, cells[row][col + 1]);
+            Game.getTeamByID(teamID).getMilitaryBases().put(lane[0].getPathNum(), mb);
+            mb.setLane(lane);
+            mb.setPathNumber(lane[0].getPathNum());
+        }
+
+        else if (patternType == NUM_MBL_LR) {
+            System.out.println("MBL_LR   run");
+            for (int i = row; i < row + 5; i++) {
+                lane[index++] = cells[i][col + 3];
+            }
+            if ((col > columnsLength/2) || (col == columnsLength/2 && row < rowsLength/2))
+                teamID = GameState.TEAM_MATH;
+            else teamID = GameState.TEAM_CE;
+            MilitaryBase mb = new MilitaryBase(GameObjectID.create(MilitaryBase.class), Game.getTeamByID(teamID),
+                    GameState.ORIENTATION_VERTICAL, cells[row][col]);
+            Game.getTeamByID(teamID).getMilitaryBases().put(lane[0].getPathNum(), mb);
+            mb.setLane(lane);
+            mb.setPathNumber(lane[0].getPathNum());
+        }
+
+        else if (patternType == NUM_MBD_LU) {
+            System.out.println("MBD_LU   run");
+            for (int i = col; i < col + 5; i++) {
+                lane[index++] = cells[row][i];
+            }
+            if ((col > columnsLength/2) || (col == columnsLength/2 && row < rowsLength/2))
+                teamID = GameState.TEAM_MATH;
+            else teamID = GameState.TEAM_CE;
+            MilitaryBase mb = new MilitaryBase(GameObjectID.create(MilitaryBase.class), Game.getTeamByID(teamID),
+                    GameState.ORIENTATION_VERTICAL, cells[row + 1][col]);
+            Game.getTeamByID(teamID).getMilitaryBases().put(lane[0].getPathNum(), mb);
+            mb.setLane(lane);
+            mb.setPathNumber(lane[0].getPathNum());
+        }
+
+        else if (patternType == NUM_MBU_LD) {
+            System.out.println("MBU_LD   run");
+            for (int i = col; i < col + 5; i++) {
+                lane[index++] = cells[row + 3][i];
+            }
+            if ((col > columnsLength/2) || (col == columnsLength/2 && row < rowsLength/2))
+                teamID = GameState.TEAM_MATH;
+            else teamID = GameState.TEAM_CE;
+            MilitaryBase mb = new MilitaryBase(GameObjectID.create(MilitaryBase.class), Game.getTeamByID(teamID),
+                    GameState.ORIENTATION_VERTICAL, cells[row][col]);
+            Game.getTeamByID(teamID).getMilitaryBases().put(lane[0].getPathNum(), mb);
+            mb.setLane(lane);
+            mb.setPathNumber(lane[0].getPathNum());
+        }
     }
 
     public void mark(int patternNum, int col, int row) {

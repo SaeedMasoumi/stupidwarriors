@@ -88,4 +88,8 @@ public class Cell {
 	public GameObject[] getObjects() {
 		return objects.toArray(new GameObject[objects.size()]);
 	}
+
+    public ArrayList<GameObject> getObjectsList() {
+        return objects;
+    }
 }

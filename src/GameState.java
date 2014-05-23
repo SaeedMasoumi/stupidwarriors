@@ -49,4 +49,8 @@ public class GameState {
     public static final String RANGE = "range";
     public static final String ORIENTATION = "or";
     public static final String RELOAD_TIME = "time";
+
+    public static final int ORIENTATION_HORIZONTAL = 0;
+    public static final int ORIENTATION_VERTICAL = 1;
+
 }

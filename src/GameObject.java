@@ -1,3 +1,4 @@
+import common.exceptions.NotEnoughMoneyException;
 import mahyarise.common.GameObjectID;
 
 public class GameObject {
@@ -15,12 +16,6 @@ public class GameObject {
     // migire pas nabayad to unit bashe
     protected int xSize;// FOR PHASE 1 andaze toole objecta
     protected int ySize; // andaze arze objecta
-
-    public GameObject(GameObjectID id, Team team) {
-        this.id = id;
-        this.team = team;
-        team.addObject(this);
-    }
 
     public GameObjectID getID() {
         return id;

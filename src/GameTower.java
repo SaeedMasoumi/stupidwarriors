@@ -1,4 +1,5 @@
 
+import common.exceptions.NotEnoughMoneyException;
 import mahyarise.common.GameObjectID;
 
 /*
@@ -24,15 +25,28 @@ import mahyarise.common.GameObjectID;
  */
 public class GameTower extends Tower {
 
-    public GameTower(Cell cell, GameObjectID id, Team team) {
+    private static final int PWR_AGAINST_TANKS = 50;
+    private static final int PWR_AGAINST_SOLDIERS = 400;
+    private static final int RELOAD_TIME = 2000;
+    private static final int HEALTH = 5000;
+    private static final int REFLECTION_OF_DAMAGE = 0;
+    private static final int COST = 300;
+
+    public GameTower(Cell cell, GameObjectID id, Team team) throws NotEnoughMoneyException{
         super(cell, id, team);
-        
-        pwrAgainstTanks = 50;
-        pwrAgainstSoldiers = 400;
-        reloadTime = 2000;
-        health = 5000;
-        cost = 300;
-        price = (int) (cost * 0.8);
+
+        pwrAgainstTanks = PWR_AGAINST_TANKS;
+        pwrAgainstSoldiers = PWR_AGAINST_SOLDIERS;
+        reloadTime = RELOAD_TIME;
+        health = HEALTH;
+        reflectionOfDamage = REFLECTION_OF_DAMAGE;
+        cost = COST;
+        price = (int) (COST * 0.8); // arzeshe tower
+
+        team.withdrawMoney(cost);
     }
-    
+
+    public static int getCost() {
+        return COST;
+    }
 }

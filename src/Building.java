@@ -1,18 +1,25 @@
 
 import mahyarise.common.GameObjectID;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
 public class Building extends GameObject{
-    protected Cell[][] cells;
     protected int orientation; //TODO
+    protected Cell[][] location;
+
+    protected Cell leftUpCornerCell;
 
     public Building(GameObjectID id, Team team) {
-        super(id, team);
+        this.id = id;
+        this.team = team;
+        isAlive = 1;
+        team.addObject(this);
+        Game.getObjects().put(id, this);
     }
-    public void setCells(Cell[][] cells) {
-        this.cells = cells;
+    public void setLocation(Cell[][] cells) {
+        this.location = cells;
         for (int row = 0; row < cells.length; row++)
             for (int col = 0; col < cells[0].length; col++)
             {
@@ -20,8 +27,8 @@ public class Building extends GameObject{
             }
     }
 
-    public Cell[][] getCells() {
-        return cells;
+    public Cell[][] getLocation() {
+        return location;
     }
 
     public HashMap<String, Integer> getInfo() {
@@ -34,5 +41,9 @@ public class Building extends GameObject{
         info.put(GameState.ORIENTATION, orientation);// TODO ...
 
         return info;
+    }
+
+    public Cell getLeftUpCornerCell() {
+        return leftUpCornerCell;
     }
 }
