@@ -106,19 +106,17 @@ public class Test {
         judge.setMapSize(map1[0].length, map1.length);
         judge.loadMap(map1);
 
-        for (int i = 0; i < Game.getTeamCE().getHeadQuarter().getLocation().length; i++)
-            for (int j = 0; j < Game.getTeamCE().getHeadQuarter().getLocation()[0].length; j++) {
-                graphicsInterface.addMarker(Game.getTeamCE().getHeadQuarter().getLocation()[i][j].getRow(), Game.getTeamCE().getHeadQuarter().getLocation()[i][j].getCol());
-            }
-//
-//        for (int i = 0; i < 3; i++) {
-//            graphicsInterface.addMarker(Game.getTeamCE().getMilitaryBases().get(i).getLeftUpCornerCell().getRow(),
-//                    Game.getTeamCE().getMilitaryBases().get(i).getLeftUpCornerCell().getCol(), Color.BLUE);
-//            graphicsInterface.addMarker(Game.getTeamMath().getMilitaryBases().get(i).getLeftUpCornerCell().getRow(),
-//                    Game.getTeamMath().getMilitaryBases().get(i).getLeftUpCornerCell().getCol(), Color.GREEN);
-//        }
+//        for (int i = 0; i < Game.getTeamCE().getHeadQuarter().getLocation().length; i++)
+//            for (int j = 0; j < Game.getTeamCE().getHeadQuarter().getLocation()[0].length; j++) {
+//                graphicsInterface.addMarker(Game.getTeamCE().getHeadQuarter().getLocation()[i][j].getRow(), Game.getTeamCE().getHeadQuarter().getLocation()[i][j].getCol());
+//            }
 
-        Game.getMap().printPathNumbers();
+        for (int i = 0; i < 3; i++) {
+            graphicsInterface.addMarker(Game.getTeamCE().getMilitaryBases().get(i).getLeftUpCornerCell().getRow(),
+                    Game.getTeamCE().getMilitaryBases().get(i).getLeftUpCornerCell().getCol(), Color.BLUE);
+            graphicsInterface.addMarker(Game.getTeamMath().getMilitaryBases().get(i).getLeftUpCornerCell().getRow(),
+                    Game.getTeamMath().getMilitaryBases().get(i).getLeftUpCornerCell().getCol(), Color.GREEN);
+        }
 
         graphicsInterface.start();
     }

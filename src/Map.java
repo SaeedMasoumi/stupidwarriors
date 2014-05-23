@@ -100,12 +100,12 @@ public class Map {
                 cells[row][col] = new Cell(types[row][col], col, row);
             }
 
-        this.markingPath(); // mark paths -> 0, 1, 2
-        this.pathFinding(); // mark cells -> 0, 1, 2, 3, 4
-
         ArrayList<Cell[][]> HQs = getHeadQuartersCells();
         Game.getTeamCE().getHeadQuarter().setLocation(HQs.get(GameState.TEAM_CE)); // -> 0
         Game.getTeamMath().getHeadQuarter().setLocation(HQs.get(GameState.TEAM_MATH)); // -> 1
+
+        this.markingPath(); // mark paths -> 0, 1, 2
+        this.pathFinding(); // mark cells -> 0, 1, 2, 3, 4
     }
 
     public Cell getCell(int col, int row) {
@@ -266,14 +266,14 @@ public class Map {
             System.out.println("MBR_LL   run");
             for (int i = row; i < row + 5; i++) {
                 lane[index++] = cells[i][col];
-//                if (cells[i][col + 4].getObjectsList().contains(Game.getTeamCE().getHeadQuarter()))
-//                    teamID = GameState.TEAM_CE;
-//                if (cells[i][col + 4].getObjectsList().contains(Game.getTeamMath().getHeadQuarter()))
-//                    teamID = GameState.TEAM_MATH;
+                if (cells[i][col + 4].getObjectsList().contains(Game.getTeamCE().getHeadQuarter()))
+                    teamID = GameState.TEAM_CE;
+                if (cells[i][col + 4].getObjectsList().contains(Game.getTeamMath().getHeadQuarter()))
+                    teamID = GameState.TEAM_MATH;
             }
-            if ((col > columnsLength/2) || (col == columnsLength/2 && row < rowsLength/2))
-                teamID = GameState.TEAM_MATH;
-            else teamID = GameState.TEAM_CE;
+//            if ((col > columnsLength/2) || (col == columnsLength/2 && row < rowsLength/2))
+//                teamID = GameState.TEAM_MATH;
+//            else teamID = GameState.TEAM_CE;
 
             MilitaryBase mb = new MilitaryBase(GameObjectID.create(MilitaryBase.class), Game.getTeamByID(teamID),
                     GameState.ORIENTATION_VERTICAL, cells[row][col + 1]);
@@ -286,10 +286,11 @@ public class Map {
             System.out.println("MBL_LR   run");
             for (int i = row; i < row + 5; i++) {
                 lane[index++] = cells[i][col + 3];
+                if (cells[i][col - 1].getObjectsList().contains(Game.getTeamCE().getHeadQuarter()))
+                    teamID = GameState.TEAM_CE;
+                if (cells[i][col - 1].getObjectsList().contains(Game.getTeamMath().getHeadQuarter()))
+                    teamID = GameState.TEAM_MATH;
             }
-            if ((col > columnsLength/2) || (col == columnsLength/2 && row < rowsLength/2))
-                teamID = GameState.TEAM_MATH;
-            else teamID = GameState.TEAM_CE;
             MilitaryBase mb = new MilitaryBase(GameObjectID.create(MilitaryBase.class), Game.getTeamByID(teamID),
                     GameState.ORIENTATION_VERTICAL, cells[row][col]);
             Game.getTeamByID(teamID).getMilitaryBases().put(lane[0].getPathNum(), mb);
@@ -301,6 +302,10 @@ public class Map {
             System.out.println("MBD_LU   run");
             for (int i = col; i < col + 5; i++) {
                 lane[index++] = cells[row][i];
+                if (cells[row + 4][i].getObjectsList().contains(Game.getTeamCE().getHeadQuarter()))
+                    teamID = GameState.TEAM_CE;
+                if (cells[row + 4][i].getObjectsList().contains(Game.getTeamMath().getHeadQuarter()))
+                    teamID = GameState.TEAM_MATH;
             }
             if ((col > columnsLength/2) || (col == columnsLength/2 && row < rowsLength/2))
                 teamID = GameState.TEAM_MATH;
@@ -316,6 +321,10 @@ public class Map {
             System.out.println("MBU_LD   run");
             for (int i = col; i < col + 5; i++) {
                 lane[index++] = cells[row + 3][i];
+                if (cells[row - 1][i].getObjectsList().contains(Game.getTeamCE().getHeadQuarter()))
+                    teamID = GameState.TEAM_CE;
+                if (cells[row - 1][i].getObjectsList().contains(Game.getTeamMath().getHeadQuarter()))
+                    teamID = GameState.TEAM_MATH;
             }
             if ((col > columnsLength/2) || (col == columnsLength/2 && row < rowsLength/2))
                 teamID = GameState.TEAM_MATH;
