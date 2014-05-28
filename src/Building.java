@@ -4,7 +4,7 @@ import mahyarise.common.GameObjectID;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
+// TODO info e building bayad dorost beshe ... hatmane hatman :D
 public class Building extends GameObject{
     protected int orientation; //TODO
     protected Cell[][] location;

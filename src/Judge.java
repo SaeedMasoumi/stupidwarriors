@@ -6,6 +6,8 @@ import mahyarise.common.GameObjectID;
 import mahyarise.common.exceptions.MahyariseExceptionBase;
 import mahyarise.judge.JudgeAbstract;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Judge extends JudgeAbstract {
@@ -215,19 +217,59 @@ public class Judge extends JudgeAbstract {
 
     }
 
+    // Complete
     @Override
     public GameObjectID[] getBuildingID(int teamID, int buildingType) {
-        return new GameObjectID[0];
+        ArrayList<GameObjectID> idList = new ArrayList<GameObjectID>();
+
+        idList.add(Game.getTeamByID(teamID).getHeadQuarter().getID());
+
+        for (MilitaryBase mb: Game.getTeamByID(teamID).getMilitaryBases().values())
+        {
+            idList.add(mb.getID());
+        }
+
+        return idList.toArray(new GameObjectID[idList.size()]);
     }
 
+    // Complete
     @Override
     public GameObjectID[] getInRange(GameObjectID id) throws MahyariseExceptionBase {
-        return new GameObjectID[0];
+        ArrayList<GameObjectID> idList = new ArrayList<GameObjectID>();
+        try {
+            if (!(Game.getObjects().get(id) instanceof Unit))
+                throw new UnauthorizedAccessException("is not Unit");
+
+            Cell enemyCells[] = ((Unit) Game.getObjects().get(id)).findEnemies();
+            for (Cell cell: enemyCells) {
+                for (GameObject obj: cell.getObjects())
+                {
+                    idList.add(obj.getID());
+                }
+            }
+
+            return idList.toArray(new GameObjectID[idList.size()]);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
+    // Complete
     @Override
     public GameObjectID getTarget(GameObjectID id) throws MahyariseExceptionBase {
-        return null;
+        try {
+            if (!(Game.getObjects().get(id) instanceof Unit))
+                throw new UnauthorizedAccessException("is not a Unit");
+
+            Unit unit = (Unit) Game.getObjects().get(id);
+
+            return unit.findTargets(unit.findEnemies()).getObjects()[0].getID();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
@@ -237,7 +279,6 @@ public class Judge extends JudgeAbstract {
 
     @Override
     public void startTimer() {
-
     }
 
     @Override
@@ -258,13 +299,59 @@ public class Judge extends JudgeAbstract {
             Game.getTeamMath().setMoney(amount);
     }
 
+    // Complete
     @Override
     public void updateInfo(GameObjectID id, String infoKey, Integer infoValue) throws MahyariseExceptionBase {
+        try {
+            if (!Game.getObjects().containsKey(id))
+                throw new GameObjectNotFoundException(id);
 
+            GameObject object = Game.getObjects().get(id);
+
+            if (object instanceof Attacker) {
+                ((Attacker) object).getInfo().put(infoKey, infoValue);
+            }
+
+            else if (object instanceof Tower) {
+                ((Tower) object).getInfo().put(infoKey, infoValue);
+            }
+
+            else ((Building) object).getInfo().put(infoKey, infoValue);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
+    // Complete
     @Override
     public void updateInfo(GameObjectID id, HashMap<String, Integer> newInfo) throws MahyariseExceptionBase {
+        try {
+            if (!Game.getObjects().containsKey(id))
+                throw new GameObjectNotFoundException(id);
 
+            GameObject object = Game.getObjects().get(id);
+
+            if (object instanceof Attacker) {
+                for (String key: newInfo.keySet()) {
+                    if (((Attacker) object).getInfo().containsKey(key))
+                        ((Attacker) object).getInfo().put(key, newInfo.get(key));
+                }
+            }
+            else if (object instanceof Tower) {
+                for (String key: newInfo.keySet()) {
+                    if (((Tower) object).getInfo().containsKey(key))
+                        ((Tower) object).getInfo().put(key, newInfo.get(key));
+                }
+            }
+            else {
+                for (String key: newInfo.keySet()) {
+                    if (((Building) object).getInfo().containsKey(key))
+                        ((Building) object).getInfo().put(key, newInfo.get(key));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

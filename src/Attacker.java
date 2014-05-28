@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TimerTask;
 
@@ -36,14 +37,28 @@ public class Attacker extends Unit {
     protected static int pwrUpgradeCounter = 0;
     protected static int healthUpgradeCounter = 0;
 
-
-    // Attacker Properties
     protected int attackPower;
+    protected HashMap<String, Integer> info = new HashMap<String, Integer>();
+
+    protected ArrayList<Cell> hasSeen = new ArrayList<Cell>();
 
     public Attacker(Cell cell, GameObjectID id, Team team) throws NotEnoughMoneyException{
         super(id, team);
         this.currentCell = cell;
         cell.addObject(this);
+        initInfo();
+    }
+
+    private void initInfo() {
+        info.put(GameState.HEALTH, health);
+        info.put(GameState.ROW, currentCell.getRow());
+        info.put(GameState.COLOUMN, currentCell.getCol());
+        info.put(GameState.TEAM_ID, team.getID());
+        info.put(GameState.IS_ALIVE, isAlive);
+        info.put(GameState.ATTACK, attackPower);
+        info.put(GameState.RELOAD_TIME, reloadTime);
+        info.put(GameState.VALUE, price);
+        info.put(GameState.RANGE, range);
     }
 
     @Override
@@ -58,7 +73,7 @@ public class Attacker extends Unit {
                     object.takeDamage(attackPower);
                 }
             }
-        }, (int)this.reloadTime, (int)this.reloadTime);
+        }, this.reloadTime, this.reloadTime);
     }
 
     @Override
@@ -154,28 +169,19 @@ public class Attacker extends Unit {
     public void pathFinding() {
         for (int i = -1; i <= 1; i += 2)
         {
-            if (!Game.getMap().isOutOfPath(currentCell.getCol(), currentCell.getRow() + i)
-                    && Game.getMap().getLaneNum(currentCell.getCol(), currentCell.getRow() + i) == currentCell.getLaneNum())
+            if (!Game.getMap().isOutOfPath(currentCell.getCol(), currentCell.getRow() + i) // khareje masir nabashe ...
+                    && Game.getMap().getLaneNum(currentCell.getCol(), currentCell.getRow() + i) == currentCell.getLaneNum()
+                    && !hasSeen.contains(Game.getMap().getCell(currentCell.getCol(), currentCell.getRow() + i)))
                 nextCell = Game.getMap().getCell(currentCell.getCol(), currentCell.getRow() + i);
 
             else if (!Game.getMap().isOutOfPath(currentCell.getCol() + i, currentCell.getRow())
-                    && Game.getMap().getLaneNum(currentCell.getCol() + i, currentCell.getRow()) == currentCell.getLaneNum())
+                    && Game.getMap().getLaneNum(currentCell.getCol() + i, currentCell.getRow()) == currentCell.getLaneNum()
+                    && !hasSeen.contains(Game.getMap().getCell(currentCell.getCol() + i, currentCell.getRow())))
                 nextCell = Game.getMap().getCell(currentCell.getCol() + i, currentCell.getRow());
         }
     }
 
     public HashMap<String, Integer> getInfo() {
-        HashMap<String, Integer> info = new HashMap<String, Integer>();
-        info.put(GameState.HEALTH, health);
-        info.put(GameState.ROW, currentCell.getRow());
-        info.put(GameState.COLOUMN, currentCell.getCol());
-        info.put(GameState.TEAM_ID, team.getID());
-        info.put(GameState.IS_ALIVE, isAlive);
-        info.put(GameState.ATTACK, attackPower);
-        info.put(GameState.RELOAD_TIME, reloadTime);
-        info.put(GameState.VALUE, price);
-        info.put(GameState.RANGE, range);
-
         return info;
     }
 }
