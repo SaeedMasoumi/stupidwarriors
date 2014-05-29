@@ -11,7 +11,7 @@ import java.util.TimerTask;
 public class Test {
 
     static Judge judge = new Judge();
-    static GraphicsInterface graphicsInterface = new GraphicsInterface(judge);
+    public static GraphicsInterface graphicsInterface = new GraphicsInterface(judge);
 
     public static void main(String[] args) {
 

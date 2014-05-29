@@ -104,7 +104,7 @@ public class Team {
             @Override
             public void run() {
                 counter += 50;
-                if (counter % GameState.oneSec == 0) {
+                if (counter >= GameState.oneSec) {
                     money += plusMoney;
                     counter = 0;
                 }
@@ -179,7 +179,7 @@ public class Team {
             public void run() {
                 counter += 50;
 
-                if (counter % GameState.oneSec == 0) {
+                if (counter >= GameState.oneSec) {
                     for (GameObject object : objects.values())
                         if (object.isAttacker()) {
                             Attacker attacker = (Attacker) object;
@@ -293,7 +293,7 @@ public class Team {
             public void run() {
                 counter += 50;
 
-                if (counter % (oneSec * 60) == 0) {
+                if (counter >= (oneSec * 60)) {
                     money += 50 + (int) (Math.random() * ((1000 - 50) + 1));
                     counter = 0;
                 }

@@ -37,18 +37,22 @@ abstract public class Unit extends GameObject{
         ArrayList<Cell> enemiesCell = new ArrayList<Cell>();
         for(int col = this.currentCell.getCol() - this.range; col <= this.currentCell.getCol() + this.range; col++)
             for(int row = this.currentCell.getRow() - this.range; row <= this.currentCell.getRow() + this.range; row++)
-                for(int i = 0; i < Game.getMap().getCell(col, row).getObjects().length; i++) //TODO forech :D
-                {
-                    if (Game.getMap().getCell(col, row).getObjects()[i] != null && Game.getMap().getCell(col, row).getObjects()[i].getTeamID() != this.getTeamID())
+                if (!Game.getMap().isOutOfPath(col, row)) { // agar khareje map nabud
+                    for (int i = 0; i < Game.getMap().getCell(col, row).getObjects().length; i++) //TODO forech :D
                     {
-                        enemiesCell.add(Game.getMap().getCell(col, row));
+                        if (Game.getMap().getCell(col, row).getObjects()[i] != null && Game.getMap().getCell(col, row).getObjects()[i].getTeamID() != this.getTeamID()) {
+                            enemiesCell.add(Game.getMap().getCell(col, row));
+                        }
                     }
                 }
         
         return enemiesCell.toArray(new Cell[enemiesCell.size()]);
     }
 
+    public void unitDie() {
+        currentCell.removeObject(this);
+        Test.graphicsInterface.removeGameObject(this.getID());
+    }
+
     abstract public Cell findTargets(Cell[] enemiesCell); // peyda kardane target baraye har unit motefavete
-    
-    abstract public void attack();
 }
