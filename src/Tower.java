@@ -100,6 +100,27 @@ public class Tower extends Unit {
     // TODO .. age tunesti ino kamel kon ...
     @Override
     public Cell findTargets(Cell[] enemiesCell) {
+        if (enemiesCell.length == 0)
+            return null;
+
+        Cell targetCell = null;
+        ArrayList<GameObject> targets = new ArrayList<GameObject>();
+        int targetsCounter = 0;
+
+        int minTimeRemainToDeath = Integer.MAX_VALUE;
+        for (Cell cell: enemiesCell) {  
+            for (GameObject enemy: cell.getObjects()) {
+                if (enemy instanceof Infantry) {
+                    if ((enemy.getHealth() / this.pwrAgainstSoldiers) < minTimeRemainToDeath) {
+                        minTimeRemainToDeath = enemy.getHealth() / this.pwrAgainstSoldiers;
+                        targets.add(enemy);
+                    }
+                }
+            }
+        }
+
+
+
 //        Cell targetCell = null;
 //        int counter = 1;
 //        double minlife = 1000;

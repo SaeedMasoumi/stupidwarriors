@@ -47,6 +47,7 @@ public class Attacker extends Unit {
         this.currentCell = cell;
         cell.addObject(this);
         initInfo();
+        pathFinding();
     }
 
     private void initInfo() {
@@ -81,70 +82,67 @@ public class Attacker extends Unit {
         if (enemiesCell.length == 0) // yani asan kasi tooye bordesh nist
             return null;
 
-        else
+        isAttacking = true; // hamle mikone ... TODO bayad vayse ...
+        for (Cell cell : enemiesCell)
         {
-            isAttacking = true; // hamle mikone ... TODO bayad vayse ...
-            for (Cell cell : enemiesCell)
+            for (GameObject enemy: cell.getObjects())
             {
-                for (GameObject enemy: cell.getObjects())
-                {
-                    if (enemy.isTower())
-                        return cell;
-                }
+                if (enemy.isTower())
+                    return cell;
             }
+        }
 
-            // yani borji ro peyda nakardim pas donbale nazdiktarin attacker migardim
-            Cell targetCell = null;
-            double distance = Double.MAX_VALUE;
-            for (Cell cell: enemiesCell) {
-                for (GameObject enemy : cell.getObjects())
-                {
-                    if (enemy.isAttacker() && enemy.getLaneNumber() == this.getLaneNumber()) // tooye yek masir
-                        if (Calc.distance(this, enemy) < distance) {
-                            targetCell = cell;
-                            distance = Calc.distance(this, enemy);
-                        }
-                }
-            }
-
-            if (targetCell != null)
-                return targetCell;
-
-            // hala price
-            for (Cell cell: enemiesCell) {
-                for (GameObject enemy: cell.getObjects())
-                {
-                    double price = 0;
-                    if (enemy.isAttacker() && enemy.price > price) {
-                        targetCell = cell;
-                        price = enemy.price;
-                    }
-                }
-            }
-            if (targetCell != null)
-                return targetCell;
-
-            // ya niru haye doshman hamechizeshun yekie ya inke niruye doshman building e
-            for(Cell cell: enemiesCell) {
-                for(GameObject enemy: cell.getObjects())
-                {
-                    if (enemy.isAttacker())
-                        return cell;
-                }
-            }
-            // yani niruye doshman building e
-            distance = Double.MAX_VALUE;
-            for (Cell cell: enemiesCell) {
-                for(GameObject enemy: cell.getObjects()) //TODO need Refactors .. agar Military Base tooye masire doshman ha bashe nemitunan be HQ asib bezanan
-                    if (enemy.isBuilding() && Calc.distance(this, enemy) < distance) {
+        // yani borji ro peyda nakardim pas donbale nazdiktarin attacker migardim
+        Cell targetCell = null;
+        double distance = Double.MAX_VALUE;
+        for (Cell cell: enemiesCell) {
+            for (GameObject enemy : cell.getObjects()) // TODO produce bugs bugs bugs
+            {
+                if (enemy instanceof Attacker && ((Attacker)enemy).getCurrentCell().getPathNum() == this.getCurrentCell().getPathNum()) // tooye yek masir
+                    if (Calc.distance(this, enemy) < distance) {
                         targetCell = cell;
                         distance = Calc.distance(this, enemy);
                     }
             }
-
-            if (targetCell != null)
-                return targetCell;
         }
+
+        if (targetCell != null)
+            return targetCell;
+
+        // hala price
+        for (Cell cell: enemiesCell) {
+            for (GameObject enemy: cell.getObjects())
+            {
+                double price = 0;
+                if (enemy.isAttacker() && enemy.price > price) {
+                    targetCell = cell;
+                    price = enemy.price;
+                }
+            }
+        }
+        if (targetCell != null)
+            return targetCell;
+
+        // ya niru haye doshman hamechizeshun yekie ya inke niruye doshman building e
+        for(Cell cell: enemiesCell) {
+            for(GameObject enemy: cell.getObjects())
+            {
+                if (enemy.isAttacker())
+                    return cell;
+            }
+        }
+        // yani niruye doshman building e
+        distance = Double.MAX_VALUE;
+        for (Cell cell: enemiesCell) {
+            for(GameObject enemy: cell.getObjects()) //TODO need Refactors .. agar Military Base tooye masire doshman ha bashe nemitunan be HQ asib bezanan
+                if (enemy.isBuilding() && Calc.distance(this, enemy) < distance) {
+                    targetCell = cell;
+                    distance = Calc.distance(this, enemy);
+                }
+        }
+
+        if (targetCell != null)
+            return targetCell;
         return null;
     }
 
@@ -167,18 +165,39 @@ public class Attacker extends Unit {
 
 
     public void pathFinding() {
-        for (int i = -1; i <= 1; i += 2)
-        {
-            if (!Game.getMap().isOutOfPath(currentCell.getCol(), currentCell.getRow() + i) // khareje masir nabashe ...
-                    && Game.getMap().getLaneNum(currentCell.getCol(), currentCell.getRow() + i) == currentCell.getLaneNum()
-                    && !hasSeen.contains(Game.getMap().getCell(currentCell.getCol(), currentCell.getRow() + i)))
-                nextCell = Game.getMap().getCell(currentCell.getCol(), currentCell.getRow() + i);
+        Game.addTimerTask(new TimerTask() {
+            int counter = 0;
+            @Override
+            public void run() {
+                counter += 50;
 
-            else if (!Game.getMap().isOutOfPath(currentCell.getCol() + i, currentCell.getRow())
-                    && Game.getMap().getLaneNum(currentCell.getCol() + i, currentCell.getRow()) == currentCell.getLaneNum()
-                    && !hasSeen.contains(Game.getMap().getCell(currentCell.getCol() + i, currentCell.getRow())))
-                nextCell = Game.getMap().getCell(currentCell.getCol() + i, currentCell.getRow());
-        }
+                if (counter % 500 == 0) // 500 milli second
+                {
+                    hasSeen.add(currentCell);
+                    for (int i = -1; i <= 1; i += 2)
+                    {
+                        if (!Game.getMap().isOutOfPath(currentCell.getCol(), currentCell.getRow() + i) // khareje masir nabashe ...
+                                && Game.getMap().getLaneNum(currentCell.getCol(), currentCell.getRow() + i) == currentCell.getLaneNum()
+                                && !hasSeen.contains(Game.getMap().getCell(currentCell.getCol(), currentCell.getRow() + i))) {
+                            nextCell = Game.getMap().getCell(currentCell.getCol(), currentCell.getRow() + i);
+                        }
+
+                        else if (!Game.getMap().isOutOfPath(currentCell.getCol() + i, currentCell.getRow())
+                                && Game.getMap().getLaneNum(currentCell.getCol() + i, currentCell.getRow()) == currentCell.getLaneNum()
+                                && !hasSeen.contains(Game.getMap().getCell(currentCell.getCol() + i, currentCell.getRow()))) {
+                            nextCell = Game.getMap().getCell(currentCell.getCol() + i, currentCell.getRow());
+                        }
+                    }
+                    currentCell.removeObject(Attacker.this);
+                    nextCell.addObject(Attacker.this);
+                    currentCell = nextCell;
+                    info.put(GameState.ROW, currentCell.getRow());
+                    info.put(GameState.COLOUMN, currentCell.getCol());
+                    counter = 0;
+                }
+            }
+        });
+
     }
 
     public HashMap<String, Integer> getInfo() {

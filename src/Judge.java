@@ -9,6 +9,7 @@ import mahyarise.judge.JudgeAbstract;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TimerTask;
 
 public class Judge extends JudgeAbstract {
 
@@ -274,23 +275,25 @@ public class Judge extends JudgeAbstract {
 
     @Override
     public void next50milis() {
-
+        Game.next50ms();
     }
 
     @Override
     public void startTimer() {
+        Game.startTimer();
     }
 
     @Override
     public void pauseTimer() {
-        Game.getTimer().cancel();
+        Game.stopTimer();
     }
 
     @Override
     public float getTime() {
-        return 0;
+        return Game.getTime() / 1000;
     }
 
+    // Complete
     @Override
     public void setMoney(int teamID, int amount) {
         if (teamID == GameState.TEAM_CE)

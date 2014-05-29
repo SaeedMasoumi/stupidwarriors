@@ -53,4 +53,6 @@ public class GameState {
     public static final int ORIENTATION_HORIZONTAL = 0;
     public static final int ORIENTATION_VERTICAL = 1;
 
+    public static final int oneSec = 1000;
+
 }

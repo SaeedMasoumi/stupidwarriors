@@ -34,13 +34,13 @@ public class Team {
     public static final int TEAM_CE = 0;
     public static final int TEAM_MATH = 1;
 
-    private boolean healthBounceUpgradeUsed;
-    private boolean speedUpgradeUsed;
-    private boolean shieldUpgradeUsed;
+    public boolean healthBounceUpgradeUsed;
+    public boolean speedUpgradeUsed;
+    public boolean shieldUpgradeUsed;
 
-    private boolean moneyBounceUpgradeUsed;
-    private boolean enemyPriceUpgradeUsed;
-    private boolean reduceUnitsPriceUpgradeUsed;
+    public boolean moneyBounceUpgradeUsed;
+    public boolean enemyPriceUpgradeUsed;
+    public boolean reduceUnitsPriceUpgradeUsed;
 
     // properties
     private int money;
@@ -67,6 +67,7 @@ public class Team {
         shieldUpgradeUsed = false;
 
         headQuarter = new HeadQuarter(GameObjectID.create(HeadQuarter.class), this);
+        generateMoney();
     }
 
     public int getID() {
@@ -98,14 +99,17 @@ public class Team {
 
     // generate money
     public void generateMoney() {
-        Game.getTimer().schedule(new TimerTask() {
-
-            // the method which must be repeatedly call 
+        Game.addTimerTask(new TimerTask() {
+            int counter = 0;
             @Override
             public void run() {
-                money += plusMoney;
+                counter += 50;
+                if (counter % GameState.oneSec == 0) {
+                    money += plusMoney;
+                    counter = 0;
+                }
             }
-        }, 0, oneSec);
+        });
     }
 
     public void withdrawMoney(int amount) {
@@ -169,28 +173,34 @@ public class Team {
         teamUpgradePurchaseList.add(GameState.PU_CE_HEALTH);
         this.withdrawMoney(5000);
 
-        Game.getTimer().schedule(new TimerTask() {
+        Game.addTimerTask(new TimerTask() {
+            int counter = 0;
             @Override
             public void run() {
-                for (GameObject object : objects.values())
-                    if (object.isAttacker()) {
-                        Attacker attacker = (Attacker) object;
-                        if (attacker.getTeamID() == TEAM_CE) {
-                            if (attacker.health < Infantry.CE_MAX_HEALTH)
-                                attacker.health += attacker.health * 0.05;
+                counter += 50;
 
-                            if (attacker.health > Infantry.CE_MAX_HEALTH)
-                                attacker.health = Infantry.CE_MAX_HEALTH;
-                        } else {
-                            if (attacker.health < Infantry.MATH_MAX_HEALTH)
-                                attacker.health += attacker.health * 0.05;
+                if (counter % GameState.oneSec == 0) {
+                    for (GameObject object : objects.values())
+                        if (object.isAttacker()) {
+                            Attacker attacker = (Attacker) object;
+                            if (attacker.getTeamID() == TEAM_CE) {
+                                if (attacker.health < Infantry.CE_MAX_HEALTH)
+                                    attacker.health += attacker.health * 0.05;
 
-                            if (attacker.health > Infantry.MATH_MAX_HEALTH)
-                                attacker.health = Infantry.MATH_MAX_HEALTH;
+                                if (attacker.health > Infantry.CE_MAX_HEALTH)
+                                    attacker.health = Infantry.CE_MAX_HEALTH;
+                            } else {
+                                if (attacker.health < Infantry.MATH_MAX_HEALTH)
+                                    attacker.health += attacker.health * 0.05;
+
+                                if (attacker.health > Infantry.MATH_MAX_HEALTH)
+                                    attacker.health = Infantry.MATH_MAX_HEALTH;
+                            }
                         }
-                    }
+                    counter = 0;
+                }
             }
-        }, 0, oneSec);
+        });
 
         for(GameObject object: objects.values())
         {
@@ -277,12 +287,19 @@ public class Team {
         teamUpgradePurchaseList.add(GameState.PU_MATH_ECO);
         this.withdrawMoney(5000);
 
-        Game.getTimer().schedule(new TimerTask() {
+        Game.addTimerTask(new TimerTask() {
+            int counter = 0;
             @Override
             public void run() {
-                money += 50 + (int) (Math.random() * ((1000 - 50) + 1));
+                counter += 50;
+
+                if (counter % (oneSec * 60) == 0) {
+                    money += 50 + (int) (Math.random() * ((1000 - 50) + 1));
+                    counter = 0;
+                }
             }
-        }, 0, oneSec * 60);
+        });
+
     }
 
     public void enemyPriceUpgrade() throws NotEnoughMoneyException, UnauthorizedAccessException, PowerUpAlreadyUsedException  {

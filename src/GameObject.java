@@ -6,9 +6,8 @@ public class GameObject {
     protected static double MAX_HEALTH; // baraye upgrade ha lazeme
     protected GameObjectID id; // each GameObject has it's own id
     protected Team team;
-    protected Cell currentCell;
-    protected int laneNumber; // shomareye masiri ke toosh hast .. ghalat emlaei
 
+    protected Cell currentCell;
     protected int isAlive;
     // ham nadare :D
 
@@ -21,8 +20,8 @@ public class GameObject {
         return id;
     }
 
-    public int getLaneNumber() {
-        return laneNumber;
+    public int getHealth() {
+        return health;
     }
 
     public double getPrice() {

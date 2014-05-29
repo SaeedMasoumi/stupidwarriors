@@ -119,5 +119,11 @@ public class Test {
         }
 
         graphicsInterface.start();
+        Game.getTimer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                graphicsInterface.refresh();
+            }
+        }, 0, 50);
     }
 }

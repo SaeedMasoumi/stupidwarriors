@@ -263,7 +263,6 @@ public class Map {
         Cell[] lane = new Cell[5];
         int teamID = 1;
         if (patternType == NUM_MBR_LL) {
-            System.out.println("MBR_LL   run");
             for (int i = row; i < row + 5; i++) {
                 lane[index++] = cells[i][col];
                 if (cells[i][col + 4].getObjectsList().contains(Game.getTeamCE().getHeadQuarter()))
@@ -283,7 +282,6 @@ public class Map {
         }
 
         else if (patternType == NUM_MBL_LR) {
-            System.out.println("MBL_LR   run");
             for (int i = row; i < row + 5; i++) {
                 lane[index++] = cells[i][col + 3];
                 if (cells[i][col - 1].getObjectsList().contains(Game.getTeamCE().getHeadQuarter()))
@@ -299,7 +297,6 @@ public class Map {
         }
 
         else if (patternType == NUM_MBD_LU) {
-            System.out.println("MBD_LU   run");
             for (int i = col; i < col + 5; i++) {
                 lane[index++] = cells[row][i];
                 if (cells[row + 4][i].getObjectsList().contains(Game.getTeamCE().getHeadQuarter()))
@@ -318,7 +315,6 @@ public class Map {
         }
 
         else if (patternType == NUM_MBU_LD) {
-            System.out.println("MBU_LD   run");
             for (int i = col; i < col + 5; i++) {
                 lane[index++] = cells[row + 3][i];
                 if (cells[row - 1][i].getObjectsList().contains(Game.getTeamCE().getHeadQuarter()))
