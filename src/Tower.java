@@ -26,6 +26,7 @@ public class Tower extends Unit {
         this.currentCell = cell;
         cell.addObject(this);
         initInfo();
+        AI();
     }
 
     private void initInfo() {
@@ -40,6 +41,40 @@ public class Tower extends Unit {
         info.put(GameState.TANK_ATTACK, pwrAgainstTanks);
         info.put(GameState.INFANTRY_ATTACK, pwrAgainstSoldiers);
     }
+
+    public void AI() {
+        Game.addTimerTask(new TimerTask() {
+            @Override
+            public void run() {
+                Cell targetCell = findTargets(findEnemies());
+                if (targetCell != null && !Tower.this.isDie())
+                    attack(targetCell);
+                else isAttacking = false;
+
+                if (Tower.this.isDie())
+                    unitDie();
+            }
+        });
+    }
+
+
+    private int counterForAttack = 0;
+    public void attack(Cell targetCell) {
+        isAttacking = true;
+        counterForAttack += 50;
+
+        if (counterForAttack >= reloadTime) {
+            System.out.println("Attack! Attack!");
+            for (GameObject object : targetCell.getObjects()) {
+                if (object.isSoldier())
+                    object.takeDamage(pwrAgainstSoldiers);
+                else if (object.isTank())
+                    object.takeDamage(pwrAgainstTanks);
+            }
+            counterForAttack = 0;
+        }
+    }
+
 
     public void reloadTimeUpgrade() throws NotEnoughMoneyException {
         if (Game.getTeamByID(team.getID()).getMoney() < price * 0.1)
@@ -78,23 +113,6 @@ public class Tower extends Unit {
 
     }
 
-    public void attack() {
-        final Cell targetCell = this.findTargets(this.findEnemies());
-        Game.getTimer().schedule(new TimerTask() {
-
-            @Override
-            public void run() {
-                for(GameObject object: targetCell.getObjects())
-                {
-                    if(object.isSoldier())
-                        object.takeDamage(pwrAgainstSoldiers);
-                    else if (object.isTank())
-                        object.takeDamage(pwrAgainstTanks);
-                }
-            }
-        }, (int)this.reloadTime, (int)this.reloadTime);
-    }
-
 
     // TODO .. age tunesti ino kamel kon ...
     @Override
@@ -104,10 +122,10 @@ public class Tower extends Unit {
 
         Cell targetCell = null;
         ArrayList<GameObject> targets = new ArrayList<GameObject>();
-        int targetsCounter = 0;
+        ArrayList<GameObject> finalTargets = new ArrayList<GameObject>();
 
         int minTimeRemainToDeath = Integer.MAX_VALUE;
-        for (Cell cell: enemiesCell) {  
+        for (Cell cell: enemiesCell) {
             for (GameObject enemy: cell.getObjects()) {
                 if (enemy instanceof Infantry) {
                     if ((enemy.getHealth() / this.pwrAgainstSoldiers) < minTimeRemainToDeath) {
@@ -115,9 +133,42 @@ public class Tower extends Unit {
                         targets.add(enemy);
                     }
                 }
+
+                if (enemy instanceof Tank) {
+                    if ((enemy.getHealth() / this.pwrAgainstTanks) < minTimeRemainToDeath) {
+                        minTimeRemainToDeath = enemy.getHealth() / this.pwrAgainstTanks;
+                        targets.add(enemy);
+                    }
+                }
+            }
+        }
+        for (GameObject enemy: targets) {
+            if (enemy instanceof Infantry) {
+                if ((enemy.getHealth() / this.pwrAgainstSoldiers) == minTimeRemainToDeath)
+                    finalTargets.add(enemy);
+            }
+
+            if (enemy instanceof Tank) {
+                if ((enemy.getHealth() / this.pwrAgainstTanks) == minTimeRemainToDeath) {
+                    finalTargets.add(enemy);
+                }
             }
         }
 
+        targets.clear();
+        int minDistance = Integer.MAX_VALUE;
+        // TODO min Distance to HQ
+
+        int maxPrice = 0;
+        for (GameObject enemy: finalTargets) { // TODO on targets
+            if (enemy.getPrice() > maxPrice)
+            {
+                maxPrice = enemy.getPrice();
+                targetCell = enemy.getCurrentCell();
+            }
+        }
+
+        return targetCell;
 
 
 //        Cell targetCell = null;
@@ -172,7 +223,6 @@ public class Tower extends Unit {
 //            }
 //        }
 //        return targetCell;
-        return null;
     }
 
     public HashMap<String, Integer> getInfo() {

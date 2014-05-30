@@ -24,7 +24,7 @@ public class GameObject {
         return health;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
@@ -35,6 +35,10 @@ public class GameObject {
 
     public void takeDamage(int damage) {
         health -= damage;
+    }
+
+    public Cell getCurrentCell() {
+        return currentCell;
     }
 
     public boolean isUnit() {

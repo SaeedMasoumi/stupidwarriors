@@ -62,7 +62,7 @@ public class Judge extends JudgeAbstract {
 
             case ATTACKER_TANK:
                 id = GameObjectID.create(Tank.class);
-                new Infantry(Game.getTeamByID(teamID).getMilitaryBases().get(path).getLane()[lane], id, Game.getTeamByID(teamID));
+                new Tank(Game.getTeamByID(teamID).getMilitaryBases().get(path).getLane()[lane], id, Game.getTeamByID(teamID));
                 break;
         }
         return id;

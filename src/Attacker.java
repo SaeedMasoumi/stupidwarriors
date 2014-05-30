@@ -31,7 +31,6 @@ import mahyarise.common.GameObjectID;
  */
 public class Attacker extends Unit {
     // Variables for Map information
-    protected boolean isAttacking;
     protected Cell nextCell;
 
     protected static int pwrUpgradeCounter = 0;
@@ -42,7 +41,7 @@ public class Attacker extends Unit {
 
     protected ArrayList<Cell> hasSeen = new ArrayList<Cell>();
 
-    private int counterForAttacker = 0;
+    private int counterForAttack = 0;
 
     public Attacker(Cell cell, GameObjectID id, Team team) throws NotEnoughMoneyException{
         super(id, team);
@@ -72,7 +71,7 @@ public class Attacker extends Unit {
                 counter += 50;
 
                 Cell targetCell = findTargets(findEnemies());
-                if (targetCell != null)
+                if (targetCell != null && !Attacker.this.isDie())
                     attack(targetCell);
                 else isAttacking = false;
 
@@ -93,14 +92,13 @@ public class Attacker extends Unit {
     public void attack(Cell targetCell) {
         isAttacking = true;
 
-        counterForAttacker += 50;
+        counterForAttack += 50;
 
-        if (counterForAttacker >= reloadTime) {
+        if (counterForAttack >= reloadTime) {
             for (GameObject object : targetCell.getObjects()) {
                 object.takeDamage(attackPower);
-                System.out.println(object.getClass().toString() + " Health: " + health);
             }
-            counterForAttacker = 0;
+            counterForAttack = 0;
         }
     }
 

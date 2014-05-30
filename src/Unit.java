@@ -12,7 +12,8 @@ abstract public class Unit extends GameObject{
     //and each duration(it's a timer in javafx maybe it's 10ms) it +=10ms;
     protected int range;
     protected int cost;
-    
+    protected boolean isAttacking;
+
     public Unit(GameObjectID id, Team team) throws NotEnoughMoneyException{
         try {
             if (team.getMoney() < cost)
@@ -45,13 +46,27 @@ abstract public class Unit extends GameObject{
                         }
                     }
                 }
-        
+
         return enemiesCell.toArray(new Cell[enemiesCell.size()]);
     }
 
     public void unitDie() {
         currentCell.removeObject(this);
         Test.graphicsInterface.removeGameObject(this.getID());
+        if (Game.getTeamByID(GameState.TEAM_MATH).reduceUnitsPriceUpgradeUsed
+                && this.team.getID() == GameState.TEAM_MATH)
+            this.price -= this.price * 0.1;
+
+        if (Game.getTeamByID(GameState.TEAM_MATH).enemyPriceUpgradeUsed
+                && this.team.getID() == GameState.TEAM_CE)
+            this.price += this.price * 0.1;
+
+
+        if (team.getID() == GameState.TEAM_CE) {
+            Game.getTeamMath().addMoney(this.price);
+        }
+
+        else Game.getTeamCE().addMoney(this.price);
     }
 
     abstract public Cell findTargets(Cell[] enemiesCell); // peyda kardane target baraye har unit motefavete

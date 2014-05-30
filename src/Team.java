@@ -116,6 +116,10 @@ public class Team {
         this.money -= amount;
     }
 
+    public void addMoney(int amount) {
+        this.money += amount;
+    }
+
     public void addObject(GameObject obj) {
         objects.put(obj.getID(), obj);
         Game.getObjects().put(obj.getID(), obj);
@@ -315,17 +319,6 @@ public class Team {
         enemyPriceUpgradeUsed = true;
         teamUpgradePurchaseList.add(GameState.PU_MATH_PROFIT);
         this.withdrawMoney(4000);
-
-        for(GameObject object: Game.getObjects().values())
-        {
-            if (object.getTeamID() != this.id)
-            {
-                Unit unit = (Unit) object;
-                unit.price += unit.price * 0.1;
-            }
-        }
-
-        Infantry.CE_PRICE += Infantry.CE_PRICE * 0.1; //TODO shayad bug bede
     }
 
     public void reduceUnitsPriceUpgrade() throws NotEnoughMoneyException, UnauthorizedAccessException, PowerUpAlreadyUsedException  { // or Downgrade :D
@@ -341,17 +334,6 @@ public class Team {
         reduceUnitsPriceUpgradeUsed = true;
         teamUpgradePurchaseList.add(GameState.PU_MATH_DEC_VAL);
         this.withdrawMoney(4000);
-
-        for(GameObject object: objects.values())
-        {
-            if(object.isUnit())
-            {
-                Unit unit = (Unit) object;
-                unit.price -= unit.price * 0.1;
-            }
-        }
-
-        Infantry.MATH_PRICE -= Infantry.MATH_PRICE * 0.1; //TODO shayad bug bede
     }
 
     public void updateInfo() {
