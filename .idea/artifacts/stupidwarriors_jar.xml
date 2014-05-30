@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="stupidwarriors:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/stupidwarriors_jar</output-path>
+    <root id="archive" name="stupidwarriors.jar">
+      <element id="module-output" name="stupidwarriors" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/junit-4.11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/Graphics.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

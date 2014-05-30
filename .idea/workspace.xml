@@ -1,11 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="stupidwarriors:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/Game.java" line="0" />
+    <bookmark url="file://$PROJECT_DIR$/src/Logic/Game.java" line="0" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ceeedd14-b50d-4a86-94f9-ff3c58065f4f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Test.java" afterPath="$PROJECT_DIR$/src/Test.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/stupidwarriors_jar.xml" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\engine\audio\Sound.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\engine\scene\controller\gameSelectController.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\engine\scene\controller\menuController.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\engine\scene\controller\renderController.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\engine\scene\gameScene.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\engine\scene\gameSelectScene.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\engine\scene\layout\game.fxml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\engine\scene\layout\gameSelect.fxml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\engine\scene\layout\gameStartUp.fxml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\engine\scene\layout\mainMenu.fxml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\engine\scene\layout\startUp.fxml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\engine\scene\mainMenuScene.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\engine\scene\mainScene.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\engine\scene\modernStartUp.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\engine\scene\segmented.css" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\engine\scene\startUpScene.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\css\bg.css" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\css\button.css" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\css\segmented.css" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\css\style.css" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\0e030b5562f23b72959fe6af937fd532.jpg" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\SKnb9kl.jpg" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\StupidZombies2.jpg" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\TDF_TREE_A.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\TDF_TREE_B.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\Warrior.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\bang.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\bg.bmp" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\bg.jpg" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\bg.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\gold.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\goldcoinsingle.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\health-0.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\icon2.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\iconMenu.jpg" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\magic_warriors_wallpaper_537c5.jpg" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\menu\chat.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\menu\check.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\menu\controls.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\menu\heart.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\menu\home.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\menu\phone.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\menu\settings.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\menu\smartphone.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\palm_a.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\palm_b.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\px_spear.gif" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\selectGame.jpg" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\st.bmp" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\st.jpg" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\startup.jpg" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\startup\gpl.PNG" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\startup\icon.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\startup\javaFX.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\startup\opensource.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\stiFX.jpg" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\stiOP.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\img\stupidSoldier.bmp" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\layout\MenuXML.fxml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\layout\mainScene.fxml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\layout\menuScene.fxml" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\sound\Battleground.ogg" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\sound\Begins.mp3" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\sound\Chipper Doodle v2.mp3" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\sound\Click_Base.ogg" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\sound\Loading.ogg" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\sound\Note1.wav" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\sound\Note2.wav" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\sound\Note3.wav" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\sound\Note4.wav" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\sound\Note5.wav" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\sound\Note6.wav" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\sound\Note7.wav" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\sound\Note8.wav" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\sound\background.ogg" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\sound\effect\btnClicked-1.mp3" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\sound\effect\btnClicked-2.mp3" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\resources\sound\smallFunk.mp3" afterPath="" />
+      <change type="MOVED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\Attacker.java" afterPath="$PROJECT_DIR$/src/Logic/Attacker.java" />
+      <change type="MOVED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\BlackTower.java" afterPath="$PROJECT_DIR$/src/Logic/BlackTower.java" />
+      <change type="MOVED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\Building.java" afterPath="$PROJECT_DIR$/src/Logic/Building.java" />
+      <change type="MOVED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\Calc.java" afterPath="$PROJECT_DIR$/src/Logic/Calc.java" />
+      <change type="MOVED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\Cell.java" afterPath="$PROJECT_DIR$/src/Logic/Cell.java" />
+      <change type="MOVED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\ElectricityTower.java" afterPath="$PROJECT_DIR$/src/Logic/ElectricityTower.java" />
+      <change type="MOVED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\Game.java" afterPath="$PROJECT_DIR$/src/Logic/Game.java" />
+      <change type="MOVED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\GameObject.java" afterPath="$PROJECT_DIR$/src/Logic/GameObject.java" />
+      <change type="MOVED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\GameState.java" afterPath="$PROJECT_DIR$/src/Logic/GameState.java" />
+      <change type="MOVED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\GameTower.java" afterPath="$PROJECT_DIR$/src/Logic/GameTower.java" />
+      <change type="MOVED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\GeneralMathTower.java" afterPath="$PROJECT_DIR$/src/Logic/GeneralMathTower.java" />
+      <change type="MOVED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\HeadQuarter.java" afterPath="$PROJECT_DIR$/src/Logic/HeadQuarter.java" />
+      <change type="MOVED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\Infantry.java" afterPath="$PROJECT_DIR$/src/Logic/Infantry.java" />
+      <change type="MOVED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\Judge.java" afterPath="$PROJECT_DIR$/src/mahyarise/judge/Judge.java" />
+      <change type="MOVED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\Map.java" afterPath="$PROJECT_DIR$/src/Logic/Map.java" />
+      <change type="MOVED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\MilitaryBase.java" afterPath="$PROJECT_DIR$/src/Logic/MilitaryBase.java" />
+      <change type="MOVED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\PoisonTower.java" afterPath="$PROJECT_DIR$/src/Logic/PoisonTower.java" />
+      <change type="MOVED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\StupidWarriors.java" afterPath="$PROJECT_DIR$/src/Logic/StupidWarriors.java" />
+      <change type="MOVED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\Tank.java" afterPath="$PROJECT_DIR$/src/Logic/Tank.java" />
+      <change type="MOVED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\TankTower.java" afterPath="$PROJECT_DIR$/src/Logic/TankTower.java" />
+      <change type="MOVED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\Team.java" afterPath="$PROJECT_DIR$/src/Logic/Team.java" />
+      <change type="MOVED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\Test.java" afterPath="$PROJECT_DIR$/src/Logic/Test.java" />
+      <change type="MOVED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\Tower.java" afterPath="$PROJECT_DIR$/src/Logic/Tower.java" />
+      <change type="MOVED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\Unit.java" afterPath="$PROJECT_DIR$/src/Logic/Unit.java" />
+      <change type="MOVED" beforePath="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\judge\JudgeAbstract.java" afterPath="$PROJECT_DIR$/src/mahyarise/judge/JudgeAbstract.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/JudgeTest.java" afterPath="$PROJECT_DIR$/test/JudgeTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="stupidwarriors.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,109 +138,126 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Map.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Map.java">
+      <file leaf-file-name="Map.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Logic/Map.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="944" max-vertical-offset="7326">
-              <caret line="107" column="58" selection-start-line="107" selection-start-column="58" selection-end-line="107" selection-end-column="58" />
+            <state vertical-scroll-proportion="0.65255475" vertical-offset="2199" max-vertical-offset="7938">
+              <caret line="164" column="36" selection-start-line="164" selection-start-column="0" selection-end-line="165" selection-end-column="0" />
               <folding>
-                <element signature="e#3492#3493#0" expanded="true" />
-                <element signature="e#3530#3531#0" expanded="true" />
+                <element signature="e#3594#3595#0" expanded="true" />
+                <element signature="e#3632#3633#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Attacker.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Attacker.java">
+      <file leaf-file-name="Judge.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/mahyarise/judge/Judge.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="379" max-vertical-offset="3888">
-              <caret line="48" column="29" selection-start-line="48" selection-start-column="29" selection-end-line="48" selection-end-column="29" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6192">
+              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#8364#8378#0" expanded="true" />
+                <element signature="e#8837#8851#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="Unit.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Unit.java">
+        <entry file="file://$PROJECT_DIR$/src/Logic/Unit.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1530">
-              <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Calc.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Calc.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
-              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="1584">
+              <caret line="53" column="69" selection-start-line="53" selection-start-column="69" selection-end-line="53" selection-end-column="69" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="HeadQuarter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/HeadQuarter.java">
+        <entry file="file://$PROJECT_DIR$/src/Logic/HeadQuarter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="792">
-              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1296">
+              <caret line="13" column="2" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="2" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1455#1762#0" expanded="true" />
+                <element signature="e#1751#1752#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="GameObject.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/GameObject.java">
+        <entry file="file://$PROJECT_DIR$/src/Logic/GameObject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="525" max-vertical-offset="1404">
-              <caret line="84" column="24" selection-start-line="84" selection-start-column="24" selection-end-line="84" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Cell.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Cell.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="345" max-vertical-offset="1368">
-              <caret line="44" column="24" selection-start-line="44" selection-start-column="24" selection-end-line="44" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="1440">
+              <caret line="85" column="24" selection-start-line="85" selection-start-column="24" selection-end-line="85" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="MilitaryBase.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/MilitaryBase.java">
+        <entry file="file://$PROJECT_DIR$/src/Logic/MilitaryBase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="291" max-vertical-offset="1530">
-              <caret line="38" column="20" selection-start-line="38" selection-start-column="20" selection-end-line="38" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="2322">
+              <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2461#2462#0" expanded="true" />
-                <element signature="e#2509#2510#0" expanded="true" />
+                <element signature="e#1499#3270#0" expanded="true" />
+                <element signature="e#3259#3260#0" expanded="true" />
+                <element signature="e#4449#4450#0" expanded="true" />
+                <element signature="e#4497#4498#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Building.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Building.java">
+      <file leaf-file-name="GameState.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Logic/GameState.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="57" max-vertical-offset="882">
-              <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="319" max-vertical-offset="1188">
+              <caret line="55" column="42" selection-start-line="55" selection-start-column="42" selection-end-line="55" selection-end-column="42" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Test.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Test.java">
+      <file leaf-file-name="Game.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Logic/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7100372" vertical-offset="1479" max-vertical-offset="2430">
-              <caret line="114" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1206">
+              <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Building.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Logic/Building.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="149" max-vertical-offset="1008">
+              <caret line="49" column="5" selection-start-line="49" selection-start-column="5" selection-end-line="49" selection-end-column="5" />
+              <folding>
+                <element signature="e#1402#1403#0" expanded="true" />
+                <element signature="e#1458#1459#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Test.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Logic/Test.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1164" max-vertical-offset="2448">
+              <caret line="80" column="34" selection-start-line="80" selection-start-column="34" selection-end-line="80" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#10185#10325#0" expanded="true" />
+                <element signature="e#10314#10315#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -186,11 +313,19 @@
         <option value="$PROJECT_DIR$/src/Tower.java" />
         <option value="$PROJECT_DIR$/src/MilitaryBase.java" />
         <option value="$PROJECT_DIR$/src/Map.java" />
-        <option value="$PROJECT_DIR$/src/Unit.java" />
         <option value="$PROJECT_DIR$/src/Attacker.java" />
         <option value="$PROJECT_DIR$/src/Building.java" />
         <option value="$PROJECT_DIR$/src/GameObject.java" />
+        <option value="$PROJECT_DIR$/src/Unit.java" />
         <option value="$PROJECT_DIR$/src/Test.java" />
+        <option value="$PROJECT_DIR$/src/judge/Judge.java" />
+        <option value="$PROJECT_DIR$/src/Logic/Game.java" />
+        <option value="$PROJECT_DIR$/src/Logic/MilitaryBase.java" />
+        <option value="$PROJECT_DIR$/src/Logic/Unit.java" />
+        <option value="$PROJECT_DIR$/src/Logic/Test.java" />
+        <option value="$PROJECT_DIR$/src/Logic/Building.java" />
+        <option value="$PROJECT_DIR$/src/Logic/HeadQuarter.java" />
+        <option value="$PROJECT_DIR$/src/Logic/Map.java" />
       </list>
     </option>
   </component>
@@ -234,6 +369,70 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stupidwarriors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stupidwarriors" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stupidwarriors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stupidwarriors" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="judge" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stupidwarriors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stupidwarriors" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Logic" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stupidwarriors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stupidwarriors" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -245,7 +444,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="FullScreen" value="true" />
+    <property name="FullScreen" value="false" />
     <property name="options.lastSelected" value="editor.preferences.appearance" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
@@ -272,13 +471,19 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="975" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Saeed\Documents\GitHub\stupidwarriors\src\Logic" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Test">
+  <component name="RunManager" selected="Application.Test (1)">
     <configuration default="false" name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <option name="VM_PARAMETERS" />
@@ -319,6 +524,28 @@
     </configuration>
     <configuration default="false" name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Test" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="stupidwarriors" />
+      <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Test (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Logic.Test" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -468,16 +695,18 @@
       <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
       <method />
     </configuration>
-    <list size="3">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Application.Main" />
       <item index="1" class="java.lang.String" itemvalue="Application.Game" />
       <item index="2" class="java.lang.String" itemvalue="Application.Test" />
+      <item index="3" class="java.lang.String" itemvalue="Application.Test (1)" />
     </list>
     <recent_temporary>
-      <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="Application.Test" />
-        <item index="1" class="java.lang.String" itemvalue="Application.Game" />
-        <item index="2" class="java.lang.String" itemvalue="Application.Main" />
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="Application.Test (1)" />
+        <item index="1" class="java.lang.String" itemvalue="Application.Test" />
+        <item index="2" class="java.lang.String" itemvalue="Application.Game" />
+        <item index="3" class="java.lang.String" itemvalue="Application.Main" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -512,14 +741,14 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32913843" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.119324185" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.11907067" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21197917" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19167474" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21376051" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22451082" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -552,7 +781,7 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Attacker.java">
+    <entry file="file://$PROJECT_DIR$/src/Logic/Attacker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1830" max-vertical-offset="2355">
           <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
@@ -560,28 +789,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Infantry.java">
+    <entry file="file://$PROJECT_DIR$/src/Logic/Infantry.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="975" max-vertical-offset="1155">
           <caret line="65" column="24" selection-start-line="65" selection-start-column="24" selection-end-line="65" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Tank.java">
+    <entry file="file://$PROJECT_DIR$/src/Logic/Tank.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="900" max-vertical-offset="2085">
           <caret line="60" column="18" selection-start-line="60" selection-start-column="18" selection-end-line="60" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Calc.java">
+    <entry file="file://$PROJECT_DIR$/src/Logic/Calc.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="480">
           <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Team.java">
+    <entry file="file://$PROJECT_DIR$/src/Logic/Team.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2790" max-vertical-offset="3615">
           <caret line="197" column="0" selection-start-line="197" selection-start-column="0" selection-end-line="197" selection-end-column="0" />
@@ -589,60 +818,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Attacker.java">
+    <entry file="file://$PROJECT_DIR$/src/Logic/Attacker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2140">
           <caret line="36" column="31" selection-start-line="36" selection-start-column="31" selection-end-line="36" selection-end-column="31" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/engine/scene/gameSelectScene.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="795">
-          <caret line="20" column="32" selection-start-line="0" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/StupidWarriors.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1350">
-          <caret line="1" column="21" selection-start-line="0" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/engine/scene/startUpScene.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="667" max-vertical-offset="1800">
-          <caret line="68" column="44" selection-start-line="68" selection-start-column="44" selection-end-line="68" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/engine/scene/controller/menuController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4" vertical-offset="0" max-vertical-offset="2955">
-          <caret line="22" column="21" selection-start-line="0" selection-start-column="0" selection-end-line="191" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/engine/scene/mainMenuScene.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.10909091" vertical-offset="225" max-vertical-offset="1065">
-          <caret line="21" column="28" selection-start-line="0" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/engine/scene/mainScene.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.58181816" vertical-offset="675" max-vertical-offset="1500">
-          <caret line="77" column="9" selection-start-line="0" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/engine/scene/modernStartUp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2025">
-          <caret line="33" column="28" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -730,21 +910,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameState.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="111" max-vertical-offset="1152">
-          <caret line="55" column="42" selection-start-line="55" selection-start-column="42" selection-end-line="55" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/engine/scene/gameScene.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17910448" vertical-offset="0" max-vertical-offset="1005">
-          <caret line="37" column="13" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_05/src.zip!/java/util/Timer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3324468" vertical-offset="6338" max-vertical-offset="12276">
@@ -759,15 +924,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Judge.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="2556">
-          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Team.java">
+    <entry file="file://$PROJECT_DIR$/src/Logic/Team.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="4535" max-vertical-offset="5958">
           <caret line="300" column="53" selection-start-line="300" selection-start-column="53" selection-end-line="300" selection-end-column="53" />
@@ -775,7 +932,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Infantry.java">
+    <entry file="file://$PROJECT_DIR$/src/Logic/Infantry.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="822" max-vertical-offset="1962">
           <caret line="54" column="33" selection-start-line="54" selection-start-column="33" selection-end-line="54" selection-end-column="33" />
@@ -783,7 +940,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameTower.java">
+    <entry file="file://$PROJECT_DIR$/src/Logic/GameTower.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="183" max-vertical-offset="1026">
           <caret line="45" column="22" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
@@ -791,7 +948,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ElectricityTower.java">
+    <entry file="file://$PROJECT_DIR$/src/Logic/ElectricityTower.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="1026">
           <caret line="45" column="8" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="22" />
@@ -799,7 +956,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/PoisonTower.java">
+    <entry file="file://$PROJECT_DIR$/src/Logic/PoisonTower.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="183" max-vertical-offset="1026">
           <caret line="45" column="22" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
@@ -807,7 +964,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TankTower.java">
+    <entry file="file://$PROJECT_DIR$/src/Logic/TankTower.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="183" max-vertical-offset="1026">
           <caret line="45" column="22" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
@@ -815,7 +972,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GeneralMathTower.java">
+    <entry file="file://$PROJECT_DIR$/src/Logic/GeneralMathTower.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="183" max-vertical-offset="1026">
           <caret line="45" column="22" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
@@ -823,18 +980,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Tower.java">
+    <entry file="file://$PROJECT_DIR$/src/Logic/Tower.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="504" max-vertical-offset="4194">
           <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
           <folding>
-            <element signature="e#7796#7797#0" expanded="true" />
-            <element signature="e#7823#7824#0" expanded="true" />
+            <element signature="e#7811#7812#0" expanded="true" />
+            <element signature="e#7838#7839#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Tank.java">
+    <entry file="file://$PROJECT_DIR$/src/Logic/Tank.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="2574">
           <caret line="36" column="36" selection-start-line="36" selection-start-column="36" selection-end-line="36" selection-end-column="36" />
@@ -842,7 +999,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/BlackTower.java">
+    <entry file="file://$PROJECT_DIR$/src/Logic/BlackTower.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="183" max-vertical-offset="1044">
           <caret line="46" column="22" selection-start-line="46" selection-start-column="22" selection-end-line="46" selection-end-column="22" />
@@ -850,18 +1007,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="453" max-vertical-offset="1260">
-          <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-          <folding>
-            <element signature="e#1436#1559#0" expanded="true" />
-            <element signature="e#1548#1549#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Cell.java">
+    <entry file="file://$PROJECT_DIR$/src/Logic/Cell.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="345" max-vertical-offset="1368">
           <caret line="44" column="24" selection-start-line="44" selection-start-column="24" selection-end-line="44" selection-end-column="24" />
@@ -869,26 +1015,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Map.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="944" max-vertical-offset="7326">
-          <caret line="107" column="58" selection-start-line="107" selection-start-column="58" selection-end-line="107" selection-end-column="58" />
-          <folding>
-            <element signature="e#3492#3493#0" expanded="true" />
-            <element signature="e#3530#3531#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/HeadQuarter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="792">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Calc.java">
+    <entry file="file://$PROJECT_DIR$/src/Logic/Calc.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
           <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
@@ -896,58 +1023,211 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MilitaryBase.java">
+    <entry file="file://$PROJECT_DIR$/src/Logic/Attacker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="291" max-vertical-offset="1530">
-          <caret line="38" column="20" selection-start-line="38" selection-start-column="20" selection-end-line="38" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="415" max-vertical-offset="3924">
+          <caret line="50" column="29" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Logic/StupidWarriors.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="813" max-vertical-offset="1620">
+          <caret line="26" column="4" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_05/src.zip!/java/util/ArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="14875" max-vertical-offset="24876">
+          <caret line="885" column="0" selection-start-line="885" selection-start-column="0" selection-end-line="885" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Logic/Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1164" max-vertical-offset="2448">
+          <caret line="80" column="34" selection-start-line="80" selection-start-column="34" selection-end-line="80" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2461#2462#0" expanded="true" />
-            <element signature="e#2509#2510#0" expanded="true" />
+            <element signature="e#10185#10325#0" expanded="true" />
+            <element signature="e#10314#10315#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Attacker.java">
+    <entry file="file://$PROJECT_DIR$/src/Logic/MilitaryBase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="379" max-vertical-offset="3888">
-          <caret line="48" column="29" selection-start-line="48" selection-start-column="29" selection-end-line="48" selection-end-column="29" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="2322">
+          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1499#3270#0" expanded="true" />
+            <element signature="e#3259#3260#0" expanded="true" />
+            <element signature="e#4449#4450#0" expanded="true" />
+            <element signature="e#4497#4498#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Logic/GameState.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="111" max-vertical-offset="1152">
+          <caret line="55" column="42" selection-start-line="55" selection-start-column="42" selection-end-line="55" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Unit.java">
+    <entry file="file://$PROJECT_DIR$/src/Logic/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1530">
-          <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1206">
+          <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Building.java">
+    <entry file="file://$PROJECT_DIR$/src/mahyarise/judge/Judge.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="57" max-vertical-offset="882">
-          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="110" max-vertical-offset="6192">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#8364#8378#0" expanded="true" />
+            <element signature="e#8837#8851#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Logic/Unit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="1584">
+          <caret line="53" column="69" selection-start-line="53" selection-start-column="69" selection-end-line="53" selection-end-column="69" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameObject.java">
+    <entry file="file://$PROJECT_DIR$/src/Logic/Building.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="525" max-vertical-offset="1404">
-          <caret line="84" column="24" selection-start-line="84" selection-start-column="24" selection-end-line="84" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="149" max-vertical-offset="1008">
+          <caret line="49" column="5" selection-start-line="49" selection-start-column="5" selection-end-line="49" selection-end-column="5" />
+          <folding>
+            <element signature="e#1402#1403#0" expanded="true" />
+            <element signature="e#1458#1459#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Logic/GameObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="1440">
+          <caret line="85" column="24" selection-start-line="85" selection-start-column="24" selection-end-line="85" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Test.java">
+    <entry file="file://$PROJECT_DIR$/src/Logic/HeadQuarter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7100372" vertical-offset="1479" max-vertical-offset="2430">
-          <caret line="114" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1296">
+          <caret line="13" column="2" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="2" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1455#1762#0" expanded="true" />
+            <element signature="e#1751#1752#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Logic/Map.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.65255475" vertical-offset="2199" max-vertical-offset="7938">
+          <caret line="164" column="36" selection-start-line="164" selection-start-column="0" selection-end-line="165" selection-end-column="0" />
+          <folding>
+            <element signature="e#3594#3595#0" expanded="true" />
+            <element signature="e#3632#3633#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <last-edited>stupidwarriors:jar</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>stupidwarriors</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>lib</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
 
