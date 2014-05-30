@@ -48,6 +48,8 @@ public class Tower extends Unit {
             public void run() {
                 Cell targetCell = findTargets(findEnemies());
 
+                System.out.println("Tower found " + findEnemies().length + " enemies !!");
+
                 if (targetCell != null && !Tower.this.isDie())
                     attack(targetCell);
                 else isAttacking = false;

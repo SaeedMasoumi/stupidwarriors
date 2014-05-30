@@ -14,6 +14,8 @@ abstract public class Unit extends GameObject{
     protected int cost;
     protected boolean isAttacking;
 
+    private boolean unitDieCalled;
+
     public Unit(GameObjectID id, Team team) throws NotEnoughMoneyException{
         try {
             if (team.getMoney() < cost)
@@ -39,10 +41,15 @@ abstract public class Unit extends GameObject{
         for(int col = this.currentCell.getCol() - this.range; col <= this.currentCell.getCol() + this.range; col++)
             for(int row = this.currentCell.getRow() - this.range; row <= this.currentCell.getRow() + this.range; row++)
                 if (!Game.getMap().isOutOfPath(col, row)) { // agar khareje map nabud
-                    for (int i = 0; i < Game.getMap().getCell(col, row).getObjects().length; i++) //TODO forech :D
+                    for (GameObject object: Game.getMap().getCell(col, row).getObjects())
                     {
-                        if (Game.getMap().getCell(col, row).getObjects()[i] != null && Game.getMap().getCell(col, row).getObjects()[i].getTeamID() != this.getTeamID()) {
-                            enemiesCell.add(Game.getMap().getCell(col, row));
+                        if (object != null && object.getTeamID() != this.getTeamID()) {
+                            if (!(object instanceof Building) && object.getCurrentCell().getPathNum() == this.getCurrentCell().getPathNum())
+                                enemiesCell.add(Game.getMap().getCell(col, row));
+                            else if ((object instanceof MilitaryBase) && ((MilitaryBase) object).getPathNumber() == this.getCurrentCell().getPathNum())
+                                enemiesCell.add(Game.getMap().getCell(col, row));
+                            else if (object instanceof HeadQuarter)
+                                enemiesCell.add(Game.getMap().getCell(col, row));
                         }
                     }
                 }
@@ -51,6 +58,10 @@ abstract public class Unit extends GameObject{
     }
 
     public void unitDie() {
+        if (unitDieCalled)
+            return;
+
+        unitDieCalled = true;
         currentCell.removeObject(this);
         Test.graphicsInterface.removeGameObject(this.getID());
         if (Game.getTeamByID(GameState.TEAM_MATH).reduceUnitsPriceUpgradeUsed

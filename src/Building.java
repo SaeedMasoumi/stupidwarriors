@@ -46,4 +46,5 @@ public class Building extends GameObject{
     public Cell getLeftUpCornerCell() {
         return leftUpCornerCell;
     }
+
 }

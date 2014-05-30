@@ -31,6 +31,7 @@ public class ElectricityTower extends Tower{
     private static final int HEALTH = 2000;
     private static final int REFLECTION_OF_DAMAGE = 10;
     private static final int COST = 600;
+    private static final int RANGE = 7;
 
     public ElectricityTower(Cell cell, GameObjectID id, Team team) throws NotEnoughMoneyException{
         super(cell, id, team);
@@ -42,6 +43,7 @@ public class ElectricityTower extends Tower{
         reflectionOfDamage = REFLECTION_OF_DAMAGE;
         cost = COST;
         price = (int) (COST * 0.8); // arzeshe tower
+        range = RANGE;
 
         team.withdrawMoney(cost);
     }

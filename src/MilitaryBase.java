@@ -1,6 +1,8 @@
 
 import mahyarise.common.GameObjectID;
 
+import java.util.ArrayList;
+
 /*
  * Copyright (C) 2014 Saeed Masoumi & Saeed Rajabzade
  *
@@ -37,8 +39,36 @@ public class MilitaryBase extends Building {
         isAlive = 1;
         this.orientation = orientation;
         this.leftUpCornerCell = leftUpCornerCell;
+        setLocation();
     }
 
+    private void setLocation() {
+        if (orientation == GameState.ORIENTATION_VERTICAL) {
+            Cell[][] loc = new Cell[5][3];
+            for (int col = leftUpCornerCell.getCol(); col < leftUpCornerCell.getCol() + 3; col++)
+                for (int row = leftUpCornerCell.getRow(); row < leftUpCornerCell.getRow() + 5; row++) {
+                    Game.getMap().getCell(col, row).addObject(this);
+                    loc[row - leftUpCornerCell.getRow()][col - leftUpCornerCell.getCol()] = Game.getMap().getCell(col, row);
+                }
+
+            super.setLocation(loc);
+        }
+        else {
+            Cell[][] loc = new Cell[3][5];
+            for (int col = leftUpCornerCell.getCol(); col < leftUpCornerCell.getCol() + 5; col++)
+                for (int row = leftUpCornerCell.getRow(); row < leftUpCornerCell.getRow() + 3; row++) {
+                    Game.getMap().getCell(col, row).addObject(this);
+                    loc[row - leftUpCornerCell.getRow()][col - leftUpCornerCell.getCol()] = Game.getMap().getCell(col, row);
+                }
+
+            super.setLocation(loc);
+        }
+
+    }
+
+    private void setCellsPathNum(Cell cell) {
+        cell.setPathNum(this.pathNumber);
+    }
     public void setLane(Cell[] lane) {
         this.lane = lane;
     }

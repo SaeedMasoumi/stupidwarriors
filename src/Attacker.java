@@ -122,7 +122,7 @@ public class Attacker extends Unit {
         for (Cell cell: enemiesCell) {
             for (GameObject enemy : cell.getObjects()) // TODO produce bugs bugs bugs
             {
-                if (enemy instanceof Attacker && ((Attacker)enemy).getCurrentCell().getPathNum() == this.getCurrentCell().getPathNum()) // tooye yek masir
+                if (enemy instanceof Attacker) // tooye yek masir
                     if (Calc.distance(this, enemy) < distance) {
                         targetCell = cell;
                         distance = Calc.distance(this, enemy);
@@ -156,12 +156,10 @@ public class Attacker extends Unit {
             }
         }
         // yani niruye doshman building e
-        distance = Double.MAX_VALUE;
         for (Cell cell: enemiesCell) {
             for(GameObject enemy: cell.getObjects()) //TODO need Refactors .. agar Military Base tooye masire doshman ha bashe nemitunan be HQ asib bezanan
-                if (enemy instanceof Building && Calc.distance(this, enemy) < distance) {
+                if (enemy instanceof Building) {
                     targetCell = cell;
-                    distance = Calc.distance(this, enemy);
                 }
         }
 

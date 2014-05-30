@@ -81,8 +81,10 @@ public class GameObject {
     }
 
     public boolean isDie() {
-        if (health <= 0)
+        if (health <= 0) {
+            isAlive = 0;
             return true;
+        }
 
         else return false;
     }
