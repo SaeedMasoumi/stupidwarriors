@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="lib">
+    <archive path="C:/Users/Saeed/Documents/GitHub/stupidwarriors/lib/junit-4.11.jar" />
+    <archive path="C:/Users/Saeed/Documents/GitHub/stupidwarriors/lib/Graphics.jar" />
+  </library>
+</eclipse-userlibraries>
+
