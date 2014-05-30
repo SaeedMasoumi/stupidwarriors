@@ -111,7 +111,7 @@ public class Attacker extends Unit {
         {
             for (GameObject enemy: cell.getObjects())
             {
-                if (enemy.isTower())
+                if (enemy instanceof Tower)
                     return cell;
             }
         }
@@ -159,7 +159,7 @@ public class Attacker extends Unit {
         distance = Double.MAX_VALUE;
         for (Cell cell: enemiesCell) {
             for(GameObject enemy: cell.getObjects()) //TODO need Refactors .. agar Military Base tooye masire doshman ha bashe nemitunan be HQ asib bezanan
-                if (enemy.isBuilding() && Calc.distance(this, enemy) < distance) {
+                if (enemy instanceof Building && Calc.distance(this, enemy) < distance) {
                     targetCell = cell;
                     distance = Calc.distance(this, enemy);
                 }

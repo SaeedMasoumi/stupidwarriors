@@ -47,6 +47,7 @@ public class Tower extends Unit {
             @Override
             public void run() {
                 Cell targetCell = findTargets(findEnemies());
+
                 if (targetCell != null && !Tower.this.isDie())
                     attack(targetCell);
                 else isAttacking = false;
@@ -64,7 +65,6 @@ public class Tower extends Unit {
         counterForAttack += 50;
 
         if (counterForAttack >= reloadTime) {
-            System.out.println("Attack! Attack!");
             for (GameObject object : targetCell.getObjects()) {
                 if (object.isSoldier())
                     object.takeDamage(pwrAgainstSoldiers);
@@ -142,6 +142,7 @@ public class Tower extends Unit {
                 }
             }
         }
+
         for (GameObject enemy: targets) {
             if (enemy instanceof Infantry) {
                 if ((enemy.getHealth() / this.pwrAgainstSoldiers) == minTimeRemainToDeath)
@@ -155,18 +156,19 @@ public class Tower extends Unit {
             }
         }
 
+        targetCell = finalTargets.get(0).getCurrentCell(); // TODO need change
         targets.clear();
         int minDistance = Integer.MAX_VALUE;
         // TODO min Distance to HQ
 
-        int maxPrice = 0;
-        for (GameObject enemy: finalTargets) { // TODO on targets
-            if (enemy.getPrice() > maxPrice)
-            {
-                maxPrice = enemy.getPrice();
-                targetCell = enemy.getCurrentCell();
-            }
-        }
+//        int maxPrice = 0;
+//        for (GameObject enemy: finalTargets) { // TODO on targets
+//            if (enemy.getPrice() > maxPrice)
+//            {
+//                maxPrice = enemy.getPrice();
+//                targetCell = enemy.getCurrentCell();
+//            }
+//        }
 
         return targetCell;
 
