@@ -73,12 +73,18 @@ public class Attacker extends Unit {
                 counter += 50;
 
                 Cell targetCell = findTargets(findEnemies());
-                if (targetCell != null && !Attacker.this.isDie())
-                    attack(targetCell);
-                else isAttacking = false;
 
-                if (Attacker.this.isDie()) {
+                if (targetCell != null && !Attacker.this.isDie()) {
+                    for (GameObject object: targetCell.getObjects()) {
+                        if (object.isAlive == 1)
+                            attack(object);
+                        else isAttacking = false;
+                    }
+                }
+
+                if (Attacker.this.isDie() && isAlive == 1) {
                     unitDie();
+                    isAlive = 0;
                 }
 
                 if (counter >= 500) // 500 milli second
@@ -93,18 +99,17 @@ public class Attacker extends Unit {
 
     }
 
-    public void attack(Cell targetCell) {
+    public void attack(GameObject object) {
         isAttacking = true;
 
         counterForAttack += 50;
 
         if (counterForAttack >= reloadTime) {
-            for (GameObject object : targetCell.getObjects()) {
-                object.takeDamage(attackPower);
-            }
+            object.takeDamage(attackPower);
             counterForAttack = 0;
         }
     }
+
 
     @Override
     public Cell findTargets(Cell[] enemiesCell) {
@@ -173,25 +178,26 @@ public class Attacker extends Unit {
     }
 
     public void pathFinding() {
-        if (!isAttacking) { // agar hamle nemikard
-            hasSeen.add(currentCell);
-            for (int i = -1; i <= 1; i += 2) {
-                if (!Game.getMap().isOutOfPath(currentCell.getCol(), currentCell.getRow() + i) // khareje masir nabashe ...
-                        && Game.getMap().getLaneNum(currentCell.getCol(), currentCell.getRow() + i) == currentCell.getLaneNum()
-                        && !hasSeen.contains(Game.getMap().getCell(currentCell.getCol(), currentCell.getRow() + i))) {
-                    nextCell = Game.getMap().getCell(currentCell.getCol(), currentCell.getRow() + i);
-                } else if (!Game.getMap().isOutOfPath(currentCell.getCol() + i, currentCell.getRow())
-                        && Game.getMap().getLaneNum(currentCell.getCol() + i, currentCell.getRow()) == currentCell.getLaneNum()
-                        && !hasSeen.contains(Game.getMap().getCell(currentCell.getCol() + i, currentCell.getRow()))) {
-                    nextCell = Game.getMap().getCell(currentCell.getCol() + i, currentCell.getRow());
-                }
+        if (isAttacking) // agar hamle nemikard
+            return;
+        hasSeen.add(currentCell);
+        for (int i = -1; i <= 1; i += 2) {
+            if (!Game.getMap().isOutOfPath(currentCell.getCol(), currentCell.getRow() + i) // khareje masir nabashe ...
+                    && Game.getMap().getLaneNum(currentCell.getCol(), currentCell.getRow() + i) == currentCell.getLaneNum()
+                    && !hasSeen.contains(Game.getMap().getCell(currentCell.getCol(), currentCell.getRow() + i))) {
+                nextCell = Game.getMap().getCell(currentCell.getCol(), currentCell.getRow() + i);
+            } else if (!Game.getMap().isOutOfPath(currentCell.getCol() + i, currentCell.getRow())
+                    && Game.getMap().getLaneNum(currentCell.getCol() + i, currentCell.getRow()) == currentCell.getLaneNum()
+                    && !hasSeen.contains(Game.getMap().getCell(currentCell.getCol() + i, currentCell.getRow()))) {
+                nextCell = Game.getMap().getCell(currentCell.getCol() + i, currentCell.getRow());
             }
-            currentCell.removeObject(Attacker.this);
-            nextCell.addObject(Attacker.this);
-            currentCell = nextCell;
-            info.put(GameState.ROW, currentCell.getRow());
-            info.put(GameState.COLOUMN, currentCell.getCol());
         }
+        currentCell.removeObject(Attacker.this);
+        nextCell.addObject(Attacker.this);
+        currentCell = nextCell;
+        info.put(GameState.ROW, currentCell.getRow());
+        info.put(GameState.COLOUMN, currentCell.getCol());
+
     }
 
     ///////////////// Upgrades /////////////////

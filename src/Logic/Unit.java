@@ -45,6 +45,7 @@ abstract public class Unit extends GameObject{
                     for (GameObject object: Game.getMap().getCell(col, row).getObjects())
                     {
                         if (object != null && object.getTeamID() != this.getTeamID()) {
+//                            System.out.println(object.getClass());
                             if (!(object instanceof Building) && object.getCurrentCell().getPathNum() == this.getCurrentCell().getPathNum())
                                 enemiesCell.add(Game.getMap().getCell(col, row));
                             else if ((object instanceof MilitaryBase) && ((MilitaryBase) object).getPathNumber() == this.getCurrentCell().getPathNum())
@@ -56,16 +57,19 @@ abstract public class Unit extends GameObject{
                         }
                     }
                 }
+
+//        if (enemiesCell.size() != 0)
+//            System.out.println("I am " + this.getClass() + " And my enemies are: " + enemiesCell);
+
         return enemiesCell.toArray(new Cell[enemiesCell.size()]);
     }
 
     public void unitDie() {
-        if (unitDieCalled)
-            return;
-
-        unitDieCalled = true;
         currentCell.removeObject(this);
+
+//        System.out.println(this.getClass() + " dies!");
 //        Test.graphicsInterface.removeGameObject(this.getID());
+
         if (Game.getTeamByID(GameState.TEAM_MATH).reduceUnitsPriceUpgradeUsed
                 && this.team.getID() == GameState.TEAM_MATH)
             this.price -= this.price * 0.1;

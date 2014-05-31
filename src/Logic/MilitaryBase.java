@@ -46,7 +46,7 @@ public class MilitaryBase extends Building {
         Game.addTimerTask(new TimerTask() {
             @Override
             public void run() {
-                if (MilitaryBase.this.isDie())
+                if (MilitaryBase.this.isDie() && isAlive == 1)
                 {
                     if (isDestroyed)
                         return;
@@ -60,6 +60,7 @@ public class MilitaryBase extends Building {
                                         leftUpCornerCell.getCol() + col, leftUpCornerCell.getRow() + row);
                                 location[row][col].setLaneNum(col);
                                 Game.getMap().getCell(leftUpCornerCell.getCol() + col, leftUpCornerCell.getRow() + row).setLaneNum(col);
+                                Game.getMap().getCell(leftUpCornerCell.getCol() + col, leftUpCornerCell.getRow() + row).removeObject(MilitaryBase.this);
                             }
                         }
                     }
@@ -71,6 +72,8 @@ public class MilitaryBase extends Building {
                                         leftUpCornerCell.getCol() + col, leftUpCornerCell.getRow() + row);
                                 location[row][col].setLaneNum(row);
                                 Game.getMap().getCell(leftUpCornerCell.getCol() + col, leftUpCornerCell.getRow() + row).setLaneNum(row);
+                                Game.getMap().getCell(leftUpCornerCell.getCol() + col, leftUpCornerCell.getRow() + row).removeObject(MilitaryBase.this);
+                                System.out.println("MB Destroyed");
                             }
                         }
                     }

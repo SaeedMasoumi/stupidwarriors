@@ -57,6 +57,7 @@ public class Tower extends Unit {
 
                 if (Tower.this.isDie())
                     unitDie();
+                initInfo();
             }
         });
     }
