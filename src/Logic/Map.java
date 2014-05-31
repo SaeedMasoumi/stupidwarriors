@@ -50,11 +50,19 @@ public class Map {
             {11,11,11,11,11},
             {11,11,11,11,11}};
 
+
     // num for patterns ...
     private static final int NUM_MBL_LR = 101;
     private static final int NUM_MBR_LL = 102;
     private static final int NUM_MBU_LD = 103;
     private static final int NUM_MBD_LU = 104;
+
+
+    private static final int[][] HQ_PATTERN = {{10,10,10,10,10},
+            {10,10,10,10,10},
+            {10,10,10,10,10},
+            {10,10,10,10,10},
+            {10,10,10,10,10}};
 
 
     private int columnsLength, rowsLength;
@@ -99,13 +107,7 @@ public class Map {
                 cells[row][col] = new Cell(types[row][col], col, row);
             }
 
-        ArrayList<Cell[][]> HQs = getHeadQuartersCells();
-        Game.getTeamCE().getHeadQuarter().setLocation(HQs.get(GameState.TEAM_CE)); // -> 0
-        Game.getTeamMath().getHeadQuarter().setLocation(HQs.get(GameState.TEAM_MATH)); // -> 1
-
-        Game.getTeamCE().getHeadQuarter().setHQInCells();
-        Game.getTeamMath().getHeadQuarter().setHQInCells();
-
+        findHeadQuarters();
 
         this.markingPath(); // mark paths -> 0, 1, 2
         this.pathFinding(); // mark cells -> 0, 1, 2, 3, 4
@@ -142,69 +144,36 @@ public class Map {
     public int getLaneNum(int col, int row) {return cells[row][col].getLaneNum();}
 
     // TODO convert ArrayList to 2D Array directly
-    public ArrayList<Cell[][]> getHeadQuartersCells() {
-        boolean firstTime = true;
-        ArrayList<Cell[][]> HQs = new ArrayList<Cell[][]>();
-
-        ArrayList<Cell> ceHQ = new ArrayList<Cell>();
-        ArrayList<Cell> mathHQ = new ArrayList<Cell>();
-
-        Cell[][] ceHQCell = new Cell[5][5];
-        Cell[][] mathHQCell = new Cell[5][5];
-
-        for (int col = 0; col < columnsLength; col++)
-            for (int row = rowsLength - 1; row >= 0; row--)
+    public void findHeadQuarters() {
+        boolean mathHQhasBeenMarked = false;
+        for (int col = columnsLength - HQ_PATTERN[0].length ; col >= 0; col--)
+            for (int row = 0; row <= rowsLength - HQ_PATTERN.length; row++)
             {
-                if (cells[row][col].getType() == GameState.CELL_TYPE_HQ) {
-                    DFS(col, row, GameState.CELL_TYPE_HQ, ceHQ, mathHQ);
-                    if (firstTime) {
-                        Game.getTeamCE().getHeadQuarter().setLeftUpCornerCell(Game.getMap().getCell(col, row - 4));
+                int[][] pattern = new int[HQ_PATTERN.length][HQ_PATTERN[0].length];
+                for (int i = row; i < row + 5; i++)
+                    for (int j = col; j < col + 5; j++)
+                        pattern[i - row][j - col] = cells[i][j].getType();
+                if (Arrays.deepEquals(pattern, HQ_PATTERN))
+                {
+                    if (mathHQhasBeenMarked) {
+                        Game.getTeamCE().getHeadQuarter().setLeftUpCornerCell(cells[row][col]);
                     }
-                    else Game.getTeamMath().getHeadQuarter().setLeftUpCornerCell(Game.getMap().getCell(col, row - 4));
+                    else Game.getTeamMath().getHeadQuarter().setLeftUpCornerCell(cells[row][col]);
 
-                    firstTime = false;
+                    mathHQhasBeenMarked = true;
                 }
             }
 
-        for (int i = 0; i < 5; i++)
-            for (int j = 0; j < 5; j++)
-            {
-                ceHQCell[i][j] = ceHQ.get(0);
-                ceHQ.remove(0);
-            }
-        HQs.add(ceHQCell);
-
-        for (int i = 0; i < 5; i++)
-            for (int j = 0; j < 5; j++)
-            {
-                mathHQCell[i][j] = mathHQ.get(0);
-                mathHQ.remove(0);
-            }
-        HQs.add(mathHQCell);
-
-        return HQs;
+        Game.getTeamCE().getHeadQuarter().setHQInCells();
+        Game.getTeamMath().getHeadQuarter().setHQInCells();
     }
 
-    // TODO convert ArrayList to 2D Array directly
-    public void DFS(int col, int row, int type, ArrayList<Cell> ceHQ, ArrayList<Cell> mathHQ) {
-        if (ceHQ.contains(cells[row][col]))
-            return;
-        else if (mathHQ.contains(cells[row][col]))
-            return;
+    private boolean isOutOfMap(int col, int row) {
+        return col < 0 || row < 0 || col >= columnsLength || row >= columnsLength;
+    }
 
-        if (ceHQ.size() >= 25)
-            mathHQ.add(cells[row][col]);
-
-        else ceHQ.add(cells[row][col]);
-        for (int i = -1; i <= 1; i += 2)
-        {
-            if (!isOutOfPath(col + i, row) && cells[row][col + i].getType() == type) {
-                DFS(col + i, row, type, ceHQ, mathHQ);
-            }
-            if (!isOutOfPath(col, row + i) && cells[row + i][col].getType() == type) {
-                DFS(col, row + i, type, ceHQ, mathHQ);
-            }
-        }
+    private boolean isNotHQ(int col, int row) {
+        return isOutOfMap(col, row) && (cells[row][col].getType() != GameState.CELL_TYPE_HQ);
     }
 
     public void pathFinding() {

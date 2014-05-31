@@ -86,6 +86,8 @@ public class Attacker extends Unit {
                     pathFinding();
                     counter = 0;
                 }
+
+                initInfo();
             }
         });
 

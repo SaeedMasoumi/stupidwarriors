@@ -26,17 +26,13 @@ import java.util.TimerTask;
  * @author Saeed
  */
 public class HeadQuarter extends Building {
-    
-    private static final int SIZE1 = 5;
-    private static final int SIZE2 = 5;
-
-
 
     public HeadQuarter(GameObjectID id, Team team) {
         super(id, team);
         isDestroyed = false;
         health = 10000;
         isAlive = 1;
+        Game.getObjects().put(id, this);
         nextTurn();
     }
 
@@ -62,5 +58,8 @@ public class HeadQuarter extends Building {
         });
     }
 
-
+    @Override
+    public String toString() {
+        return "I am HQ of Team " + team.getID() + " with health " + health;
+    }
 }

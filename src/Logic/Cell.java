@@ -94,4 +94,9 @@ public class Cell {
     public ArrayList<GameObject> getObjectsList() {
         return objects;
     }
+
+    @Override
+    public String toString() {
+        return "Col: " + col + " ,Row: " + row;
+    }
 }

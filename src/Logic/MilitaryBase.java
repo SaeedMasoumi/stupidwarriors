@@ -26,9 +26,6 @@ import java.util.TimerTask;
  * @author Saeed
  */
 public class MilitaryBase extends Building {
-    
-    private static final int SIZE1 = 5;
-    private static final int SIZE2 = 3;
 
     private Cell[] lane = new Cell[5];
     private int pathNumber;
@@ -41,9 +38,8 @@ public class MilitaryBase extends Building {
         this.orientation = orientation;
         this.leftUpCornerCell = leftUpCornerCell;
         setLocation();
+        Game.getObjects().put(id, this);
         nextStep();
-
-        System.out.println("ID: " + id.getNumber() + ", Orientation: " + orientation);
     }
 
     private void nextStep() {
@@ -79,8 +75,6 @@ public class MilitaryBase extends Building {
                         }
                     }
                     isDestroyed = true;
-                    Game.getMap().printMapLaneNumbers();
-                    System.out.println("////////////////////////////");
                 }
             }
         });

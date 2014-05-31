@@ -56,7 +56,6 @@ abstract public class Unit extends GameObject{
                         }
                     }
                 }
-
         return enemiesCell.toArray(new Cell[enemiesCell.size()]);
     }
 
