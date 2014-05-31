@@ -82,6 +82,8 @@ public class Attacker extends Unit {
                     }
                 }
 
+                else isAttacking = false;
+
                 if (Attacker.this.isDie() && isAlive == 1) {
                     unitDie();
                     isAlive = 0;

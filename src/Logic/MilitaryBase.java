@@ -51,16 +51,16 @@ public class MilitaryBase extends Building {
                     if (isDestroyed)
                         return;
 
-                    isAlive = 0;
                     if (orientation == GameState.ORIENTATION_HORIZONTAL)
                     {
                         for (int col = 0; col < 5; col++) {
                             for (int row = 0; row < 3; row++) {
+                                Game.getMap().getCell(leftUpCornerCell.getCol() + col, leftUpCornerCell.getRow() + row).removeObject(MilitaryBase.this);
+                                location[row][col].removeObject(MilitaryBase.this);
                                 Game.getMap().setCellsType(GameState.CELL_TYPE_LANE,
                                         leftUpCornerCell.getCol() + col, leftUpCornerCell.getRow() + row);
                                 location[row][col].setLaneNum(col);
                                 Game.getMap().getCell(leftUpCornerCell.getCol() + col, leftUpCornerCell.getRow() + row).setLaneNum(col);
-                                Game.getMap().getCell(leftUpCornerCell.getCol() + col, leftUpCornerCell.getRow() + row).removeObject(MilitaryBase.this);
                             }
                         }
                     }
@@ -68,15 +68,17 @@ public class MilitaryBase extends Building {
                     else {
                         for (int row = 0; row < 5; row++) {
                             for (int col = 0; col < 3; col++) {
+                                Game.getMap().getCell(leftUpCornerCell.getCol() + col, leftUpCornerCell.getRow() + row).removeObject(MilitaryBase.this);
+                                location[row][col].removeObject(MilitaryBase.this);
                                 Game.getMap().setCellsType(GameState.CELL_TYPE_LANE,
                                         leftUpCornerCell.getCol() + col, leftUpCornerCell.getRow() + row);
                                 location[row][col].setLaneNum(row);
                                 Game.getMap().getCell(leftUpCornerCell.getCol() + col, leftUpCornerCell.getRow() + row).setLaneNum(row);
-                                Game.getMap().getCell(leftUpCornerCell.getCol() + col, leftUpCornerCell.getRow() + row).removeObject(MilitaryBase.this);
-                                System.out.println("MB Destroyed");
                             }
                         }
                     }
+                    
+                    isAlive = 0;
                     isDestroyed = true;
                 }
             }

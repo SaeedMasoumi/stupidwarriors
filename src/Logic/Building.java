@@ -22,11 +22,11 @@ public class Building extends GameObject{
     }
     public void setLocation(Cell[][] cells) {
         this.location = cells;
-        for (int row = 0; row < cells.length; row++)
-            for (int col = 0; col < cells[0].length; col++)
-            {
-                cells[row][col].addObject(this);
-            }
+//        for (int row = 0; row < cells.length; row++)
+//            for (int col = 0; col < cells[0].length; col++)
+//            {
+//                cells[row][col].addObject(this);
+//            }
     }
 
     public Cell[][] getLocation() {
