@@ -207,7 +207,10 @@ public class Judge extends JudgeAbstract {
             else if (object instanceof Tower)
                 return ((Tower) object).getInfo();
 
-            else return ((Building) object).getInfo();
+            else {
+                System.out.println("HERE");
+                return ((Building) object).getInfo();
+            }
 
 
         } catch (GameObjectNotFoundException e){

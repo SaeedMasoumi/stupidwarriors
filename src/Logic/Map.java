@@ -168,7 +168,7 @@ public class Map {
         Game.getTeamMath().getHeadQuarter().setHQInCells();
     }
 
-    private boolean isOutOfMap(int col, int row) {
+    public boolean isOutOfMap(int col, int row) {
         return col < 0 || row < 0 || col >= columnsLength || row >= columnsLength;
     }
 

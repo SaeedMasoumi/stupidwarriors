@@ -74,22 +74,22 @@ public class Attacker extends Unit {
 
                 Cell targetCell = findTargets(findEnemies());
 
+                boolean haveAlive = false;
+
                 if (targetCell != null && !Attacker.this.isDie()) {
                     for (GameObject object: targetCell.getObjects()) {
-                        if (object.isAlive == 1)
-                            attack(object);
-                        else isAttacking = false;
+                        attack(object);
                     }
                 }
-
                 else isAttacking = false;
+
 
                 if (Attacker.this.isDie() && isAlive == 1) {
                     unitDie();
                     isAlive = 0;
                 }
 
-                if (counter >= 500) // 500 milli second
+                if (counter >= 500 && isAlive == 1) // 500 milli second
                 {
                     pathFinding();
                     counter = 0;

@@ -41,7 +41,7 @@ abstract public class Unit extends GameObject{
         ArrayList<Cell> enemiesCell = new ArrayList<Cell>();
         for(int col = this.currentCell.getCol() - this.range; col <= this.currentCell.getCol() + this.range; col++)
             for(int row = this.currentCell.getRow() - this.range; row <= this.currentCell.getRow() + this.range; row++)
-                if (!Game.getMap().isOutOfPath(col, row)) { // agar khareje map nabud
+                if (!Game.getMap().isOutOfMap(col, row)) { // agar khareje map nabud
                     for (GameObject object: Game.getMap().getCell(col, row).getObjects())
                     {
                         if (object != null && object.getTeamID() != this.getTeamID()) {
@@ -52,7 +52,7 @@ abstract public class Unit extends GameObject{
                                 enemiesCell.add(Game.getMap().getCell(col, row));
                             else if (object instanceof HeadQuarter) {
                                 enemiesCell.add(Game.getMap().getCell(col, row));
-                                System.out.println("We found HQ !! :D");
+//                                System.out.println("We found HQ !! :D");
                             }
                         }
                     }
@@ -67,7 +67,7 @@ abstract public class Unit extends GameObject{
     public void unitDie() {
         currentCell.removeObject(this);
 
-//        System.out.println(this.getClass() + " dies!");
+        System.out.println(this.getClass() + " dies!");
 //        Test.graphicsInterface.removeGameObject(this.getID());
 
         if (Game.getTeamByID(GameState.TEAM_MATH).reduceUnitsPriceUpgradeUsed

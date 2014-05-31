@@ -10,6 +10,7 @@ public class Building extends GameObject{
     protected Cell[][] location;
 
     protected Cell leftUpCornerCell;
+    protected HashMap<String, Integer> info = new HashMap<String, Integer>();
 
     protected boolean isDestroyed;
 
@@ -20,6 +21,16 @@ public class Building extends GameObject{
         team.addObject(this);
         Game.getObjects().put(id, this);
     }
+
+    protected void initInfo() {
+        info.put(GameState.HEALTH, health);
+        info.put(GameState.ROW, leftUpCornerCell.getRow());
+        info.put(GameState.COLOUMN, leftUpCornerCell.getCol());
+        info.put(GameState.TEAM_ID, team.getID());
+        info.put(GameState.IS_ALIVE, isAlive);
+        info.put(GameState.ORIENTATION, orientation);// TODO ...
+    }
+
     public void setLocation(Cell[][] cells) {
         this.location = cells;
 //        for (int row = 0; row < cells.length; row++)
@@ -34,14 +45,6 @@ public class Building extends GameObject{
     }
 
     public HashMap<String, Integer> getInfo() {
-        HashMap<String, Integer> info = new HashMap<String, Integer>();
-        info.put(GameState.HEALTH, health);
-        info.put(GameState.ROW, currentCell.getRow());
-        info.put(GameState.COLOUMN, currentCell.getCol());
-        info.put(GameState.TEAM_ID, team.getID());
-        info.put(GameState.IS_ALIVE, isAlive);
-        info.put(GameState.ORIENTATION, orientation);// TODO ...
-
         return info;
     }
 

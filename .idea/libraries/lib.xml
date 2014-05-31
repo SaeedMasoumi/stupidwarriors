@@ -2,9 +2,11 @@
   <library name="lib">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/junit-4.11.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/Graphics.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/Graphics Last.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/Downloads/Graphics Last.jar!/" />
+    </SOURCES>
   </library>
 </component>

@@ -46,6 +46,7 @@ public class MilitaryBase extends Building {
         Game.addTimerTask(new TimerTask() {
             @Override
             public void run() {
+
                 if (MilitaryBase.this.isDie() && isAlive == 1)
                 {
                     if (isDestroyed)
@@ -81,6 +82,7 @@ public class MilitaryBase extends Building {
                     isAlive = 0;
                     isDestroyed = true;
                 }
+                initInfo();
             }
         });
     }

@@ -33,7 +33,6 @@ public class HeadQuarter extends Building {
         health = 10000;
         isAlive = 1;
         Game.getObjects().put(id, this);
-        nextTurn();
     }
 
     public void setHQInCells() {
@@ -41,19 +40,34 @@ public class HeadQuarter extends Building {
             for (int row = 0; row < 5; row++) {
                 Game.getMap().getCell(col + leftUpCornerCell.getCol(), row + leftUpCornerCell.getRow()).addObject(this);
             }
+
+        nextTurn();
     }
 
     private void nextTurn() {
         Game.addTimerTask(new TimerTask() {
+            int counter = 0;
+
             @Override
             public void run() {
+                counter += 50;
                 if (HeadQuarter.this.isDie()) {
                     if (isDestroyed)
                         return;
 
                     isAlive = 0;
-                    // TODO something ....
+                    for (int col = 0; col < 5; col++)
+                        for (int row = 0; row < 5; row++) {
+                            Game.getMap().getCell(col + leftUpCornerCell.getCol(), row + leftUpCornerCell.getRow()).removeObject(HeadQuarter.this);
+                        }
                 }
+
+//                if (counter >= 10000) {
+//                    System.out.println(getInfo());
+//                    counter = 0;
+//                }
+
+                initInfo();
             }
         });
     }
