@@ -7,6 +7,7 @@ import java.util.TimerTask;
 import common.exceptions.NotEnoughMoneyException;
 import common.exceptions.PowerUpAlreadyUsedException;
 import mahyarise.common.GameObjectID;
+import mahyarise.judge.GameManager;
 
 
 public class Tower extends Unit {
@@ -26,7 +27,6 @@ public class Tower extends Unit {
         super(id, team);
         this.currentCell = cell;
         cell.addObject(this);
-        initInfo();
         AI();
     }
 
@@ -44,7 +44,7 @@ public class Tower extends Unit {
     }
 
     public void AI() {
-        Game.addTimerTask(new TimerTask() {
+        GameManager.getGame().addTimerTask(new TimerTask() {
             @Override
             public void run() {
                 Cell targetCell = findTargets(findEnemies());
@@ -57,7 +57,6 @@ public class Tower extends Unit {
 
                 if (Tower.this.isDie())
                     unitDie();
-                initInfo();
             }
         });
     }
@@ -81,8 +80,8 @@ public class Tower extends Unit {
 
 
     public void reloadTimeUpgrade() throws NotEnoughMoneyException {
-        if (Game.getTeamByID(team.getID()).getMoney() < price * 0.1)
-            throw new NotEnoughMoneyException(Game.getTeamByID(team.getID()).getMoney());
+        if (GameManager.getGame().getTeamByID(team.getID()).getMoney() < price * 0.1)
+            throw new NotEnoughMoneyException(GameManager.getGame().getTeamByID(team.getID()).getMoney());
 
         team.withdrawMoney((int)(price * 0.1));
         price += price * 0.1;
@@ -90,8 +89,8 @@ public class Tower extends Unit {
     }
 
     public void powerUpgrade() throws NotEnoughMoneyException {
-        if (Game.getTeamByID(team.getID()).getMoney() < price * 0.15)
-            throw new NotEnoughMoneyException(Game.getTeamByID(team.getID()).getMoney());
+        if (GameManager.getGame().getTeamByID(team.getID()).getMoney() < price * 0.15)
+            throw new NotEnoughMoneyException(GameManager.getGame().getTeamByID(team.getID()).getMoney());
 
         team.withdrawMoney((int)( price * 0.15));
         price += price * 0.15;
@@ -103,8 +102,8 @@ public class Tower extends Unit {
         if(rangeUpgradeCounter >= 3)
             throw new PowerUpAlreadyUsedException();
 
-        if (Game.getTeamByID(team.getID()).getMoney() < price * 0.15)
-            throw new NotEnoughMoneyException(Game.getTeamByID(team.getID()).getMoney());
+        if (GameManager.getGame().getTeamByID(team.getID()).getMoney() < price * 0.15)
+            throw new NotEnoughMoneyException(GameManager.getGame().getTeamByID(team.getID()).getMoney());
 
         team.withdrawMoney((int)(price * 0.2));
         rangeUpgradeCounter++;

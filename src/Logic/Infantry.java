@@ -3,6 +3,7 @@ package Logic;
 import common.exceptions.NotEnoughMoneyException;
 import mahyarise.common.GameObjectID;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /*

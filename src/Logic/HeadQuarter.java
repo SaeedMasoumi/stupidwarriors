@@ -1,6 +1,7 @@
 package Logic;
 
 import mahyarise.common.GameObjectID;
+import mahyarise.judge.GameManager;
 
 import java.util.TimerTask;
 
@@ -32,20 +33,20 @@ public class HeadQuarter extends Building {
         isDestroyed = false;
         health = 10000;
         isAlive = 1;
-        Game.getObjects().put(id, this);
+        GameManager.getGame().getObjects().put(id, this);
     }
 
     public void setHQInCells() {
         for (int col = 0; col < 5; col++)
             for (int row = 0; row < 5; row++) {
-                Game.getMap().getCell(col + leftUpCornerCell.getCol(), row + leftUpCornerCell.getRow()).addObject(this);
+                GameManager.getGame().getMap().getCell(col + leftUpCornerCell.getCol(), row + leftUpCornerCell.getRow()).addObject(this);
             }
 
         nextTurn();
     }
 
     private void nextTurn() {
-        Game.addTimerTask(new TimerTask() {
+        GameManager.getGame().addTimerTask(new TimerTask() {
             int counter = 0;
 
             @Override
@@ -58,7 +59,7 @@ public class HeadQuarter extends Building {
                     isAlive = 0;
                     for (int col = 0; col < 5; col++)
                         for (int row = 0; row < 5; row++) {
-                            Game.getMap().getCell(col + leftUpCornerCell.getCol(), row + leftUpCornerCell.getRow()).removeObject(HeadQuarter.this);
+                            GameManager.getGame().getMap().getCell(col + leftUpCornerCell.getCol(), row + leftUpCornerCell.getRow()).removeObject(HeadQuarter.this);
                         }
                 }
 
@@ -66,8 +67,6 @@ public class HeadQuarter extends Building {
 //                    System.out.println(getInfo());
 //                    counter = 0;
 //                }
-
-                initInfo();
             }
         });
     }

@@ -4,6 +4,7 @@ import common.exceptions.NotEnoughMoneyException;
 import common.exceptions.PowerUpAlreadyUsedException;
 import common.exceptions.UnauthorizedAccessException;
 import mahyarise.common.GameObjectID;
+import mahyarise.judge.GameManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -100,8 +101,9 @@ public class Team {
 
     // generate money
     public void generateMoney() {
-        Game.addTimerTask(new TimerTask() {
+        GameManager.getGame().addTimerTask(new TimerTask() {
             int counter = 0;
+
             @Override
             public void run() {
                 counter += 50;
@@ -123,12 +125,12 @@ public class Team {
 
     public void addObject(GameObject obj) {
         objects.put(obj.getID(), obj);
-        Game.getObjects().put(obj.getID(), obj);
+        GameManager.getGame().getObjects().put(obj.getID(), obj);
     }
 
     public void removeObject(GameObject obj) {
         objects.remove(obj.getID());
-        Game.getObjects().remove(obj.getID());
+        GameManager.getGame().getObjects().remove(obj.getID());
     }
 
     /* upgrade ha ro bayad rooye Team seda bezanim chon rooye hameye attacker haye ye team tasir dare */
@@ -178,8 +180,9 @@ public class Team {
         teamUpgradePurchaseList.add(GameState.PU_CE_HEALTH);
         this.withdrawMoney(5000);
 
-        Game.addTimerTask(new TimerTask() {
+        GameManager.getGame().addTimerTask(new TimerTask() {
             int counter = 0;
+
             @Override
             public void run() {
                 counter += 50;
@@ -230,7 +233,7 @@ public class Team {
         shieldUpgradeUsed = true;
         teamUpgradePurchaseList.add(GameState.PU_CE_ARMOR);
         this.withdrawMoney(4000);
-        for(GameObject object: Game.getObjects().values()) {
+        for(GameObject object: GameManager.getGame().getObjects().values()) {
             if (object.getTeamID() != this.id) // agar teameshun yeki nabashe pas doshman hastan
             {
                 if (object.isTower())
@@ -292,8 +295,9 @@ public class Team {
         teamUpgradePurchaseList.add(GameState.PU_MATH_ECO);
         this.withdrawMoney(5000);
 
-        Game.addTimerTask(new TimerTask() {
+        GameManager.getGame().addTimerTask(new TimerTask() {
             int counter = 0;
+
             @Override
             public void run() {
                 counter += 50;

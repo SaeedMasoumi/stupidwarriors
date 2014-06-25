@@ -17,7 +17,7 @@
  * MA 02110-1301  USA
  */
 
-import mahyarise.judge.Judge;
+import mahyarise.judge.GameManager;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -30,7 +30,7 @@ import static org.junit.Assert.*;
  * @author Bl
  */
 public class JudgeTest {
-    private Judge judgeTest ;
+    private GameManager judgeTest ;
     public JudgeTest() {
     judgeTest.setMapSize(200, 200);
         int[][] a = new int [200][200];

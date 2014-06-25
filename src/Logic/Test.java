@@ -1,7 +1,7 @@
 //package Logic;
 //
 //import mahyarise.TAgraphics.GraphicsInterface;
-//import mahyarise.judge.Judge;
+//import mahyarise.judge.GameManager;
 //
 //import java.awt.*;
 //import java.util.TimerTask;
@@ -13,8 +13,9 @@
 //// just for test
 //public class Test {
 //
-//    static Judge judge = new Judge();
-//    public static GraphicsInterface graphicsInterface = new GraphicsInterface(judge);
+////    GameManager gameManager = new GameManager();
+////
+////    public static GraphicsInterface graphicsInterface = new GraphicsInterface();
 //
 //    public static void main(String[] args) {
 //
@@ -104,8 +105,8 @@
 //                {13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13}};
 //
 //
-//        judge.setMapSize(map1[0].length, map1.length);
-//        judge.loadMap(map1);
+//        GameManager.setMapSize(map1[0].length, map1.length);
+//        GameManager.loadMap(map1);
 //
 ////        for (int i = 0; i < Game.getTeamCE().getHeadQuarter().getLocation().length; i++)
 ////            for (int j = 0; j < Game.getTeamCE().getHeadQuarter().getLocation()[0].length; j++) {
@@ -113,14 +114,14 @@
 ////            }
 //
 //        for (int i = 0; i < 3; i++) {
-//            graphicsInterface.addMarker(Game.getTeamCE().getMilitaryBases().get(i).getLeftUpCornerCell().getRow(),
-//                    Game.getTeamCE().getMilitaryBases().get(i).getLeftUpCornerCell().getCol(), Color.BLUE);
-//            graphicsInterface.addMarker(Game.getTeamMath().getMilitaryBases().get(i).getLeftUpCornerCell().getRow(),
-//                    Game.getTeamMath().getMilitaryBases().get(i).getLeftUpCornerCell().getCol(), Color.GREEN);
+//            graphicsInterface.addMarker(GameManager.getGame().getTeamCE().getMilitaryBases().get(i).getLeftUpCornerCell().getRow(),
+//                    GameManager.getGame().getTeamCE().getMilitaryBases().get(i).getLeftUpCornerCell().getCol(), Color.BLUE);
+//            graphicsInterface.addMarker(GameManager.getGame().getTeamMath().getMilitaryBases().get(i).getLeftUpCornerCell().getRow(),
+//                    GameManager.getGame().getTeamMath().getMilitaryBases().get(i).getLeftUpCornerCell().getCol(), Color.GREEN);
 //        }
 //
 //        graphicsInterface.start();
-//        Game.getTimer().schedule(new TimerTask() {
+//        GameManager.getGame().getTimer().schedule(new TimerTask() {
 //            @Override
 //            public void run() {
 //                graphicsInterface.refresh();

@@ -3,6 +3,8 @@ package Logic;
 import common.exceptions.NotEnoughMoneyException;
 import mahyarise.common.GameObjectID;
 
+import java.io.Serializable;
+
 /*
  * Copyright (C) 2014 Saeed Masoumi & Saeed Rajabzade.
  *
@@ -26,7 +28,7 @@ import mahyarise.common.GameObjectID;
  *
  * @author Saeed Masoumi
  */
-public class Tank extends Attacker {
+public class Tank extends Attacker{
    private GameObject myEnemy;
 
     // Same for all objects -> must be static

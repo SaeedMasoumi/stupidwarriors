@@ -1,6 +1,7 @@
 package Logic;
 
 import mahyarise.common.GameObjectID;
+import mahyarise.judge.GameManager;
 
 import java.util.HashMap;
 
@@ -19,7 +20,7 @@ public class Building extends GameObject{
         this.team = team;
         isAlive = 1;
         team.addObject(this);
-        Game.getObjects().put(id, this);
+        GameManager.getGame().getObjects().put(id, this);
     }
 
     protected void initInfo() {
