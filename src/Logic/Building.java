@@ -23,6 +23,7 @@ public class Building extends GameObject{
         GameManager.getGame().getObjects().put(id, this);
     }
 
+    // See Also -> Attacker.
     protected void initInfo() {
         info.put(GameState.HEALTH, health);
         info.put(GameState.ROW, leftUpCornerCell.getRow());

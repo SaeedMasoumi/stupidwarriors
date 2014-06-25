@@ -33,18 +33,19 @@ import mahyarise.judge.GameManager;
  * @author Saeed Saeed
  */
 public class Attacker extends Unit {
+
     // Variables for Map information
-    protected Cell nextCell;
+    protected Cell nextCell; // cell e baadi ke bayad bere
 
     protected static int pwrUpgradeCounter = 0;
     protected static int healthUpgradeCounter = 0;
 
     protected int attackPower;
-    protected HashMap<String, Integer> info = new HashMap<String, Integer>();
+    protected HashMap<String, Integer> info = new HashMap<String, Integer>(); // in baraye judge bood, felan hazfesh nakon baadan ke refactor kardam shayad niaz shod
 
-    protected ArrayList<Cell> hasSeen = new ArrayList<Cell>();
+    protected ArrayList<Cell> hasSeen = new ArrayList<Cell>(); // cell haei ke dide, baraye ine ke bar nagarde be aghab.
 
-    private int counterForAttack = 0;
+    private int counterForAttack = 0; // harvaght >= reloadTime shod, Attacker hamle mikone
 
     public Attacker(Cell cell, GameObjectID id, Team team) throws NotEnoughMoneyException{
         super(id, team);
@@ -53,6 +54,10 @@ public class Attacker extends Unit {
         AI();
     }
 
+    /**
+     * baraye judge bood
+     * felan pakesh nakon. tabe e khubie, hameye etela'ati ke niaz darim ro tooye ye hashmap mirize.
+     */
     private void initInfo() {
         info.put(GameState.HEALTH, health);
         info.put(GameState.ROW, currentCell.getRow());
@@ -65,6 +70,10 @@ public class Attacker extends Unit {
         info.put(GameState.RANGE, range);
     }
 
+    /**
+     * baraye harekat kardan, peyda kardan e doshman ha
+     * va hamle kardan beheshun.
+     */
     public void AI() {
         GameManager.getGame().addTimerTask(new TimerTask() {
             int counter = 0;
@@ -74,8 +83,6 @@ public class Attacker extends Unit {
                 counter += 50;
 
                 Cell targetCell = findTargets(findEnemies());
-
-                boolean haveAlive = false;
 
                 if (targetCell != null && !Attacker.this.isDie()) {
                     for (GameObject object : targetCell.getObjects()) {
@@ -99,6 +106,10 @@ public class Attacker extends Unit {
 
     }
 
+    /**
+     * ye object migire, behesh damage mizane.
+     * @param object
+     */
     public void attack(GameObject object) {
         isAttacking = true;
 
@@ -111,6 +122,11 @@ public class Attacker extends Unit {
     }
 
 
+    /**
+     * olaviat ro check mikone. un cell i ro bar migardune ke toosh doshmane ba olaviate bishtat hast.
+     * @param enemiesCell
+     * @return un cell i ro bar migardune ke toosh doshmane ba olaviate bishtar hast
+     */
     @Override
     public Cell findTargets(Cell[] enemiesCell) {
         if (enemiesCell.length == 0) // yani asan kasi tooye bordesh nist
@@ -177,6 +193,9 @@ public class Attacker extends Unit {
         return null;
     }
 
+    /**
+     * masir ro peyda mikone
+     */
     public void pathFinding() {
         if (isAttacking) // agar hamle nemikard
             return;
@@ -200,8 +219,7 @@ public class Attacker extends Unit {
 
     }
 
-    ///////////////// Upgrades /////////////////
-
+    ///////////////// Upgrades ////////////////
     public static void pwrUpgrade(int teamID) {
         Infantry.pwrUpgrade(teamID);
         Tank.pwrUpgrade(teamID);
@@ -216,9 +234,6 @@ public class Attacker extends Unit {
         Infantry.healthUpgrade(teamID);
         Tank.healthUpgrade(teamID);
     }
-
-
-
 
 
     public HashMap<String, Integer> getInfo() {

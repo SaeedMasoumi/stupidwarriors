@@ -341,6 +341,7 @@ public class Team {
         this.withdrawMoney(4000);
     }
 
+    // shayad baadan be in ehtiaj dashte bashi.
     public void updateInfo() {
         for(GameObject object: objects.values())
         {

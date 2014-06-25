@@ -4,18 +4,13 @@ import mahyarise.common.GameObjectID;
 
 public class GameObject {
     protected int health;
-    protected static double MAX_HEALTH; // baraye upgrade ha lazeme
     protected GameObjectID id; // each GameObject has it's own id
     protected Team team;
 
     protected Cell currentCell;
-    protected int isAlive;
-    // ham nadare :D
+    protected int isAlive; // 0 -> Die, 1 -> Alive
 
-    protected int price; // arzeshe har unit arzesh be base ha ham taalogh
-    // migire pas nabayad to unit bashe
-    protected int xSize;// FOR PHASE 1 andaze toole objecta
-    protected int ySize; // andaze arze objecta
+    protected int price; // arzeshe har unit va arzeshe base
 
     public GameObjectID getID() {
         return id;
@@ -30,6 +25,7 @@ public class GameObject {
     }
 
     // For cheat ...
+    // TODO for Rajab: Console ro khodam misazam.
     public void setHealth(int health) {
         this.health = health;
     }
@@ -42,6 +38,8 @@ public class GameObject {
         return currentCell;
     }
 
+
+    //TODO instanceof Unit be jaye in ... baraye baghie ham hamintor
     public boolean isUnit() {
         return this.getClass().toString().matches(".*\\bTank.*\\b")
                 || this.getClass().toString().matches(".*\\bAttacker.*\\b")
@@ -66,14 +64,6 @@ public class GameObject {
 
     public boolean isTower() {
         return this.getClass().toString().matches(".*\\bTower.*\\b");
-
-    }
-
-    public boolean isBuilding() {
-        return this.getClass().toString().matches(".*\\bBuilding.*\\b")
-                || this.getClass().toString().matches(".*\\bmilitaryBase.*\\b")
-                || this.getClass().toString()
-                .matches(".*\\bheadQuarterBase.*\\b");
 
     }
 
