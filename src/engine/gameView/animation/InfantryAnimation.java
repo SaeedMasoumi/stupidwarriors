@@ -45,17 +45,17 @@ public class InfantryAnimation extends ImageView{
     private final ImageView current ;
     private Timeline anim ;
     //
-    public static final String MOVE_RIGHT = Asset.class.getResource("img/attacker/gav.png").toString();
-    public static final String MOVE_LEFT = Asset.class.getResource("img/attacker/gav8.png").toString();
+    public static final String MOVE_RIGHT = Asset.class.getResource("img/attacker/move_right.png").toString();
+    public static final String MOVE_LEFT = Asset.class.getResource("img/attacker/move_left.png").toString();
 
-    public static final String MOVE_UP = Asset.class.getResource("img/attacker/gav.png").toString();
-    public static final String MOVE_DOWN = Asset.class.getResource("img/attacker/gav8.png").toString();
+    public static final String MOVE_UP = Asset.class.getResource("img/attacker/move_up.png").toString();
+    public static final String MOVE_DOWN = Asset.class.getResource("img/attacker/move_down.png").toString();
 
-    public static final String ATTACK_UP = Asset.class.getResource("img/attacker/gav.png").toString();
-    public static final String ATTACK_DOWN = Asset.class.getResource("img/attacker/gav8.png").toString();
+    public static final String ATTACK_UP = Asset.class.getResource("img/attacker/attack_up.png").toString();
+    public static final String ATTACK_DOWN = Asset.class.getResource("img/attacker/attack_down.png").toString();
 
-    public static final String ATTACK_RIGHT = Asset.class.getResource("img/tower/scout.png").toString();
-    public static final String ATTACK_LEFT = Asset.class.getResource("img/attacker/gav8.png").toString();
+    public static final String ATTACK_RIGHT = Asset.class.getResource("img/attacker/attack_right.png").toString();
+    public static final String ATTACK_LEFT = Asset.class.getResource("img/attacker/attack_left.png").toString();
 
     @SuppressWarnings("LeakingThisInConstructor")
     public InfantryAnimation(Image img,StackPane stack,int numCells,double x , double y){

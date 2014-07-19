@@ -22,6 +22,7 @@ import engine.gameScene.url.Url;
 import engine.gameView.animation.Expload;
 import engine.gameView.animation.InfantryAnimation;
 import engine.gameView.mapGenerator.MapCell;
+import java.io.File;
 import java.io.IOException;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -76,6 +77,11 @@ public class Game {
                 .cycleCount(Animation.INDEFINITE)
                 .keyFrames(oneFrame)
                 .build()
-                .play();    }
+                .play();    
+    
+       
+  
+    }
+    
     
 }

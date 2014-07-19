@@ -146,7 +146,7 @@ public class MapGenerator {
         }
     }
     public static void createMapTree(StackPane gameStack){
-        ImageView t1 = new ImageView(Url.TREES);
+        ImageView t1 = new ImageView(Url.TREE1);
         
         t1.setTranslateX(MapCell.posX(5));
         t1.setTranslateY(MapCell.posY(40-6));

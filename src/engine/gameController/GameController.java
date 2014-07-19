@@ -67,6 +67,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.LineBuilder;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -77,7 +78,10 @@ import javax.imageio.ImageIO;
  * @author Saeed Masoumi
  */
 public class GameController implements Initializable{
+    //debug
     public static boolean DEBUG_MODE = false;
+    @FXML Rectangle DEBUG_REC;
+    @FXML Label DEBUG_LB1,DEBUG_LB2,DEBUG_LB3,DEBUG_LB4;
     private Stage stage;
     //hero
     private ImageView hero;
@@ -208,17 +212,39 @@ public class GameController implements Initializable{
             stage.close();
             System.exit(0);
         });
+        debug.setImage(new Image(Url.DEBUG));
+
         debug.setOnMouseClicked((Event t)->{
             if(!DEBUG_MODE){
                 DEBUG_MODE = true;
-                showCells(40);
+          //      showCells(50);
+                DEBUG_REC.setVisible(DEBUG_MODE);
+                DEBUG_LB1.setVisible(DEBUG_MODE);
+                DEBUG_LB2.setVisible(DEBUG_MODE);
+                DEBUG_LB3.setVisible(DEBUG_MODE);
+                DEBUG_LB4.setVisible(DEBUG_MODE);
+                
+                DEBUG_LB1.setText("Available processors (cores): " + 
+        Runtime.getRuntime().availableProcessors());
+                DEBUG_LB2.setText("Free memory (bytes): " + 
+        Runtime.getRuntime().freeMemory());
+                    long maxMemory = Runtime.getRuntime().maxMemory();
+
+                DEBUG_LB3.setText("Maximum memory (bytes): " + 
+        (maxMemory == Long.MAX_VALUE ? "no limit" : maxMemory));
+                DEBUG_LB4.setText("Total memory available to JVM (bytes): " + 
+        Runtime.getRuntime().totalMemory());
              }
             else {
                 DEBUG_MODE= false;
+                DEBUG_REC.setVisible(DEBUG_MODE);
+                DEBUG_LB1.setVisible(DEBUG_MODE);
+                DEBUG_LB2.setVisible(DEBUG_MODE);
+                DEBUG_LB3.setVisible(DEBUG_MODE);
+                DEBUG_LB4.setVisible(DEBUG_MODE);
              }
         });
-        
-        capture.setOnMouseClicked((Event t)->{
+       capture.setOnMouseClicked((Event t)->{
             capture();
             GameAnimation.fadeText("Captured", mainStack, 0,0,Color.BLUE);
 
@@ -252,7 +278,7 @@ public class GameController implements Initializable{
         
         setGold(1000000);
         
-    //          showCells(50);
+         //     showCells(50);
         gameStack.setOnMouseClicked((MouseEvent t )->{
             
             System.out.println(t.getX()+"L"+t.getY());

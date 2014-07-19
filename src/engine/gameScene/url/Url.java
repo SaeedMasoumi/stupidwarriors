@@ -26,8 +26,7 @@ public class Url {
      */
     public static final String TREE1 = Asset.class.getResource("img/map/tree1.png").toString();
     public static final String TREE2 = Asset.class.getResource("img/map/tree2.png").toString();
-    public static final String TREES = Asset.class.getResource("img/test/head.png").toString();
-    
+     
     /*
     Flags
     */
@@ -92,5 +91,6 @@ public class Url {
         Cursor
     */
     public static final String CURSOR = Asset.class.getResource("img/cursor.png").toString();
+    public static final String DEBUG = Asset.class.getResource("img/debug-ic.png").toString();
     
 }
