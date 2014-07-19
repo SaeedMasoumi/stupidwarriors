@@ -18,7 +18,7 @@
 package engine.gameController;
 
 import engine.asset.Asset;
-import engine.gameScene.Game;
+import engine.gameScene.GameScene;
 import engine.gameScene.url.Url;
 import engine.gameView.Prefs;
 import java.io.IOException;
@@ -151,7 +151,7 @@ public class StartUpController implements Initializable{
         });
         btn.setStyle("-fx-base: blue;");
         btn.setOnMouseClicked(new EventHandler() {
-            Game game = new Game();
+            GameScene game = new GameScene();
             @Override
             public void handle(Event t) {
                 try {

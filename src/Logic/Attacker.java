@@ -51,6 +51,7 @@ public class Attacker extends Unit {
         super(id, team);
         this.currentCell = cell;
         cell.addObject(this);
+        nextCell = pathFinding();
         AI();
     }
 
@@ -98,7 +99,13 @@ public class Attacker extends Unit {
 
                 if (counter >= 500 && isAlive == 1) // 500 milli second
                 {
-                    pathFinding();
+                    currentCell.removeObject(Attacker.this);
+                    nextCell.addObject(Attacker.this);
+
+                    currentCell = nextCell;
+                    
+                    nextCell = pathFinding();
+
                     counter = 0;
                 }
             }
@@ -196,9 +203,9 @@ public class Attacker extends Unit {
     /**
      * masir ro peyda mikone
      */
-    public void pathFinding() {
+    public Cell pathFinding() {
         if (isAttacking) // agar hamle nemikard
-            return;
+            return Attacker.this.currentCell;
         hasSeen.add(currentCell);
         for (int i = -1; i <= 1; i += 2) {
             if (!GameManager.getGame().getMap().isOutOfPath(currentCell.getCol(), currentCell.getRow() + i) // khareje masir nabashe ...
@@ -211,12 +218,10 @@ public class Attacker extends Unit {
                 nextCell = GameManager.getGame().getMap().getCell(currentCell.getCol() + i, currentCell.getRow());
             }
         }
-        currentCell.removeObject(Attacker.this);
-        nextCell.addObject(Attacker.this);
-        currentCell = nextCell;
         info.put(GameState.ROW, currentCell.getRow());
         info.put(GameState.COLOUMN, currentCell.getCol());
 
+        return nextCell;
     }
 
     ///////////////// Upgrades ////////////////

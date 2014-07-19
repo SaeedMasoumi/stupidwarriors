@@ -100,13 +100,13 @@ public class SceneBuilder {
     public static void createTableBoardLeftSoldier(ImageView infantrySoldier, ImageView tankSoldier, StackPane mainStack) {
         StackPane.setAlignment(infantrySoldier, Pos.BOTTOM_LEFT);
         StackPane.setAlignment(tankSoldier, Pos.BOTTOM_LEFT);
-         double x = 20;
-        double y = -78;
+         double x = 40;
+        double y = -50;
         double imgX = infantrySoldier.getImage().getWidth();
         infantrySoldier.setTranslateX(x);
         infantrySoldier.setTranslateY(y);
         
-        tankSoldier.setTranslateX(x+imgX+10);
+        tankSoldier.setTranslateX(x+imgX+30);
         tankSoldier.setTranslateY(y);
         mainStack.getChildren().addAll(infantrySoldier,tankSoldier);
     

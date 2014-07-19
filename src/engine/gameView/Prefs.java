@@ -105,7 +105,9 @@ public class Prefs {
         MY_FLAG_IMG = new ImageView(MY_FLAG);
         MY_HERO_IMG = new ImageView(MY_HERO);
         MY_HERO_IMG_ICON = new ImageView(MY_HERO_ICON);
-        
+        //@2in1 //means 2 player in one pc
+        Prefs.CURRENT_TEAM = Prefs.MY_TEAM_NAME;
+
  
     }
     public static void setEnemyTeamPrefs(String hero,String pos,String name){

@@ -101,7 +101,7 @@
                   <Insets bottom="-5.0" />
                </StackPane.margin>
             </ImageView>
-            <ImageView fx:id="tableRight" fitHeight="200.0" fitWidth="300.0" visible="false" StackPane.alignment="BOTTOM_RIGHT">
+            <ImageView fx:id="tableRight" fitHeight="200.0" fitWidth="300.0" StackPane.alignment="BOTTOM_RIGHT">
                <image>
                   <Image url="@../img/hud/board.png" />
                </image>

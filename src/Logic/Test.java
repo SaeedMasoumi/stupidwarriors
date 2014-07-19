@@ -1,10 +1,11 @@
 //package Logic;
 //
-//import mahyarise.TAgraphics.GraphicsInterface;
-//import mahyarise.judge.GameManager;
+//import static engine.gameScene.Game.graphicsInterface;
 //
 //import java.awt.*;
 //import java.util.TimerTask;
+//import mahyarise.TAgraphics.GraphicsInterface;
+//import mahyarise.judge.GameManager;
 //
 ///**
 //* Created by Saeed on 5/21/2014.
@@ -116,7 +117,7 @@
 //        for (int i = 0; i < 3; i++) {
 //            graphicsInterface.addMarker(GameManager.getGame().getTeamCE().getMilitaryBases().get(i).getLeftUpCornerCell().getRow(),
 //                    GameManager.getGame().getTeamCE().getMilitaryBases().get(i).getLeftUpCornerCell().getCol(), Color.BLUE);
-//            graphicsInterface.addMarker(GameManager.getGame().getTeamMath().getMilitaryBases().get(i).getLeftUpCornerCell().getRow(),
+//            graphicsInterface.addMarkaer(GameManager.getGame().getTeamMath().getMilitaryBases().get(i).getLeftUpCornerCell().getRow(),
 //                    GameManager.getGame().getTeamMath().getMilitaryBases().get(i).getLeftUpCornerCell().getCol(), Color.GREEN);
 //        }
 //

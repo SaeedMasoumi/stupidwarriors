@@ -110,7 +110,7 @@ public class GameController implements Initializable{
     @FXML Label teamName;
     
     public void setMyToolbar(){
-        flagIcon.setImage(new Image(Prefs.MY_FLAG));
+         flagIcon.setImage(new Image(Prefs.MY_FLAG));
         heroIcon.setImage(new Image(Prefs.MY_HERO_ICON));
         teamName.setText(Prefs.MY_TEAM_NAME);
     }
@@ -193,7 +193,9 @@ public class GameController implements Initializable{
 
         //map creator
         MapGenerator.createMapGrass(gameStack);
-        MapGenerator.createMapTree(gameStack);
+     //   MapGenerator.createMapTree(gameStack);
+        MapGenerator.createMapLake1(gameStack);
+        MapGenerator.createMapLake2(gameStack);
         MapGenerator.createMapPath(gameStack);
         
         //set my and enemy building
@@ -203,8 +205,6 @@ public class GameController implements Initializable{
         MapGenerator.setEnemyMilitaryBases(gameStack);
         // set starter of the game
         setMyToolbar();
-        //@2in1 //means 2 player in one pc
-        Prefs.CURRENT_TEAM = Prefs.MY_TEAM_NAME;
         /*
         buttons Listeners
         */
@@ -217,7 +217,7 @@ public class GameController implements Initializable{
         debug.setOnMouseClicked((Event t)->{
             if(!DEBUG_MODE){
                 DEBUG_MODE = true;
-          //      showCells(50);
+             //   showCells(50);
                 DEBUG_REC.setVisible(DEBUG_MODE);
                 DEBUG_LB1.setVisible(DEBUG_MODE);
                 DEBUG_LB2.setVisible(DEBUG_MODE);
@@ -384,6 +384,7 @@ public class GameController implements Initializable{
     }
     /**
      * Bottom Controller for mainStack
+     * It check left and right tables
      */
     public void checkBottomBoards(){
         checkTableRight();
@@ -391,6 +392,7 @@ public class GameController implements Initializable{
     }
     /**
      * check right side table
+     * setting glow for them
      */
     private void checkTableRight(){
         
@@ -419,7 +421,8 @@ public class GameController implements Initializable{
         
     }
     /**
-     * check left side table
+     * check left side table 
+     * setting glow for them(if mouse moved on each item)
      */
     private void checkTableLeft(){
         
@@ -461,6 +464,9 @@ public class GameController implements Initializable{
         }
         
     }
+    /**
+     *  if user clicked on a tower
+    */
     public void setTowerShopVisible(){
         towerAutoRepair.setVisible(true);
         towerPowerUpgrade.setVisible(true);
@@ -470,7 +476,10 @@ public class GameController implements Initializable{
         infantrySoldier.setVisible(false);
         tankSoldier.setVisible(false);
     }
-    
+    /**
+     * if user clicked on a military base 
+     * then it will show MilitaryBase property
+     */
     public void setMilitaryShopVisible(){
         towerAutoRepair.setVisible(false);
         towerPowerUpgrade.setVisible(false);
@@ -485,14 +494,23 @@ public class GameController implements Initializable{
     
     private void buySoldier() {
     }
-    
+    /**
+     * 
+     * @return stack of the game
+     */
     public StackPane getGameStack(){
         return gameStack;
     }
+    /**
+     * optimize game stack
+     */
     private void saeedOptimizer() {
         gameStack.setCache(true);
         gameStack.setCacheHint(CacheHint.SPEED);
     }
+    /**
+     * capture gameStack and save it in the root of application
+     */
     private void capture(){
         WritableImage image = gameStack.snapshot(new SnapshotParameters(), null);        
         File file = new File("sample.png");
@@ -501,6 +519,71 @@ public class GameController implements Initializable{
         } catch (IOException ex) {
             Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    /**
+     * if user clicked on his MB then change the team to My_Team
+     */
+    public void checkMyMilitaryBase() {
+          Prefs.MY_MB1_IMG.setOnMouseClicked((Event t)->{
+            Prefs.CURRENT_TEAM = Prefs.MY_TEAM_NAME;
+             setMilitaryShopVisible();
+             setMyToolbar();
+             
+         });
+        Prefs.MY_MB2_IMG.setOnMouseClicked((Event t)->{
+             Prefs.CURRENT_TEAM = Prefs.MY_TEAM_NAME;
+              setMilitaryShopVisible();
+             setMyToolbar();
+        });
+        Prefs.MY_MB3_IMG.setOnMouseClicked((Event t)->{
+            Prefs.CURRENT_TEAM = Prefs.MY_TEAM_NAME;
+            setMilitaryShopVisible();
+            setMyToolbar();
+            });
+    }
+    /**
+     * if user clicked on enemy MBs then change the team to Enemy_Team
+     * Note:only for 2in1 mode
+     */
+    public void checkEnemyMilitaryBase() {
+        Prefs.ENEMY_MB1_IMG.setOnMouseClicked((Event t)->{
+            Prefs.CURRENT_TEAM = Prefs.ENEMY_TEAM_NAME;
+            setMilitaryShopVisible();
+            setEnemyToolbar();
+        });
+        Prefs.ENEMY_MB2_IMG.setOnMouseClicked((Event t)->{
+           Prefs.CURRENT_TEAM = Prefs.ENEMY_TEAM_NAME; 
+            setMilitaryShopVisible();
+            setEnemyToolbar();
+        });
+        Prefs.ENEMY_MB3_IMG.setOnMouseClicked((Event t)->{
+            Prefs.CURRENT_TEAM = Prefs.ENEMY_TEAM_NAME;
+            setMilitaryShopVisible();
+            setEnemyToolbar();
+        });
+        
+     }
+    /**
+     * if user clicked on his HQ then change the team to My_team
+     */
+    public void checkHQBase() {
+        Prefs.MY_HQ_IMG.setOnMouseClicked((Event t)->{
+            Prefs.CURRENT_TEAM = Prefs.MY_TEAM_NAME;
+            setMyToolbar();
+            
+        });
+        
+     }
+
+    /**
+     * if user clicked on enemy HQ then change the team to ENEmy_team
+     */
+    public void checkEnemyHQBase() {
+        Prefs.ENEMY_HQ_IMG.setOnMouseClicked((Event t)->{
+            Prefs.CURRENT_TEAM = Prefs.ENEMY_TEAM_NAME;
+            setEnemyToolbar();
+            
+        });
     }
     
 }

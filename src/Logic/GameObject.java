@@ -3,7 +3,7 @@ package Logic;
 import javafx.scene.image.ImageView;
 import mahyarise.common.GameObjectID;
 
-public class GameObject extends ImageView{
+public class GameObject {
     protected int health;
     protected GameObjectID id; // each GameObject has it's own id
     protected Team team;

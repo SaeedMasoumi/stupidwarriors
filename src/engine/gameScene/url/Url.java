@@ -20,6 +20,8 @@ public class Url {
      */
     public static final String GRASS = Asset.class.getResource("img/map/grass.png").toString();
     public static final String PATH = Asset.class.getResource("img/map/path.png").toString();
+    public static final String LAKE1 = Asset.class.getResource("img/map/waterab_over.png").toString();
+    public static final String LAKE2 = Asset.class.getResource("img/map/waterb_over.png").toString();
     
     /**
      * Trees
@@ -48,7 +50,7 @@ public class Url {
     /*
      Atackers 
      */
-    public static final String INFANTRY = Asset.class.getResource("img/attacker/infantary.png").toString();
+    public static final String INFANTRY = Asset.class.getResource("img/attacker/kinglong.png").toString();
     public static final String TANK = Asset.class.getResource("img/attacker/tank.png").toString();
     
     /**

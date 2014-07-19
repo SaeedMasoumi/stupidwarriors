@@ -124,6 +124,11 @@ public class MapGenerator {
     */
     public static int[]HQTR ={34,5};
     public static int[]HQBL ={5,34};
+    /*
+    Waterab
+    */
+    public static int [][]LAKE1 = {{9,8},{27,29}};
+    public static int [][]LAKE2 = {{30,26}};
     
     /**
      * add grass to the ground of map
@@ -155,6 +160,27 @@ public class MapGenerator {
         
         
         
+    }
+    public static void createMapLake1(StackPane gameStack){
+        Image lake = new Image(Url.LAKE1);
+        for(int i = 0 ;i <LAKE1.length;i++){
+            ImageView l = new ImageView(lake);
+            gameStack.getChildren().add(l);
+            l.setTranslateX(MapCell.posX(LAKE1[i][0]));
+            l.setTranslateY(MapCell.posY(LAKE1[i][1]));
+            optimizeNode(l);
+        }
+    }
+    
+    public static void createMapLake2(StackPane gameStack){
+          Image lake = new Image(Url.LAKE2);
+        for(int i = 0 ;i <LAKE2.length;i++){
+            ImageView l = new ImageView(lake);
+            gameStack.getChildren().add(l);
+            l.setTranslateX(MapCell.posX(LAKE2[i][0]));
+            l.setTranslateY(MapCell.posY(LAKE2[i][1]));
+            optimizeNode(l);
+        }
     }
     public static void createMapPath(StackPane gameStack){
         Image path = new Image(Url.PATH);
