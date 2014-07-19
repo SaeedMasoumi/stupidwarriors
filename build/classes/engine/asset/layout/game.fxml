@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane id="background" fx:id="mainPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <ToolBar fx:id="toolBar">
+            <items>
+                <Region styleClass="spacer" />
+                <HBox styleClass="segmented-button-bar">
+                   <children>
+                       <Button fx:id="pause" styleClass="first" text="Pause" />
+                       <Button fx:id="save" text="Save" />
+                       <Button fx:id="load" text="Load" />
+                       <Button fx:id="exit" styleClass="last" text="Exit" />
+                  <ImageView fx:id="flagIcon" fitHeight="26.0" fitWidth="33.0">
+                     <image>
+                        <Image url="@../img/flags/1.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="150.0" top="5.0" />
+                     </HBox.margin>
+                     <effect>
+                        <DropShadow color="WHITE" />
+                     </effect>
+                  </ImageView>
+                  <Label fx:id="teamName" text="Team 1" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ImageView fx:id="goldIcon" fitHeight="24.0" fitWidth="24.0">
+                     <image>
+                        <Image url="@../img/hud/gold.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="120.0" top="5.0" />
+                     </HBox.margin>
+                     <effect>
+                        <DropShadow color="#fff20a" />
+                     </effect>
+                  </ImageView>
+                  <Text fx:id="tGold" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                     <HBox.margin>
+                        <Insets left="5.0" top="7.5" />
+                     </HBox.margin>
+                  </Text>
+                  <ImageView fx:id="heroIcon" fitHeight="29.0" fitWidth="43.0">
+                     <image>
+                        <Image url="@../img/heros/h4_i.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="125.0" />
+                     </HBox.margin>
+                     <effect>
+                        <DropShadow color="WHITE" />
+                     </effect>
+                  </ImageView>
+                  <ImageView fx:id="capture">
+                     <image>
+                        <Image url="@../img/capture.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="100.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fx:id="debug">
+                     <image>
+                        <Image url="@../img/debug.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin>
+                  </ImageView>
+                   </children>
+                </HBox>
+            </items>
+        </ToolBar>
+    </top>
+   <center>
+      <StackPane fx:id="mainStack" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ScrollPane fx:id="scrollPane" pannable="true" prefHeight="200.0" prefWidth="200.0" StackPane.alignment="CENTER">
+               <content>
+                  <StackPane fx:id="gameStack" prefHeight="150.0" prefWidth="200.0" />
+               </content>
+            </ScrollPane>
+            <ImageView fx:id="tableLeft" fitHeight="200.0" fitWidth="300.0" StackPane.alignment="BOTTOM_LEFT">
+               <image>
+                  <Image url="@../img/hud/board.png" />
+               </image>
+               <StackPane.margin>
+                  <Insets bottom="-5.0" />
+               </StackPane.margin>
+            </ImageView>
+            <ImageView fx:id="tableRight" fitHeight="200.0" fitWidth="300.0" StackPane.alignment="BOTTOM_RIGHT">
+               <image>
+                  <Image url="@../img/hud/board.png" />
+               </image>
+               <StackPane.margin>
+                  <Insets bottom="-5.0" />
+               </StackPane.margin>
+            </ImageView>
+            <TextField id="terminal" fx:id="terminal" opacity="0.7" StackPane.alignment="BOTTOM_CENTER">
+               <StackPane.margin>
+                  <Insets />
+               </StackPane.margin>
+            </TextField>
+         </children>
+      </StackPane>
+   </center>
+</BorderPane>

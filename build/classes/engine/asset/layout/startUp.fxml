@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:id="stack" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fx:id="backgroundImage" fitHeight="760.0" fitWidth="1366.0">
+         <image>
+            <Image url="@../img/bg.jpg" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="100.0" arcWidth="100.0" fill="#15395b" height="579.0" opacity="0.73" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="633.0" />
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#ff541f" height="50.0" opacity="0.89" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="125.0">
+         <StackPane.margin>
+            <Insets bottom="500.0" right="400.0" />
+         </StackPane.margin>
+      </Rectangle>
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#ffb51f" height="50.0" opacity="0.89" stroke="#fcac00" strokeType="INSIDE" strokeWidth="0.0" width="111.0">
+         <StackPane.margin>
+            <Insets bottom="500.0" left="400.0" />
+         </StackPane.margin>
+      </Rectangle>
+      <Rectangle arcHeight="20.0" arcWidth="20.0" fill="#34b976" height="35.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="108.0">
+         <StackPane.margin>
+            <Insets bottom="250.0" />
+         </StackPane.margin>
+      </Rectangle>
+      <Button fx:id="btn" mnemonicParsing="false" prefHeight="23.0" prefWidth="106.0" text="Start">
+         <StackPane.margin>
+            <Insets top="300.0" />
+         </StackPane.margin></Button>
+      <CheckBox fx:id="NE" mnemonicParsing="false" selected="true" text="North East" textFill="WHITE">
+         <StackPane.margin>
+            <Insets bottom="400.0" right="500.0" />
+         </StackPane.margin>
+      </CheckBox>
+      <Label text="Select Your Region" textFill="WHITE">
+         <StackPane.margin>
+            <Insets bottom="500.0" right="400.0" />
+         </StackPane.margin>
+      </Label>
+      <CheckBox fx:id="SW" mnemonicParsing="false" text="South West" textFill="WHITE">
+         <StackPane.margin>
+            <Insets bottom="400.0" left="100.0" right="400.0" />
+         </StackPane.margin>
+      </CheckBox>
+      <Label text="Select Your Hero" textFill="WHITE">
+         <StackPane.margin>
+            <Insets bottom="250.0" />
+         </StackPane.margin>
+      </Label>
+      <CheckBox fx:id="hero_left" mnemonicParsing="false" selected="true" text="Holy Knight" textFill="WHITE">
+         <StackPane.margin>
+            <Insets bottom="100.0" right="125.0" />
+         </StackPane.margin>
+         <font>
+            <Font size="15.0" />
+         </font>
+      </CheckBox>
+      <CheckBox fx:id="hero_right" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" text="Warlord" textFill="WHITE">
+         <StackPane.margin>
+            <Insets bottom="100.0" left="125.0" />
+         </StackPane.margin>
+         <font>
+            <Font size="15.0" />
+         </font>
+      </CheckBox>
+      <ImageView fitHeight="200.0" fitWidth="150.0">
+         <image>
+            <Image url="@../img/heros/h4.png" />
+         </image>
+         <StackPane.margin>
+            <Insets right="350.0" />
+         </StackPane.margin>
+      </ImageView>
+      <ImageView fx:id="hero_right_img" fitHeight="200.0" fitWidth="150.0">
+         <image>
+            <Image url="@../img/heros/h1.png" />
+         </image>
+         <StackPane.margin>
+            <Insets left="350.0" />
+         </StackPane.margin>
+      </ImageView>
+      <Label text="Select Your Map" textFill="WHITE">
+         <StackPane.margin>
+            <Insets bottom="500.0" left="400.0" />
+         </StackPane.margin>
+      </Label>
+      <Label text="There is Only one map in our database" textFill="#ff4646">
+         <StackPane.margin>
+            <Insets bottom="400.0" left="400.0" />
+         </StackPane.margin>
+      </Label>
+   </children>
+</StackPane>

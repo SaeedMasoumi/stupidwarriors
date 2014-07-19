@@ -1,8 +1,9 @@
 package Logic;
 
+import javafx.scene.image.ImageView;
 import mahyarise.common.GameObjectID;
 
-public class GameObject {
+public class GameObject extends ImageView{
     protected int health;
     protected GameObjectID id; // each GameObject has it's own id
     protected Team team;
@@ -18,6 +19,7 @@ public class GameObject {
 
     public int getHealth() {
         return health;
+      
     }
 
     public int getPrice() {
