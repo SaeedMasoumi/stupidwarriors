@@ -13,55 +13,55 @@ import java.util.TimerTask;
  */
 
 public class Game implements Serializable{
-    private Map map = new Map();
+    private static Map map = new Map();
 
-    private ArrayList<TimerTask> tasks = new ArrayList<TimerTask>();
+    private static ArrayList<TimerTask> tasks = new ArrayList<TimerTask>();
 
-    private Timer timer = new Timer();
-    private int time = 0;
+    private static Timer timer = new Timer();
+    private static int time = 0;
 
-    private HashMap<GameObjectID, GameObject> objects = new HashMap<GameObjectID, GameObject>();
+    private static HashMap<GameObjectID, GameObject> objects = new HashMap<GameObjectID, GameObject>();
 
-    private Team ce = new Team(GameState.TEAM_CE);
-    private Team math = new Team(GameState.TEAM_MATH);
+    private static Team ce = new Team(GameState.TEAM_CE);
+    private static Team math = new Team(GameState.TEAM_MATH);
 
 
-    public Map getMap() {
+    public static Map getMap() {
         return map;
     }
-    public void setMap(Map map) {
-        this.map = map;
-    }
+//    public static void setMap(Map map) {
+//        this.map = map;
+//    }
 
-    public Team getTeamCE() {
+    public static Team getTeamCE() {
         return ce;
     }
-    public Team getTeamMath() {
+    public static Team getTeamMath() {
         return math;
     }
-    public Team getTeamByID (int id) {
+    public static Team getTeamByID (int id) {
         if (id == GameState.TEAM_CE)
             return ce;
         else return math;
     }
 
-    public void addTimerTask(TimerTask task) {
+    public static void addTimerTask(TimerTask task) {
         tasks.add(task);
     }
 
-    public HashMap<GameObjectID, GameObject> getObjects() {
+    public static HashMap<GameObjectID, GameObject> getObjects() {
         return objects;
     }
 
-    public Timer getTimer() {
+    public static Timer getTimer() {
         return timer;
     }
 
-    public float getTime() {
+    public static float getTime() {
         return time;
     }
 
-    public void startTimer() {
+    public static void startTimer() {
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -72,14 +72,14 @@ public class Game implements Serializable{
         , 0, 50);
     }
 
-    public void stopTimer() {
+    public static void stopTimer() {
         if (timer == null)
             return;
         timer.cancel();
         timer = null;
     }
 
-    public synchronized void next50ms() {
+    public static synchronized void next50ms() {
         time += 50;
         for (TimerTask task: tasks) {
             task.run();

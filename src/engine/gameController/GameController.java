@@ -49,6 +49,8 @@ import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -72,6 +74,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javax.imageio.ImageIO;
+import mahyarise.judge.GameManager;
 
 /**
  *
@@ -132,12 +135,15 @@ public class GameController implements Initializable{
     private final ImageView teamUpgrade =  new ImageView(Url.TEAM_UPGRADE_ICON);
     //left
     private final ImageView infantrySoldier = new ImageView(Url.INFANTRY);
+    private final ImageView kingLong = new ImageView(Url.INFANTRY);
+    
     private final ImageView tankSoldier = new ImageView(Url.TANK);
     
     private final ImageView towerReloadUpgrade = new ImageView(Url.TOWER_RELOAD_UP);
     private final ImageView towerPowerUpgrade = new ImageView(Url.TOWER_POWER_UP);
     private final ImageView towerRangeUpgrade = new ImageView(Url.TOWER_RANGE_UP);
     private final ImageView towerAutoRepair = new ImageView(Url.TOWER_AUTO_REPAIR);
+    
     
     
     public ImageView test = new ImageView(Url.ICON);//@TEST
@@ -217,7 +223,7 @@ public class GameController implements Initializable{
         debug.setOnMouseClicked((Event t)->{
             if(!DEBUG_MODE){
                 DEBUG_MODE = true;
-             //   showCells(50);
+                showCells(50);
                 DEBUG_REC.setVisible(DEBUG_MODE);
                 DEBUG_LB1.setVisible(DEBUG_MODE);
                 DEBUG_LB2.setVisible(DEBUG_MODE);
@@ -273,16 +279,16 @@ public class GameController implements Initializable{
                 
             }
         });
+        gameStack.getChildren().add(kingLong);
+        kingLong.setVisible(false);
+  
         //@TEST add for bg
         
         
-        setGold(1000000);
+        setGold(5000);
         
          //     showCells(50);
-        gameStack.setOnMouseClicked((MouseEvent t )->{
-            
-            System.out.println(t.getX()+"L"+t.getY());
-        });
+
 
         setTowerShopVisible();
         //@TEST
@@ -447,6 +453,8 @@ public class GameController implements Initializable{
                 towerReloadUpgrade.setEffect(new Glow(0));
                 
             });
+            //clicked
+   
         }
         else if(infantrySoldier.isVisible()){
             infantrySoldier.setOnMouseMoved((Event t)->{
@@ -489,10 +497,22 @@ public class GameController implements Initializable{
         infantrySoldier.setVisible(true);
         tankSoldier.setVisible(true);
     }
-    private void buyUpgrade() {
+    public void buyUpgrade() {
     }
     
-    private void buySoldier() {
+    public void buySoldier() {
+         infantrySoldier.setOnMouseClicked((MouseEvent t) -> {
+             if(kingLong.isVisible()){
+                kingLong.setVisible(false);
+                System.out.println("isvis");
+            }
+            else {
+                kingLong.setVisible(true);
+                kingLong.setTranslateX(t.getX()-GAME_WIDTH/2);
+                kingLong.setTranslateY(t.getY()-GAME_HEIGHT/2);
+                System.out.println("nonvis");
+            }
+                });
     }
     /**
      * 
@@ -584,6 +604,23 @@ public class GameController implements Initializable{
             setEnemyToolbar();
             
         });
+    }
+    
+    public void checkMouseBehavior() {
+        gameStack.setOnMouseMoved((MouseEvent t )->{
+            //it means we should buy kinLong(infantrysoldier)
+            if(kingLong.isVisible()){
+            kingLong.setTranslateX(t.getX()-2000/2);
+            kingLong.setTranslateY(t.getY()-2000/2);
+            }
+        });
+        gameStack.setOnMouseClicked((MouseEvent t )->{
+            if(kingLong.isVisible()){
+                kingLong.setVisible(false);
+            }
+        });
+        
+        
     }
     
 }

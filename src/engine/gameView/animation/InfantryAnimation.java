@@ -222,6 +222,7 @@ public class InfantryAnimation extends ImageView{
     */
     public void stopAnim(){
         anim.stop();
+        stack.getChildren().remove(this);
     }
     public void setPosX(double x){
         this.setTranslateX(this.getTranslateX()+x);

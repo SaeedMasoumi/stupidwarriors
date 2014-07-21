@@ -101,7 +101,7 @@ public class Team {
 
     // generate money
     public void generateMoney() {
-        GameManager.getGame().addTimerTask(new TimerTask() {
+        Game.addTimerTask(new TimerTask() {
             int counter = 0;
 
             @Override
@@ -125,12 +125,12 @@ public class Team {
 
     public void addObject(GameObject obj) {
         objects.put(obj.getID(), obj);
-        GameManager.getGame().getObjects().put(obj.getID(), obj);
+        Game.getObjects().put(obj.getID(), obj);
     }
 
     public void removeObject(GameObject obj) {
         objects.remove(obj.getID());
-        GameManager.getGame().getObjects().remove(obj.getID());
+        Game.getObjects().remove(obj.getID());
     }
 
     /* upgrade ha ro bayad rooye Team seda bezanim chon rooye hameye attacker haye ye team tasir dare */
@@ -180,7 +180,7 @@ public class Team {
         teamUpgradePurchaseList.add(GameState.PU_CE_HEALTH);
         this.withdrawMoney(5000);
 
-        GameManager.getGame().addTimerTask(new TimerTask() {
+        Game.addTimerTask(new TimerTask() {
             int counter = 0;
 
             @Override
@@ -233,7 +233,7 @@ public class Team {
         shieldUpgradeUsed = true;
         teamUpgradePurchaseList.add(GameState.PU_CE_ARMOR);
         this.withdrawMoney(4000);
-        for(GameObject object: GameManager.getGame().getObjects().values()) {
+        for(GameObject object: Game.getObjects().values()) {
             if (object.getTeamID() != this.id) // agar teameshun yeki nabashe pas doshman hastan
             {
                 if (object.isTower())
@@ -295,7 +295,7 @@ public class Team {
         teamUpgradePurchaseList.add(GameState.PU_MATH_ECO);
         this.withdrawMoney(5000);
 
-        GameManager.getGame().addTimerTask(new TimerTask() {
+        Game.addTimerTask(new TimerTask() {
             int counter = 0;
 
             @Override

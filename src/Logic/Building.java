@@ -20,7 +20,7 @@ public class Building extends GameObject{
         this.team = team;
         isAlive = 1;
         team.addObject(this);
-        GameManager.getGame().getObjects().put(id, this);
+        Game.getObjects().put(id, this);
     }
 
     // See Also -> Attacker.

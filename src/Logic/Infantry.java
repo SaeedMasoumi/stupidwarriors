@@ -1,10 +1,12 @@
 package Logic;
 
 import common.exceptions.NotEnoughMoneyException;
-import mahyarise.common.GameObjectID;
+import engine.gameView.animation.InfantryAnimation;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import javafx.scene.layout.StackPane;
+import mahyarise.common.GameObjectID;
 
 /*
  * Copyright (C) 2014 saeed.
@@ -39,7 +41,7 @@ public class Infantry extends Attacker {
     private static int CE_COST = 10;
     public static int CE_PRICE = (int) (CE_COST * 0.8);
     private static int CE_RANGE = 4;
-
+    private InfantryAnimation soldier;
     public static int MATH_MAX_HEALTH = 400;
     public static int MATH_ATTACK_POWER = 20;
     private static int MATH_RELOAD_TIME = 200;
@@ -54,7 +56,7 @@ public class Infantry extends Attacker {
     
     
     
-    public Infantry(Cell starting, GameObjectID id, Team team) throws NotEnoughMoneyException{
+    public Infantry(Cell starting, GameObjectID id, Team team,StackPane gameStack) throws NotEnoughMoneyException{
         super(starting, id, team);
         if (team.getID() == Team.TEAM_CE)
         {
@@ -74,10 +76,13 @@ public class Infantry extends Attacker {
             this.cost = MATH_COST;
             this.price = MATH_PRICE;
         }
-
+        this.soldier = new InfantryAnimation(gameStack,4, currentCell, nextCell);
+        this.soldier.show();
         team.withdrawMoney(cost);
     }
-
+   public InfantryAnimation getSoldier(){
+       return this.soldier;
+   }
     ///////////////// Upgrades /////////////////
 
     public static void pwrUpgrade(int teamID) {

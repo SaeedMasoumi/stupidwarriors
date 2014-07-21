@@ -39,12 +39,12 @@ public class MilitaryBase extends Building {
         this.orientation = orientation;
         this.leftUpCornerCell = leftUpCornerCell;
         setLocation();
-        GameManager.getGame().getObjects().put(id, this);
+        Game.getObjects().put(id, this);
         nextStep();
     }
 
     private void nextStep() {
-        GameManager.getGame().addTimerTask(new TimerTask() {
+        Game.addTimerTask(new TimerTask() {
             @Override
             public void run() {
 
@@ -55,23 +55,23 @@ public class MilitaryBase extends Building {
                     if (orientation == GameState.ORIENTATION_HORIZONTAL) {
                         for (int col = 0; col < 5; col++) {
                             for (int row = 0; row < 3; row++) {
-                                GameManager.getGame().getMap().getCell(leftUpCornerCell.getCol() + col, leftUpCornerCell.getRow() + row).removeObject(MilitaryBase.this);
+                                Game.getMap().getCell(leftUpCornerCell.getCol() + col, leftUpCornerCell.getRow() + row).removeObject(MilitaryBase.this);
                                 location[row][col].removeObject(MilitaryBase.this);
-                                GameManager.getGame().getMap().setCellsType(GameState.CELL_TYPE_LANE,
+                                Game.getMap().setCellsType(GameState.CELL_TYPE_LANE,
                                         leftUpCornerCell.getCol() + col, leftUpCornerCell.getRow() + row);
                                 location[row][col].setLaneNum(col);
-                                GameManager.getGame().getMap().getCell(leftUpCornerCell.getCol() + col, leftUpCornerCell.getRow() + row).setLaneNum(col);
+                                Game.getMap().getCell(leftUpCornerCell.getCol() + col, leftUpCornerCell.getRow() + row).setLaneNum(col);
                             }
                         }
                     } else {
                         for (int row = 0; row < 5; row++) {
                             for (int col = 0; col < 3; col++) {
-                                GameManager.getGame().getMap().getCell(leftUpCornerCell.getCol() + col, leftUpCornerCell.getRow() + row).removeObject(MilitaryBase.this);
+                                Game.getMap().getCell(leftUpCornerCell.getCol() + col, leftUpCornerCell.getRow() + row).removeObject(MilitaryBase.this);
                                 location[row][col].removeObject(MilitaryBase.this);
-                                GameManager.getGame().getMap().setCellsType(GameState.CELL_TYPE_LANE,
+                                Game.getMap().setCellsType(GameState.CELL_TYPE_LANE,
                                         leftUpCornerCell.getCol() + col, leftUpCornerCell.getRow() + row);
                                 location[row][col].setLaneNum(row);
-                                GameManager.getGame().getMap().getCell(leftUpCornerCell.getCol() + col, leftUpCornerCell.getRow() + row).setLaneNum(row);
+                                Game.getMap().getCell(leftUpCornerCell.getCol() + col, leftUpCornerCell.getRow() + row).setLaneNum(row);
                             }
                         }
                     }
@@ -88,8 +88,8 @@ public class MilitaryBase extends Building {
             Cell[][] loc = new Cell[5][3];
             for (int col = leftUpCornerCell.getCol(); col < leftUpCornerCell.getCol() + 3; col++)
                 for (int row = leftUpCornerCell.getRow(); row < leftUpCornerCell.getRow() + 5; row++) {
-                    GameManager.getGame().getMap().getCell(col, row).addObject(this);
-                    loc[row - leftUpCornerCell.getRow()][col - leftUpCornerCell.getCol()] = GameManager.getGame().getMap().getCell(col, row);
+                    Game.getMap().getCell(col, row).addObject(this);
+                    loc[row - leftUpCornerCell.getRow()][col - leftUpCornerCell.getCol()] = Game.getMap().getCell(col, row);
                 }
 
             super.setLocation(loc);
@@ -98,8 +98,8 @@ public class MilitaryBase extends Building {
             Cell[][] loc = new Cell[3][5];
             for (int col = leftUpCornerCell.getCol(); col < leftUpCornerCell.getCol() + 5; col++)
                 for (int row = leftUpCornerCell.getRow(); row < leftUpCornerCell.getRow() + 3; row++) {
-                    GameManager.getGame().getMap().getCell(col, row).addObject(this);
-                    loc[row - leftUpCornerCell.getRow()][col - leftUpCornerCell.getCol()] = GameManager.getGame().getMap().getCell(col, row);
+                    Game.getMap().getCell(col, row).addObject(this);
+                    loc[row - leftUpCornerCell.getRow()][col - leftUpCornerCell.getCol()] = Game.getMap().getCell(col, row);
                 }
             super.setLocation(loc);
         }

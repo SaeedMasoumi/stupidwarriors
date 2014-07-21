@@ -36,7 +36,7 @@ public class Attacker extends Unit {
 
     // Variables for Map information
     protected Cell nextCell; // cell e baadi ke bayad bere
-
+    
     protected static int pwrUpgradeCounter = 0;
     protected static int healthUpgradeCounter = 0;
 
@@ -46,7 +46,8 @@ public class Attacker extends Unit {
     protected ArrayList<Cell> hasSeen = new ArrayList<Cell>(); // cell haei ke dide, baraye ine ke bar nagarde be aghab.
 
     private int counterForAttack = 0; // harvaght >= reloadTime shod, Attacker hamle mikone
-
+    
+   
     public Attacker(Cell cell, GameObjectID id, Team team) throws NotEnoughMoneyException{
         super(id, team);
         this.currentCell = cell;
@@ -76,7 +77,7 @@ public class Attacker extends Unit {
      * va hamle kardan beheshun.
      */
     public void AI() {
-        GameManager.getGame().addTimerTask(new TimerTask() {
+        Game.addTimerTask(new TimerTask() {
             int counter = 0;
 
             @Override
@@ -97,7 +98,7 @@ public class Attacker extends Unit {
                     isAlive = 0;
                 }
 
-                if (counter >= 500 && isAlive == 1) // 500 milli second
+                if (counter >= 1000 && isAlive == 1) // 500 milli second
                 {
                     currentCell.removeObject(Attacker.this);
                     nextCell.addObject(Attacker.this);
@@ -208,14 +209,14 @@ public class Attacker extends Unit {
             return Attacker.this.currentCell;
         hasSeen.add(currentCell);
         for (int i = -1; i <= 1; i += 2) {
-            if (!GameManager.getGame().getMap().isOutOfPath(currentCell.getCol(), currentCell.getRow() + i) // khareje masir nabashe ...
-                    && GameManager.getGame().getMap().getLaneNum(currentCell.getCol(), currentCell.getRow() + i) == currentCell.getLaneNum()
-                    && !hasSeen.contains(GameManager.getGame().getMap().getCell(currentCell.getCol(), currentCell.getRow() + i))) {
-                nextCell = GameManager.getGame().getMap().getCell(currentCell.getCol(), currentCell.getRow() + i);
-            } else if (!GameManager.getGame().getMap().isOutOfPath(currentCell.getCol() + i, currentCell.getRow())
-                    && GameManager.getGame().getMap().getLaneNum(currentCell.getCol() + i, currentCell.getRow()) == currentCell.getLaneNum()
-                    && !hasSeen.contains(GameManager.getGame().getMap().getCell(currentCell.getCol() + i, currentCell.getRow()))) {
-                nextCell = GameManager.getGame().getMap().getCell(currentCell.getCol() + i, currentCell.getRow());
+            if (!Game.getMap().isOutOfPath(currentCell.getCol(), currentCell.getRow() + i) // khareje masir nabashe ...
+                    && Game.getMap().getLaneNum(currentCell.getCol(), currentCell.getRow() + i) == currentCell.getLaneNum()
+                    && !hasSeen.contains(Game.getMap().getCell(currentCell.getCol(), currentCell.getRow() + i))) {
+                nextCell = Game.getMap().getCell(currentCell.getCol(), currentCell.getRow() + i);
+            } else if (!Game.getMap().isOutOfPath(currentCell.getCol() + i, currentCell.getRow())
+                    && Game.getMap().getLaneNum(currentCell.getCol() + i, currentCell.getRow()) == currentCell.getLaneNum()
+                    && !hasSeen.contains(Game.getMap().getCell(currentCell.getCol() + i, currentCell.getRow()))) {
+                nextCell = Game.getMap().getCell(currentCell.getCol() + i, currentCell.getRow());
             }
         }
         info.put(GameState.ROW, currentCell.getRow());
@@ -243,5 +244,8 @@ public class Attacker extends Unit {
 
     public HashMap<String, Integer> getInfo() {
         return info;
+    }
+    public Cell getNextCell(){
+        return nextCell;
     }
 }

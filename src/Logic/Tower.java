@@ -44,7 +44,7 @@ public class Tower extends Unit {
     }
 
     public void AI() {
-        GameManager.getGame().addTimerTask(new TimerTask() {
+        Game.addTimerTask(new TimerTask() {
             @Override
             public void run() {
                 Cell targetCell = findTargets(findEnemies());
@@ -80,8 +80,8 @@ public class Tower extends Unit {
 
 
     public void reloadTimeUpgrade() throws NotEnoughMoneyException {
-        if (GameManager.getGame().getTeamByID(team.getID()).getMoney() < price * 0.1)
-            throw new NotEnoughMoneyException(GameManager.getGame().getTeamByID(team.getID()).getMoney());
+        if (Game.getTeamByID(team.getID()).getMoney() < price * 0.1)
+            throw new NotEnoughMoneyException(Game.getTeamByID(team.getID()).getMoney());
 
         team.withdrawMoney((int)(price * 0.1));
         price += price * 0.1;
@@ -89,8 +89,8 @@ public class Tower extends Unit {
     }
 
     public void powerUpgrade() throws NotEnoughMoneyException {
-        if (GameManager.getGame().getTeamByID(team.getID()).getMoney() < price * 0.15)
-            throw new NotEnoughMoneyException(GameManager.getGame().getTeamByID(team.getID()).getMoney());
+        if (Game.getTeamByID(team.getID()).getMoney() < price * 0.15)
+            throw new NotEnoughMoneyException(Game.getTeamByID(team.getID()).getMoney());
 
         team.withdrawMoney((int)( price * 0.15));
         price += price * 0.15;
@@ -102,8 +102,8 @@ public class Tower extends Unit {
         if(rangeUpgradeCounter >= 3)
             throw new PowerUpAlreadyUsedException();
 
-        if (GameManager.getGame().getTeamByID(team.getID()).getMoney() < price * 0.15)
-            throw new NotEnoughMoneyException(GameManager.getGame().getTeamByID(team.getID()).getMoney());
+        if (Game.getTeamByID(team.getID()).getMoney() < price * 0.15)
+            throw new NotEnoughMoneyException(Game.getTeamByID(team.getID()).getMoney());
 
         team.withdrawMoney((int)(price * 0.2));
         rangeUpgradeCounter++;

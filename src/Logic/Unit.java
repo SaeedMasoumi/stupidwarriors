@@ -27,7 +27,7 @@ abstract public class Unit extends GameObject{
             this.team = team;
             isAlive = 1;
             team.addObject(this);
-            GameManager.getGame().getObjects().put(id, this);
+            Game.getObjects().put(id, this);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -37,22 +37,24 @@ abstract public class Unit extends GameObject{
     public Cell getCurrentCell() {
         return currentCell;
     }
-
+    public boolean isAttacking(){
+        return isAttacking==true;
+    }
     public Cell[] findEnemies() {
         ArrayList<Cell> enemiesCell = new ArrayList<Cell>();
         for(int col = this.currentCell.getCol() - this.range; col <= this.currentCell.getCol() + this.range; col++)
             for(int row = this.currentCell.getRow() - this.range; row <= this.currentCell.getRow() + this.range; row++)
-                if (!GameManager.getGame().getMap().isOutOfMap(col, row)) { // agar khareje map nabud
-                    for (GameObject object: GameManager.getGame().getMap().getCell(col, row).getObjects())
+                if (!Game.getMap().isOutOfMap(col, row)) { // agar khareje map nabud
+                    for (GameObject object: Game.getMap().getCell(col, row).getObjects())
                     {
                         if (object != null && object.getTeamID() != this.getTeamID()) {
 //                            System.out.println(object.getClass());
                             if (!(object instanceof Building) && object.getCurrentCell().getPathNum() == this.getCurrentCell().getPathNum())
-                                enemiesCell.add(GameManager.getGame().getMap().getCell(col, row));
+                                enemiesCell.add(Game.getMap().getCell(col, row));
                             else if ((object instanceof MilitaryBase) && ((MilitaryBase) object).getPathNumber() == this.getCurrentCell().getPathNum())
-                                enemiesCell.add(GameManager.getGame().getMap().getCell(col, row));
+                                enemiesCell.add(Game.getMap().getCell(col, row));
                             else if (object instanceof HeadQuarter) {
-                                enemiesCell.add(GameManager.getGame().getMap().getCell(col, row));
+                                enemiesCell.add(Game.getMap().getCell(col, row));
 //                                System.out.println("We found HQ !! :D");
                             }
                         }
@@ -71,20 +73,20 @@ abstract public class Unit extends GameObject{
         System.out.println(this.getClass() + " dies!");
 //        Test.graphicsInterface.removeGameObject(this.getID());
 
-        if (GameManager.getGame().getTeamByID(GameState.TEAM_MATH).reduceUnitsPriceUpgradeUsed
+        if (Game.getTeamByID(GameState.TEAM_MATH).reduceUnitsPriceUpgradeUsed
                 && this.team.getID() == GameState.TEAM_MATH)
             this.price -= this.price * 0.1;
 
-        if (GameManager.getGame().getTeamByID(GameState.TEAM_MATH).enemyPriceUpgradeUsed
+        if (Game.getTeamByID(GameState.TEAM_MATH).enemyPriceUpgradeUsed
                 && this.team.getID() == GameState.TEAM_CE)
             this.price += this.price * 0.1;
 
 
         if (team.getID() == GameState.TEAM_CE) {
-            GameManager.getGame().getTeamMath().addMoney(this.price);
+            Game.getTeamMath().addMoney(this.price);
         }
 
-        else GameManager.getGame().getTeamCE().addMoney(this.price);
+        else Game.getTeamCE().addMoney(this.price);
     }
 
     abstract public Cell findTargets(Cell[] enemiesCell); // peyda kardane target baraye har unit motefavete
