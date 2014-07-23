@@ -1,5 +1,6 @@
 package Logic;
 
+import engine.gameView.Prefs;
 import mahyarise.common.GameObjectID;
 
 import java.io.Serializable;
@@ -66,6 +67,7 @@ public class Game implements Serializable{
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
+                if(!Prefs.PAUSE)
                 next50ms();
             }
         }

@@ -1,9 +1,12 @@
 package Logic;
 
 import common.exceptions.NotEnoughMoneyException;
-import mahyarise.common.GameObjectID;
+import engine.gameView.animation.InfantryAnimation;
+import engine.gameView.animation.TankAnimation;
 
 import java.io.Serializable;
+import javafx.scene.layout.StackPane;
+import mahyarise.common.GameObjectID;
 
 /*
  * Copyright (C) 2014 Saeed Masoumi & Saeed Rajabzade.
@@ -46,13 +49,14 @@ public class Tank extends Attacker{
     private static int MATH_PRICE = (int) (MATH_COST * 0.8);
     private static int MATH_RANGE = 6;
 
+    private TankAnimation soldier;
 
     /**
      * Tank Constructor 
      * should give a started row and col because we need these parameters
      * @param currentCell
      */
-    public Tank(Cell currentCell,GameObjectID id, Team team) throws NotEnoughMoneyException{
+    public Tank(Cell currentCell,GameObjectID id, Team team,StackPane gameStack) throws NotEnoughMoneyException{
         super(currentCell, id, team);
         
         //fill map info of this object
@@ -77,10 +81,13 @@ public class Tank extends Attacker{
             this.range = MATH_RANGE;
             this.cost = MATH_COST;
         }
-
+        this.soldier = new TankAnimation(gameStack,4, currentCell, nextCell);
+        this.soldier.show();
         team.withdrawMoney(cost);
     }
-
+   public TankAnimation getSoldier(){
+       return this.soldier;
+   }
     public static void setCE_RELOAD_TIME(int reload_time) {
         CE_RELOAD_TIME = reload_time;
     }

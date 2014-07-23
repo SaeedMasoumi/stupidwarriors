@@ -21,6 +21,7 @@ import javafx.animation.FadeTransition;
 import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
@@ -44,6 +45,17 @@ public class GameAnimation {
         lb.setStyle("-fx-font-size: 20pt;");
         stack.getChildren().add(lb);
         FadeTransition ft = new FadeTransition(Duration.millis(2000),lb); 
+        ft.setFromValue(1.0);
+        ft.setToValue(0);
+        ft.setCycleCount(1);
+        ft.setAutoReverse(true);
+        ft.play();
+    }
+       public static void fadeImage(ImageView img,StackPane stack,double x,double y){
+        img.setTranslateX(x);
+        img.setTranslateY(y);
+        stack.getChildren().addAll(img);
+        FadeTransition ft = new FadeTransition(Duration.millis(2000),img); 
         ft.setFromValue(1.0);
         ft.setToValue(0);
         ft.setCycleCount(1);

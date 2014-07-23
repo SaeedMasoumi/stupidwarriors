@@ -61,14 +61,14 @@ public class GameManager {
 
             case GameState.ATTACKER_TANK:
                 id = GameObjectID.create(Tank.class);
-                new Tank(Game.getTeamByID(teamID).getMilitaryBases().get(path).getLane()[lane], id, Game.getTeamByID(teamID));
+                new Tank(Game.getTeamByID(teamID).getMilitaryBases().get(path).getLane()[lane], id, Game.getTeamByID(teamID),gameStack);
                 break;
         }
         return id;
     }
 
     // Complete
-    public static GameObjectID createTower(int teamID, int towerType, int col, int row) throws MahyariseExceptionBase {
+    public static GameObjectID createTower(int teamID, int towerType, int col, int row,StackPane gameStack) throws MahyariseExceptionBase {
         //TODO need to check for path and lane and cell, each team has it's own tower
         try {
             GameObjectID id = null;
@@ -77,37 +77,37 @@ public class GameManager {
                     if (Game.getTeamByID(teamID).getMoney() < BlackTower.getCost())
                         throw new NotEnoughMoneyException(Game.getTeamByID(teamID).getMoney());
                     id = GameObjectID.create(BlackTower.class);
-                    new BlackTower(Game.getMap().getCell(col, row), id, Game.getTeamByID(teamID));
+                    new BlackTower(Game.getMap().getCell(col, row), id, Game.getTeamByID(teamID),gameStack);
                     break;
                 case GameState.TOWER_TYPE_GAME:
                     if (Game.getTeamByID(teamID).getMoney() < GameTower.getCost())
                         throw new NotEnoughMoneyException(Game.getTeamByID(teamID).getMoney());
                     id = GameObjectID.create(GameTower.class);
-                    new GameTower(Game.getMap().getCell(col, row), id, Game.getTeamByID(teamID));
+                    new GameTower(Game.getMap().getCell(col, row), id, Game.getTeamByID(teamID),gameStack);
                     break;
                 case GameState.TOWER_TYPE_TANK:
                     if (Game.getTeamByID(teamID).getMoney() < TankTower.getCost())
                         throw new NotEnoughMoneyException(Game.getTeamByID(teamID).getMoney());
                     id = GameObjectID.create(TankTower.class);
-                    new TankTower(Game.getMap().getCell(col, row), id, Game.getTeamByID(teamID));
+                    new TankTower(Game.getMap().getCell(col, row), id, Game.getTeamByID(teamID),gameStack);
                     break;
                 case GameState.TOWER_TYPE_GENERAL_MATH:
                     if (Game.getTeamByID(teamID).getMoney() < GeneralMathTower.getCost())
                         throw new NotEnoughMoneyException(Game.getTeamByID(teamID).getMoney());
                     id = GameObjectID.create(GeneralMathTower.class);
-                    new GeneralMathTower(Game.getMap().getCell(col, row), id, Game.getTeamByID(teamID));
+                    new GeneralMathTower(Game.getMap().getCell(col, row), id, Game.getTeamByID(teamID),gameStack);
                     break;
                 case GameState.TOWER_TYPE_ELECTRICITY:
                     if (Game.getTeamByID(teamID).getMoney() < ElectricityTower.getCost())
                         throw new NotEnoughMoneyException(Game.getTeamByID(teamID).getMoney());
                     id = GameObjectID.create(ElectricityTower.class);
-                    new ElectricityTower(Game.getMap().getCell(col, row), id, Game.getTeamByID(teamID));
+                    new ElectricityTower(Game.getMap().getCell(col, row), id, Game.getTeamByID(teamID),gameStack);
                     break;
                 case GameState.TOWER_TYPE_POISON:
                     if (Game.getTeamByID(teamID).getMoney() < PoisonTower.getCost())
                         throw new NotEnoughMoneyException(Game.getTeamByID(teamID).getMoney());
                     id = GameObjectID.create(PoisonTower.class);
-                    new PoisonTower(Game.getMap().getCell(col, row), id, Game.getTeamByID(teamID));
+                    new PoisonTower(Game.getMap().getCell(col, row), id, Game.getTeamByID(teamID),gameStack);
                     break;
             }
             return id;

@@ -69,7 +69,7 @@ public class MapCell {
      * @param y "getTranlateY()" of a node
      * @return  the row of node
      */
-    public static double posRow(double y){
+    public static int posRow(double y){
           Double posy = GameController.GAME_HEIGHT/2 + y;
           Double cell = GameController.GAME_CELL_SIZE;
           int ans = posy.intValue()/cell.intValue();

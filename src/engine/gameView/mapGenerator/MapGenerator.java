@@ -20,6 +20,8 @@ package engine.gameView.mapGenerator;
 import engine.gameController.GameController;
 import engine.gameScene.url.Url;
 import engine.gameView.Prefs;
+import engine.gameView.animation.Explode;
+import javafx.animation.Animation;
 import javafx.scene.CacheHint;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -91,7 +93,7 @@ public class MapGenerator {
 {13,12,12,12,12,12,13,13,13,13,13,13,13,13,13,13,13,13,13,12,12,12,12,12,13,13,13,13,13,13,13,13,13,12,12,12,12,12,13,13},
 {13,12,12,12,12,12,13,13,13,13,13,13,13,13,13,13,13,13,13,12,12,12,12,12,13,13,13,13,13,13,13,13,13,12,12,12,12,12,13,13},
 {13,12,12,12,12,12,13,13,13,13,13,13,13,13,13,13,13,13,13,12,12,12,12,12,13,13,13,13,13,13,13,13,13,12,12,12,12,12,13,13},
-{13,12,12,12,12,12,13,13,13,13,13,13,13,13,13,13,13,13,13,12,12,12,12,12,13,13,13,13,13,13,13,13,13,12,12,12,12,12,13,13},
+{13,12,12,12,12,12,13,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,13,13,13,13,13,13,13,13,13,12,12,12,12,12,13,13},
 {13,12,12,12,12,12,13,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,13,13,13,13,13,13,13,13,13,12,12,12,12,12,13,13},
 {13,12,12,12,12,12,13,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,13,13,13,13,13,13,13,13,13,12,12,12,12,12,13,13},
 {13,12,12,12,12,12,13,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,13,13,13,13,13,13,13,13,13,12,12,12,12,12,13,13},
@@ -112,8 +114,7 @@ public class MapGenerator {
 {13,13,13,13,13,13,13,13,11,11,11,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,13,13},
 {13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13},
 {13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13},
-{13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13}}
- ;
+{13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13}};
     /*
     Military Bases Postiton
     */
@@ -150,15 +151,25 @@ public class MapGenerator {
             }
         }
     }
+  
     public static void createMapTree(StackPane gameStack){
-        ImageView t1 = new ImageView(Url.TREE1);
+        ImageView t1 = new ImageView(Url.TREES);
+        ImageView t2 = new ImageView(Url.LION);
+        ImageView t3 = new ImageView(Url.DESPLAT);
+        t1.setTranslateX(MapCell.posX(11));
+        t1.setTranslateY(MapCell.posY(13));
+        t2.setTranslateX(MapCell.posX(28));
+        t2.setTranslateY(MapCell.posY(20));
+        t3.setTranslateX(MapCell.posX(38));
+        t3.setTranslateY(MapCell.posY(1));
+        gameStack.getChildren().addAll( t1,t2,t3);
+             Explode fire = new Explode(new Image(Url.FIRE), gameStack, 5, MapCell.posX(26)+20,MapCell.posY(19));
+        fire.towerBlast(false,Animation.INDEFINITE);
         
-        t1.setTranslateX(MapCell.posX(5));
-        t1.setTranslateY(MapCell.posY(40-6));
-        gameStack.getChildren().add( t1);
+             Explode fire2 = new Explode(new Image(Url.FIRE), gameStack, 5, MapCell.posX(29),MapCell.posY(19));
+        fire2.towerBlast(false,Animation.INDEFINITE);
         optimizeNode(t1);
-        
-        
+        optimizeNode(t2);
         
     }
     public static void createMapLake1(StackPane gameStack){
@@ -195,6 +206,31 @@ public class MapGenerator {
                     PATH.setTranslateY(MapCell.posY(i));
                     optimizeNode(PATH);
                 }
+            }
+        }
+    }
+      public static void createMapPath2(StackPane gameStack){
+    Image path = new Image(Url.PATHGRASS);
+        Image rock = new Image(Url.ROCK);
+
+        for(int i=0;i<gameMapSize;i++){
+            for(int j=0;j<gameMapSize;j++){
+                
+                
+                if(gameMap[i][j]==12  ){
+                    if(Math.random() < 0.3){
+                    ImageView PATH = new ImageView(path);
+                    gameStack.getChildren().add(PATH);
+                    PATH.setTranslateX(MapCell.posX(j));
+                    PATH.setTranslateY(MapCell.posY(i));
+                    optimizeNode(PATH);
+//                    }else if(Math.random()<0.1){
+//                    ImageView PATH = new ImageView(rock);
+//                    gameStack.getChildren().add(PATH);
+//                    PATH.setTranslateX(MapCell.posX(j));
+//                    PATH.setTranslateY(MapCell.posY(i));
+//                    optimizeNode(PATH);}
+                    }}
             }
         }
     }

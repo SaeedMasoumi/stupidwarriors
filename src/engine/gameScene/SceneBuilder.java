@@ -73,16 +73,21 @@ public class SceneBuilder {
     public static void createTableBoardRight(ImageView scoutTower,
             ImageView hammerHeadTower,
             ImageView bulletTower,
+            ImageView teamUpgrade2,
+            ImageView teamUpgrade3,
             ImageView teamUpgrade,
             StackPane mainStack) {
         
         //add to stack
-        mainStack.getChildren().addAll(scoutTower,hammerHeadTower,bulletTower,teamUpgrade);
+        mainStack.getChildren().addAll(scoutTower,hammerHeadTower,bulletTower,teamUpgrade,teamUpgrade2,teamUpgrade3);
         //set position
         StackPane.setAlignment(scoutTower, Pos.BOTTOM_RIGHT);
         StackPane.setAlignment(hammerHeadTower, Pos.BOTTOM_RIGHT);
         StackPane.setAlignment(bulletTower, Pos.BOTTOM_RIGHT);
         StackPane.setAlignment(teamUpgrade, Pos.BOTTOM_RIGHT);
+        StackPane.setAlignment(teamUpgrade2, Pos.BOTTOM_RIGHT);
+        StackPane.setAlignment(teamUpgrade3, Pos.BOTTOM_RIGHT);
+
         //set translate x,y
         scoutTower.setTranslateX(-10);
         scoutTower.setTranslateY(-80);
@@ -91,10 +96,16 @@ public class SceneBuilder {
         hammerHeadTower.setTranslateY(-90);
         
         bulletTower.setTranslateX(-100);
-        bulletTower.setTranslateY(-75);
+        bulletTower.setTranslateY(-80);
         
-        teamUpgrade.setTranslateX(-112);
-        teamUpgrade.setTranslateY(-15);
+        teamUpgrade.setTranslateX(-10);
+        teamUpgrade.setTranslateY(-10);
+        
+        teamUpgrade2.setTranslateX(-200);
+        teamUpgrade2.setTranslateY(-10);
+        
+        teamUpgrade3.setTranslateX(-100);
+        teamUpgrade3.setTranslateY(-10);
     }
 
     public static void createTableBoardLeftSoldier(ImageView infantrySoldier, ImageView tankSoldier, StackPane mainStack) {

@@ -6,6 +6,8 @@ import java.util.TimerTask;
 
 import common.exceptions.NotEnoughMoneyException;
 import common.exceptions.PowerUpAlreadyUsedException;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import mahyarise.common.GameObjectID;
 import mahyarise.judge.GameManager;
 
@@ -14,9 +16,9 @@ public class Tower extends Unit {
     protected int pwrAgainstTanks;
     protected int pwrAgainstSoldiers;
     protected int reflectionOfDamage;
-
+    protected boolean isBlastShown = false;
     protected int accuracyOfHit; // For phase 2
-
+    protected ImageView tower;
     protected int rangeUpgradeCounter = 0;
 
     protected HashMap<String, Integer> info = new HashMap<String, Integer>();
@@ -29,7 +31,12 @@ public class Tower extends Unit {
         cell.addObject(this);
         AI();
     }
-
+    public void setBlast(boolean t){
+        isBlastShown = t;
+    }
+    public boolean shouldShowBlast(){
+        return isBlastShown==false;
+    }
     private void initInfo() {
         info.put(GameState.HEALTH, health);
         info.put(GameState.ROW, currentCell.getRow());
@@ -49,7 +56,7 @@ public class Tower extends Unit {
             public void run() {
                 Cell targetCell = findTargets(findEnemies());
 
-                System.out.println("Tower found " + findEnemies().length + " enemies !!");
+        //        System.out.println("Tower found " + findEnemies().length + " enemies !!");
 
                 if (targetCell != null && !Tower.this.isDie())
                     attack(targetCell);
@@ -233,5 +240,11 @@ public class Tower extends Unit {
     public HashMap<String, Integer> getInfo() {
         return info;
     }
+    public void removeTower(StackPane game){
+        game.getChildren().remove(this.tower);
+    }
+    public ImageView getImage(){
+        return this.tower;
+       }
 
 }

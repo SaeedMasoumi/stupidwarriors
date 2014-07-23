@@ -1,27 +1,25 @@
 /*
-* Copyright (C) 2014 Saeed Masoumi & Saeed Rajabzade
-*
-* This program is free software: you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ * Copyright (C) 2014 Saeed Masoumi & Saeed Rajabzade
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 package engine.gameView.animation;
 
 import Logic.Cell;
 import engine.asset.Asset;
-import engine.gameScene.url.Url;
 import engine.gameView.mapGenerator.MapCell;
-import java.math.MathContext;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -33,14 +31,13 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
-import javafx.scene.media.AudioClip;
 import javafx.util.Duration;
 
 /**
  *
- * @author Saeed Masoumi
+ * @author Saeed
  */
-public class InfantryAnimation extends ImageView{
+public class TankAnimation extends ImageView {
     private final StackPane stack;
     private  int numCells;
     private final Duration FRAME_TIME = Duration.seconds(0.12);
@@ -66,7 +63,7 @@ public class InfantryAnimation extends ImageView{
     private static final String RIGHT = "R";
     
     @SuppressWarnings("LeakingThisInConstructor")
-    public InfantryAnimation(Image img,StackPane stack,int numCells,double x , double y){
+    public TankAnimation(Image img,StackPane stack,int numCells,double x , double y){
         this.stack =stack;
         this.current= this;
         direction = LEFT;
@@ -77,7 +74,7 @@ public class InfantryAnimation extends ImageView{
         this.setX(x);
         this.setY(y);
     }
-    public InfantryAnimation(StackPane stack,int numCells,Cell current , Cell next){
+    public TankAnimation(StackPane stack,int numCells,Cell current , Cell next){
         this.stack =stack;
         this.current = this;
         animate(predictMovement(current,next), numCells);
@@ -231,8 +228,4 @@ public class InfantryAnimation extends ImageView{
     public void setPosY(double y){
         this.setTranslateY(this.getTranslateY()+y);
     }
-    
-    
-    
-    
 }

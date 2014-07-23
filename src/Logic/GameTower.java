@@ -1,6 +1,10 @@
 package Logic;
 
 import common.exceptions.NotEnoughMoneyException;
+import engine.gameScene.url.Url;
+import engine.gameView.mapGenerator.MapCell;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import mahyarise.common.GameObjectID;
 
 /*
@@ -33,8 +37,8 @@ public class GameTower extends Tower {
     private static final int REFLECTION_OF_DAMAGE = 0;
     private static final int COST = 300;
     private static final int RANGE = 7;
-
-    public GameTower(Cell cell, GameObjectID id, Team team) throws NotEnoughMoneyException{
+   
+    public GameTower(Cell cell, GameObjectID id, Team team,StackPane gameStack) throws NotEnoughMoneyException{
         super(cell, id, team);
 
         pwrAgainstTanks = PWR_AGAINST_TANKS;
@@ -45,11 +49,16 @@ public class GameTower extends Tower {
         cost = COST;
         price = (int) (COST * 0.8); // arzeshe tower
         range = RANGE;
-
+        tower = new ImageView(Url.SCOUT);
+        gameStack.getChildren().add(tower);
+        
+        tower.setTranslateX(MapCell.posX(cell.getCol()));
+        tower.setTranslateY(MapCell.posY(cell.getRow()));
         team.withdrawMoney(cost);
     }
 
     public static int getCost() {
         return COST;
     }
+  
 }

@@ -17,11 +17,15 @@
 
 package engine.gameController;
 
+import Logic.Cell;
+import Logic.Game;
+import Logic.GameState;
 import com.sun.javafx.cursor.CursorFrame;
+import engine.gameScene.GameScene;
 import engine.gameScene.SceneBuilder;
 import engine.gameScene.url.Url;
 import engine.gameView.Prefs;
-import engine.gameView.animation.Expload;
+import engine.gameView.animation.Explode;
 import engine.gameView.animation.GameAnimation;
 import engine.gameView.animation.InfantryAnimation;
 import engine.gameView.mapGenerator.MapCell;
@@ -31,6 +35,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -74,6 +79,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javax.imageio.ImageIO;
+import mahyarise.common.exceptions.MahyariseExceptionBase;
 import mahyarise.judge.GameManager;
 
 /**
@@ -105,7 +111,7 @@ public class GameController implements Initializable{
     @FXML ScrollPane scrollPane;
     @FXML StackPane mainStack;
     //fxml toolbar buttons
-    @FXML Button pasue,save,load,exit;
+    @FXML Button pause,save,load,exit;
     //fxml toolbar icons & text
     @FXML Text tGold;
     @FXML ImageView flagIcon;
@@ -113,7 +119,7 @@ public class GameController implements Initializable{
     @FXML Label teamName;
     
     public void setMyToolbar(){
-         flagIcon.setImage(new Image(Prefs.MY_FLAG));
+        flagIcon.setImage(new Image(Prefs.MY_FLAG));
         heroIcon.setImage(new Image(Prefs.MY_HERO_ICON));
         teamName.setText(Prefs.MY_TEAM_NAME);
     }
@@ -133,10 +139,16 @@ public class GameController implements Initializable{
     private final ImageView hammerHeadTower = new ImageView(Url.HAMMERHEAD_TOWER_ICON);
     private final ImageView bulletTower = new ImageView(Url.BULLET_TOWER_ICON);
     private final ImageView teamUpgrade =  new ImageView(Url.TEAM_UPGRADE_ICON);
+    private final ImageView teamUpgrade2 =  new ImageView(Url.TEAM_UPGRADE_ICON_2);
+    private final ImageView teamUpgrade3 =  new ImageView(Url.TEAM_UPGRADE_ICON_3);
+    private final ImageView scout =  new ImageView(Url.SCOUT);
+    private final ImageView hammerhead =  new ImageView(Url.HAMMERHEAD);
+    private final ImageView bullet =  new ImageView(Url.BULLET);
     //left
     private final ImageView infantrySoldier = new ImageView(Url.INFANTRY);
     private final ImageView kingLong = new ImageView(Url.INFANTRY);
-    
+    private final ImageView destroyer = new ImageView(Url.INFANTRY);
+
     private final ImageView tankSoldier = new ImageView(Url.TANK);
     
     private final ImageView towerReloadUpgrade = new ImageView(Url.TOWER_RELOAD_UP);
@@ -170,7 +182,7 @@ public class GameController implements Initializable{
 //        scrollPane.setMinSize(GAME_WIDTH, GAME_HEIGHT);
         scrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollBarPolicy.NEVER);
- 
+        
         gameStack.setPrefSize(GAME_WIDTH,GAME_HEIGHT);
         gameStack.setMaxSize(GAME_WIDTH, GAME_HEIGHT);
         gameStack.setMinSize(GAME_WIDTH, GAME_HEIGHT);
@@ -192,18 +204,18 @@ public class GameController implements Initializable{
         */
         //change posotion of bottom images
         
-        SceneBuilder.createTableBoardRight(scoutTower,hammerHeadTower,bulletTower,teamUpgrade,mainStack);
+        SceneBuilder.createTableBoardRight(scoutTower,hammerHeadTower,bulletTower,teamUpgrade,teamUpgrade2,teamUpgrade3,mainStack);
         SceneBuilder.createTableBoardLeftMap(mainStack);
         SceneBuilder.createTableBoardLeftSoldier(infantrySoldier,tankSoldier,mainStack);
         SceneBuilder.createTableBoarderLeftTower(towerAutoRepair,towerPowerUpgrade,towerRangeUpgrade,towerReloadUpgrade,mainStack);
-
+        
         //map creator
         MapGenerator.createMapGrass(gameStack);
-     //   MapGenerator.createMapTree(gameStack);
+        //   MapGenerator.createMapTree(gameStack);
         MapGenerator.createMapLake1(gameStack);
         MapGenerator.createMapLake2(gameStack);
-        MapGenerator.createMapPath(gameStack);
-        
+        MapGenerator.createMapPath2(gameStack);
+        MapGenerator.createMapTree(gameStack);
         //set my and enemy building
         MapGenerator.setMyHQBase(gameStack);
         MapGenerator.setEnemyHQBase(gameStack);
@@ -214,33 +226,35 @@ public class GameController implements Initializable{
         /*
         buttons Listeners
         */
+        scrollPane.setVvalue(1);
+        scrollPane.setHvalue(0);
         exit.setOnMouseClicked((Event t) -> {
             stage.close();
             System.exit(0);
         });
         debug.setImage(new Image(Url.DEBUG));
-
+        
         debug.setOnMouseClicked((Event t)->{
             if(!DEBUG_MODE){
                 DEBUG_MODE = true;
-                showCells(50);
+            //    showCells(50);
                 DEBUG_REC.setVisible(DEBUG_MODE);
                 DEBUG_LB1.setVisible(DEBUG_MODE);
                 DEBUG_LB2.setVisible(DEBUG_MODE);
                 DEBUG_LB3.setVisible(DEBUG_MODE);
                 DEBUG_LB4.setVisible(DEBUG_MODE);
                 
-                DEBUG_LB1.setText("Available processors (cores): " + 
-        Runtime.getRuntime().availableProcessors());
-                DEBUG_LB2.setText("Free memory (bytes): " + 
-        Runtime.getRuntime().freeMemory());
-                    long maxMemory = Runtime.getRuntime().maxMemory();
-
-                DEBUG_LB3.setText("Maximum memory (bytes): " + 
-        (maxMemory == Long.MAX_VALUE ? "no limit" : maxMemory));
-                DEBUG_LB4.setText("Total memory available to JVM (bytes): " + 
-        Runtime.getRuntime().totalMemory());
-             }
+                DEBUG_LB1.setText("Available processors (cores): " +
+                        Runtime.getRuntime().availableProcessors());
+                DEBUG_LB2.setText("Free memory (bytes): " +
+                        Runtime.getRuntime().freeMemory());
+                long maxMemory = Runtime.getRuntime().maxMemory();
+                
+                DEBUG_LB3.setText("Maximum memory (bytes): " +
+                        (maxMemory == Long.MAX_VALUE ? "no limit" : maxMemory));
+                DEBUG_LB4.setText("Total memory available to JVM (bytes): " +
+                        Runtime.getRuntime().totalMemory());
+            }
             else {
                 DEBUG_MODE= false;
                 DEBUG_REC.setVisible(DEBUG_MODE);
@@ -248,16 +262,24 @@ public class GameController implements Initializable{
                 DEBUG_LB2.setVisible(DEBUG_MODE);
                 DEBUG_LB3.setVisible(DEBUG_MODE);
                 DEBUG_LB4.setVisible(DEBUG_MODE);
-             }
+            }
         });
-       capture.setOnMouseClicked((Event t)->{
+        capture.setOnMouseClicked((Event t)->{
             capture();
             GameAnimation.fadeText("Captured", mainStack, 0,0,Color.BLUE);
-
+            
         });
         /*
         KeyBoard listener
         */
+        pause.setOnMouseClicked((Event t)->{
+        if(Prefs.PAUSE == true)
+            Prefs.PAUSE = false;
+        else 
+            Prefs.PAUSE = true;
+           
+        });
+        
         terminal.setOnKeyPressed(ke->{
             KeyCode key = ke.getCode();
             if(key.equals(KeyCode.ENTER)){
@@ -273,26 +295,36 @@ public class GameController implements Initializable{
                     delay.play();
                     
                 }
+                else if(terminal.getText().equals("hero") ){
+                    if(Prefs.CURRENT_TEAM.equals(Prefs.MY_TEAM_NAME))
+                    GameAnimation.fadeImage(new ImageView(Prefs.MY_HERO), mainStack, 0,0);
+                    else
+                    GameAnimation.fadeImage(new ImageView(Prefs.ENEMY_HEARO), mainStack, 0,0);
+                    
+                }
                 else
-                GameAnimation.fadeText(terminal.getText(), mainStack, x,y,Color.RED);
+                    GameAnimation.fadeText(terminal.getText(), mainStack, x,y,Color.RED);
                 terminal.setText("");
                 
             }
         });
-        gameStack.getChildren().add(kingLong);
+        gameStack.getChildren().addAll(kingLong,destroyer,scout,hammerhead,bullet);
         kingLong.setVisible(false);
-  
+        destroyer.setVisible(false);
+        scout.setVisible(false);
+        hammerhead.setVisible(false);
+        bullet.setVisible(false);
         //@TEST add for bg
         
         
         setGold(5000);
         
-         //     showCells(50);
-
-
+        //     showCells(50);
+        
+        
         setTowerShopVisible();
         //@TEST
-
+        
         
         
         
@@ -321,8 +353,8 @@ public class GameController implements Initializable{
         }
 //        test3.setTranslateY(GAME_WIDTH);
     }
-       
- 
+    
+    
     
     
     public void setGold(int i){
@@ -374,7 +406,7 @@ public class GameController implements Initializable{
     }
     
     private void fixNodeResolution() {
-     
+        
         terminal.setMaxWidth(stage.getWidth()-2*300);//TODO stage.getWidht declared & 300 should be a var
         if(stage.getHeight()>=700 && stage.getWidth()>=1000)
             return ;
@@ -415,19 +447,30 @@ public class GameController implements Initializable{
             teamUpgrade.setEffect(new Glow(0.5));
             
         });
+          teamUpgrade2.setOnMouseMoved((Event t) -> {
+            teamUpgrade2.setEffect(new Glow(0.5));
+            
+        });  teamUpgrade3.setOnMouseMoved((Event t) -> {
+            teamUpgrade3.setEffect(new Glow(0.5));
+            
+        });
+          
         tableRight.setOnMouseMoved((Event t)->{
             scoutTower.setEffect(new Glow(0));
             hammerHeadTower.setEffect(new Glow(0));
             bulletTower.setEffect(new Glow(0));
             teamUpgrade.setEffect(new Glow(0));
-            
+            teamUpgrade2.setEffect(new Glow(0));
+            teamUpgrade3.setEffect(new Glow(0));
+
+                    
         });
         
         
         
     }
     /**
-     * check left side table 
+     * check left side table
      * setting glow for them(if mouse moved on each item)
      */
     private void checkTableLeft(){
@@ -454,7 +497,7 @@ public class GameController implements Initializable{
                 
             });
             //clicked
-   
+            
         }
         else if(infantrySoldier.isVisible()){
             infantrySoldier.setOnMouseMoved((Event t)->{
@@ -474,7 +517,7 @@ public class GameController implements Initializable{
     }
     /**
      *  if user clicked on a tower
-    */
+     */
     public void setTowerShopVisible(){
         towerAutoRepair.setVisible(true);
         towerPowerUpgrade.setVisible(true);
@@ -485,7 +528,7 @@ public class GameController implements Initializable{
         tankSoldier.setVisible(false);
     }
     /**
-     * if user clicked on a military base 
+     * if user clicked on a military base
      * then it will show MilitaryBase property
      */
     public void setMilitaryShopVisible(){
@@ -497,29 +540,187 @@ public class GameController implements Initializable{
         infantrySoldier.setVisible(true);
         tankSoldier.setVisible(true);
     }
+    public void buyTeamUpgrade(){
+        
+        teamUpgrade.setOnMouseClicked((Event t)->{
+            if(Prefs.CURRENT_TEAM.equals(Prefs.MY_TEAM_NAME)){
+                try {
+                    if(!Prefs.MY_REGION.equals(Prefs.TOP_RIGHT))
+                    GameManager.purchaseTeamPowerup(GameScene.My_Team, GameState.PU_CE_ARMOR);
+                    else 
+                   GameManager.purchaseTeamPowerup(GameScene.My_Team, GameState.PU_MATH_DEC_VAL);
+
+                } catch (MahyariseExceptionBase ex) {
+                 }
+            }else {
+                try {
+                    if(!Prefs.ENEMY_REGION.equals(Prefs.TOP_RIGHT))
+                        GameManager.purchaseTeamPowerup(GameScene.Enemy_Team, GameState.PU_CE_ARMOR);
+                    
+                    else 
+                         GameManager.purchaseTeamPowerup(GameScene.Enemy_Team, GameState.PU_MATH_DEC_VAL);
+                }
+                catch (MahyariseExceptionBase ex) {
+                     }
+
+            }
+        }); 
+        teamUpgrade2.setOnMouseClicked((Event t)->{
+            if(Prefs.CURRENT_TEAM.equals(Prefs.MY_TEAM_NAME)){
+                try {
+                    if(!Prefs.MY_REGION.equals(Prefs.TOP_RIGHT))
+                    GameManager.purchaseTeamPowerup(GameScene.My_Team, GameState.PU_CE_ARMOR);
+                    else 
+                   GameManager.purchaseTeamPowerup(GameScene.My_Team, GameState.PU_MATH_DEC_VAL);
+
+                } catch (MahyariseExceptionBase ex) {
+                 }
+            }else {
+                try {
+                    if(!Prefs.ENEMY_REGION.equals(Prefs.TOP_RIGHT))
+                        GameManager.purchaseTeamPowerup(GameScene.Enemy_Team, GameState.PU_CE_PACE);
+                    
+                    else 
+                         GameManager.purchaseTeamPowerup(GameScene.Enemy_Team, GameState.PU_MATH_ECO);
+                }
+                catch (MahyariseExceptionBase ex) {
+                     }
+
+            }        });
+        teamUpgrade3.setOnMouseClicked((Event t)->{
+            if(Prefs.CURRENT_TEAM.equals(Prefs.MY_TEAM_NAME)){
+                try {
+                    if(!Prefs.MY_REGION.equals(Prefs.TOP_RIGHT))
+                    GameManager.purchaseTeamPowerup(GameScene.My_Team, GameState.PU_CE_HEALTH);
+                    else 
+                   GameManager.purchaseTeamPowerup(GameScene.My_Team, GameState.PU_MATH_PROFIT);
+
+                } catch (MahyariseExceptionBase ex) {
+                  }
+            }else {
+                try {
+                    if(!Prefs.ENEMY_REGION.equals(Prefs.TOP_RIGHT))
+                        GameManager.purchaseTeamPowerup(GameScene.Enemy_Team, GameState.PU_CE_HEALTH);
+                    
+                    else 
+                         GameManager.purchaseTeamPowerup(GameScene.Enemy_Team, GameState.PU_MATH_PROFIT);
+                }
+                catch (MahyariseExceptionBase ex) {
+                     }
+
+            }        });
+        
+        
+    }
+    
     public void buyUpgrade() {
+        
+        
+        towerAutoRepair.setOnMouseClicked((MouseEvent t)->{
+            if(Prefs.CURRENT_TEAM.equals(Prefs.MY_TEAM_NAME)){
+            }else {
+            }
+        });
+        towerPowerUpgrade.setOnMouseClicked((MouseEvent t)->{
+            if(Prefs.CURRENT_TEAM.equals(Prefs.MY_TEAM_NAME)){
+                
+            }else {
+            }
+        });
+        towerRangeUpgrade.setOnMouseClicked((MouseEvent t)->{
+            if(Prefs.CURRENT_TEAM.equals(Prefs.MY_TEAM_NAME)){
+                
+            }else {
+            }
+        });
+        towerReloadUpgrade.setOnMouseClicked((MouseEvent t)->{
+            if(Prefs.CURRENT_TEAM.equals(Prefs.MY_TEAM_NAME)){
+                
+            }else {
+            }
+        });
     }
     
     public void buySoldier() {
-         infantrySoldier.setOnMouseClicked((MouseEvent t) -> {
-             if(kingLong.isVisible()){
+        infantrySoldier.setOnMouseClicked((MouseEvent t) -> {
+            if(kingLong.isVisible()){
                 kingLong.setVisible(false);
-                System.out.println("isvis");
-            }
+             }
             else {
                 kingLong.setVisible(true);
+                destroyer.setVisible(false);
                 kingLong.setTranslateX(t.getX()-GAME_WIDTH/2);
                 kingLong.setTranslateY(t.getY()-GAME_HEIGHT/2);
-                System.out.println("nonvis");
+             }
+        });
+        tankSoldier.setOnMouseClicked((MouseEvent t)->{
+            if(destroyer.isVisible()){
+            destroyer.setVisible(false);
             }
-                });
+            else{
+                kingLong.setVisible(false);
+                destroyer.setVisible(true);
+                destroyer.setTranslateX(t.getX()-GAME_WIDTH/2);
+                destroyer.setTranslateY(t.getY()-GAME_HEIGHT/2);            } 
+        });
+    }
+    public void buyTower(){
+        scoutTower.setOnMouseClicked((MouseEvent t)->{
+            if(scout.isVisible()){
+                scout.setVisible(false);
+            }
+            else {
+                kingLong.setVisible(false);
+                hammerhead.setVisible(false);
+                bullet.setVisible(false);
+                destroyer.setVisible(false);
+                scout.setVisible(true);
+                scout.setTranslateX(t.getX()-GAME_WIDTH/2);
+                scout.setTranslateY(t.getY()-GAME_HEIGHT/2);   
+            }
+        
+        });
+        hammerHeadTower.setOnMouseClicked((MouseEvent t)->{
+            if(hammerhead.isVisible()){
+                hammerhead.setVisible(false);
+            }
+            else {
+                kingLong.setVisible(false);
+                hammerhead.setVisible(true);
+                bullet.setVisible(false);
+                destroyer.setVisible(false);
+                scout.setVisible(false);
+                hammerhead.setTranslateX(t.getX()-GAME_WIDTH/2);
+                hammerhead.setTranslateY(t.getY()-GAME_HEIGHT/2);   
+            }
+        
+        });
+        bulletTower.setOnMouseClicked((MouseEvent t)->{
+            if(bullet.isVisible()){
+                bullet.setVisible(false);
+            }
+            else {
+                kingLong.setVisible(false);
+                hammerhead.setVisible(false);
+                bullet.setVisible(true);
+                destroyer.setVisible(false);
+                scout.setVisible(false);
+                bullet.setTranslateX(t.getX()-GAME_WIDTH/2);
+                bullet.setTranslateY(t.getY()-GAME_HEIGHT/2);   
+            }
+        
+        });
+        
     }
     /**
-     * 
+     *
      * @return stack of the game
      */
     public StackPane getGameStack(){
         return gameStack;
+    }
+    public ScrollPane getScrollPane(){
+        return scrollPane;
     }
     /**
      * optimize game stack
@@ -532,7 +733,7 @@ public class GameController implements Initializable{
      * capture gameStack and save it in the root of application
      */
     private void capture(){
-        WritableImage image = gameStack.snapshot(new SnapshotParameters(), null);        
+        WritableImage image = gameStack.snapshot(new SnapshotParameters(), null);
         File file = new File("sample.png");
         try {
             ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
@@ -544,22 +745,22 @@ public class GameController implements Initializable{
      * if user clicked on his MB then change the team to My_Team
      */
     public void checkMyMilitaryBase() {
-          Prefs.MY_MB1_IMG.setOnMouseClicked((Event t)->{
+        Prefs.MY_MB1_IMG.setOnMouseClicked((Event t)->{
             Prefs.CURRENT_TEAM = Prefs.MY_TEAM_NAME;
-             setMilitaryShopVisible();
-             setMyToolbar();
-             
-         });
+            setMilitaryShopVisible();
+            setMyToolbar();
+            
+        });
         Prefs.MY_MB2_IMG.setOnMouseClicked((Event t)->{
-             Prefs.CURRENT_TEAM = Prefs.MY_TEAM_NAME;
-              setMilitaryShopVisible();
-             setMyToolbar();
+            Prefs.CURRENT_TEAM = Prefs.MY_TEAM_NAME;
+            setMilitaryShopVisible();
+            setMyToolbar();
         });
         Prefs.MY_MB3_IMG.setOnMouseClicked((Event t)->{
             Prefs.CURRENT_TEAM = Prefs.MY_TEAM_NAME;
             setMilitaryShopVisible();
             setMyToolbar();
-            });
+        });
     }
     /**
      * if user clicked on enemy MBs then change the team to Enemy_Team
@@ -572,7 +773,7 @@ public class GameController implements Initializable{
             setEnemyToolbar();
         });
         Prefs.ENEMY_MB2_IMG.setOnMouseClicked((Event t)->{
-           Prefs.CURRENT_TEAM = Prefs.ENEMY_TEAM_NAME; 
+            Prefs.CURRENT_TEAM = Prefs.ENEMY_TEAM_NAME;
             setMilitaryShopVisible();
             setEnemyToolbar();
         });
@@ -582,19 +783,20 @@ public class GameController implements Initializable{
             setEnemyToolbar();
         });
         
-     }
+    }
     /**
      * if user clicked on his HQ then change the team to My_team
      */
     public void checkHQBase() {
         Prefs.MY_HQ_IMG.setOnMouseClicked((Event t)->{
             Prefs.CURRENT_TEAM = Prefs.MY_TEAM_NAME;
+            setTowerShopVisible();
             setMyToolbar();
             
         });
         
-     }
-
+    }
+    
     /**
      * if user clicked on enemy HQ then change the team to ENEmy_team
      */
@@ -602,6 +804,7 @@ public class GameController implements Initializable{
         Prefs.ENEMY_HQ_IMG.setOnMouseClicked((Event t)->{
             Prefs.CURRENT_TEAM = Prefs.ENEMY_TEAM_NAME;
             setEnemyToolbar();
+            setTowerShopVisible();
             
         });
     }
@@ -610,13 +813,174 @@ public class GameController implements Initializable{
         gameStack.setOnMouseMoved((MouseEvent t )->{
             //it means we should buy kinLong(infantrysoldier)
             if(kingLong.isVisible()){
-            kingLong.setTranslateX(t.getX()-2000/2);
-            kingLong.setTranslateY(t.getY()-2000/2);
+                kingLong.setTranslateX(t.getX()-2000/2);
+                kingLong.setTranslateY(t.getY()-2000/2);
+            }
+            else if(destroyer.isVisible()){
+                 destroyer.setTranslateX(t.getX()-2000/2);
+                destroyer.setTranslateY(t.getY()-2000/2);
+            }
+            else if(scout.isVisible()){
+             scout.setTranslateX(t.getX()-2000/2);
+                scout.setTranslateY(t.getY()-2000/2);
+            }
+            else if(hammerhead.isVisible()){
+                 hammerhead.setTranslateX(t.getX()-2000/2);
+                hammerhead.setTranslateY(t.getY()-2000/2);
+            }
+            else if(bullet.isVisible()){
+                 bullet.setTranslateX(t.getX()-2000/2);
+                bullet.setTranslateY(t.getY()-2000/2);
+            
             }
         });
         gameStack.setOnMouseClicked((MouseEvent t )->{
-            if(kingLong.isVisible()){
-                kingLong.setVisible(false);
+                int col = Game.getMap().getCell(MapCell.posCol(t.getX()-1000), MapCell.posRow(t.getY()-1000)).getCol();
+                int row = Game.getMap().getCell(MapCell.posCol(t.getX()-1000), MapCell.posRow(t.getY()-1000)).getRow();
+                int lane =Game.getMap().getCell(MapCell.posCol(t.getX()-1000), MapCell.posRow(t.getY()-1000)).getLaneNum();
+                int path =Game.getMap().getCell(MapCell.posCol(t.getX()-1000), MapCell.posRow(t.getY()-1000)).getPathNum();
+           
+            if(kingLong.isVisible() ){
+                  kingLong.setVisible(false);
+
+                if(lane<1 || lane>3){
+                     return;
+                }
+                    
+                if(Prefs.CURRENT_TEAM.equals(Prefs.MY_TEAM_NAME))
+                {
+                    try {
+                      //path lane               
+                         GameManager.createAttacker(GameScene.My_Team,GameState.ATTACKER_INFANTRY,path,
+                                lane, gameStack);
+                    } catch (MahyariseExceptionBase ex) {
+                    }
+                }else {
+                    
+                    try {
+                        GameManager.createAttacker(GameScene.Enemy_Team,GameState.ATTACKER_INFANTRY, path,  lane, gameStack);
+                    } catch (MahyariseExceptionBase ex) {
+                    }
+                }
+                
+            }
+            else if(destroyer.isVisible()){  
+                destroyer.setVisible(false);
+                 
+                if(lane<1 || lane>3){
+                     return;
+                }
+                    
+                if(Prefs.CURRENT_TEAM.equals(Prefs.MY_TEAM_NAME))
+                {
+                    try {
+                      //path lane               
+                         GameManager.createAttacker(GameScene.My_Team,GameState.ATTACKER_TANK,path,
+                                lane, gameStack);
+                    } catch (MahyariseExceptionBase ex) {
+                    }
+                }else {
+                    
+                    try {
+                        GameManager.createAttacker(GameScene.Enemy_Team,GameState.ATTACKER_TANK, path,  lane, gameStack);
+                    } catch (MahyariseExceptionBase ex) {
+                    }
+                }
+                
+            }
+            else if(scout.isVisible()){ //black tower ce /
+                scout.setVisible(false);
+                if(Prefs.CURRENT_TEAM.equals(Prefs.MY_TEAM_NAME) ){
+                    if(Prefs.MY_REGION.equals(Prefs.TOP_RIGHT)){
+                        try {
+                            GameManager.createTower(GameScene.My_Team, GameState.TOWER_TYPE_GENERAL_MATH, col, row, gameStack);
+                        } catch (MahyariseExceptionBase ex) {
+                         }
+                    }else {
+                        try {
+                            GameManager.createTower(GameScene.My_Team, GameState.TOWER_TYPE_GAME, col, row, gameStack);
+                        } catch (MahyariseExceptionBase ex) {
+                         }
+
+                    }
+                
+                }else {
+                     if(Prefs.ENEMY_REGION.equals(Prefs.TOP_RIGHT)){
+                        try {
+                            GameManager.createTower(GameScene.Enemy_Team, GameState.TOWER_TYPE_GENERAL_MATH, col, row, gameStack);
+                        } catch (MahyariseExceptionBase ex) {
+                            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }else {
+                        try {
+                            GameManager.createTower(GameScene.Enemy_Team, GameState.TOWER_TYPE_GAME, col, row, gameStack);
+                        } catch (MahyariseExceptionBase ex) {
+                            Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    }
+                }
+            }
+            else if(hammerhead.isVisible()){
+                hammerhead.setVisible(false);
+            if(Prefs.CURRENT_TEAM.equals(Prefs.MY_TEAM_NAME) ){
+                    if(Prefs.MY_REGION.equals(Prefs.TOP_RIGHT)){
+                        try {
+                            GameManager.createTower(GameScene.My_Team, GameState.TOWER_TYPE_TANK, col, row, gameStack);
+                        } catch (MahyariseExceptionBase ex) {
+                         }
+                    }else {
+                        try {
+                            GameManager.createTower(GameScene.My_Team, GameState.TOWER_TYPE_BLACK, col, row, gameStack);
+                        } catch (MahyariseExceptionBase ex) {
+                         }
+
+                    }
+                
+                }else {
+                     if(Prefs.ENEMY_REGION.equals(Prefs.TOP_RIGHT)){
+                        try {
+                            GameManager.createTower(GameScene.Enemy_Team, GameState.TOWER_TYPE_TANK, col, row, gameStack);
+                        } catch (MahyariseExceptionBase ex) {
+                         }
+                    }else {
+                        try {
+                            GameManager.createTower(GameScene.Enemy_Team, GameState.TOWER_TYPE_BLACK, col, row, gameStack);
+                        } catch (MahyariseExceptionBase ex) {
+                         }
+
+                    }
+                }
+            }else if(bullet.isVisible()){
+               bullet.setVisible(false );
+               if(Prefs.CURRENT_TEAM.equals(Prefs.MY_TEAM_NAME) ){
+                    if(Prefs.MY_REGION.equals(Prefs.TOP_RIGHT)){
+                        try {
+                            GameManager.createTower(GameScene.My_Team, GameState.TOWER_TYPE_ELECTRICITY, col, row, gameStack);
+                        } catch (MahyariseExceptionBase ex) {
+                         }
+                    }else {
+                        try {
+                            GameManager.createTower(GameScene.My_Team, GameState.TOWER_TYPE_POISON, col, row, gameStack);
+                        } catch (MahyariseExceptionBase ex) {
+                         }
+
+                    }
+                
+                }else {
+                     if(Prefs.ENEMY_REGION.equals(Prefs.TOP_RIGHT)){
+                        try {
+                            GameManager.createTower(GameScene.Enemy_Team, GameState.TOWER_TYPE_ELECTRICITY, col, row, gameStack);
+                        } catch (MahyariseExceptionBase ex) {
+                         }
+                    }else {
+                        try {
+                            GameManager.createTower(GameScene.Enemy_Team, GameState.TOWER_TYPE_POISON, col, row, gameStack);
+                        } catch (MahyariseExceptionBase ex) {
+                         }
+
+                    }
+                }
             }
         });
         

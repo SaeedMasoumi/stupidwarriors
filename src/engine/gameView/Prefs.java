@@ -26,6 +26,7 @@ import javafx.scene.image.ImageView;
  */
 public class Prefs {
     public static String CURRENT_TEAM;
+    public static boolean PAUSE=false;
     /*
         Team Names
     */

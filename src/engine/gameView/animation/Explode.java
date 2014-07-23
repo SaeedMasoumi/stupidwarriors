@@ -19,6 +19,7 @@ package engine.gameView.animation;
 
 import engine.gameScene.url.Url;
 import engine.gameView.soundEffect.OggPlayer;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
@@ -39,7 +40,7 @@ import javax.swing.text.Position;
  *
  * @author Saeed Masoumi
  */
-public class Expload extends ImageView{
+public class Explode extends ImageView{
     private final StackPane stack;
     private final int numCells;
     private final Duration FRAME_TIME = Duration.seconds(0.12);
@@ -47,7 +48,7 @@ public class Expload extends ImageView{
     private final ImageView current ;
     private Timeline anim ;
     @SuppressWarnings("LeakingThisInConstructor")
-    public Expload(Image explosionImage,StackPane stack,int numCells,double x , double y){
+    public Explode(Image explosionImage,StackPane stack,int numCells,double x , double y){
         this.stack =stack;
         this.current= this;
         this.numCells = numCells ;
@@ -72,9 +73,8 @@ public class Expload extends ImageView{
         stack.getChildren().add(this.current);
  
       }
-    public void towerBlast(){
+    public void towerBlast(boolean sound,int cycle){
         
-        AudioClip  blast =new AudioClip (Url.BLAST_SOUND_EFFECT);
         final IntegerProperty frameCounter = new SimpleIntegerProperty(0);
          anim = new Timeline(
                 new KeyFrame(FRAME_TIME, event -> {
@@ -82,7 +82,7 @@ public class Expload extends ImageView{
                     setViewport(cellClips[frameCounter.get()]);
                 })
         );
-        anim.setCycleCount(numCells);
+        anim.setCycleCount(cycle);
         anim.setOnFinished(new EventHandler<ActionEvent>() {
 
             @Override
@@ -91,9 +91,11 @@ public class Expload extends ImageView{
             }
         });
         anim.play();
+        if(sound){
+        AudioClip  blast =new AudioClip (Url.BLAST_SOUND_EFFECT);
         blast.play();
         blast.setCycleCount(1);
-
+        }
        
     }
     
